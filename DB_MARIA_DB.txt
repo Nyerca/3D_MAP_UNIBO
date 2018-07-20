@@ -1,0 +1,431 @@
+//Per entrare in maria db:
+sudo mysql -p
+
+//Per eseguire
+node server.js
+node crud.js
+
+E cercare su google:
+isi-studio8bis.csr.unibo.it
+
+
+
+----------------------------- CREARE IL DATABASE -----------------------------------
+
+Da MariaDB
+
+create table toopendata (
+     IdInfo int not null,
+     NomeTabellaOpenData char(100) not null,
+     constraint IDInfo primary key (IdInfo))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table informazioni (
+     IdInfo int not null AUTO_INCREMENT,
+     Nome char(100) not null,
+     Descrizione char(100),
+     Posti int,
+     constraint IDInfo primary key (IdInfo))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table figura (
+     IdFigura int not null AUTO_INCREMENT,
+     Tipo char(100) not null,
+     Class char(100) not null,
+     x int,
+     y int,
+     width int,
+     height int,
+     Points char(200),
+     Piano int not null,
+     constraint IDFigura primary key (IdFigura))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table datacategory (
+     IdDataCategory int not null AUTO_INCREMENT,
+     Nome char(100) not null,
+     Colore char(100) not null,
+     constraint IDDataCategory primary key (IdDataCategory))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table pin (
+     IdPin int not null AUTO_INCREMENT,
+     Icon char(100) not null,
+     Top_distance int not null,
+     Left_distance int not null,
+     constraint IDPin primary key (IdPin))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table dataspace (
+     IdDataSpace char(100) not null,
+     IdInfo int not null,
+     IdFigura int not null,
+     IdDataCategory int not null,
+     IdPin int,
+     constraint IDDataSpace primary key (IdDataSpace))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Constraints Section
+-- ___________________ 
+
+alter table toopendata add constraint FKR_5
+     foreign key (IdInfo) references informazioni (IdInfo);
+
+alter table dataspace add constraint FKR_1
+     foreign key (IdInfo) references informazioni (IdInfo);
+
+alter table dataspace add constraint FKR_2
+     foreign key (IdFigura) references figura (IdFigura);
+
+alter table dataspace add constraint FKR_3
+     foreign key (IdDataCategory) references datacategory (IdDataCategory);
+
+alter table dataspace add constraint FKR_4
+     foreign key (IdPin) references pin (IdPin);
+
+
+##################################
+
+Da phpmyadmin
+
+CREATE VIEW `view_svg` AS 
+SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano FROM `dataspace`RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
+
+CREATE VIEW `level_pins` AS 
+SELECT IdDataSpace, dataspace.IdFigura, IdDataCategory, Icon, Top_distance, Left_distance, figura.Piano FROM `dataspace`, `pin`, `figura` where dataspace.IdPin = pin.IdPin AND dataspace.IdFigura = figura.IdFigura
+
+CREATE VIEW `view_content` AS 
+SELECT IdDataSpace, IdDataCategory, Nome, Descrizione, Posti, figura.Piano FROM `dataspace`, `informazioni`, `figura` where dataspace.IdInfo = informazioni.IdInfo AND dataspace.IdFigura = figura.IdFigura ORDER BY IdDataCategory, Piano
+
+
+##################################
+
+INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (1,"AULA 5.5");
+
+INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES 
+("Aula 2.8", "Aula del primo piano", 89),
+("Aula 2.7", "Aula del primo piano", 89),
+("Aula 2.6", "Aula del primo piano", 109),
+("Aula 2.5", "Aula del primo piano", 99),
+("Aula 2.4", "Aula del primo piano", 100),
+("Aula 2.3", "Aula del primo piano", 100),
+("Laboratorio Informatico 2.2", "Aula del primo piano", 100),
+("Aula 2.1", "Aula del primo piano", 100),
+("Locale Tecnico", "Aula del primo piano", null),
+("Aula 2.9", "Aula del primo piano", 210),
+("Aula 2.10", "Aula del primo piano", 72),
+("Aula 2.11", "Aula del primo piano", 36),
+("Aula 2.12", "Aula del primo piano", 220),
+("Aula 2.13", "Aula del primo piano", 92),
+("Laboratorio Disegno 2.17", "Aula del primo piano", 51),
+("Laboratorio Disegno 2.16", "Aula del primo piano", 51),
+("Laboratorio Disegno 2.15", "Aula del primo piano", 50),
+("Laboratorio Disegno 2.14", "Aula del primo piano", 50),
+("Laboratorio 2 Elettronica e Telecomunicazioni", "Aula del secondo piano", 30),
+("Laboratorio Informatico 3.2", "Aula del secondo piano", 63),
+("Laboratorio Informatico 3.1", "Aula del secondo piano", 83),
+("Aula Magna 3.4", "Aula del secondo piano", 312),
+("Laboratorio 1 Elettronica e Telecomunicazioni", "Aula del secondo piano", 10),
+("Laboratorio Informatico 3.3", "Aula del secondo piano", 97),
+("Laboratorio di Ricerca", "Aula del secondo piano", 17),
+("Aula 3.10", "Aula del secondo piano", 99),
+("Aula 3.11", "Aula del secondo piano", 99),
+("Laboratorio di Sintesi 3.12", "Aula del secondo piano", 18),
+("Laboratorio di Sintesi 3.13", "Aula del secondo piano", 18),
+("Laboratorio di Sintesi 3.14", "Aula del secondo piano", 18),
+("Laboratorio di Sintesi 3.15", "Aula del secondo piano", 18),
+("Laboratorio di Sintesi 3.16", "Aula del secondo piano", 18),
+("Laboratorio Disegno 3.9", "Aula del secondo piano", 50),
+("Laboratorio Disegno 3.8", "Aula del secondo piano", 50),
+("Aula 3.7", "Aula del secondo piano", 188),
+("Laboratorio Disegno 3.6", "Aula del secondo piano", 50),
+("Laboratorio Disegno 3.5", "Aula del secondo piano", 50),
+("Aula 4.1", "Aula del terzo piano", 90),
+("Laboratorio Informatico CAD 4.2", "Aula del terzo piano", 81),
+("Sensore Canarin", "Descrizione del sensore canarin", null),
+("Paola Salomoni", "Ufficio della professoressa Paola Salomoni", null);
+
+
+
+INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Piano`) VALUES 
+("rect", "map__space", "1400", "100", "100", "200", null, 1),
+("rect", "map__space", "1295", "100", "100", "200", null, 1),
+("rect", "map__space", "1190", "100", "100", "200", null, 1),
+("rect", "map__space", "1085", "100", "100", "200", null, 1),
+("rect", "map__space", "980", "100", "100", "200", null, 1),
+("rect", "map__space", "870", "100", "105", "200", null, 1),
+("rect", "map__space", "660", "100", "205", "200", null, 1),
+("rect", "map__space", "505", "100", "150", "200", null, 1),
+("rect", "map__space", "100", "225", "220", "300", null, 1),
+("rect", "map__space", "1295", "325", "205", "200", null, 1),
+("rect", "map__space", "1190", "325", "100", "200", null, 1),
+("rect", "map__space", "1010", "425", "160", "100", null, 1),
+("rect", "map__space", "660", "325", "205", "200", null, 1),
+("rect", "map__space", "555", "325", "100", "200", null, 1),
+("rect", "map__space", "1350", "925", "145", "200", null, 1),
+("rect", "map__space", "1200", "925", "145", "200", null, 1),
+("rect", "map__space", "790", "950", "205", "175", null, 1),
+("rect", "map__space", "580", "950", "205", "175", null, 1),
+("rect", "map__space", "1165", "100", "220", "200", null, 2),
+("rect", "map__space", "820", "100", "220", "200", null, 2),
+("rect", "map__space", "600", "100", "210", "200", null, 2),
+("rect", "map__space", "100", "225", "262", "300", null, 2),
+("rect", "map__space", "1165", "325", "220", "200", null, 2),
+("rect", "map__space", "600", "325", "210", "200", null, 2),
+("rect", "map__space", "1400", "925", "100", "200", null, 2),
+("rect", "map__space", "1295", "925", "100", "200", null, 2),
+("rect", "map__space", "1190", "925", "100", "200", null, 2),
+("rect", "map__space", "870", "950", "100", "175", null, 2),
+("rect", "map__space", "765", "950", "100", "175", null, 2),
+("rect", "map__space", "660", "950", "100", "175", null, 2),
+("rect", "map__space", "555", "950", "100", "175", null, 2),
+("rect", "map__space", "450", "950", "100", "175", null, 2),
+("rect", "map__space", "975", "1200", "205", "175", null, 2),
+("rect", "map__space", "765", "1200", "205", "175", null, 2),
+("rect", "map__space", "555", "1200", "205", "175", null, 2),
+("rect", "map__space", "345", "1200", "205", "175", null, 2),
+("polygon", "map__space", null, null, null, null, "250 1350,250 1380,340 1380,340 1200,210 1200,210 1350", 2),
+("rect", "map__space", "1200", "925", "105", "200", null, 3),
+("rect", "map__space", "1200", "1150", "200", "225", null, 3),
+("rect", "map__lake", "1070", "325", "100", "60", null, 1),
+("rect", "map__lake", "870", "425", "100", "100", null, 1),
+("rect", "map__lake", "460", "325", "90", "60", null, 1),
+("polygon", "map__lake", null, null, null, null, "1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950", 1),
+("rect", "map__lake", "365", "1065", "90", "60", null, 1),
+("rect", "map__lake", "100", "1000", "90", "140", null, 1),
+("rect", "map__space", "400", "425", "35", "100", null, 1),
+("rect", "map__space", "440", "425", "35", "100", null, 1),
+("rect", "map__space", "480", "425", "35", "100", null, 1),
+("rect", "map__space", "520", "425", "30", "100", null, 1),
+("rect", "map__space", "450", "100", "50", "50", null, 1),
+("rect", "map__space", "300", "575", "100", "30", null, 1),
+("rect", "map__space", "300", "610", "100", "30", null, 1),
+("rect", "map__space", "100", "645", "300", "30", null, 1),
+("rect", "map__space", "540", "950", "35", "100", null, 1),
+("rect", "map__space", "500", "950", "35", "100", null, 1),
+("rect", "map__space", "460", "950", "35", "100", null, 1),
+("rect", "map__space", "400", "950", "55", "50", null, 1),
+("rect", "map__lake", "1060", "325", "90", "60", null, 2),
+("rect", "map__lake", "820", "425", "100", "100", null, 2),
+("rect", "map__lake", "395", "325", "90", "60", null, 2),
+("polygon", "map__lake", null, null, null, null, "1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950", 2),
+("rect", "map__lake", "340", "1060", "90", "60", null, 2),
+("rect", "map__lake", "225", "590", "70", "80", null, 2),
+("rect", "map__space", "1190", "1200", "100", "175", null, 2),
+("rect", "map__space", "1295", "1200", "100", "175", null, 2),
+("rect", "map__space", "1400", "1260", "100", "50", null, 2),
+("rect", "map__space", "100", "1200", "80", "60", null, 2),
+("rect", "map__space", "100", "1265", "80", "40", null, 2),
+("rect", "map__space", "100", "1310", "105", "40", null, 2),
+("rect", "map__space", "300", "590", "100", "300", null, 2),
+("rect", "map__space", "225", "675", "70", "50", null, 2),
+("rect", "map__space", "1050", "100", "105", "200", null, 2),
+("rect", "map__space", "490", "325", "105", "200", null, 2),
+("rect", "map__space", "395", "100", "200", "200", null, 2),
+("rect", "map__space", "200", "100", "190", "120", null, 2),
+("rect", "map__space", "1095", "425", "45", "100", null, 2),
+("rect", "map__space", "1040", "425", "45", "100", null, 2),
+("rect", "map__space", "985", "425", "45", "100", null, 2),
+("rect", "map__space", "930", "425", "45", "100", null, 2),
+("polygon", "map__lake", null, null, null, null, "1130 385,1130 325,1180 325,1180 285,1090 285,1090 325,1030 325,1030 385", 3),
+("rect", "map__lake", "380", "285", "90", "100", null, 3),
+("polygon", "map__lake", null, null, null, null, "1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950", 3),
+("rect", "map__lake", "340", "1060", "90", "60", null, 3),
+("rect", "map__lake", "215", "1150", "90", "80", null, 3),
+("rect", "map__lake", "215", "525", "70", "80", null, 3),
+("rect", "map__space", "300", "145", "30", "100", null, 3),
+("rect", "map__space", "335", "145", "30", "100", null, 3),
+("rect", "map__space", "370", "145", "30", "100", null, 3),
+("rect", "map__space", "405", "145", "30", "100", null, 3),
+("rect", "map__space", "440", "145", "30", "100", null, 3),
+("rect", "map__space", "475", "145", "60", "100", null, 3),
+("rect", "map__space", "540", "145", "60", "100", null, 3),
+("rect", "map__space", "605", "145", "60", "100", null, 3),
+("rect", "map__space", "670", "145", "60", "100", null, 3),
+("rect", "map__space", "735", "145", "60", "100", null, 3),
+("rect", "map__space", "800", "145", "60", "100", null, 3),
+("rect", "map__space", "865", "145", "60", "100", null, 3),
+("rect", "map__space", "930", "145", "60", "100", null, 3),
+("rect", "map__space", "995", "145", "60", "100", null, 3),
+("rect", "map__space", "1060", "215", "120", "30", null, 3),
+("rect", "map__space", "735", "265", "240", "40", null, 3),
+("rect", "map__space", "1060", "100", "30", "100", null, 3),
+("rect", "map__space", "1095", "100", "30", "100", null, 3),
+("rect", "map__space", "1130", "100", "30", "100", null, 3),
+("rect", "map__space", "1165", "100", "30", "100", null, 3),
+("rect", "map__space", "1200", "100", "30", "100", null, 3),
+("rect", "map__space", "1235", "100", "30", "100", null, 3),
+("rect", "map__space", "1270", "100", "30", "100", null, 3),
+("rect", "map__space", "1305", "100", "30", "100", null, 3),
+("rect", "map__space", "1340", "100", "30", "100", null, 3),
+("rect", "map__space", "1270", "210", "100", "40", null, 3),
+("rect", "map__space", "1270", "255", "100", "40", null, 3),
+("rect", "map__space", "1270", "300", "100", "30", null, 3),
+("rect", "map__space", "1270", "335", "100", "40", null, 3),
+("rect", "map__space", "1270", "380", "100", "40", null, 3),
+("rect", "map__space", "565", "325", "30", "100", null, 3),
+("rect", "map__space", "600", "325", "60", "100", null, 3),
+("rect", "map__space", "665", "325", "60", "100", null, 3),
+("rect", "map__space", "730", "325", "60", "100", null, 3),
+("rect", "map__space", "795", "325", "60", "100", null, 3),
+("rect", "map__space", "860", "325", "60", "100", null, 3),
+("rect", "map__space", "925", "325", "30", "100", null, 3),
+("rect", "map__space", "960", "425", "60", "100", null, 3),
+("rect", "map__space", "1025", "425", "30", "100", null, 3),
+("rect", "map__space", "1060", "425", "30", "100", null, 3),
+("rect", "map__space", "1095", "425", "30", "100", null, 3),
+("rect", "map__space", "1130", "425", "30", "100", null, 3),
+("rect", "map__space", "1165", "425", "30", "100", null, 3),
+("rect", "map__space", "1200", "425", "30", "100", null, 3),
+("rect", "map__space", "1235", "425", "30", "100", null, 3),
+("rect", "map__space", "1270", "425", "30", "100", null, 3),
+("rect", "map__space", "1305", "425", "30", "100", null, 3),
+("rect", "map__space", "1340", "425", "30", "100", null, 3),
+("rect", "map__space", "100", "525", "30", "100", null, 3),
+("rect", "map__space", "135", "525", "30", "100", null, 3),
+("rect", "map__space", "170", "525", "30", "100", null, 3),
+("rect", "map__space", "300", "630", "100", "30", null, 3),
+("rect", "map__space", "300", "665", "100", "30", null, 3),
+("rect", "map__space", "300", "700", "100", "30", null, 3),
+("rect", "map__space", "300", "735", "100", "30", null, 3),
+("rect", "map__space", "300", "770", "100", "30", null, 3),
+("rect", "map__space", "300", "805", "100", "30", null, 3),
+("rect", "map__space", "300", "840", "100", "30", null, 3),
+("rect", "map__space", "300", "875", "100", "30", null, 3),
+("rect", "map__space", "950", "950", "80", "100", null, 3),
+("rect", "map__space", "860", "950", "80", "100", null, 3),
+("rect", "map__space", "770", "950", "80", "100", null, 3),
+("rect", "map__space", "680", "950", "80", "100", null, 3),
+("rect", "map__space", "590", "950", "80", "100", null, 3),
+("rect", "map__space", "500", "950", "80", "100", null, 3),
+("rect", "map__space", "450", "950", "40", "100", null, 3),
+("rect", "map__space", "780", "1090", "240", "40", null, 3),
+("rect", "map__space", "480", "1090", "240", "40", null, 3),
+("rect", "map__space", "1050", "1170", "140", "100", null, 3),
+("rect", "map__space", "960", "1170", "80", "100", null, 3),
+("rect", "map__space", "870", "1170", "80", "100", null, 3),
+("rect", "map__space", "780", "1170", "80", "100", null, 3),
+("rect", "map__space", "690", "1170", "80", "100", null, 3),
+("rect", "map__space", "600", "1170", "80", "100", null, 3),
+("rect", "map__space", "510", "1170", "80", "100", null, 3),
+("rect", "map__space", "460", "1170", "40", "100", null, 3),
+("rect", "map__space", "410", "1170", "40", "100", null, 3),
+("rect", "map__space", "360", "1170", "40", "100", null, 3),
+("rect", "map__space", "310", "1170", "40", "100", null, 3),
+("rect", "map__space", "185", "1235", "60", "60", null, 3),
+("rect", "map__space", "175", "1300", "70", "60", null, 3),
+("rect", "map__space", "100", "1235", "70", "115", null, 3),
+("rect", "map__space", "100", "630", "100", "30", null, 3),
+("rect", "map__space", "100", "665", "100", "30", null, 3),
+("rect", "map__space", "100", "700", "100", "30", null, 3),
+("rect", "map__space", "100", "735", "100", "30", null, 3),
+("rect", "map__space", "100", "770", "100", "30", null, 3),
+("rect", "map__space", "100", "805", "100", "30", null, 3),
+("rect", "map__space", "100", "840", "100", "30", null, 3),
+("rect", "map__space", "100", "875", "100", "30", null, 3),
+("rect", "map__space", "100", "910", "100", "30", null, 3),
+("rect", "map__space", "100", "945", "100", "30", null, 3),
+("rect", "map__space", "100", "980", "100", "30", null, 3),
+("rect", "map__space", "100", "1015", "100", "30", null, 3),
+("rect", "map__space", "100", "1050", "100", "30", null, 3),
+("rect", "map__space", "100", "1085", "100", "60", null, 3),
+("rect", "map__stairs", "1070", "390", "100", "30", null, 1),
+("rect", "map__stairs", "460", "390", "90", "30", null, 1),
+("rect", "map__stairs", "365", "1005", "90", "55", null, 1),
+("rect", "map__stairs", "1080", "1045", "105", "60", null, 1),
+("rect", "map__stairs", "1060", "390", "90", "30", null, 2),
+("rect", "map__stairs", "395", "390", "90", "30", null, 2),
+("rect", "map__stairs", "340", "1005", "90", "50", null, 2),
+("rect", "map__stairs", "1080", "1045", "105", "60", null, 2),
+("rect", "map__stairs", "1030", "390", "100", "30", null, 3),
+("rect", "map__stairs", "380", "390", "90", "30", null, 3),
+("rect", "map__stairs", "340", "1005", "90", "50", null, 3),
+("rect", "map__stairs", "1080", "1045", "105", "60", null, 3),
+("circle", "map__space", "420", "545", "20", null, null, 1);
+
+INSERT INTO `datacategory`(`Nome`, `Colore`) VALUES 
+("Aule", "#7cbf7f"),
+("Laboratori", "#6584c7"),
+("Sensori", "#f4bc42"),
+("Professori", "#41d9f4"),
+("Lezioni", "#f48241");
+
+INSERT INTO `pin`(`Icon`, `Top_distance`, `Left_distance`) VALUES 
+("pencil", 15, 81),
+("pencil", 15, 76),
+("pencil", 15, 70),
+("pencil", 15, 65),
+("pencil", 15, 60),
+("pencil", 15, 54),
+("display", 15, 48),
+("pencil", 15, 39),
+("display", 29, 22),
+("pencil", 32, 78),
+("pencil", 32, 71),
+("pencil", 36, 64),
+("pencil", 32, 48),
+("pencil", 32, 41),
+("display", 73, 80),
+("display", 73, 72),
+("display", 75, 54),
+("display", 75, 44),
+("display", 15, 72),
+("display", 15, 57),
+("display", 15, 46),
+("pencil", 29, 23),
+("display", 31, 73),
+("display", 32, 45),
+("display", 73, 81),
+("pencil", 73, 76),
+("pencil", 73, 71),
+("display", 75, 56),
+("display", 75, 51),
+("display", 75, 46),
+("display", 75, 41),
+("display", 75, 36),
+("display", 92, 63),
+("display", 92, 53),
+("pencil", 92, 43),
+("display", 92, 34),
+("display", 92, 25),
+("pencil", 73, 71),
+("display", 90, 74),
+("avocado", 40, 33);
+
+INSERT INTO `dataspace`(`IdDataSpace`, `IdInfo`, `IdFigura`, `IdDataCategory`, `IdPin`) VALUES 
+("1.01", 1, 1, 1, 1),
+("1.02", 2, 2, 1, 2),
+("1.03", 3, 3, 1, 3),
+("1.04", 4, 4, 1, 4),
+("1.05", 5, 5, 1, 5),
+("1.06", 6, 6, 1, 6),
+("1.07", 7, 7, 2, 7),
+("1.08", 8, 8, 1, 8),
+("1.09", 9, 9, 2, 9),
+("1.10", 10, 10, 1, 10),
+("1.11", 11, 11, 1, 11),
+("1.12", 12, 12, 1, 12),
+("1.13", 13, 13, 1, 13),
+("1.14", 14, 14, 1, 14),
+("1.15", 15, 15, 2, 15),
+("1.16", 16, 16, 2, 16),
+("1.17", 17, 17, 2, 17),
+("1.18", 18, 18, 2, 18),
+("2.01", 19, 19, 2, 19),
+("2.02", 20, 20, 2, 20),
+("2.03", 21, 21, 2, 21),
+("2.04", 22, 22, 1, 22),
+("2.05", 23, 23, 2, 23),
+("2.06", 24, 24, 2, 24),
+("2.07", 25, 25, 2, 25),
+("2.08", 26, 26, 1, 26),
+("2.09", 27, 27, 1, 27),
+("2.10", 28, 28, 2, 28),
+("2.11", 29, 29, 2, 29),
+("2.12", 30, 30, 2, 30),
+("2.13", 31, 31, 2, 31),
+("2.14", 32, 32, 2, 32),
+("2.15", 33, 33, 2, 33),
+("2.16", 34, 34, 2, 34),
+("2.17", 35, 35, 1, 35),
+("2.18", 36, 36, 2, 36),
+("2.19", 37, 37, 2, 37),
+("3.01", 38, 38, 1, 38),
+("3.02", 39, 39, 2, 39),
+("1.19", 40, 194, 3, 40),
+("3.03", 41, 165, 4, null);
+

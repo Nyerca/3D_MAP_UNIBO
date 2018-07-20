@@ -1,0 +1,231 @@
+								
+################################### 1
+
+<path d="M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
+M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90" 
+class="map__outline" />
+
+
+<rect x="1070" y="325" width="100" height="60" class="map__lake" />
+<rect x="870" y="425" width="100" height="100" class="map__lake" />
+<rect x="460" y="325" width="90" height="60" class="map__lake" />
+<polygon class="map__lake" 
+points="1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950"></polygon>
+<rect x="365" y="1065" width="90" height="60" class="map__lake" />
+<rect x="100" y="1000" width="90" height="140" class="map__lake" />
+
+
+<rect x="400" y="425" width="35" height="100" class="map__space" />
+<rect x="440" y="425" width="35" height="100" class="map__space" />
+<rect x="480" y="425" width="35" height="100" class="map__space" />
+<rect x="520" y="425" width="30" height="100" class="map__space" />
+<rect x="450" y="100" width="50" height="50" class="map__space" />
+<rect x="300" y="575" width="100" height="30" class="map__space" />
+<rect x="300" y="610" width="100" height="30" class="map__space" />
+<rect x="100" y="645" width="300" height="30" class="map__space" />
+<rect x="540" y="950" width="35" height="100" class="map__space" />
+<rect x="500" y="950" width="35" height="100" class="map__space" />
+<rect x="460" y="950" width="35" height="100" class="map__space" />
+<rect x="400" y="950" width="55" height="50" class="map__space" />
+	
+								
+<rect data-space="1.01" x="1400" y="100" width="100" height="200" class="map__space" />
+<rect data-space="1.02" x="1295" y="100" width="100" height="200" class="map__space" />
+<rect data-space="1.03" x="1190" y="100" width="100" height="200" class="map__space" />
+<rect data-space="1.04" x="1085" y="100" width="100" height="200" class="map__space" />
+<rect data-space="1.05" x="980" y="100" width="100" height="200" class="map__space" />
+<rect data-space="1.06" x="870" y="100" width="105" height="200" class="map__space" />
+<rect data-space="1.07" x="660" y="100" width="205" height="200" class="map__space" />
+<rect data-space="1.08" x="505" y="100" width="150" height="200" class="map__space" />
+<rect data-space="1.09" x="100" y="225" width="220" height="300" class="map__space" />
+<rect data-space="1.10" x="1295" y="325" width="205" height="200" class="map__space" />
+<rect data-space="1.11" x="1190" y="325" width="100" height="200" class="map__space" />
+<rect data-space="1.12" x="1010" y="425" width="160" height="100" class="map__space" />
+<rect data-space="1.13" x="660" y="325" width="205" height="200" class="map__space" />
+<rect data-space="1.14" x="555" y="325" width="100" height="200" class="map__space" />
+<rect data-space="1.15" x="1350" y="925" width="145" height="200" class="map__space" />
+<rect data-space="1.16" x="1200" y="925" width="145" height="200" class="map__space" />
+<rect data-space="1.17" x="790" y="950" width="205" height="175" class="map__space" />
+<rect data-space="1.18" x="580" y="950" width="205" height="175" class="map__space" />
+
+<rect x="1070" y="390" width="100" height="30" class="map__stairs" />
+<rect x="460" y="390" width="90" height="30" class="map__stairs" />
+<rect x="365" y="1005" width="90" height="55" class="map__stairs" />
+<rect x="1080" y="1045" width="105" height="60" class="map__stairs" />
+
+################################### 2
+<path d="M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
+M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90" 
+class="map__outline" />
+
+<rect x="1060" y="325" width="90" height="60" class="map__lake" />
+<rect x="820" y="425" width="100" height="100" class="map__lake" />
+<rect x="395" y="325" width="90" height="60" class="map__lake" />						
+<polygon class="map__lake" points="1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950"></polygon>
+<rect x="340" y="1060" width="90" height="60" class="map__lake" />
+<rect x="225" y="590" width="70" height="80" class="map__lake" />
+
+
+<rect x="1190" y="1200" width="100" height="175" class="map__space" />
+<rect x="1295" y="1200" width="100" height="175" class="map__space" />
+<rect x="1400" y="1260" width="100" height="50" class="map__space" />
+<rect x="100" y="1200" width="80" height="60" class="map__space" />
+<rect x="100" y="1265" width="80" height="40" class="map__space" />
+<rect x="100" y="1310" width="105" height="40" class="map__space" />
+<rect x="300" y="590" width="100" height="300" class="map__space" />
+<rect x="225" y="675" width="70" height="50" class="map__space" />
+<rect x="1050" y="100" width="105" height="200" class="map__space" />
+<rect x="490" y="325" width="105" height="200" class="map__space" />
+<rect x="395" y="100" width="200" height="200" class="map__space" />
+<rect x="200" y="100" width="190" height="120" class="map__space" />
+<rect x="1095" y="425" width="45" height="100" class="map__space" />
+<rect x="1040" y="425" width="45" height="100" class="map__space" />
+<rect x="985" y="425" width="45" height="100" class="map__space" />
+<rect x="930" y="425" width="45" height="100" class="map__space" />					
+
+
+<rect data-space="2.01" x="1165" y="100" width="220" height="200" class="map__space" />
+<rect data-space="2.02" x="820" y="100" width="220" height="200" class="map__space" />
+<rect data-space="2.03" x="600" y="100" width="210" height="200" class="map__space" />
+<rect data-space="2.04" x="100" y="225" width="262" height="300" class="map__space" />
+<rect data-space="2.05" x="1165" y="325" width="220" height="200" class="map__space" />
+<rect data-space="2.06" x="600" y="325" width="210" height="200" class="map__space" />
+<rect data-space="2.07" x="1400" y="925" width="100" height="200" class="map__space" />
+<rect data-space="2.08" x="1295" y="925" width="100" height="200" class="map__space" />
+<rect data-space="2.09" x="1190" y="925" width="100" height="200" class="map__space" />
+<rect data-space="2.10" x="870" y="950" width="100" height="175" class="map__space" />
+<rect data-space="2.11" x="765" y="950" width="100" height="175" class="map__space" />
+<rect data-space="2.12" x="660" y="950" width="100" height="175" class="map__space" />
+<rect data-space="2.13" x="555" y="950" width="100" height="175" class="map__space" />
+<rect data-space="2.14" x="450" y="950" width="100" height="175" class="map__space" />
+<rect data-space="2.15" x="975" y="1200" width="205" height="175" class="map__space" />
+<rect data-space="2.16" x="765" y="1200" width="205" height="175" class="map__space" />
+<rect data-space="2.17" x="555" y="1200" width="205" height="175" class="map__space" />
+<rect data-space="2.18" x="345" y="1200" width="205" height="175" class="map__space" />
+<polygon data-space="2.19" class="map__space" points="250 1350,250 1380,340 1380,340 1200,210 1200,210 1350"></polygon>
+	
+<rect x="1060" y="390" width="90" height="30" class="map__stairs" />
+<rect x="395" y="390" width="90" height="30" class="map__stairs" />
+<rect x="340" y="1005" width="90" height="50" class="map__stairs" />
+<rect x="1080" y="1045" width="105" height="60" class="map__stairs" />
+
+################################### 3
+<path d="M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
+M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90" 
+class="map__outline" />
+
+<polygon class="map__lake" points="1130 385,1130 325,1180 325,1180 285,1090 285,1090 325,1030 325,1030 385"></polygon>
+<rect x="380" y="285" width="90" height="100" class="map__lake" />						
+<polygon class="map__lake" points="1185 950,1185 1030,1080 1030,1080 990,1040 990,1040 950"></polygon>
+<rect x="340" y="1060" width="90" height="60" class="map__lake" />
+<rect x="215" y="1150" width="90" height="80" class="map__lake" />
+<rect x="215" y="525" width="70" height="80" class="map__lake" />
+
+
+<rect x="300" y="145" width="30" height="100" class="map__space" />
+<rect x="335" y="145" width="30" height="100" class="map__space" />
+<rect x="370" y="145" width="30" height="100" class="map__space" />
+<rect x="405" y="145" width="30" height="100" class="map__space" />
+<rect x="440" y="145" width="30" height="100" class="map__space" />
+<rect x="475" y="145" width="60" height="100" class="map__space" />
+<rect x="540" y="145" width="60" height="100" class="map__space" />
+<rect x="605" y="145" width="60" height="100" class="map__space" />
+<rect x="670" y="145" width="60" height="100" class="map__space" />
+<rect x="735" y="145" width="60" height="100" class="map__space" />
+<rect x="800" y="145" width="60" height="100" class="map__space" />
+<rect x="865" y="145" width="60" height="100" class="map__space" />
+<rect x="930" y="145" width="60" height="100" class="map__space" />
+<rect x="995" y="145" width="60" height="100" class="map__space" />
+<rect x="1060" y="215" width="120" height="30" class="map__space" />
+<rect x="735" y="265" width="240" height="40" class="map__space" />
+<rect x="1060" y="100" width="30" height="100" class="map__space" />
+<rect x="1095" y="100" width="30" height="100" class="map__space" />
+<rect x="1130" y="100" width="30" height="100" class="map__space" />
+<rect x="1165" y="100" width="30" height="100" class="map__space" />
+<rect x="1200" y="100" width="30" height="100" class="map__space" />
+<rect x="1235" y="100" width="30" height="100" class="map__space" />
+<rect x="1270" y="100" width="30" height="100" class="map__space" />
+<rect x="1305" y="100" width="30" height="100" class="map__space" />
+<rect x="1340" y="100" width="30" height="100" class="map__space" />
+<rect x="1270" y="210" width="100" height="40" class="map__space" />
+<rect x="1270" y="255" width="100" height="40" class="map__space" />
+<rect x="1270" y="300" width="100" height="30" class="map__space" />
+<rect x="1270" y="335" width="100" height="40" class="map__space" />
+<rect x="1270" y="380" width="100" height="40" class="map__space" />
+<rect x="565" y="325" width="30" height="100" class="map__space" />
+<rect x="600" y="325" width="60" height="100" class="map__space" />
+<rect x="665" y="325" width="60" height="100" class="map__space" />
+<rect x="730" y="325" width="60" height="100" class="map__space" />
+<rect x="795" y="325" width="60" height="100" class="map__space" />
+<rect x="860" y="325" width="60" height="100" class="map__space" />
+<rect x="925" y="325" width="30" height="100" class="map__space" />
+<rect x="960" y="425" width="60" height="100" class="map__space" />
+<rect x="1025" y="425" width="30" height="100" class="map__space" />
+<rect x="1060" y="425" width="30" height="100" class="map__space" />
+<rect x="1095" y="425" width="30" height="100" class="map__space" />
+<rect x="1130" y="425" width="30" height="100" class="map__space" />
+<rect x="1165" y="425" width="30" height="100" class="map__space" />
+<rect x="1200" y="425" width="30" height="100" class="map__space" />
+<rect x="1235" y="425" width="30" height="100" class="map__space" />
+<rect x="1270" y="425" width="30" height="100" class="map__space" />
+<rect x="1305" y="425" width="30" height="100" class="map__space" />
+<rect x="1340" y="425" width="30" height="100" class="map__space" />
+<rect x="100" y="525" width="30" height="100" class="map__space" />
+<rect x="135" y="525" width="30" height="100" class="map__space" />
+<rect x="170" y="525" width="30" height="100" class="map__space" />
+<rect x="300" y="630" width="100" height="30" class="map__space" />
+<rect x="300" y="665" width="100" height="30" class="map__space" />
+<rect x="300" y="700" width="100" height="30" class="map__space" />
+<rect x="300" y="735" width="100" height="30" class="map__space" />
+<rect x="300" y="770" width="100" height="30" class="map__space" />
+<rect x="300" y="805" width="100" height="30" class="map__space" />
+<rect x="300" y="840" width="100" height="30" class="map__space" />
+<rect x="300" y="875" width="100" height="30" class="map__space" />
+<rect x="950" y="950" width="80" height="100" class="map__space" />
+<rect x="860" y="950" width="80" height="100" class="map__space" />
+<rect x="770" y="950" width="80" height="100" class="map__space" />
+<rect x="680" y="950" width="80" height="100" class="map__space" />
+<rect x="590" y="950" width="80" height="100" class="map__space" />
+<rect x="500" y="950" width="80" height="100" class="map__space" />
+<rect x="450" y="950" width="40" height="100" class="map__space" />
+<rect x="780" y="1090" width="240" height="40" class="map__space" />
+<rect x="480" y="1090" width="240" height="40" class="map__space" />
+<rect x="1050" y="1170" width="140" height="100" class="map__space" />
+<rect x="960" y="1170" width="80" height="100" class="map__space" />
+<rect x="870" y="1170" width="80" height="100" class="map__space" />
+<rect x="780" y="1170" width="80" height="100" class="map__space" />
+<rect x="690" y="1170" width="80" height="100" class="map__space" />
+<rect x="600" y="1170" width="80" height="100" class="map__space" />
+<rect x="510" y="1170" width="80" height="100" class="map__space" />
+<rect x="460" y="1170" width="40" height="100" class="map__space" />
+<rect x="410" y="1170" width="40" height="100" class="map__space" />
+<rect x="360" y="1170" width="40" height="100" class="map__space" />
+<rect x="310" y="1170" width="40" height="100" class="map__space" />
+<rect x="185" y="1235" width="60" height="60" class="map__space" />
+<rect x="175" y="1300" width="70" height="60" class="map__space" />
+<rect x="100" y="1235" width="70" height="115" class="map__space" />
+<rect x="100" y="630" width="100" height="30" class="map__space" />
+<rect x="100" y="665" width="100" height="30" class="map__space" />
+<rect x="100" y="700" width="100" height="30" class="map__space" />
+<rect x="100" y="735" width="100" height="30" class="map__space" />
+<rect x="100" y="770" width="100" height="30" class="map__space" />
+<rect x="100" y="805" width="100" height="30" class="map__space" />
+<rect x="100" y="840" width="100" height="30" class="map__space" />
+<rect x="100" y="875" width="100" height="30" class="map__space" />
+<rect x="100" y="910" width="100" height="30" class="map__space" />
+<rect x="100" y="945" width="100" height="30" class="map__space" />
+<rect x="100" y="980" width="100" height="30" class="map__space" />
+<rect x="100" y="1015" width="100" height="30" class="map__space" />
+<rect x="100" y="1050" width="100" height="30" class="map__space" />
+<rect x="100" y="1085" width="100" height="60" class="map__space" />
+
+
+<rect data-space="3.01" x="1200" y="925" width="105" height="200" class="map__space" />
+<rect data-space="3.02" x="1200" y="1150" width="200" height="225" class="map__space" />
+
+
+<rect x="1030" y="390" width="100" height="30" class="map__stairs" />
+<rect x="380" y="390" width="90" height="30" class="map__stairs" />
+<rect x="340" y="1005" width="90" height="50" class="map__stairs" />
+<rect x="1080" y="1045" width="105" height="60" class="map__stairs" />
+ 

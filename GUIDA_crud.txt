@@ -1,0 +1,19 @@
+############    Istruzioni    #################################################
+
+	Per far partire crud.js bisogna eseguire dalla bash:
+	
+	npm install express
+	npm install socket.io
+	npm install mysql
+	
+	Attivare da XAMPP Apache e MySQL
+	
+	eseguire:
+		node crud.js
+	
+	In caso non funzionasse installare da bash anche:
+	npm install body-parser
+	npm install bootpag
+
+###############################################################################
+
