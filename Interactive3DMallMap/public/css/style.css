@@ -32,6 +32,11 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.logoUnibo {
+	width: 20%;
+	margin: -3% 0 0 0;
+}
+
 a {
 	text-decoration: none;
 	color: #aaa;
@@ -420,11 +425,14 @@ button:focus {
 	padding: 0;
 	color: #fff;
 	border: 0;
-	background: #d7d7dc;
+	opacity: 0.7;
+	background-color: #BB2E29;
+	
+	
 }
 
 .boxbutton--dark {
-	background: #c4c4c7;
+	background-color: #6B0808;
 }
 
 .boxbutton--darker {
@@ -502,7 +510,7 @@ button:focus {
 	height: 100%;
 	padding: 3em;
 	text-align: center;
-	background: #d7d7dc;
+	background: #fff;
 	-webkit-transition: -webkit-transform 0.8s;
 	transition: transform 0.8s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -598,7 +606,7 @@ button:focus {
 	width: 300px;
 	min-height: 100vh;
 	padding: 5em 0 1em;
-	background: #fff;
+	background-color: #BB2E29;
 }
 
 .search {
@@ -662,6 +670,7 @@ button:focus {
 	line-height: 1;
 	position: relative;
 	display: block;
+
 }
 
 .list__item:first-child {
@@ -712,6 +721,7 @@ button:focus {
 }
 
 .list__link {
+	color: white;
 	font-size: 0.85em;
 	display: block;
 	padding: 0.5em 0.5em 0.5em 0;
@@ -719,7 +729,7 @@ button:focus {
 
 .list__item--active .list__link,
 .list__link:hover {
-	color: #515158;
+	color: black;
 }
 
 /* Pins */
