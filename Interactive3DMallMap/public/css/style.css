@@ -510,7 +510,7 @@ button:focus {
 	height: 100%;
 	padding: 3em;
 	text-align: center;
-	background: #fff;
+	background: #d7d7dc;
 	-webkit-transition: -webkit-transform 0.8s;
 	transition: transform 0.8s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
@@ -606,7 +606,7 @@ button:focus {
 	width: 300px;
 	min-height: 100vh;
 	padding: 5em 0 1em;
-	background-color: #BB2E29;
+	background: #fff;
 }
 
 .search {
@@ -622,7 +622,7 @@ button:focus {
 	padding: 1.315em 2em;
 	color: #fff;
 	border: 0;
-	background: #515158;
+	background-color: #6B0808;
 	border-radius: 0;
 }
 
@@ -721,7 +721,6 @@ button:focus {
 }
 
 .list__link {
-	color: white;
 	font-size: 0.85em;
 	display: block;
 	padding: 0.5em 0.5em 0.5em 0;
@@ -729,7 +728,7 @@ button:focus {
 
 .list__item--active .list__link,
 .list__link:hover {
-	color: black;
+	color: #515158;
 }
 
 /* Pins */

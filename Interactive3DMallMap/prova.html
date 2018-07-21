@@ -22,7 +22,6 @@
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 var xmlns = "http://www.w3.org/2000/svg";
-	
 
 var socket = io('/mySensorNamespace');	
 
@@ -198,6 +197,7 @@ socket.on('hi',function(data) {
 			span.appendChild(t2);
 		}
 		
+		var content = document.getElementById("content");
 		p.appendChild(span);
 		div2.appendChild(p);
 		div2.appendChild(p2);
@@ -216,7 +216,8 @@ var svg_node = document.createElementNS(xmlns, "svg");
 		var useSVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		useSVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-cross');
 		svg_node.appendChild(useSVG);
-	
+		
+	var content = document.getElementById("content");
 	svg_node.appendChild(useSVG);
 	btn.appendChild(svg_node);
 	content.appendChild(btn);
