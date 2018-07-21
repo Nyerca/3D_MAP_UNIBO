@@ -6,6 +6,8 @@
 	box-sizing: border-box;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,300italic,400italic,500,500italic,700,700italic,900,900italic,100italic);
+
 @font-face {
 	font-family: 'codropsicons';
 	font-weight: normal;
@@ -908,3 +910,55 @@ button:focus {
 ul.list li:after { 
     content:'' !important;
 }
+
+
+/* Legenda colori */
+section.box {
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	background-color: #FFFFFF;
+	box-shadow: 0 2px 6px #CCC;
+	border-radius: 5px;
+	display: block;
+	float: left;
+	position:fixed;
+	bottom:0;
+	margin: 0 0 20px 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+@keyframes fadein {
+    0%   { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+.opacityIn {
+	animation: fadein 0.5s ease-in forwards;
+}
+.opacityOut {
+	animation: fadeOut 1s ease-in forwards;
+}
+
+section.box p {
+  margin: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline; 
+	font-weight: 400;
+	font-size: 14px;
+	color: #494A4A;
+	display: block;
+	text-align: center;
+	padding: 5px 0px 0px 5px;
+	width:100%;
+}
+
+/* Grapefruit */
+section.color-left.grapefruit-light {background-color:#ED5565;}
+section.color-right.grapefruit-dark {background-color:#DA4453;}

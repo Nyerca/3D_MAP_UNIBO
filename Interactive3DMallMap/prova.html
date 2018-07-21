@@ -42,7 +42,7 @@ $.ajaxSetup({ cache: true });
                     console.log(" A " + vect[1]);
 					socket.emit('deleteValue', vect);
 					}
-				currents[0] = "asd";
+
 				console.log(" A " + data.result.records[0].inizio);
 
             }
@@ -50,9 +50,43 @@ $.ajaxSetup({ cache: true });
 
 
 socket.on('hi',function(data) {	
-	
+	var box = document.getElementsByClassName("box")[0];
+	while (box.firstChild) {
+    box.removeChild(box.firstChild);
+}
+
+
+
 	//Carico il css descritto nella tabella datacategory
 	var valori = data.datacategory.split(';');
+	var indCategories = 0;
+	console.log("VAL LEN: " + valori.length);
+	
+document.getElementById("level__pins_1").innerHTML = "";
+document.getElementById("level__pins_2").innerHTML = "";
+document.getElementById("level__pins_3").innerHTML = "";
+document.getElementById("ulList").innerHTML = "";
+
+	
+	var style0 = document.createElement('style');
+	style0.type = 'text/css';
+	var wdt = valori.length * 64;
+	style0.innerHTML = "section.box { width: : '" + wdt + "' !important;}";
+	document.getElementsByTagName('head')[0].appendChild(style0);
+	
+	function showLegend(text, idC) {
+	console.log("Aaa: " + "" + idC);
+	document.getElementById("color1").classList.remove('opacityIn');
+	document.getElementById("color2").classList.remove('opacityIn');
+	document.getElementById("color3").classList.remove('opacityIn');
+	document.getElementById("color4").classList.remove('opacityIn');
+	document.getElementById("color5").classList.remove('opacityIn');
+	
+		document.getElementById("color" + idC).classList.add('opacityIn');
+
+		document.getElementById("colorLegend").innerHTML = text;
+	}
+	
 	for(var field in valori) {
 		var line = valori[field].split('***');
 		
@@ -66,7 +100,8 @@ socket.on('hi',function(data) {
 		style4.type = 'text/css';
 		var style5 = document.createElement('style');
 		style5.type = 'text/css';
-		
+		var style6 = document.createElement('style');
+		style6.type = 'text/css';
 		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { content: '" + line[1] + "'; color: " + line[2] + "}";
 		style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
 		style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
@@ -78,9 +113,42 @@ socket.on('hi',function(data) {
 		document.getElementsByTagName('head')[0].appendChild(style3);
 		document.getElementsByTagName('head')[0].appendChild(style4);
 		document.getElementsByTagName('head')[0].appendChild(style5);
+		
+		var box = document.getElementsByClassName("box")[0];
+		var span = document.createElement("span");
+		span.setAttribute("id","color" + line[0]);
+		span.setAttribute("class","opacityOut");
+		span.onclick = (function() {
+		var idC = line[0];
+      var currentI = line[1];
+      return function() { 
+          showLegend(currentI + '', idC + '');
+      }
+   })();
+		
+		if(indCategories == 0) {
+			span.setAttribute("class","color-left " + line[1]);
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px; border-top-left-radius: 5px; display: block; float: left;opacity: 0.2;}";
+		}
+		else if(indCategories == valori.length - 1) {
+			span.setAttribute("class","color-right " + line[1]);
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px; border-top-right-radius: 5px; display: block; float: left;opacity: 0.2;}";
+		}
+		else  {
+			span.setAttribute("class","color-center " + line[1])
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px;  display: block; float: left;opacity: 0.2;}";
+		}
+		indCategories ++;
+		document.getElementsByTagName('head')[0].appendChild(style6);
+		box.appendChild(span);
 	}
 	
-	
+	var box = document.getElementsByClassName("box")[0];
+	var p = document.createElement("p");
+	p.setAttribute("id","colorLegend");
+	var tn = document.createTextNode(" ");
+	p.appendChild(tn);
+	box.appendChild(p);
 	
 	//Carico la vista view_svg
 	var valori = data.figura.split(';');
@@ -518,6 +586,9 @@ x.style.display="none";
 	for(var field in valori) {
 
 		var line = valori[field].split('***');
+
+			if(typeof line[2] === "undefined")console.log("UNDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+			if(typeof line[2] !== "undefined") {
 			console.log("LUU" + line[2]);
 	var li = document.createElement("li");
 	li.setAttribute("id",5);
@@ -541,6 +612,7 @@ x.style.display="none";
 			
 	li.appendChild(a);
 	document.getElementById("ulList").appendChild(li);
+	}
 		
 	}
 	
@@ -773,6 +845,10 @@ x.style.display="none";
 				<header class="codrops-header">
 					<img class="logoUnibo" src="/img/logo.png" alt=""/>
 				</header>
+				<section class="box">
+
+
+				</section>
 				<div class="mall">
 					<div class="surroundings">
 						<img class="surroundings__map" src="/img/surroundings.svg" alt="Surroundings"/>

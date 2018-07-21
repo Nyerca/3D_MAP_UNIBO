@@ -71,11 +71,12 @@ function check() {
 			pin: pin,
 			opendata : singleData,
 		}
-		info = "", figura = "", datacategory = "", pin = "", dataspace = "";
+		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="";
 		namespace.emit('hi', vals);
 		console.log("emit");
 		clearInterval(interval);
 	}
+	
 }
 
 //Function that select values from the table and emits data to indexSensori.html
