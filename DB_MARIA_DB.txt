@@ -85,6 +85,10 @@ Da phpmyadmin
 CREATE VIEW `view_svg` AS 
 SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano FROM `dataspace`RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
 
+CREATE VIEW `view_svg` AS 
+SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano, Colore FROM `dataspace` JOIN `datacategory` ON dataspace.IdDataCategory = datacategory.IdDataCategory RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
+
+
 CREATE VIEW `level_pins` AS 
 SELECT IdDataSpace, dataspace.IdFigura, IdDataCategory, Icon, Top_distance, Left_distance, figura.Piano FROM `dataspace`, `pin`, `figura` where dataspace.IdPin = pin.IdPin AND dataspace.IdFigura = figura.IdFigura
 

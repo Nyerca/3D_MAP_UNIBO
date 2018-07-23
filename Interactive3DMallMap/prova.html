@@ -154,10 +154,17 @@ document.getElementById("ulList").innerHTML = "";
 	var valori = data.figura.split(';');
 	for(var field in valori) {
 		var line = valori[field].split('***');
+		console.log("LINE[9]: " + line[9]);
 		
 		var node = document.createElementNS(xmlns, line[1]);
 		node.setAttribute("data-space",line[0]);
-		node.setAttribute("class", line[2]);
+		if(line[0] != "null") {
+			node.setAttribute("class","clickable_space " + line[2]);
+			node.style.fill= line[9];
+		} else {
+			node.setAttribute("class", line[2]);
+		}
+
 		
 
 		if(line[6] != "null") {
@@ -190,11 +197,13 @@ document.getElementById("ulList").innerHTML = "";
 		
 		
 		var a_node = document.createElement("a");
+		a_node.setAttribute("id", "DS"+line[0]);
 		a_node.setAttribute("class","pin pin--" +pins);
 		a_node.setAttribute("data-category", line[2]);
 		a_node.setAttribute("data-space",line[0]);
 		a_node.setAttribute("href","#");
 		a_node.setAttribute("aria-label","PIN");
+		a_node.style.display = "none";
 		
 		
 		var span_node = document.createElement("span");
@@ -616,11 +625,14 @@ x.style.display="none";
 		
 	}
 	
-	
-	
+
+
+
+		var elems = document.getElementsByClassName("clickable_space");
+		
+
 
 });
-
 
 
 

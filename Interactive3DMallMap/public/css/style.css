@@ -745,9 +745,7 @@ button:focus {
 	transform-style: preserve-3d;
 }
 
-.level__pins--active {
-	pointer-events: auto;
-}
+
 
 .pin {
 	position: absolute;

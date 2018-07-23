@@ -106,7 +106,9 @@ function emitData() {
 			figura = figura + "***" + result[val].height;
 			figura = figura + "***" + result[val].Points;
 			figura = figura + "***" + result[val].Piano;
+			figura = figura + "***" + result[val].Colore;
 			figura = figura + ";";
+			
 		}
 		figura = figura.slice(0, -1);
 		if (err) throw err;

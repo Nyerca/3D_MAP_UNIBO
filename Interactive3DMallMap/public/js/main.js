@@ -117,7 +117,13 @@
 
 		// click on the show mall´s levels ctrl
 		allLevelsCtrl.addEventListener('click', function() {
-			// shows all levels
+			
+			//hides all pins
+		pins.forEach(function(pin) {
+			pin.style.display = "none";
+		});
+		
+		// shows all levels
 			showAllLevels();
 		});
 
@@ -162,6 +168,12 @@
 
 		// closing the content area
 		contentCloseCtrl.addEventListener('click', function() {
+			
+			//hides all pins
+		pins.forEach(function(pin) {
+			pin.style.display = "none";
+		});
+		
 			closeContentArea();
 		});
 
@@ -175,9 +187,24 @@
 				ev.preventDefault();
 				// for smaller screens: close search bar
 				closeSearch();
+		
 				// open level
 				showLevel(level);
 				// open content for this space
+				
+				
+				
+							//set the current level pins as active
+	var levelEl = mallLevels[selectedLevel - 1];
+		classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
+
+		//hides all pins
+		pins.forEach(function(pin) {
+			pin.style.display = "none";
+		});
+
+		//display the selected pin
+		document.getElementById("DS"+spacerefval).style.display = "block";
 				openContent(spacerefval);
 			});
 		});
@@ -191,12 +218,36 @@
 		closeSearchCtrl.addEventListener('click', function() {
 			closeSearch();
 		});
+		
 	}
 
 	/**
 	 * Opens a level. The current level moves to the center while the other ones move away.
 	 */
+	 var i = 0;
+	 
+	 function pinClick (e) {
+		 //set the current level pins as active
+	var levelEl = mallLevels[selectedLevel - 1];
+		classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
+
+		//hides all pins
+		pins.forEach(function(pin) {
+			pin.style.display = "none";
+		});
+
+		//display the selected pin
+		document.getElementById("DS"+$(this).attr("data-space")).style.display = "block";
+		console.log("THIS " + $(this).attr("data-space"));
+		openContent($(this).attr("data-space"));
+	 }
+	 
 	function showLevel(level) {
+		if (i==0) {
+		$('.clickable_space').on("click", pinClick);
+i++;  
+		}
+  
 		if( isExpanded ) {
 			return false;
 		}
@@ -217,7 +268,7 @@
 			classie.add(mallLevelsEl, 'levels--open');
 
 			// show level pins
-			showPins();
+			//showPins();
 
 			isExpanded = true;
 		}, 'transform');
@@ -230,12 +281,16 @@
 
 		// filter the spaces for this level
 		showLevelSpaces();
+		
+
 	}
 
 	/**
 	 * Shows all Mall´s levels
 	 */
 	function showAllLevels() {
+		$('.clickable_space').off('click');
+		i = 0;
 		if( isNavigating || !isExpanded ) {
 			return false;
 		}
@@ -261,6 +316,7 @@
 		if( isOpenContentArea ) {
 			closeContentArea();
 		}
+		
 	}
 
 	/**
@@ -416,6 +472,7 @@
 			classie.remove(activeItem, 'list__item--active');
 		}
 		// list item gets class active
+		
 		classie.add(spacesEl.querySelector('li[data-space="' + spacerefval + '"]'), 'list__item--active');
 
 		// remove class selected (if any) from current space
@@ -424,7 +481,7 @@
 			classie.remove(activeSpaceArea, 'map__space--selected');
 		}
 		// svg area gets selected
-		classie.add(mallLevels[selectedLevel - 1].querySelector('svg > .map__space[data-space="' + spaceref + '"]'), 'map__space--selected');
+		//classie.add(mallLevels[selectedLevel - 1].querySelector('svg > .map__space[data-space="' + spaceref + '"]'), 'map__space--selected');
 	}
 
 	/**
@@ -441,6 +498,7 @@
 		// disable mall nav ctrls
 		classie.add(levelDownCtrl, 'boxbutton--disabled');
 		classie.add(levelUpCtrl, 'boxbutton--disabled');
+		
 	}
 
 	/**
@@ -457,7 +515,7 @@
 			});
 		}
 		// map pin gets selected
-		try {
+		try {		
 			classie.add(mallLevelsEl.querySelector('.pin[data-space="' + spaceref + '"]'), 'pin--active');
 		}
 		catch(err) {
