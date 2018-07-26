@@ -159,8 +159,9 @@ document.getElementById("ulList").innerHTML = "";
 		var node = document.createElementNS(xmlns, line[1]);
 		node.setAttribute("data-space",line[0]);
 		if(line[0] != "null") {
-			node.setAttribute("class","clickable_space " + line[2]);
-			node.style.fill= line[9];
+			node.setAttribute("class","changeCol clickable_space " + line[2]);
+			node.style.fill= null;
+			node.setAttribute("id",line[9]);
 		} else {
 			node.setAttribute("class", line[2]);
 		}
@@ -630,10 +631,38 @@ x.style.display="none";
 
 		var elems = document.getElementsByClassName("clickable_space");
 		
+	
+function hideAndShow() {
+$(".level--1").attr('data-content','');
+		 $(".level--2").attr('data-content','');
+		 $(".level--3").attr('data-content','');
+		 
+		 setTimeout(function () {
+		 $(".level--1").attr('data-content','L1');
+		  $(".level--2").attr('data-content','L2');
+		  $(".level--3").attr('data-content','L3');
+		  }, 1000);
+}	
+		
+		
+$( ".mallnav__button--all-levels" ).click(function() {
+  var list= document.getElementsByClassName("changeCol");
+		for (var i = 0; i < list.length; i++) {
+	list[i].style.fill= null;
+}
+hideAndShow();
+});		
 
 
+$( ".mallnav__button--down" ).click(function() {
+hideAndShow();
+});	
+
+$( ".mallnav__button--up" ).click(function() {
+hideAndShow();
 });
-
+				
+});
 
 
 </script>
@@ -904,7 +933,7 @@ x.style.display="none";
 
 					</div>
 					<div class="levels">
-						<div class="level level--1" aria-label="Level 1">
+						<div class="level level--1" data-content="L1" aria-label="Level 1">
 							<svg id="lev1" class="map map--1" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 1</title>
 								<polygon points="200,100 1500,100 1500,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
@@ -921,7 +950,7 @@ class="map__outline" />
 							</div>
 							<!-- /level__pins -->
 						</div>
-						<div class="level level--2" aria-label="Level 2">
+						<div class="level level--2" data-content="L2" aria-label="Level 2">
 							<svg id="lev2" class="map map--2" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 2</title>
 								<polygon points="200,100 1385,100 1385,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
@@ -938,7 +967,7 @@ class="map__outline" />
 							</div>
 							<!-- /level__pins -->
 						</div>
-					<div class="level level--3" aria-label="Level 3">
+					<div class="level level--3" data-content="L3" aria-label="Level 3">
 							<svg id="lev3" class="map map--3" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 3</title>
 								<polygon points="300,145 1070,145 1070,100 1370,100 

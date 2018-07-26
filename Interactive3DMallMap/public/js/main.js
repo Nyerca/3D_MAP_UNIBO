@@ -112,6 +112,7 @@
 			level.addEventListener('click', function() {
 				// shows this level
 				showLevel(pos+1);
+				
 			});
 		});
 
@@ -242,7 +243,8 @@
 		openContent($(this).attr("data-space"));
 	 }
 	 
-	function showLevel(level) {
+	function showLevel(level) {		
+		
 		if (i==0) {
 		$('.clickable_space').on("click", pinClick);
 i++;  
@@ -282,6 +284,23 @@ i++;
 		// filter the spaces for this level
 		showLevelSpaces();
 		
+			var list= document.getElementsByClassName("changeCol");
+			setTimeout(function () {
+for (var i = 0; i < list.length; i++) {
+	list[i].style.fill= list[i].id;
+}
+}, 500);
+
+		$(".level--1").attr('data-content','');
+		 $(".level--2").attr('data-content','');
+		 $(".level--3").attr('data-content','');
+		 $(".level--" + level).attr('data-content','L'+level);
+		 
+		 setTimeout(function () {
+		 $(".level--1").attr('data-content','L1');
+		  $(".level--2").attr('data-content','L2');
+		  $(".level--3").attr('data-content','L3');
+		  }, 1000);
 
 	}
 
@@ -316,6 +335,7 @@ i++;
 		if( isOpenContentArea ) {
 			closeContentArea();
 		}
+		
 		
 	}
 
