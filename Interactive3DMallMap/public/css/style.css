@@ -960,3 +960,8 @@ section.box p {
 /* Grapefruit */
 section.color-left.grapefruit-light {background-color:#ED5565;}
 section.color-right.grapefruit-dark {background-color:#DA4453;}
+
+
+#svgCar {
+	position: absolute;
+}

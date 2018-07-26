@@ -83,9 +83,6 @@ alter table dataspace add constraint FKR_4
 Da phpmyadmin
 
 CREATE VIEW `view_svg` AS 
-SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano FROM `dataspace`RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
-
-CREATE VIEW `view_svg` AS 
 SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano, Colore FROM `dataspace` JOIN `datacategory` ON dataspace.IdDataCategory = datacategory.IdDataCategory RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
 
 
