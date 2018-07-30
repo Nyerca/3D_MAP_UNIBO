@@ -118,6 +118,7 @@ function emitData() {
 			datacategory = datacategory + result[val].IdDataCategory;
 			datacategory = datacategory + "***" + result[val].Nome;
 			datacategory = datacategory + "***" + result[val].Colore;
+			datacategory = datacategory + "***" + result[val].Icon;
 			datacategory = datacategory + ";";
 		}
 		datacategory = datacategory.slice(0, -1);

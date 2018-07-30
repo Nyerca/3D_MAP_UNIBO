@@ -13,9 +13,16 @@
 </style>
 
 		
+<polygon class="st3" points="102 0,102 78,500 78,500 0"/>
+<polygon class="st2" points="505 0,505 78,525 78,525 0"/>
+<polygon class="st3" points="530 0,530 78,1180 78,1180 0"/>
 
-  <polygon class="st2" points="200 719,265 719,273 90,288 67,316 50,1180 51,1179 9,202 6,102 6,200 93"/>
+ <g
+     transform="translate(0 80)">
+    <polygon class="st2" points="200 720,265 720,273 110,288 87,316 75,1180 75,1180 10,202 6,102 6,102 50,196 50,199 53, 204 51,102 90,102 140,195 96,199 94,205 96"/>
+	<polygon class="st3" points="102 53,195 53, 102 86"/>
 	 <circle class="st3" cx="245" cy="55" r="25"/>
+  </g>
 </svg>
 
 

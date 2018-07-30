@@ -295,11 +295,20 @@ for (var i = 0; i < list.length; i++) {
 		 $(".level--2").attr('data-content','');
 		 $(".level--3").attr('data-content','');
 		 $(".level--" + level).attr('data-content','L'+level);
+
+
+		 classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
+		 classie.add(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
+		 classie.add(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
+
 		 
 		 setTimeout(function () {
 		 $(".level--1").attr('data-content','L1');
 		  $(".level--2").attr('data-content','L2');
 		  $(".level--3").attr('data-content','L3');
+		   classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
+		   classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
+		 classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
 		  }, 1000);
 
 	}

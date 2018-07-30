@@ -9,7 +9,6 @@ E cercare su google:
 isi-studio8bis.csr.unibo.it
 
 
-
 ----------------------------- CREARE IL DATABASE -----------------------------------
 
 Da MariaDB
@@ -42,6 +41,7 @@ create table datacategory (
      IdDataCategory int not null AUTO_INCREMENT,
      Nome char(100) not null,
      Colore char(100) not null,
+     Icon char(100) not null,
      constraint IDDataCategory primary key (IdDataCategory))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table pin (
@@ -244,7 +244,7 @@ INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Pi
 ("rect", "map__space", "995", "145", "60", "100", null, 3),
 ("rect", "map__space", "1060", "215", "120", "30", null, 3),
 ("rect", "map__space", "735", "265", "240", "40", null, 3),
-("rect", "map__space", "1060", "100", "30", "100", null, 3),
+("rect", "map__space", "1072", "100", "20", "100", null, 3),
 ("rect", "map__space", "1095", "100", "30", "100", null, 3),
 ("rect", "map__space", "1130", "100", "30", "100", null, 3),
 ("rect", "map__space", "1165", "100", "30", "100", null, 3),
@@ -308,7 +308,7 @@ INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Pi
 ("rect", "map__space", "360", "1170", "40", "100", null, 3),
 ("rect", "map__space", "310", "1170", "40", "100", null, 3),
 ("rect", "map__space", "185", "1235", "60", "60", null, 3),
-("rect", "map__space", "175", "1300", "70", "60", null, 3),
+("rect", "map__space", "175", "1300", "65", "50", null, 3),
 ("rect", "map__space", "100", "1235", "70", "115", null, 3),
 ("rect", "map__space", "100", "630", "100", "30", null, 3),
 ("rect", "map__space", "100", "665", "100", "30", null, 3),
@@ -338,12 +338,12 @@ INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Pi
 ("rect", "map__stairs", "1080", "1045", "105", "60", null, 3),
 ("circle", "map__space", "420", "545", "20", null, null, 1);
 
-INSERT INTO `datacategory`(`Nome`, `Colore`) VALUES 
-("Aule", "#7cbf7f"),
-("Laboratori", "#6584c7"),
-("Sensori", "#f4bc42"),
-("Professori", "#41d9f4"),
-("Lezioni", "#f48241");
+INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES 
+("Aule", "#7cbf7f", "pencil"),
+("Laboratori", "#6584c7","display"),
+("Sensori", "#f4bc42","avocado"),
+("Professori", "#41d9f4","star"),
+("Lezioni", "#f48241", null);
 
 INSERT INTO `pin`(`Icon`, `Top_distance`, `Left_distance`) VALUES 
 ("pencil", 15, 81),
