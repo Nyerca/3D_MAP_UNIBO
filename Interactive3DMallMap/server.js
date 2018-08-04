@@ -24,6 +24,7 @@ con.connect(function(err) {
   //console.log("Connected!");
 });
 
+var IdEntrance = 2;
 
 var dim;
 var ind = 0;
@@ -61,17 +62,18 @@ http.listen(3000, function() {
 
 
 var interval;
-var info = "", figura = "", datacategory = "", pin = "";
+var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
 		var vals = { 
 			info: info, 
 			figura: figura, 
 			datacategory: datacategory, 
 			pin: pin,
+			css: css,
 			opendata : singleData,
 		}
-		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="";
+		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="", css="";
 		namespace.emit('hi', vals);
 		console.log("emit");
 		clearInterval(interval);
@@ -82,7 +84,15 @@ function check() {
 //Function that select values from the table and emits data to indexSensori.html
 function emitData() {
 	
-	con.query("SELECT * FROM `view_content`", function (err, result, fields) {
+	con.query("SELECT * FROM `entrancecss` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
+		for(val in result) {
+			css = css + result[val].Css;
+			css = css + ";";
+		}
+		css = css.slice(0, -1);
+		if (err) throw err;
+	});
+	con.query("SELECT * FROM `view_content` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
 		for(val in result) {
 			info = info + result[val].IdDataSpace;
 			info = info + "***" + result[val].IdDataCategory;
@@ -124,7 +134,7 @@ function emitData() {
 		datacategory = datacategory.slice(0, -1);
 		if (err) throw err;
 	});
-	con.query("SELECT * FROM `level_pins`", function (err, result, fields) {
+	con.query("SELECT * FROM `level_pins` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
 		for(val in result) {
 			pin = pin + result[val].IdDataSpace;
 			pin = pin + "***" + result[val].IdFigura;

@@ -126,6 +126,8 @@
 		
 		// shows all levels
 			showAllLevels();
+			
+		
 		});
 
 		// navigating through the levels
@@ -169,7 +171,7 @@
 
 		// closing the content area
 		contentCloseCtrl.addEventListener('click', function() {
-			
+
 			//hides all pins
 		pins.forEach(function(pin) {
 			pin.style.display = "none";
@@ -243,7 +245,7 @@
 		openContent($(this).attr("data-space"));
 	 }
 	 
-	function showLevel(level) {		
+	function showLevel(level) {
 		
 		if (i==0) {
 		$('.clickable_space').on("click", pinClick);
@@ -259,6 +261,7 @@ i++;
 
 		// control navigation controls state
 		setNavigationState();
+		
 
 		classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 		
@@ -268,6 +271,14 @@ i++;
 
 		onEndTransition(levelEl, function() {
 			classie.add(mallLevelsEl, 'levels--open');
+			
+			for(var i = 0; i<mallLevelsTotal;i++) {
+
+			if(selectedLevel != i + 1) classie.add(mallLevels[i], 'level--hideMe');
+			else classie.remove(mallLevels[i], 'level--hideMe');
+			
+			
+		}
 
 			// show level pins
 			//showPins();
@@ -310,6 +321,8 @@ for (var i = 0; i < list.length; i++) {
 		   classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
 		 classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
 		  }, 1000);
+		  
+		  		
 
 	}
 
@@ -323,7 +336,14 @@ for (var i = 0; i < list.length; i++) {
 			return false;
 		}
 		isExpanded = false;
+		
+		for(var j = 0; j<mallLevelsTotal;j++) {
 
+			if(selectedLevel != j + 1) classie.remove(mallLevels[j], 'level--hideMe');
+			
+		}
+
+		
 		classie.remove(mallLevels[selectedLevel - 1], 'level--current');
 		classie.remove(mallLevelsEl, 'levels--selected-' + selectedLevel);
 		classie.remove(mallLevelsEl, 'levels--open');
@@ -344,7 +364,7 @@ for (var i = 0; i < list.length; i++) {
 		if( isOpenContentArea ) {
 			closeContentArea();
 		}
-		
+
 		
 	}
 
@@ -435,10 +455,13 @@ for (var i = 0; i < list.length; i++) {
 		// transition direction class
 		classie.add(currentLevel, 'level--moveOut' + direction);
 		// next level element
-		var nextLevel = mallLevels[selectedLevel-1]
+		var nextLevel = mallLevels[selectedLevel-1];
+		
+		 classie.remove(nextLevel, 'level--hideMe')
+
 		// ..becomes the current one
 		classie.add(nextLevel, 'level--current');
-
+		
 		// when the transition ends..
 		onEndTransition(currentLevel, function() {
 			classie.remove(currentLevel, 'level--moveOut' + direction);
@@ -452,6 +475,8 @@ for (var i = 0; i < list.length; i++) {
 			showPins();
 
 			isNavigating = false;
+		
+		
 		});
 
 		// filter the spaces for this level
@@ -459,6 +484,8 @@ for (var i = 0; i < list.length; i++) {
 
 		// hide the previous level´s pins
 		removePins(currentLevel);
+		
+		
 	}
 
 	/**
@@ -484,6 +511,8 @@ for (var i = 0; i < list.length; i++) {
 	 * Opens/Reveals a content item.
 	 */
 	function openContent(spacerefval) {
+		classie.add(document.getElementsByClassName("box")[0], 'legend_moved');	
+		
 		// if one already shown:
 		if( isOpenContentArea ) {
 			hideSpace();
@@ -511,6 +540,7 @@ for (var i = 0; i < list.length; i++) {
 		}
 		// svg area gets selected
 		//classie.add(mallLevels[selectedLevel - 1].querySelector('svg > .map__space[data-space="' + spaceref + '"]'), 'map__space--selected');
+		
 	}
 
 	/**
@@ -573,6 +603,7 @@ for (var i = 0; i < list.length; i++) {
 			setNavigationState();
 		}
 		isOpenContentArea = false;
+		classie.remove(document.getElementsByClassName("box")[0], 'legend_moved');	
 	}
 
 	/**

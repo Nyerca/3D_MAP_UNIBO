@@ -55,6 +55,23 @@ socket.on('hi',function(data) {
     box.removeChild(box.firstChild);
 }
 
+	setTimeout(function () {
+		 $("#pageLoad").remove();
+		  },300);
+
+//Carico la tabella entrancecss
+
+	var valori = data.css.split(';');
+	for(var field in valori) {
+		var line = valori[field].split('***');
+		
+		var style = document.createElement('style');
+		style.type = 'text/css';
+
+		
+		style.innerHTML = "" + line[0];
+		document.getElementsByTagName('head')[0].appendChild(style);
+	}
 
 
 	//Carico il css descritto nella tabella datacategory
@@ -70,22 +87,10 @@ document.getElementById("ulList").innerHTML = "";
 	
 	var style0 = document.createElement('style');
 	style0.type = 'text/css';
-	var wdt = valori.length * 64;
-	style0.innerHTML = "section.box { width: : '" + wdt + "' !important;}";
+	var wdt = valori.length * 130;
+	style0.innerHTML = "section.box { width: : '" + wdt + "' !important; }";
 	document.getElementsByTagName('head')[0].appendChild(style0);
-	
-	function showLegend(text, idC) {
-	console.log("Aaa: " + "" + idC);
-	document.getElementById("color1").classList.remove('opacityIn');
-	document.getElementById("color2").classList.remove('opacityIn');
-	document.getElementById("color3").classList.remove('opacityIn');
-	document.getElementById("color4").classList.remove('opacityIn');
-	document.getElementById("color5").classList.remove('opacityIn');
-	
-		document.getElementById("color" + idC).classList.add('opacityIn');
 
-		document.getElementById("colorLegend").innerHTML = text;
-	}
 	
 	for(var field in valori) {
 		var line = valori[field].split('***');
@@ -104,7 +109,7 @@ document.getElementById("ulList").innerHTML = "";
 		style6.type = 'text/css';
 
 		
-		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { content: '" + line[1] + "'; color: " + line[2] + "}";
+		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { content: '" + line[1] + " ▼'; color: " + line[2] + "}";
 		style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
 		style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
 		style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
@@ -124,6 +129,7 @@ document.getElementById("ulList").innerHTML = "";
 		var span = document.createElement("span");
 		span.setAttribute("id","color" + line[0]);
 		span.setAttribute("class","opacityOut");
+		/*
 		span.onclick = (function() {
 		var idC = line[0];
       var currentI = line[1];
@@ -131,18 +137,19 @@ document.getElementById("ulList").innerHTML = "";
           showLegend(currentI + '', idC + '');
       }
    })();
+		*/
 		
 		if(indCategories == 0) {
 			span.setAttribute("class","color-left " + line[1]);
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px; border-top-left-radius: 5px; display: block; float: left;opacity: 1;}";
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
 		}
 		else if(indCategories == valori.length - 1) {
 			span.setAttribute("class","color-right " + line[1]);
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px; border-top-right-radius: 5px; display: block; float: left;opacity: 1;}";
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
 		}
 		else  {
 			span.setAttribute("class","color-center " + line[1])
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 64px; height: 50px;  display: block; float: left;opacity: 1;}";
+			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
 		}
 		indCategories ++;
 		document.getElementsByTagName('head')[0].appendChild(style6);
@@ -152,19 +159,27 @@ document.getElementById("ulList").innerHTML = "";
 		var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
 		use2SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-' +line[3]);
 		svg2_node.appendChild(use2SVG);
-	
+		
+		var div = document.createElement("div");
+		div.setAttribute("id","rowLegend");
+		
+		var style7 = document.createElement('style');
+		style7.type = 'text/css';
+		//style7.innerHTML = "row." + line[1] + "{background-color: " + line[2] + "; width: 52px; height: 30px; border-top-left-radius: 5px; display: block; float: right;opacity: 1;}";
+		//document.getElementsByTagName('head')[0].appendChild(style7);
+		
+		
+		var p = document.createElement("p");
+		p.innerHTML = "" + line[1];
+		p.setAttribute("id","leftLegend");
+		
 		
 		span.appendChild(svg2_node);
-		
-		box.appendChild(span);
+		div.appendChild(p);
+		div.appendChild(span);
+		box.appendChild(div);
 	}
 	
-	var box = document.getElementsByClassName("box")[0];
-	var p = document.createElement("p");
-	p.setAttribute("id","colorLegend");
-	var tn = document.createTextNode(" ");
-	p.appendChild(tn);
-	box.appendChild(p);
 	
 	//Carico la vista view_svg
 	var piani = 0;
@@ -382,7 +397,7 @@ x5.appendChild(th5);
 x5.style.visibility = "hidden";
 						
 	function Show(num) {
-
+console.log("CLICK_SHOW");
 						
 		switch(num) {
 			case '1':
@@ -565,7 +580,7 @@ x.style.display="none";
 		var a = document.createElement("a");
 		a.setAttribute("href","#");
 		a.setAttribute("class","list__link");
-		a.innerHTML = line[2]
+		a.innerHTML = line[2];
 		
 		li.appendChild(a);
 		
@@ -666,9 +681,6 @@ x.style.display="none";
 		
 	}
 	
-
-
-
 		var elems = document.getElementsByClassName("clickable_space");
 		
 	
@@ -930,18 +942,22 @@ hideAndShow();
 			</defs>
 		</svg>
 		<div class="container">
+		<div id="pageLoad">
+		<div class="spinner">
+  <div class="ball"></div>
+  <p>LOADING</p>
+</div>
+</div>
 			<div class="main">		
 				<header class="codrops-header">
 					<img class="logoUnibo" src="/img/logo.png" alt=""/>
 				</header>
 				<section class="box">
-
-
 				</section>
 				<div class="mall">
 					<div class="surroundings">
 					
-					
+<!--
 						<svg id="svgCar" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" 
 	viewBox="0 0 7900 6000" xmlns:xlink="http://www.w3.org/1999/xlink" smiling="fake">
 	<script type="text/ecmascript" xlink:href="https://cdn.rawgit.com/FakeSmile/FakeSmile/master/smil.user.js"></script>
@@ -998,10 +1014,9 @@ hideAndShow();
 			rotate="auto"
 			/>
 		</g>
+
 </svg>
-					
-					
-					
+-->
 						<img class="surroundings__map" src="/img/surroundings.svg" alt="Surroundings"/>
 						
 					
