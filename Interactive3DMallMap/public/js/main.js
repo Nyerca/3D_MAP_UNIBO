@@ -101,7 +101,9 @@
 	function init() {
 		// init/bind events
 		initEvents();
+		
 	}
+
 
 	/**
 	 * Initialize/Bind events fn.
@@ -241,12 +243,11 @@
 
 		//display the selected pin
 		document.getElementById("DS"+$(this).attr("data-space")).style.display = "block";
-		console.log("THIS " + $(this).attr("data-space"));
 		openContent($(this).attr("data-space"));
 	 }
 	 
 	function showLevel(level) {
-		
+		changelev(level);
 		if (i==0) {
 		$('.clickable_space').on("click", pinClick);
 i++;  
@@ -330,6 +331,7 @@ for (var i = 0; i < list.length; i++) {
 	 * Shows all Mall´s levels
 	 */
 	function showAllLevels() {
+		
 		$('.clickable_space').off('click');
 		i = 0;
 		if( isNavigating || !isExpanded ) {
@@ -364,7 +366,8 @@ for (var i = 0; i < list.length; i++) {
 		if( isOpenContentArea ) {
 			closeContentArea();
 		}
-
+		
+changelev(0);
 		
 	}
 
@@ -372,9 +375,28 @@ for (var i = 0; i < list.length; i++) {
 	 * Shows all spaces for current level
 	 */
 	function showLevelSpaces() {
+		var cat1 = 0;
 		spacesList.filter(function(item) { 
+		
+		if(item.values().level === selectedLevel.toString()) {
+			if(item.values().category == "1");
+		cat1++;	
+		}
 			return item.values().level === selectedLevel.toString(); 
 		});
+	}
+	
+	function howManySpaces() {
+		var cat1 = 0;
+		spacesList.filter(function(item) { 
+		
+		if(item.values().level === selectedLevel.toString()) {
+			if(item.values().category == "1");
+			cat1++;	
+		}
+			
+		});
+
 	}
 
 	/**
@@ -484,7 +506,8 @@ for (var i = 0; i < list.length; i++) {
 
 		// hide the previous level´s pins
 		removePins(currentLevel);
-		
+
+		switch_lev(selectedLevel);
 		
 	}
 

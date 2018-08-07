@@ -837,7 +837,9 @@ p {
 	}
 }
 
-
+.L3_1:before { 
+    pointer-events: auto !important;
+}
 .firstTitle:before { 
     pointer-events: auto !important;
 }
@@ -949,3 +951,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	margin-top: -110%;
 }
 
+
+.firstTitle, .secondTitle, .thirdTitle, .fourthTitle, .fifthTitle {
+	text-indent: -6500px;
+}

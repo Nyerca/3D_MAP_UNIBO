@@ -22,8 +22,262 @@
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 var xmlns = "http://www.w3.org/2000/svg";
-
+var lev = 0;
 var socket = io('/mySensorNamespace');	
+
+var firstOpen = 1;
+	var secondOpen = 1;
+	var thirdOpen = 1;
+	var fourthOpen = 1;
+	var fifthOpen = 1;
+
+						
+	function Show(num) {
+
+						
+		switch(num) {
+			case '1':
+				if(firstOpen == 0) {
+					console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().fadeIn();
+							}
+						});
+
+						firstOpen = 1;
+						if(secondOpen == 1) Show('2');
+						if(thirdOpen == 1) Show('3');
+						if(fourthOpen == 1) Show('4');
+						if(fifthOpen == 1) Show('5');
+					}
+					else {
+					console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().each(function( index ) {
+									if(( this ).text != "▼") $(this).hide();
+								});
+							}
+						});
+						firstOpen = 0;
+					}
+					
+				break;
+			case '2':
+				if(secondOpen == 0) {
+						console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().fadeIn();
+							}
+						});
+						secondOpen = 1;
+						if(firstOpen == 1) Show('1');
+						if(thirdOpen == 1) Show('3');
+						if(fourthOpen == 1) Show('4');
+						if(fifthOpen == 1) Show('5');
+					}
+					else {
+					console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().each(function( index ) {
+
+  if(( this ).text != "▼") $(this).hide();
+});
+							}
+						});
+						secondOpen = 0;
+
+					}
+				break;
+			case '3':
+				if(thirdOpen == 0) {
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+
+								$(this).children().fadeIn();
+							}
+						});
+						thirdOpen = 1;
+						if(secondOpen == 1) Show('2');
+						if(firstOpen == 1) Show('1');
+						if(fourthOpen == 1) Show('4');
+						if(fifthOpen == 1) Show('5');
+					}
+					else {
+					
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().each(function( index ) {
+
+  if(( this ).text != "▼") $(this).hide();
+});
+							}
+						});
+						thirdOpen = 0;				
+					}
+				break;
+			case '4':
+				if(fourthOpen == 0) {
+
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+
+								$(this).children().fadeIn();
+							}
+						});
+
+						fourthOpen = 1;
+						if(secondOpen == 1) Show('2');
+						if(firstOpen == 1) Show('1');
+						if(thirdOpen == 1) Show('3');
+						if(fifthOpen == 1) Show('5');
+					}
+					else {
+
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().each(function( index ) {
+
+  if(( this ).text != "▼") $(this).hide();
+});
+							}
+						});
+						fourthOpen = 0;
+						
+						
+					}
+				break;
+				case '5':
+				if(fifthOpen == 0) {
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+
+								$(this).children().fadeIn();
+							}
+						});
+
+						fifthOpen = 1;
+						if(secondOpen == 1) Show('2');
+						if(firstOpen == 1) Show('1');
+						if(thirdOpen == 1) Show('3');
+						if(fourthOpen == 1) Show('4');
+					}
+					else {
+					console.log("CLOSE");
+						$( "ul.list li" ).each(function( index ) {
+							if($(this).attr("data-category") == num) {
+								$(this).children().each(function( index ) {
+  if(( this ).text != "▼") $(this).hide();
+});
+							}
+						});
+						fifthOpen = 0;
+						
+					}
+				break;
+		}
+		
+	}
+
+function hideAllMarksBut(number) {
+	$( ".firstTitle" ).each(function( index ) {
+	
+		if($(this).attr("data-level") != number) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	});
+	$( ".secondTitle" ).each(function( index ) {
+	
+		if($(this).attr("data-level") != number) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	});
+	$( ".thirdTitle" ).each(function( index ) {
+	
+		if($(this).attr("data-level") != number) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	});
+	$( ".fourthTitle" ).each(function( index ) {
+	
+		if($(this).attr("data-level") != number) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	});
+	$( ".fifthTitle" ).each(function( index ) {
+	
+		if($(this).attr("data-level") != number) {
+			$(this).hide();
+		} else {
+			$(this).show();
+		}
+	});
+   }
+  
+var switch_lev = function navigate_lev (value) {
+lev = value;
+
+hideAllMarksBut(lev);
+
+if(firstOpen == 1) valore = 1;
+if(secondOpen == 1) valore = 2;
+if(thirdOpen == 1) valore = 3;
+if(fourthOpen == 1) valore = 4;
+if(fifthOpen == 1) valore = 5;
+
+for(var n = 0; n<2; n++)  Show('1');
+for(var n = 0; n<2; n++)  Show('2');
+for(var n = 0; n<2; n++)  Show('3');
+for(var n = 0; n<2; n++)  Show('4');
+for(var n = 0; n<2; n++)  Show('5');
+
+if(valore == 1) Show('1');
+if(valore == 2) Show('2');
+if(valore == 3) Show('3');
+if(valore == 4) Show('4');
+if(valore == 5) Show('5');
+}
+
+  
+var changelev = function selLevel(value) {
+lev = value;
+
+hideAllMarksBut(lev);
+if(lev == 0) {
+var valore = 0;
+
+if(firstOpen == 1) valore = 1;
+if(secondOpen == 1) valore = 2;
+if(thirdOpen == 1) valore = 3;
+if(fourthOpen == 1) valore = 4;
+if(fifthOpen == 1) valore = 5;
+
+for(var n = 0; n<2; n++)  Show('1');
+for(var n = 0; n<2; n++)  Show('2');
+for(var n = 0; n<2; n++)  Show('3');
+for(var n = 0; n<2; n++)  Show('4');
+for(var n = 0; n<2; n++)  Show('5');
+
+
+
+if(valore == 1) Show('1');
+if(valore == 2) Show('2');
+if(valore == 3) Show('3');
+if(valore == 4) Show('4');
+if(valore == 5) Show('5');
+}
+}
 
 var currents = [];
 var current;
@@ -109,7 +363,7 @@ document.getElementById("ulList").innerHTML = "";
 		style6.type = 'text/css';
 
 		
-		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { content: '" + line[1] + " ▼'; color: " + line[2] + "}";
+		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▼'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
 		style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
 		style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
 		style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
@@ -364,208 +618,17 @@ var svg_node = document.createElementNS(xmlns, "svg");
 	var indx4 = 0;
 	var indx5 = 0;
 	
-	var firstOpen = 1;
-	var secondOpen = 1;
-	var thirdOpen = 1;
-	var fourthOpen = 1;
-	var fifthOpen = 1;
 	
-	
-var x = document.createElement("li");
-var th = document.createTextNode("A");
-x.appendChild(th);
-x.style.visibility = "hidden";
-
-var x2 = document.createElement("li");
-var th2 = document.createTextNode("A");
-x2.appendChild(th2);
-x2.style.visibility = "hidden";
-
-var x3 = document.createElement("li");
-var th3 = document.createTextNode("A");
-x3.appendChild(th3);
-x3.style.visibility = "hidden";
-
-var x4 = document.createElement("li");
-var th4 = document.createTextNode("A");
-x4.appendChild(th4);
-x4.style.visibility = "hidden";
-
-var x5 = document.createElement("li");
-var th5 = document.createTextNode("A");
-x5.appendChild(th5);
-x5.style.visibility = "hidden";
-						
-	function Show(num) {
-console.log("CLICK_SHOW");
-						
-		switch(num) {
-			case '1':
-				if(firstOpen == 0) {
-					
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-							console.log("OPEN");
-								style.innerHTML = ".firstTitle { pointer-events: auto;}";
-								document.getElementsByTagName('head')[0].appendChild(style);
-x.style.display="none";
-								$(this).children().fadeIn();
-							}
-						});
-
-						firstOpen = 1;
-					}
-					else {
-					console.log("CLOSE");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-
-								style.innerHTML = ".firstTitle { pointer-events: none;}";
-								document.getElementsByTagName('head')[0].appendChild(style);
-					x.style.display="block";
-								$(this).children().hide();
-							}
-						});
-						firstOpen = 0;
-						
-						if(indx1 == 1) {
-						var el = document.getElementById("ulList");
-						var el2 = document.getElementsByClassName("firstTitle")[0];
-						el.insertBefore(x, el2.nextSibling);
-						} else document.getElementsByClassName("firstTitle")[0].appendChild(x);
-						
-					}
-					
-				break;
-			case '2':
-				if(secondOpen == 0) {
-					console.log("OPEN");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x2.style.display="none";
-								$(this).children().fadeIn();
-							}
-						});
-
-						secondOpen = 1;
-					}
-					else {
-					console.log("CLOSE");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x2.style.display="block";
-								$(this).children().hide();
-							}
-						});
-						secondOpen = 0;
-						
-						if(indx2 == 1) {
-						var el = document.getElementById("ulList");
-						var el2 = document.getElementsByClassName("secondTitle")[0];
-						el.insertBefore(x2, el2.nextSibling);
-						} else document.getElementsByClassName("secondTitle")[0].appendChild(x2);
-						
-					}
-				break;
-			case '3':
-				if(thirdOpen == 0) {
-					console.log("OPEN");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x3.style.display="none";
-								$(this).children().fadeIn();
-							}
-						});
-						thirdOpen = 1;
-					}
-					else {
-					
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x3.style.display="block";
-								$(this).children().hide();
-							}
-						});
-						thirdOpen = 0;
-						
-						if(indx3 == 1) {
-						var el = document.getElementById("ulList");
-						var el2 = document.getElementsByClassName("thirdTitle")[0];
-						el.insertBefore(x3, el2.nextSibling);
-						} else document.getElementsByClassName("thirdTitle")[0].appendChild(x3);
-					}
-				break;
-			case '4':
-				if(fourthOpen == 0) {
-					console.log("OPEN");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x4.style.display="none";
-								$(this).children().fadeIn();
-							}
-						});
-
-						fourthOpen = 1;
-					}
-					else {
-					console.log("CLOSE");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x4.style.display="block";
-								$(this).children().hide();
-							}
-						});
-						fourthOpen = 0;
-						
-						if(indx4 == 1) {
-						var el = document.getElementById("ulList");
-						var el2 = document.getElementsByClassName("fourthTitle")[0];
-						el.insertBefore(x4, el2.nextSibling);
-						} else document.getElementsByClassName("fourthTitle")[0].appendChild(x4);
-						
-					}
-				break;
-				case '5':
-				if(fifthOpen == 0) {
-					console.log("OPEN");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x5.style.display="none";
-								$(this).children().fadeIn();
-							}
-						});
-
-						fifthOpen = 1;
-					}
-					else {
-					console.log("CLOSE");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								x5.style.display="block";
-								$(this).children().hide();
-							}
-						});
-						fifthOpen = 0;
-						
-						if(indx5 == 1) {
-						var el = document.getElementById("ulList");
-						var el2 = document.getElementsByClassName("fifthTitle")[0];
-						el.insertBefore(x5, el2.nextSibling);
-						} else document.getElementsByClassName("fifthTitle")[0].appendChild(x5);
-						
-					}
-				break;
-		}
-		
-	}
 	
 	var listener = function(event){
 		if(event.target.tagName == "LI") Show(event.target.id);
 	};
 	var event_list = ['click'];
-
-
-
+	
+	var L1_1 = 0, L1_2 = 0, L1_3 = 0, L1_4 = 0, L1_5 = 0;
+	var L2_1 = 0, L2_2 = 0, L2_3 = 0, L2_4 = 0, L2_5 = 0;
+	var L3_1 = 0, L3_2 = 0, L3_3 = 0, L3_4 = 0, L3_5 = 0;
+	
 	for(var field in valori) {
 		var line = valori[field].split('***');
 					
@@ -582,43 +645,333 @@ x.style.display="none";
 		a.setAttribute("class","list__link");
 		a.innerHTML = line[2];
 		
+		
+		
 		li.appendChild(a);
 		
+		//switch sul livello
 		switch(line[1]) {
 			case '1':
-				if(indx1 == 0) {
-					li.setAttribute("class","list__item firstTitle");
+				if(indx1 == 0) { //se categoria 1
+					var x0_tmp = document.createElement("li");
+					x0_tmp.setAttribute("id",line[1]);
+					x0_tmp.setAttribute("class","list__item");
+					x0_tmp.setAttribute("data-level","0");
+					x0_tmp.setAttribute("data-category", line[1]);
+		
+					var a0_tmp = document.createElement("a");
+					a0_tmp.innerHTML = "▼";
+					x0_tmp.appendChild(a0_tmp);
+
+					x0_tmp.classList.add("firstTitle");
 					event_list.forEach(function(ev, ev_index){
-						li.addEventListener(ev, listener, false);
+						x0_tmp.addEventListener(ev, listener, false);
 					});
+					document.getElementById("ulList").appendChild(x0_tmp);
 				}
+				/************************************************************/
+				
+				if(line[5] == 1 && L1_1 == 0) {
+					var x_tmp = document.createElement("li");
+					x_tmp.setAttribute("id",line[1]);
+					x_tmp.setAttribute("class","list__item");
+					x_tmp.setAttribute("data-level","1");
+					x_tmp.setAttribute("data-category", line[1]);
+		
+					var a_tmp = document.createElement("a");
+					a_tmp.innerHTML = "▼";
+					x_tmp.appendChild(a_tmp);
+
+					x_tmp.classList.add("firstTitle");
+					event_list.forEach(function(ev, ev_index){
+						x_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x_tmp);
+					L1_1 ++;
+				}
+				/************************************************************/
+				if(line[5] == 2 && L2_1 == 0) {
+					var x2_tmp = document.createElement("li");
+					x2_tmp.setAttribute("id",line[1]);
+					x2_tmp.setAttribute("class","list__item");
+					x2_tmp.setAttribute("data-level","2");
+					x2_tmp.setAttribute("data-category", line[1]);
+		
+					var a2_tmp = document.createElement("a");
+					a2_tmp.innerHTML = "▼";
+					x2_tmp.appendChild(a2_tmp);
+
+					x2_tmp.classList.add("firstTitle");
+					event_list.forEach(function(ev, ev_index){
+						x2_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x2_tmp);
+					L2_1 ++;
+				}
+				/************************************************************/
+				if(line[5] == 3 && L3_1 == 0) {
+					var x3_tmp = document.createElement("li");
+					x3_tmp.setAttribute("id",line[1]);
+					x3_tmp.setAttribute("class","list__item");
+					x3_tmp.setAttribute("data-level","3");
+					x3_tmp.setAttribute("data-category", line[1]);
+		
+		
+					var a3_tmp = document.createElement("a");
+					a3_tmp.innerHTML = "▼";
+					x3_tmp.appendChild(a3_tmp);
+
+					x3_tmp.classList.add("firstTitle");
+					event_list.forEach(function(ev, ev_index){
+						x3_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x3_tmp);
+					L3_1 ++;
+				}
+			
+				
 				indx1 ++;
 				break;
 			case '2':
-				if(indx2 == 0) {
-					li.setAttribute("class","list__item secondTitle");
+				if(indx2 == 0) {				
+				var x0_tmp = document.createElement("li");
+					x0_tmp.setAttribute("id",line[1]);
+					x0_tmp.setAttribute("class","list__item");
+					x0_tmp.setAttribute("data-level","0");
+					x0_tmp.setAttribute("data-category", line[1]);
+		
+					var a0_tmp = document.createElement("a");
+					a0_tmp.innerHTML = "▼";
+					x0_tmp.appendChild(a0_tmp);
+
+					x0_tmp.classList.add("secondTitle");
 					event_list.forEach(function(ev, ev_index){
-						li.addEventListener(ev, listener, false);
+						x0_tmp.addEventListener(ev, listener, false);
 					});
+					document.getElementById("ulList").appendChild(x0_tmp);
 				}
+				/************************************************************/
+				if(line[5] == 1 && L1_2 == 0) {
+					var x_tmp = document.createElement("li");
+					x_tmp.setAttribute("id",line[1]);
+					x_tmp.setAttribute("class","list__item");
+					x_tmp.setAttribute("data-level","1");
+					x_tmp.setAttribute("data-category", line[1]);
+		
+					var a_tmp = document.createElement("a");
+					a_tmp.innerHTML = "▼";
+					x_tmp.appendChild(a_tmp);
+
+					x_tmp.classList.add("secondTitle");
+					event_list.forEach(function(ev, ev_index){
+						x_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x_tmp);
+					L1_2++;
+				}
+				/************************************************************/
+				if(line[5] == 2 && L2_2 == 0) {
+					var x2_tmp = document.createElement("li");
+					x2_tmp.setAttribute("id",line[1]);
+					x2_tmp.setAttribute("class","list__item");
+					x2_tmp.setAttribute("data-level","2");
+					x2_tmp.setAttribute("data-category", line[1]);
+		
+					var a2_tmp = document.createElement("a");
+					a2_tmp.innerHTML = "▼";
+					x2_tmp.appendChild(a2_tmp);
+
+					x2_tmp.classList.add("secondTitle");
+					event_list.forEach(function(ev, ev_index){
+						x2_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x2_tmp);
+					L2_2 ++;
+				}
+				/************************************************************/
+				if(line[5] == 3 && L3_2 == 0) {
+					var x3_tmp = document.createElement("li");
+					x3_tmp.setAttribute("id",line[1]);
+					x3_tmp.setAttribute("class","list__item");
+					x3_tmp.setAttribute("data-level","3");
+					x3_tmp.setAttribute("data-category", line[1]);
+		
+		
+					var a3_tmp = document.createElement("a");
+					a3_tmp.innerHTML = "▼";
+					x3_tmp.appendChild(a3_tmp);
+
+					x3_tmp.classList.add("secondTitle");
+					event_list.forEach(function(ev, ev_index){
+						x3_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x3_tmp);
+					L3_2 ++;
+				}
+				
 				indx2 ++;
+				
 				break;
 			case '3':
 				if(indx3 == 0) {
-					li.setAttribute("class","list__item thirdTitle");
+				var x0_tmp = document.createElement("li");
+					x0_tmp.setAttribute("id",line[1]);
+					x0_tmp.setAttribute("class","list__item");
+					x0_tmp.setAttribute("data-level","0");
+					x0_tmp.setAttribute("data-category", line[1]);
+		
+					var a0_tmp = document.createElement("a");
+					a0_tmp.innerHTML = "▼";
+					x0_tmp.appendChild(a0_tmp);
+
+					x0_tmp.classList.add("thirdTitle");
 					event_list.forEach(function(ev, ev_index){
-						li.addEventListener(ev, listener, false);
+						x0_tmp.addEventListener(ev, listener, false);
 					});
+					document.getElementById("ulList").appendChild(x0_tmp);
 				}
+				/************************************************************/
+				if(line[5] == 1 && L1_3 == 0) {
+					var x_tmp = document.createElement("li");
+					x_tmp.setAttribute("id",line[1]);
+					x_tmp.setAttribute("class","list__item");
+					x_tmp.setAttribute("data-level","1");
+					x_tmp.setAttribute("data-category", line[1]);
+		
+					var a_tmp = document.createElement("a");
+					a_tmp.innerHTML = "▼";
+					x_tmp.appendChild(a_tmp);
+
+					x_tmp.classList.add("thirdTitle");
+					event_list.forEach(function(ev, ev_index){
+						x_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x_tmp);
+					L1_3 ++;
+				}
+				/************************************************************/
+				if(line[5] == 2 && L2_3 == 0) {
+					var x2_tmp = document.createElement("li");
+					x2_tmp.setAttribute("id",line[1]);
+					x2_tmp.setAttribute("class","list__item");
+					x2_tmp.setAttribute("data-level","2");
+					x2_tmp.setAttribute("data-category", line[1]);
+		
+					var a2_tmp = document.createElement("a");
+					a2_tmp.innerHTML = "▼";
+					x2_tmp.appendChild(a2_tmp);
+
+					x2_tmp.classList.add("thirdTitle");
+					event_list.forEach(function(ev, ev_index){
+						x2_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x2_tmp);
+					L2_3 ++;
+				}
+				/************************************************************/
+				if(line[5] == 3 && L3_3 == 0) {
+					var x3_tmp = document.createElement("li");
+					x3_tmp.setAttribute("id",line[1]);
+					x3_tmp.setAttribute("class","list__item");
+					x3_tmp.setAttribute("data-level","3");
+					x3_tmp.setAttribute("data-category", line[1]);
+		
+		
+					var a3_tmp = document.createElement("a");
+					a3_tmp.innerHTML = "▼";
+					x3_tmp.appendChild(a3_tmp);
+
+					x3_tmp.classList.add("thirdTitle");
+					event_list.forEach(function(ev, ev_index){
+						x3_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x3_tmp);
+					L3_3 ++;
+				}
+
+				
 				indx3 ++;
 				break;
 			case '4':
 				if(indx4 == 0) {
-					li.setAttribute("class","list__item fourthTitle");
+					
+					var x0_tmp = document.createElement("li");
+					x0_tmp.setAttribute("id",line[1]);
+					x0_tmp.setAttribute("class","list__item");
+					x0_tmp.setAttribute("data-level","0");
+					x0_tmp.setAttribute("data-category", line[1]);
+		
+					var a0_tmp = document.createElement("a");
+					a0_tmp.innerHTML = "▼";
+					x0_tmp.appendChild(a0_tmp);
+
+					x0_tmp.classList.add("fourthTitle");
 					event_list.forEach(function(ev, ev_index){
-						li.addEventListener(ev, listener, false);
+						x0_tmp.addEventListener(ev, listener, false);
 					});
+					document.getElementById("ulList").appendChild(x0_tmp);
 				}
+				/************************************************************/
+				if(line[5] == 1 && L1_4 == 0) {
+					var x_tmp = document.createElement("li");
+					x_tmp.setAttribute("id",line[1]);
+					x_tmp.setAttribute("class","list__item");
+					x_tmp.setAttribute("data-level","1");
+					x_tmp.setAttribute("data-category", line[1]);
+		
+					var a_tmp = document.createElement("a");
+					a_tmp.innerHTML = "▼";
+					x_tmp.appendChild(a_tmp);
+
+					x_tmp.classList.add("fourthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x_tmp);
+					L1_4++;
+				}
+				/************************************************************/
+				if(line[5] == 2 && L2_4 == 0) {
+					var x2_tmp = document.createElement("li");
+					x2_tmp.setAttribute("id",line[1]);
+					x2_tmp.setAttribute("class","list__item");
+					x2_tmp.setAttribute("data-level","2");
+					x2_tmp.setAttribute("data-category", line[1]);
+		
+					var a2_tmp = document.createElement("a");
+					a2_tmp.innerHTML = "▼";
+					x2_tmp.appendChild(a2_tmp);
+
+					x2_tmp.classList.add("fourthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x2_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x2_tmp);
+					L2_4++;
+				}
+				/************************************************************/
+				if(line[5] == 3 && L3_4 == 0) {
+					var x3_tmp = document.createElement("li");
+					x3_tmp.setAttribute("id",line[1]);
+					x3_tmp.setAttribute("class","list__item");
+					x3_tmp.setAttribute("data-level","3");
+					x3_tmp.setAttribute("data-category", line[1]);
+		
+		
+					var a3_tmp = document.createElement("a");
+					a3_tmp.innerHTML = "▼";
+					x3_tmp.appendChild(a3_tmp);
+
+					x3_tmp.classList.add("fourthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x3_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x3_tmp);
+					L3_4++;
+				
+				}
+
+				
 				indx4 ++;
 				break;
 		}
@@ -637,6 +990,9 @@ x.style.display="none";
    script.type= 'text/javascript';
    script.src= '/js/main.js';
    head.appendChild(script);
+   
+   
+   
 	
 	
 	
@@ -667,18 +1023,92 @@ x.style.display="none";
 	a.setAttribute("class","list__link");
 	a.innerHTML = "" + line[2] + line[3];
 	
-	if(indx5 == 0) {
-		li.setAttribute("class","list__item fifthTitle");
-		event_list.forEach(function(ev, ev_index){
-			li.addEventListener(ev, listener, false);
-		});
+				if(indx5 == 0) {
+				var x0_tmp = document.createElement("li");
+					x0_tmp.setAttribute("id",5);
+					x0_tmp.setAttribute("class","list__item");
+					x0_tmp.setAttribute("data-level","0");
+					x0_tmp.setAttribute("data-category", "5");
+		
+					var a0_tmp = document.createElement("a");
+					a0_tmp.innerHTML = "▼";
+					x0_tmp.appendChild(a0_tmp);
+
+					x0_tmp.classList.add("fifthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x0_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x0_tmp);
+				}
+				/************************************************************/
+				if(line[5] == 1 && L1_5 == 0) {
+					var x_tmp = document.createElement("li");
+					x_tmp.setAttribute("id",5);
+					x_tmp.setAttribute("class","list__item");
+					x_tmp.setAttribute("data-level","1");
+					x_tmp.setAttribute("data-category", "5");
+		
+					var a_tmp = document.createElement("a");
+					a_tmp.innerHTML = "▼";
+					x_tmp.appendChild(a_tmp);
+
+					x_tmp.classList.add("fifthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x_tmp);
+					L1_5++;
+				}
+				/************************************************************/
+				if(line[5] == 2 && L2_5 == 0) {
+					var x2_tmp = document.createElement("li");
+					x2_tmp.setAttribute("id",5);
+					x2_tmp.setAttribute("class","list__item");
+					x2_tmp.setAttribute("data-level","2");
+					x2_tmp.setAttribute("data-category", "5");
+		
+					var a2_tmp = document.createElement("a");
+					a2_tmp.innerHTML = "▼";
+					x2_tmp.appendChild(a2_tmp);
+
+					x2_tmp.classList.add("fifthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x2_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x2_tmp);
+					L2_5++;
+				}
+				/************************************************************/
+				if(line[5] == 3 && L3_5 == 0) {
+					var x3_tmp = document.createElement("li");
+					x3_tmp.setAttribute("id",5);
+					x3_tmp.setAttribute("class","list__item");
+					x3_tmp.setAttribute("data-level","3");
+					x3_tmp.setAttribute("data-category", "5");
+		
+		
+					var a3_tmp = document.createElement("a");
+					a3_tmp.innerHTML = "▼";
+					x3_tmp.appendChild(a3_tmp);
+
+					x3_tmp.classList.add("fifthTitle");
+					event_list.forEach(function(ev, ev_index){
+						x3_tmp.addEventListener(ev, listener, false);
+					});
+					document.getElementById("ulList").appendChild(x3_tmp);
+				L3_5++;
 	}
 	indx5 ++;
-			
+	
+	
 	li.appendChild(a);
 	document.getElementById("ulList").appendChild(li);
 	}
 		
+	}
+	hideAllMarksBut(0);
+	for(var j = 1; j < 6; j++) {
+		Show('' + j);
 	}
 	
 		var elems = document.getElementsByClassName("clickable_space");
