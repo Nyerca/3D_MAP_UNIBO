@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hello world</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      var socket = io('/mySensorNamespace');
+      socket.on('hi',function(data) {
+         document.body.innerHTML = '';
+		 var valori = data.split(';');
+		 for(var field in valori) {
+		  document.write(valori[field]);
+		  document.write("<br>");
+		 }
+        
+      });
+   </script>
+   <body></body>
+</html>

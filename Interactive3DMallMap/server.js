@@ -24,7 +24,7 @@ con.connect(function(err) {
   //console.log("Connected!");
 });
 
-var IdEntrance = 2;
+var IdEntrance = 1;
 
 var dim;
 var ind = 0;

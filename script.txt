@@ -1,0 +1,48 @@
+How to run node.js app forever
+
+sudo apt-get install upstart
+sudo apt-get install upstart-sysv
+
+touch myapp.conf
+pico myapp.conf
+
+/*******************************************/
+
+#!upstart
+description "my app"
+
+start on started mountall
+stop on shutdown
+
+# Automatically Respawn:
+respawn
+respawn limit 99 5
+
+env NODE_ENV=production
+
+exec node /somepath/myapp/app.js >> /var/log/myapp.log 2>&1
+
+/*******************************************/
+
+chmod +x myapp.conf 
+
+
+
+//Per eliminare uno script
+rm myapp.conf
+
+-----------------------------------------------------------------------------------------------
+sudo npm install -g forever
+nohup forever server.js &
+nohup node server.js &
+
+
+
+forever start server.js
+
+
+---------
+
+$ nohup node app &
+$ echo $! > node-instance.pid
+
