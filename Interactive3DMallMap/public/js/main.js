@@ -101,6 +101,7 @@
 	function init() {
 		// init/bind events
 		initEvents();
+
 		
 	}
 
@@ -126,11 +127,27 @@
 			pin.style.display = "none";
 		});
 		
+
+		
 		// shows all levels
 			showAllLevels();
 			
 		
 		});
+				
+		var allStates = $("#search-button");
+
+allStates.on("click", function() {
+  openSensorArea();
+  window.dispatchEvent(new Event('resize'));
+});
+
+		var closeSens = $("#close_button");
+
+closeSens.on("click", function() {
+  closeSensorArea();
+  window.dispatchEvent(new Event('resize'));
+});
 
 		// navigating through the levels
 		levelUpCtrl.addEventListener('click', function() { navigate('Down'); });
@@ -563,6 +580,54 @@ changelev(0);
 		}
 		// svg area gets selected
 		//classie.add(mallLevels[selectedLevel - 1].querySelector('svg > .map__space[data-space="' + spaceref + '"]'), 'map__space--selected');
+		
+	}
+	function openSensorArea() {
+
+		// shows space
+		showSensorSpace(true);
+		// resize mall area
+		classie.add(mall, 'mall--content-open');
+
+		
+	}
+	
+		function closeSensorArea() {
+
+		// shows space
+		closeSensorSpace(true);
+		// resize mall area
+		classie.remove(mall, 'mall--content-open');
+
+		
+	}
+
+	/**
+	 * Shows a space.
+	 */
+	function showSensorSpace(sliding) {
+		
+		
+		var style = document.createElement('style');
+		style.type = 'text/css';
+		style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:50%;}";
+		document.getElementsByTagName('head')[0].appendChild(style);
+		
+		document.getElementById('welcomeDiv').style.display = "block";
+		
+		
+	}
+	
+	function closeSensorSpace(sliding) {
+		
+		
+		var style = document.createElement('style');
+		style.type = 'text/css';
+		style.innerHTML = ".levels {transition: 0.5s; margin: -32vmin 0 0 -48vmin; height:74vmin;}";
+		document.getElementsByTagName('head')[0].appendChild(style);
+		
+		document.getElementById('welcomeDiv').style.display = "none";
+		
 		
 	}
 

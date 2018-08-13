@@ -1,10 +1,41 @@
+#search-button {
+	position:fixed;
+  width: 100px;
+  height: 50px;
+  top: 78%;
+  z-index: 160;
+}
+    
+#search-button svg {
+	
+  width: 25px;
+  height: 25px;
+}
 .bg {
+	
   background: #eeeeee;
-  padding: 50px;
+  padding: 0;
   text-align: center;
+  
+
+
+
+	position:fixed;
+	left: -100px;
+	bottom:-105px;
+	width: 0px;
+	z-index: 100;
+}
+.atomic {
+	position:relative;
+	padding: 0;
+	bottom:0;
+	width: 0px;
+	margin: 110% 0 0 0 !important;
+	transform: translateX(20vmin);
 }
 
-.icons, .atom, .sofa, .drop, .calendar, .key, .sensor, .sun, .piggy, .fan {
+.icons, .atom, .drop, .sensor, .fan {
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
 }
@@ -53,10 +84,16 @@
     -webkit-transform: rotate(360deg);
   }
 }
-.sofa, .drop, .calendar, .key, .sensor, .sun, .piggy, .fan {
+
+.drop, .sensor, .fan {
+  pointer-events:auto;
+}
+.drop, .sensor, .fan {
   -webkit-animation: spin-micro 8s infinite linear;
           animation: spin-micro 8s infinite linear;
 }
+
+
 
 @-webkit-keyframes spin-micro {
   0% {
@@ -86,8 +123,4 @@
   100% {
     -webkit-transform: rotate(360deg);
   }
-}
-
-.drop {
-	width: 10% !important;
 }

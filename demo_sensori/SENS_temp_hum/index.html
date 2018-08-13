@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>MKR1000 Dashboard</title>
+  
+  
+
+      <link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
+<script src = "/socket.io/socket.io.js"></script>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="/css/style_humidity.css">
+      <link rel="stylesheet" href="/css/style_temp.css">
+<script  src="/js/index_temp.js"></script>
+
+  
+</head>
+
+<body>
+
+
+  
+<section class="dashboard" id="main-column">
+  <div id="sensorValues">
+  
+  
+  <div class="con">
+    <div class="de">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="volts">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="de2">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="amps">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="wrapper">
+  
+	  <div class="green">
+		<div class="progress">
+		  <div class="inner">
+			<div class="percent"><span><div class="moisture">67</div></span></div>
+			<div class="water"></div>
+			<div class="glare"></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+	
+  </div>
+  <div id="sensorData"></div>
+</section>
+
+
+
+
+</body>
+
+</html>
+

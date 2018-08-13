@@ -11,6 +11,7 @@
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="/css/style_atom.css" />
 		<script src="js/modernizr-custom.js"></script>
 		<script src = "/socket.io/socket.io.js"></script>
 		
@@ -20,6 +21,24 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	
+	
+	
+	
+	
+	
+	
+      <link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
+
+  
+      <link rel="stylesheet" href="/css/style_humidity.css">
+      <link rel="stylesheet" href="/css/style_temp.css">
+<script  src="/js/index_temp.js"></script>
+
+
 <script type="text/javascript">
 var xmlns = "http://www.w3.org/2000/svg";
 var lev = 0;
@@ -30,6 +49,21 @@ var firstOpen = 1;
 	var thirdOpen = 1;
 	var fourthOpen = 1;
 	var fifthOpen = 1;
+	
+	function changeListArrow(number, className, symbol) {
+		if(document.querySelector("." + className) != null) {
+			var style_list = document.createElement('style');
+			style_list.type = 'text/css';
+			
+			var str = getComputedStyle(document.querySelector("." + className), ':before').getPropertyValue('content');
+			str = str.substr(1,str.length - 3);
+			str = str.concat("" + symbol);
+
+
+			style_list.innerHTML = ".grouped-by-category [data-category='" + number + "']:first-child::before, .grouped-by-category :not([data-category='" + number + "']) + [data-category='" + number + "']::before {content: '" + str + "';";
+			document.getElementsByTagName('head')[0].appendChild(style_list);
+		}
+	}
 
 						
 	function Show(num) {
@@ -41,11 +75,15 @@ var firstOpen = 1;
 					console.log("Il livello: " + num + " era chiuso ora viene APERTO");
 						$( "ul.list li" ).each(function( index ) {
 							if($(this).attr("data-category") == num) {
-								$(this).children().fadeIn();
+								$(this).children().fadeIn();		
 							}
 						});
 
 						firstOpen = 1;
+						
+						changeListArrow(1, "firstTitle", "▲");
+						
+		
 						if(secondOpen == 1) Show('2');
 						if(thirdOpen == 1) Show('3');
 						if(fourthOpen == 1) Show('4');
@@ -61,6 +99,9 @@ var firstOpen = 1;
 							}
 						});
 						firstOpen = 0;
+						
+						changeListArrow(1, "firstTitle", "▼");
+
 					}
 					
 				break;
@@ -73,6 +114,9 @@ var firstOpen = 1;
 							}
 						});
 						secondOpen = 1;
+						
+						changeListArrow(2, "secondTitle", "▲");
+						
 						if(firstOpen == 1) Show('1');
 						if(thirdOpen == 1) Show('3');
 						if(fourthOpen == 1) Show('4');
@@ -83,12 +127,12 @@ var firstOpen = 1;
 						$( "ul.list li" ).each(function( index ) {
 							if($(this).attr("data-category") == num) {
 								$(this).children().each(function( index ) {
-
-  if(( this ).text != "▼") $(this).hide();
-});
+								  if(( this ).text != "▼") $(this).hide();
+								});
 							}
 						});
 						secondOpen = 0;
+						changeListArrow(2, "secondTitle", "▼");
 
 					}
 				break;
@@ -101,6 +145,7 @@ var firstOpen = 1;
 							}
 						});
 						thirdOpen = 1;
+						changeListArrow(3, "thirdTitle", "▲");
 						if(secondOpen == 1) Show('2');
 						if(firstOpen == 1) Show('1');
 						if(fourthOpen == 1) Show('4');
@@ -111,12 +156,12 @@ var firstOpen = 1;
 						$( "ul.list li" ).each(function( index ) {
 							if($(this).attr("data-category") == num) {
 								$(this).children().each(function( index ) {
-
-  if(( this ).text != "▼") $(this).hide();
-});
+								  if(( this ).text != "▼") $(this).hide();
+								});
 							}
 						});
-						thirdOpen = 0;				
+						thirdOpen = 0;	
+						changeListArrow(3, "thirdTitle", "▼");
 					}
 				break;
 			case '4':
@@ -130,6 +175,7 @@ var firstOpen = 1;
 						});
 
 						fourthOpen = 1;
+						changeListArrow(4, "fourthTitle", "▲");
 						if(secondOpen == 1) Show('2');
 						if(firstOpen == 1) Show('1');
 						if(thirdOpen == 1) Show('3');
@@ -140,12 +186,12 @@ var firstOpen = 1;
 						$( "ul.list li" ).each(function( index ) {
 							if($(this).attr("data-category") == num) {
 								$(this).children().each(function( index ) {
-
-  if(( this ).text != "▼") $(this).hide();
-});
+								  if(( this ).text != "▼") $(this).hide();
+								});
 							}
 						});
 						fourthOpen = 0;
+						changeListArrow(4, "fourthTitle", "▼");
 						
 						
 					}
@@ -160,6 +206,7 @@ var firstOpen = 1;
 						});
 
 						fifthOpen = 1;
+						changeListArrow(5, "fifthTitle", "▲");
 						if(secondOpen == 1) Show('2');
 						if(firstOpen == 1) Show('1');
 						if(thirdOpen == 1) Show('3');
@@ -175,6 +222,7 @@ var firstOpen = 1;
 							}
 						});
 						fifthOpen = 0;
+						changeListArrow(5, "fifthTitle", "▼");
 						
 					}
 				break;
@@ -1154,7 +1202,10 @@ hideAndShow();
 				
 });
 
+function showArea(number){
 
+                  alert("Area of the rectangle is: " + number);
+               }
 </script>
 	</head>
 	<body>
@@ -1382,6 +1433,265 @@ hideAndShow();
 				<header class="codrops-header">
 					<img class="logoUnibo" src="/img/logo.png" alt=""/>
 				</header>
+				
+				  <button id="search-button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
+ 
+ <div id="welcomeDiv"  style="display:none;" class=" content__sensor" > 
+
+ 
+ <section class="dashboard" id="main-column">
+ <button id="close_button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
+  <div id="sensorValues">
+   
+  
+  <div class="con">
+    <div class="de">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="volts">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="de2">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="amps">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="wrapper">
+  
+	  <div class="green">
+		<div class="progress">
+		  <div class="inner">
+			<div class="percent"><span><div class="moisture">67</div></span></div>
+			<div class="water"></div>
+			<div class="glare"></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+	
+  </div>
+  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
+</section>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+  <div id="welcomeDiv2"  style="display:none;" class=" content__sensor" > 
+
+ 
+ <section class="dashboard" id="main-column">
+ <button id="close_button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
+  <div id="sensorValues">
+   
+  
+  <div class="con">
+    <div class="de">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="volts">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="de2">
+        <div class="den">
+          <div class="dene">
+            <div class="denem">
+              <div class="deneme">
+                <div class="amps">23</div><strong>&deg;</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+	
+	<div class="wrapper">
+  
+	  <div class="green">
+		<div class="progress">
+		  <div class="inner">
+			<div class="percent"><span><div class="moisture">67</div></span></div>
+			<div class="water"></div>
+			<div class="glare"></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+	
+  </div>
+  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
+</section>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+  <div class="bg">
+
+<svg version="1.1"  id="atomic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 width="350px" height="350px" viewBox="0 0 400 400" xml:space="preserve">
+ <defs>
+  </defs>
+<circle fill="none" cx="204.413" cy="203.177" r="141.493"/>
+<circle id="circle" fill="none" stroke="#EAEAEA" stroke-miterlimit="10" cx="204.413" cy="203.177" r="141.493"/>
+
+<g class="atom">
+	<path fill="#7A9C49" d="M204.035,252.4c-9.988,0-17.812-21.622-17.812-49.225c0-27.599,7.824-49.219,17.812-49.219
+		c9.991,0,17.816,21.62,17.816,49.219C221.852,230.778,214.026,252.4,204.035,252.4z M204.035,154.957
+		c-9.27,0-16.812,21.631-16.812,48.219c0,26.591,7.542,48.225,16.812,48.225c9.272,0,16.816-21.633,16.816-48.225
+		C220.852,176.588,213.308,154.957,204.035,154.957z"/>
+	<path fill="#7A9C49" d="M172.597,232.828c-5.347,0-9.068-1.491-10.761-4.312c-2.5-4.16-0.378-10.7,5.974-18.417
+		c6.242-7.584,15.853-15.467,27.061-22.195c14.763-8.864,30.322-14.371,40.605-14.371c5.348,0,9.07,1.491,10.764,4.312
+		c5.138,8.561-9.371,26.397-33.031,40.607C198.439,227.319,182.878,232.828,172.597,232.828z M235.476,174.533
+		c-10.112,0-25.474,5.452-40.09,14.228c-11.113,6.671-20.632,14.475-26.804,21.974c-5.974,7.258-8.121,13.552-5.888,17.267
+		c1.502,2.503,4.927,3.826,9.903,3.826c10.11,0,25.475-5.454,40.097-14.234c22.793-13.688,37.457-31.29,32.688-39.235
+		C243.879,175.856,240.454,174.533,235.476,174.533z"/>
+	<path fill="#7A9C49" d="M235.32,231.218c-10.358,0-25.183-4.604-39.655-12.314c-24.36-12.975-39.768-30.046-35.076-38.865
+		c1.708-3.204,5.913-4.897,12.161-4.897c10.359,0,25.186,4.603,39.662,12.313c24.357,12.973,39.761,30.045,35.068,38.865
+		C245.772,229.525,241.567,231.218,235.32,231.218z M172.75,176.143c-5.855,0-9.755,1.51-11.278,4.367
+		c-4.355,8.185,11.195,25.013,34.663,37.512c14.335,7.637,28.983,12.197,39.186,12.197c5.855,0,9.754-1.51,11.277-4.368
+		c4.355-8.186-11.19-25.014-34.655-37.512C197.604,180.702,182.952,176.143,172.75,176.143z"/>
+	<path fill="#7A9C49" d="M204.034,211.087c-4.36,0-7.907-3.549-7.907-7.911c0-4.36,3.547-7.908,7.907-7.908
+		c4.361,0,7.908,3.548,7.908,7.908C211.942,207.538,208.395,211.087,204.034,211.087z M204.034,196.268
+		c-3.809,0-6.907,3.099-6.907,6.908c0,3.811,3.099,6.911,6.907,6.911c3.809,0,6.908-3.1,6.908-6.911
+		C210.942,199.367,207.843,196.268,204.034,196.268z"/>
+</g>
+<g class="icons">
+  <g class="drop" onClick="showArea(1)">
+ 
+ 
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="300" y ="170"
+	 viewBox="0 0 3512 3512" xml:space="preserve"  onClick="showArea(1)">
+		<path width="11" d="M450.039,179.706c5.153-11.366,7.834-23.732,7.834-36.402c0-48.682-39.606-88.287-88.287-88.287
+			c-14.691,0-28.948,3.595-41.727,10.465c-16.616-17.468-39.43-27.326-63.869-27.326c-31.854,0-61.029,17.174-76.64,44.436
+			c-7.11-1.813-14.43-2.729-21.858-2.729c-48.682,0-88.287,39.606-88.287,88.287c0,9.015,1.341,17.84,3.997,26.33
+			c-19.3,16.687-30.619,41.14-30.619,66.844c0,46.495,36.128,84.712,81.785,88.051c-0.099,1.706-0.149,3.416-0.149,5.123
+			c0,48.682,39.606,88.287,88.287,88.287c28.935,0,55.911-14.366,72.27-37.587c16.438,16.521,38.929,26.052,62.611,26.052
+			c46.29,0,84.372-35.807,88.003-81.18C483.064,341.049,512,305.478,512,263.988C512,225.048,486.196,191.035,450.039,179.706z
+			 M432.195,331.349c-5.183,0.645-9.043,5.103-8.938,10.326c0.009,0.428,0.017,0.857,0.017,1.287
+			c0,37.434-30.455,67.889-67.889,67.889c-22.195,0-43.035-10.893-55.746-29.138c-2.084-2.992-5.62-4.642-9.24-4.332
+			c-3.632,0.311-6.822,2.538-8.367,5.84c-11.129,23.793-35.281,39.166-61.528,39.166c-37.434,0-67.889-30.455-67.889-67.889
+			c0-4.451,0.438-8.915,1.299-13.271c0.615-3.106-0.248-6.32-2.334-8.702c-1.943-2.217-4.743-3.478-7.671-3.478
+			c-0.216,0-0.432,0.007-0.645,0.021c-1.543,0.098-2.98,0.146-4.396,0.146c-37.434,0-67.889-30.455-67.889-67.889
+			c0-21.771,10.565-42.38,28.263-55.127c3.835-2.763,5.27-7.798,3.467-12.168c-3.39-8.213-5.11-16.92-5.11-25.879
+			c0-37.434,30.455-67.889,67.889-67.889c8.09,0,16.005,1.409,23.522,4.186c5.051,1.866,10.683-0.516,12.861-5.44
+			c10.873-24.574,35.255-40.452,62.113-40.452c21.153,0,40.727,9.608,53.705,26.36c3.297,4.259,9.338,5.218,13.794,2.191
+			c11.257-7.648,24.43-11.69,38.097-11.69c37.434,0,67.889,30.455,67.889,67.889c0,13.484-3.946,26.513-11.409,37.676
+			c-1.952,2.92-2.264,6.639-0.826,9.844c1.437,3.205,4.423,5.443,7.902,5.927c33.328,4.625,58.461,33.53,58.461,67.235
+			C491.602,298.175,466.062,327.135,432.195,331.349z"/>
+
+		<path d="M113.572,398.971c0-21.339-17.361-38.699-38.7-38.699c-10.719,0-20.679,4.321-27.89,11.852
+			c-2.702-0.593-5.47-0.89-8.284-0.89C17.36,371.233,0,388.594,0,409.933c0,19.385,14.328,35.487,32.951,38.273
+			c5.38,15.091,19.766,25.638,36.442,25.638c21.338,0,38.699-17.36,38.699-38.7c0-4.452-0.764-8.844-2.241-12.991
+			C110.819,415.513,113.572,407.389,113.572,398.971z M86.984,412.685c-3.703,3.274-4.525,8.733-1.951,12.952
+			c1.74,2.854,2.66,6.141,2.66,9.509c0,10.091-8.209,18.3-18.3,18.3c-9.336,0-17.153-6.983-18.182-16.245
+			c-0.579-5.203-4.982-9.073-10.127-9.073c-0.281,0-0.565,0.011-0.851,0.036c-0.58,0.048-1.083,0.071-1.533,0.071
+			c-10.091,0-18.3-8.209-18.3-18.3c0-10.091,8.209-18.301,18.3-18.301c2.659,0,5.228,0.562,7.634,1.67
+			c4.685,2.157,10.24,0.476,12.947-3.912c3.367-5.459,9.196-8.718,15.593-8.718c10.091,0,18.301,8.209,18.301,18.3
+			C93.175,404.207,90.918,409.206,86.984,412.685z"/>
+
+
+			<path d="M379.432,366.842c-6.911,6.734-16.03,10.444-25.682,10.444c-6.406,0-12.71-1.669-18.229-4.825
+				c-4.893-2.798-11.122-1.098-13.918,3.79c-2.797,4.89-1.099,11.121,3.79,13.918c8.598,4.918,18.403,7.517,28.357,7.517
+				c15.001,0,29.178-5.765,39.919-16.236c4.034-3.932,4.116-10.389,0.186-14.423C389.923,362.994,383.465,362.911,379.432,366.842z"
+				/>
+			<path d="M401.581,335.618c-5.609-0.626-10.642,3.411-11.264,9.009c-0.089,0.795-0.205,1.6-0.347,2.393
+				c-0.991,5.544,2.701,10.843,8.246,11.834c0.607,0.108,1.211,0.16,1.806,0.16c4.847,0,9.146-3.468,10.028-8.406
+				c0.22-1.233,0.402-2.487,0.54-3.726C411.213,341.283,407.18,336.24,401.581,335.618z"/>
+
+
+		<path d="M213.456,258.477c-4.834,0-8.335,1.5-8.668,5.835c-0.666,7.334-2.166,18.836-19.169,18.836
+			c-13.168,0-20.336-6.834-20.336-21.503v-48.507c0-14.669,7.168-21.503,20.003-21.503c17.169,0,19.169,12.001,19.503,17.836
+			c0.166,4,3.5,5.834,8.835,5.834c6.001,0,8.835-1.668,8.835-9.168c0-17.67-15.002-30.171-37.839-30.171
+			c-20.17,0-37.006,10.168-37.006,37.172v48.507c0,27.003,16.67,37.172,36.84,37.172c22.837,0,38.006-12.836,38.006-31.172
+			C222.458,260.311,219.624,258.477,213.456,258.477z"/>
+
+		<path d="M275.131,175.965c-21.169,0-37.339,10.168-37.339,37.172v48.507c0,27.004,16.17,37.172,37.339,37.172
+			c21.002,0,37.506-10.168,37.506-37.172v-48.507C312.636,186.133,296.134,175.965,275.131,175.965z M294.967,261.645
+			c0,14.669-7.501,21.503-19.835,21.503c-12.502,0-19.67-6.834-19.67-21.503v-48.507c0-14.669,7.168-21.503,19.67-21.503
+			c12.335,0,19.835,6.834,19.835,21.503V261.645z"/>
+
+		<path d="M394.486,282.148h-49.008v-6.334c0-19.17,54.008-30.838,54.008-66.677c0-20.004-16.336-33.172-35.673-33.172
+			c-18.169,0-34.171,11.668-34.171,29.505c0,7.502,3.334,9.835,8.001,9.835c5.834,0,9.334-3.334,9.334-6.668
+			c0-11.334,7.501-16.502,16.836-16.502c12.669,0,18.003,9.335,18.003,17.503c0,25.67-54.508,39.172-54.508,66.177v16.17
+			c0,3.5,4.5,5.834,7.835,5.834h59.343c3.001,0,5.834-3.835,5.834-8.001C400.32,285.65,397.485,282.148,394.486,282.148z"/>
+
+</svg>
+</g>
+
+<g class="fan">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="280px" y="85px"
+	 viewBox="0 0 3301.605 3301.605" xml:space="preserve">
+<g>
+	<path d="M236.896,38.375v12.854h-49.808V38.375H236.896z M216.009,66.389h-28.921v12.854h28.921V66.389z M187.088,107.257h49.808
+		V94.404h-49.808V107.257z M216.009,122.425h-28.921v12.854h28.921V122.425z M187.088,163.293h49.808v-12.854h-49.808V163.293z
+		 M194.852,236.533c0,35.881-29.191,65.072-65.072,65.072s-65.072-29.191-65.072-65.072c0-23.252,12.211-44.384,32.134-56.074
+		V32.938C96.843,14.775,111.618,0,129.78,0s32.938,14.775,32.938,32.938v147.522C182.641,192.137,194.852,213.275,194.852,236.533z
+		 M181.998,236.533c0-19.73-10.964-37.565-28.619-46.53l-3.515-1.787V32.944c0-11.08-9.01-20.084-20.084-20.084
+		c-11.073,0-20.084,9.004-20.084,20.084v155.272l-3.515,1.787c-17.655,8.972-28.619,26.806-28.619,46.53
+		c0,28.792,23.426,52.218,52.218,52.218S181.998,265.325,181.998,236.533z M171.291,236.533c0,22.886-18.619,41.505-41.511,41.505
+		c-22.886,0-41.505-18.619-41.505-41.505c0-18.76,12.674-35.232,30.823-40.058l2.384-0.636v-79.275h16.601v79.269l2.384,0.643
+		C158.624,201.301,171.291,217.78,171.291,236.533z M131.837,208.866c-0.99-4.396-5.411-7.288-9.917-6.26
+		c-15.733,3.56-26.723,17.32-26.723,33.465c0,4.569,3.721,8.291,8.291,8.291s8.291-3.721,8.291-8.291
+		c0-8.207,5.797-15.482,13.798-17.288C130.024,217.76,132.839,213.313,131.837,208.866z"/>
+</g>
+</svg>
+</g>
+<path class="sensor" d="M208.35,74.045h-16.424c-0.304,0-0.55-0.246-0.55-0.55c0-0.305,0.246-0.55,0.55-0.55h7.592V69.6H196.5
+	c-3.77,0-6.838-3.011-6.838-6.712v-7.146c0-3.7,3.068-6.711,6.838-6.711h7.294c3.771,0,6.839,3.011,6.839,6.711v7.146
+	c0,3.701-3.067,6.712-6.839,6.712h-3.177v3.346h7.732c0.304,0,0.55,0.245,0.55,0.55C208.899,73.799,208.653,74.045,208.35,74.045
+	 M196.5,50.131c-3.164,0-5.738,2.517-5.738,5.611v7.146c0,3.096,2.574,5.612,5.738,5.612h7.294c3.164,0,5.739-2.517,5.739-5.612
+	v-7.146c0-3.095-2.575-5.611-5.739-5.611H196.5z M213.411,53.062c-0.304,0-0.55-0.245-0.55-0.55c0-3.095-2.575-5.611-5.739-5.611
+	c-0.304,0-0.55-0.245-0.55-0.55c0-0.304,0.246-0.55,0.55-0.55c3.771,0,6.839,3.011,6.839,6.711
+	C213.961,52.817,213.715,53.062,213.411,53.062 M215.947,48.601c-0.304,0-0.55-0.246-0.55-0.55c0-2.048-1.704-3.713-3.8-3.713
+	c-0.303,0-0.55-0.246-0.55-0.549c0-0.306,0.247-0.551,0.55-0.551c2.702,0,4.899,2.159,4.899,4.812
+	C216.497,48.354,216.251,48.601,215.947,48.601"/>
+
+</svg>
+</div>
 				<section class="box">
 				</section>
 				<div class="mall">
@@ -1558,5 +1868,7 @@ class="map__outline" />
 		<!-- /container -->
 		<script src="/js/classie.js"></script>
 		<script src="/js/list.min.js"></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 	</body>
+	<script>
+
+	</script>
