@@ -22,7 +22,7 @@
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	
-	
+
 	
 	
 	
@@ -30,6 +30,7 @@
 	
       <link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+	 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
 <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
 
@@ -38,11 +39,46 @@
       <link rel="stylesheet" href="/css/style_temp.css">
 <script  src="/js/index_temp.js"></script>
 
-
+<script src='https://cdn.zingchart.com/zingchart.min.js'></script>
 <script type="text/javascript">
 var xmlns = "http://www.w3.org/2000/svg";
 var lev = 0;
 var socket = io('/mySensorNamespace');	
+
+var avg_tin = [0,0,0,0,0,0,0];
+var avg_tout = [3, 3, 4, 7, 4, 3, 3];
+
+var day0, day1, day2, day3, day4, day5, day6;
+	for(var i= 0; i < 7; i++) {
+var day = new Date();
+day.setDate(day.getDate() - i);
+
+var month_n = day.getUTCMonth() + 1; //months from 1-12
+var day_n = day.getUTCDate();
+var year_n = day.getUTCFullYear();
+var day = year_n
+if(("" + month_n).length == 1) {
+day += "-0" + month_n
+} else {
+day += "-" + month_n
+}
+if(("" +day_n).length == 1) {
+day += "-0" + day_n
+} else {
+day += "-" + day_n
+}
+
+switch(i) {
+	case 0: day0 = day; break;
+	case 1: day1 = day; break;
+	case 2: day2 = day; break;
+	case 3: day3 = day; break;
+	case 4: day4 = day; break;
+	case 5: day5 = day; break;
+	case 6: day6 = day; break;
+}
+
+}
 
 var firstOpen = 1;
 	var secondOpen = 1;
@@ -1181,6 +1217,182 @@ classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--al
 		 classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
 		  }, 1000);
 }	
+
+var valori = data.str.split(';');
+		for(var field in valori) {
+			var line = valori[field].split('***');
+
+			if(line[2] == '1') {
+						console.log(line[0]);
+				var d = new Date("" + line[1]);
+				var str = $.datepicker.formatDate('yy-mm-dd', d);
+				if(str === day0) {
+					avg_tin[0] = parseFloat(line[0]);
+				} else if(str == day1) {
+					avg_tin[1] = parseFloat(line[0]);
+				} else if(str == day2) {
+					avg_tin[2] = parseFloat(line[0]);
+				} else if(str == day3) {
+					avg_tin[3] = parseFloat(line[0]);
+				} else if(str == day4) {
+					avg_tin[4] = parseFloat(line[0]);
+				} else if(str == day5) {
+					avg_tin[5] = parseFloat(line[0]);
+				} else if(str == day6) {
+					avg_tin[6] = parseFloat(line[0]);
+				}
+			}
+			console.log(avg_tin);
+		}
+		
+		var valori = data.max.split(';');
+		for(var field in valori) {
+			console.log(valori[field]);
+		}
+		
+		var valori = data.min.split(';');
+		for(var field in valori) {
+			console.log(valori[field]);
+		}
+		
+		
+		
+// Chart Configuration
+var chartData = {
+  type: "area",
+  globals: {
+    fontFamily: "Poppins",
+    fontColor: "white",
+  },
+  "background-color":"#3d3d3d",
+  title: {
+    text: "Government requests by volume",
+    align: "center",
+	fontColor: "white",
+    padding: "5px"
+  },
+  subtitle: {
+    text:
+      "This area graph shows the total number of requests recieved over time, broken down by request type",
+    align: "center",
+    padding: "10px"
+  },
+  legend: {
+    align: "center",
+    verticalAlign: "bottom",
+	marginBottom: "100px",
+	"background-color":"#3d3d3d",
+    layout: "1x2",
+    border: "none",
+    item: {
+      fontSize: "18px"
+    },
+    marker: {
+      type: "circle"
+    }
+  },
+  plot: {
+    aspect: "spline"
+  },
+  gui:{
+    behaviors:[ //default contextMenu behaviors
+        {
+          id: "Reload", //built-in id
+          enabled:"none" //sets visibility to show 
+        },
+        {
+          id: "SaveAsImage",
+          enabled:"none"
+        },
+        {
+          id: "DownloadPDF", //built-in id
+          enabled: "none" //sets visibility to show
+        },
+        {
+          id: "DownloadSVG",
+          enabled: "none"
+        },
+        {
+          id: "Print", 
+          enabled: "none"
+        },
+        {
+          id: "ViewSource", //built-in id 
+          enabled: "none" //sets visibility to hide
+        },
+		{
+          id: "HideGuide", //built-in id 
+          enabled: "none" //sets visibility to hide
+        }
+      ] 
+  },
+  scaleX: {
+    labels: [
+      "Jul 16",
+      "Aug 16",
+      "Sep 16",
+      "Oct 16",
+      "Nov 16",
+      "Dec 16",
+      "Jan 17"
+    ],
+  },
+  "plotarea":{  
+    "background-color": 'rgba(45, 45, 45, 1.0)'
+}, 
+  crosshairX:{
+      lineColor: "#565656",
+      lineStyle: "dashed",
+      lineWidth: 2,
+      alpha : 0.5,
+      plotLabel:{ //label assoicated to data points
+   	    backgroundColor : "#ffffff",
+  	    borderColor : "#d2d2d2",
+  	    borderRadius : "5px",
+  	    bold : true,
+  	    fontSize : "12px",
+  	    fontColor : "#111",
+  	    shadow : true,
+  	    shadowDistance : 2,
+  	    shadowAlpha : 0.4
+      },
+	  scaleLabel:{ //label associated to scaleX index
+  	    bold : true,
+  	    backgroundColor : "#787878",
+  	    borderRadius : 3,
+  	    fontColor : "#eaeaea",
+  	    fontSize : "12px",
+  	    callout : true,
+  	    paddingTop : 2
+      }
+	  },
+  scaleY: {
+    values: "-10:16:2",
+	guide: {
+          visible: false
+        }
+  },
+  series: [
+    {
+      values: avg_tin,
+      text: "US Requests",
+    },
+    {
+      values: avg_tout,
+      text: "Government Requests",
+	  fontColor: "white"
+      
+    }
+  ]
+};
+
+// Render Method
+zingchart.render({
+  id: "myChart",
+  data: chartData,
+  height: 500, 
+	width: '100%'
+});
 		
 		
 $( ".mallnav__button--all-levels" ).click(function() {
@@ -1206,6 +1418,8 @@ function showArea(number){
 
                   alert("Area of the rectangle is: " + number);
                }
+			   
+
 </script>
 	</head>
 	<body>
@@ -1217,7 +1431,19 @@ function showArea(number){
 	  <stop offset="100%"   stop-color="black"/>
     </linearGradient>
 			<pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nOScgaGVpZ2h0PSc5JyBmaWxsPSdibGFjaycgLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern>
-		
+				<symbol id="back" viewBox="0 0 650 512">
+					<title>back</title>
+					<path d="M496.5,233.842c-30.841-76.706-114.112-115.06-249.823-115.06h-63.953V45.693c0-4.952-1.809-9.235-5.424-12.85
+		c-3.617-3.617-7.896-5.426-12.847-5.426c-4.952,0-9.235,1.809-12.85,5.426L5.424,179.021C1.809,182.641,0,186.922,0,191.871
+		c0,4.948,1.809,9.229,5.424,12.847L151.604,350.9c3.619,3.613,7.902,5.428,12.85,5.428c4.947,0,9.229-1.814,12.847-5.428
+		c3.616-3.614,5.424-7.898,5.424-12.848v-73.094h63.953c18.649,0,35.349,0.568,50.099,1.708c14.749,1.143,29.413,3.189,43.968,6.143
+		c14.564,2.95,27.224,6.991,37.979,12.135c10.753,5.144,20.794,11.756,30.122,19.842c9.329,8.094,16.943,17.7,22.847,28.839
+		c5.896,11.136,10.513,24.311,13.846,39.539c3.326,15.229,4.997,32.456,4.997,51.675c0,10.466-0.479,22.176-1.428,35.118
+		c0,1.137-0.236,3.375-0.715,6.708c-0.473,3.333-0.712,5.852-0.712,7.562c0,2.851,0.808,5.232,2.423,7.136
+		c1.622,1.902,3.86,2.851,6.714,2.851c3.046,0,5.708-1.615,7.994-4.853c1.328-1.711,2.561-3.806,3.71-6.283
+		c1.143-2.471,2.43-5.325,3.854-8.562c1.431-3.237,2.43-5.513,2.998-6.848c24.17-54.238,36.258-97.158,36.258-128.756
+		C511.63,291.039,506.589,259.344,496.5,233.842z"></path>
+				</symbol>
 				<symbol id="icon-pencil" viewBox="0 0 32 32">
 					<title>pencil</title>
 					<path d="M27 0c2.761 0 5 2.239 5 5 0 1.126-0.372 2.164-1 3l-2 2-7-7 2-2c0.836-0.628 1.874-1 3-1zM2 23l-2 9 9-2 18.5-18.5-7-7-18.5 18.5zM22.362 11.362l-14 14-1.724-1.724 14-14 1.724 1.724z"></path>
@@ -1441,15 +1667,25 @@ function showArea(number){
     </svg>
  </button>
  
- <div id="welcomeDiv"  style="display:none;" class=" content__sensor" > 
-
- 
- <section class="dashboard" id="main-column">
- <button id="close_button">
+ <button id="qual_temp-button">
     <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
+ </button>
+ 
+ <div id="welcomeDiv"  style="display:none;" class="content__sensor" > 
+
+ 
+ <section class="dashboard" id="main-column">
+  <button id="temp_storico_button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
+ <button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
  </button>
   <div id="sensorValues">
    
@@ -1505,58 +1741,35 @@ function showArea(number){
  
  
  
-  <div id="welcomeDiv2"  style="display:none;" class=" content__sensor" > 
-
+  <div id="welcomeDiv2"  style="display:none;" class="content__sensor" > 
+    <button id="back_button" class ="back_tempHum_button">
+    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+ </button>
+<button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
  
  <section class="dashboard" id="main-column">
- <button id="close_button">
+
+ 
+  <div id="myChart"></div>
+</section>
+ </div>
+ 
+ 
+  <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
+ <section class="dashboard" id="main-column">
+  <button id="pres_storico_button">
     <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
  </button>
+ <button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
   <div id="sensorValues">
    
-  
-  <div class="con">
-    <div class="de">
-        <div class="den">
-          <div class="dene">
-            <div class="denem">
-              <div class="deneme">
-                <div class="volts">23</div><strong>&deg;</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-	
-	<div class="de2">
-        <div class="den">
-          <div class="dene">
-            <div class="denem">
-              <div class="deneme">
-                <div class="amps">23</div><strong>&deg;</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-	
-	<div class="wrapper">
-  
-	  <div class="green">
-		<div class="progress">
-		  <div class="inner">
-			<div class="percent"><span><div class="moisture">67</div></span></div>
-			<div class="water"></div>
-			<div class="glare"></div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-</div>
-
 
 	
   </div>
@@ -1564,6 +1777,25 @@ function showArea(number){
 </section>
  </div>
  
+   <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
+ <section class="dashboard" id="main-column">
+  <button id="pres_storico_button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
+ <button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
+  <div id="sensorValues">
+   
+
+	
+  </div>
+  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
+</section>
+ </div>
  
  
  

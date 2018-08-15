@@ -1,0 +1,31 @@
+Per tutti i moduli che mancano installarli tramite
+npm install NOME_MODULO
+es:
+npm install mysql
+
+da xampp
+attivare mysql
+
+
+da xampp/mysql/bin
+mysql -h localhost -u root -p
+
+create database dbcanarin;
+create user 'canarin'@'localhost' identified by '123abc';
+grant all on dbcanarin.* to 'canarin' identified by '123abc';
+
+use dbcanarin;
+//Ho fillato i valori da localhost/phpmyadmin facendo CTRL C e CTRL V del codice SQL canarinProj.sql
+
+//Eseguire il file:
+node exSensori.js
+
+Aprire sul browser
+http://localhost:3000/
+
+
+
+
+
+//Prova di inserimento query:   (PS: verrà mostrata immediatamente)
+INSERT INTO `unified-proj`(`id`) VALUES (7)

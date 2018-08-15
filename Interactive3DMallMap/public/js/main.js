@@ -142,12 +142,42 @@ allStates.on("click", function() {
   window.dispatchEvent(new Event('resize'));
 });
 
-		var closeSens = $("#close_button");
+		var qual_pres = $("#qual_temp-button");
+
+qual_pres.on("click", function() {
+  openSensorQPArea();
+  window.dispatchEvent(new Event('resize'));
+});
+
+		var closeSens = $(".close_button");
 
 closeSens.on("click", function() {
   closeSensorArea();
   window.dispatchEvent(new Event('resize'));
 });
+
+var storicoTemp = $("#temp_storico_button");
+
+storicoTemp.on("click", function() {
+  OpenTempStoricoArea();
+
+});
+
+var backTemp = $(".back_tempHum_button");
+var parent, ink, d, x, y;
+backTemp.on("click", function() {
+	BackToTempHum();
+
+});
+
+var storicoPres = $("#pres_storico_button");
+
+storicoPres.on("click", function() {
+  OpenPresStoricoArea();
+
+});
+
+
 
 		// navigating through the levels
 		levelUpCtrl.addEventListener('click', function() { navigate('Down'); });
@@ -591,6 +621,38 @@ changelev(0);
 
 		
 	}
+		function openSensorQPArea() {
+
+		var style = document.createElement('style');
+		style.type = 'text/css';
+		style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:50%;}";
+		document.getElementsByTagName('head')[0].appendChild(style);
+		
+		document.getElementById('qual_pres_Div').style.display = "block";
+		
+		
+		// resize mall area
+		classie.add(mall, 'mall--content-open');
+
+		
+	}
+	
+	
+	function OpenTempStoricoArea() {
+		document.getElementById('welcomeDiv').style.display = "none";
+		document.getElementById('welcomeDiv2').style.display = "block";
+		
+	}
+	function BackToTempHum() {
+		document.getElementById('welcomeDiv').style.display = "block";
+		document.getElementById('welcomeDiv2').style.display = "none";
+		
+	}
+	function OpenPresStoricoArea() {
+		document.getElementById('qual_pres_Div').style.display = "none";
+		document.getElementById('welcomeDiv2').style.display = "block";
+		
+	}
 	
 		function closeSensorArea() {
 
@@ -627,7 +689,8 @@ changelev(0);
 		document.getElementsByTagName('head')[0].appendChild(style);
 		
 		document.getElementById('welcomeDiv').style.display = "none";
-		
+		document.getElementById('welcomeDiv2').style.display = "none";
+		document.getElementById('qual_pres_Div').style.display = "none";
 		
 	}
 

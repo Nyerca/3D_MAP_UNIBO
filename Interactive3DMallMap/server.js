@@ -18,8 +18,18 @@ var con = mysql.createConnection({
   password: "123abc",
   database: "db_unibo"
 });
+var con2 = mysql.createConnection({
+  host: "localhost",
+  user: "canarin",
+  password: "123abc",
+  database: "sensori"
+});
 
 con.connect(function(err) {
+  if (err) throw err;
+  //console.log("Connected!");
+});
+con2.connect(function(err) {
   if (err) throw err;
   //console.log("Connected!");
 });
@@ -63,8 +73,9 @@ http.listen(3000, function() {
 
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
+var str = "", max = "", min = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && str.length > 0 && max.length > 0 && min.length > 0) {
 		var vals = { 
 			info: info, 
 			figura: figura, 
@@ -72,8 +83,12 @@ function check() {
 			pin: pin,
 			css: css,
 			opendata : singleData,
+			str: str,
+			max: max,
+			min: min,
 		}
 		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="", css="";
+		str = "", max = "", min = "";
 		namespace.emit('hi', vals);
 		console.log("emit");
 		clearInterval(interval);
@@ -146,6 +161,33 @@ function emitData() {
 			pin = pin + ";";
 		}
 		pin = pin.slice(0, -1);
+		if (err) throw err;
+	});
+	con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
+		
+		for(val in result) {
+			str = str + result[val].media;
+			str = str + "***" + result[val].Giorno;
+			str = str + "***" + result[val].IdCanarin;
+			str = str + ";";
+		}
+		str = str.slice(0, -1);
+		if (err) throw err;
+	});
+	con2.query("SELECT MAX(Value) AS Max FROM `valori`", function (err, result, fields) {
+		for(val in result) {
+			max = max + result[val].Max;
+			max = max + ";";
+		}
+		max = max.slice(0, -1);
+		if (err) throw err;
+	});
+	con2.query("SELECT MIN(Value) AS Min FROM `valori`", function (err, result, fields) {
+		for(val in result) {
+			min = min + result[val].Min;
+			min = min + ";";
+		}
+		min = min.slice(0, -1);
 		if (err) throw err;
 	});
 
