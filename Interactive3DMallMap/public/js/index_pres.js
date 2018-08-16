@@ -1,14 +1,29 @@
+   	$(document).ready(function() {
+	var valore, val1 = 0;
+	
+
+      socket.on('sens',function(data) {
+		 valore = data.split(';');
+		for(var field in valore) {
+			var line = valore[field].split('***');
+			if(line[0] == "1") {
+				val1 = line[1];
+			}
+		}		
+      });
+
 window.feed = function(callback) {
   var tick = {};
-  tick.plot0 = Math.ceil(350 + (Math.random() * 500));
+  tick.plot0 = Math.ceil(350 + parseFloat(val1));
   callback(JSON.stringify(tick));
 };
 
 var myConfig = {
  	type: "gauge",
  	globals: {
- 	  fontSize: 25
+ 	  fontSize: 20
  	},
+	"background-color":"#3d3d3d",
  	plotarea:{
  	  marginTop:80
  	},
@@ -17,7 +32,7 @@ var myConfig = {
  	  valueBox: {
  	    placement: 'center',
  	    text:'%v', //default
- 	    fontSize:35,
+ 	    fontSize:24,
  	    rules:[
  	      {
  	        rule: '%v >= 700',
@@ -41,6 +56,41 @@ var myConfig = {
   tooltip:{
     borderRadius:5
   },
+    gui:{
+    behaviors:[ //default contextMenu behaviors
+        {
+          id: "Reload", //built-in id
+          enabled:"none" //sets visibility to show 
+        },
+        {
+          id: "SaveAsImage",
+          enabled:"none"
+        },
+        {
+          id: "DownloadPDF", //built-in id
+          enabled: "none" //sets visibility to show
+        },
+        {
+          id: "DownloadSVG",
+          enabled: "none"
+        },
+        {
+          id: "Print", 
+          enabled: "none"
+        },
+        {
+          id: "ViewSource", //built-in id 
+          enabled: "none" //sets visibility to hide
+        },
+		{
+          id: "HideGuide", //built-in id 
+          enabled: "none" //sets visibility to hide
+        }
+      ] 
+  },
+  "plotarea":{  
+    "background-color":"#3d3d3d",
+}, 
  	scaleR:{
 	  aperture:180,
 	  minValue:300,
@@ -62,8 +112,9 @@ var myConfig = {
 	    ]
 	  },
 	  labels:['300','','','','','','580','640','700','750','','850'],
+	  paddingTop:80,
 	  ring:{
-	    size:50,
+	    size:30,
 	    rules:[
 	      {
 	        rule:'%v <= 580',
@@ -88,8 +139,7 @@ var myConfig = {
       type:"feed",
       transport:"js",
       url:"feed()",
-      interval:1500,
-      resetTimeout:1000
+      interval:100
   },
 	series : [
 		{
@@ -107,8 +157,9 @@ var myConfig = {
 };
 
 zingchart.render({ 
-	id : 'myChart', 
+	id : 'pChart', 
 	data : myConfig, 
-	height: 500, 
+	height: 220, 
 	width: '100%'
 });
+	});

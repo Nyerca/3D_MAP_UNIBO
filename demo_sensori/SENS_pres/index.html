@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>My ZingChart</title>
-  
-  
-  
-      <link rel="stylesheet" href="css/style.css">
 
-  
+
+  <script src = "/socket.io/socket.io.js"></script>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+<script src='https://cdn.zingchart.com/zingchart.min.js'></script>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 
 <body>
@@ -17,17 +18,14 @@
   <!DOCTYPE html>
 <html>
 	<head>
-		<script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
-		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script></head>
 	<body>
-		<div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Powered by ZingChart</a></div>
+		<div id='pChart'></div>
 	</body>
 </html>
   
   
 
-    <script  src="js/index.js"></script>
+    <script  src="/js/index_pres.js"></script>
 
 
 

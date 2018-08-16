@@ -56,16 +56,8 @@ function checkForNewData (callback) {
 
 //Function that select values from the table and emits data to indexSensori.html
 function emitData() {
-	con.query("SELECT * FROM `valori` ORDER  BY IdValue DESC LIMIT 3", function (err, result, fields) {
-		var str = "";
-	for(val in result) {
-		str = str + result[val].IdCanarin;
-		str = str + "***" + result[val].Value;
-		str = str + ";";
-	}
-	str = str.slice(0, -1);
-	console.log(result)
-	namespace.emit('hi', str);
+	con.query("SELECT * FROM `valori`", function (err, result, fields) {
+		getObjAsString(result)
 		if (err) throw err;
 	});
 }

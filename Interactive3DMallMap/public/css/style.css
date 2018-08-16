@@ -1005,6 +1005,20 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
   width: 25px;
   height: 25px;
 }
+#hum_storico_button {
+	position: absolute;
+  width: 100px;
+  height: 50px;
+  top: 0;
+  left:100px;
+  z-index: 160;
+}
+    
+#hum_storico_button svg {
+	
+  width: 25px;
+  height: 25px;
+}
 
 #back_button {
 	position: absolute;
@@ -1073,4 +1087,33 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	
   width: 25px;
   height: 25px;
+}
+#qual_storico_button {
+	position: absolute;
+  width: 100px;
+  height: 50px;
+  top: 0;
+  left:100px;
+  z-index: 160;
+}
+    
+#qual_storico_button svg {
+	
+  width: 25px;
+  height: 25px;
+}
+.dashboard {
+  background: #3d3d3d;
+}
+#pChart {
+	margin:-7% 0 0 30% !important;
+}
+#pChart-top svg {
+	padding-top: 27px !important;
+}
+p_move {
+	width:30%;
+}
+#sensorData2 {
+	margin: -9% 0 0 0 !important;
 }

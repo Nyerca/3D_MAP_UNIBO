@@ -1,0 +1,8 @@
+Mi sono creato questo nodo di esempio
+INSERT INTO `unified-node`(`id`, `name`, `interval`) VALUES (1,"nodo1",5)
+
+Successivamente facendo partire lo script ho inserito diversi valori con type id = 4 (temperatura)
+
+NOTA: Bisogna fare gli:
+npm install random
+npm install mysql

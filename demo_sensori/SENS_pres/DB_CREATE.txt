@@ -1,0 +1,27 @@
+//Per entrare in maria db:
+sudo mysql -p
+
+//Per eseguire
+node server.js
+node crud.js
+
+E cercare su google:
+isi-studio8bis.csr.unibo.it
+
+
+----------------------------- CREARE IL DATABASE -----------------------------------
+
+Da MariaDB
+
+create database sensori;
+
+create table valori (
+     IdValue int not null AUTO_INCREMENT,
+     IdCanarin int not null,
+     Value float not null,
+     constraint IdValue primary key (IdValue))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create user 'sens'@'localhost' identified by '123abc';
+grant all on sensori.* to 'sens' identified by '123abc';
+
+##################################

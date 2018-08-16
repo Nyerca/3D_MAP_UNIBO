@@ -163,11 +163,16 @@ storicoTemp.on("click", function() {
 
 });
 
+var storicoTemp = $("#hum_storico_button");
+
+storicoTemp.on("click", function() {
+  OpenHumStoricoArea();
+
+});
+
 var backTemp = $(".back_tempHum_button");
-var parent, ink, d, x, y;
 backTemp.on("click", function() {
 	BackToTempHum();
-
 });
 
 var storicoPres = $("#pres_storico_button");
@@ -177,6 +182,17 @@ storicoPres.on("click", function() {
 
 });
 
+var backTemp = $(".back_qualPres_button");
+backTemp.on("click", function() {
+	BackToQualPres();
+});
+
+var storicoQual = $("#qual_storico_button");
+
+storicoQual.on("click", function() {
+  OpenQualStoricoArea();
+
+});
 
 
 		// navigating through the levels
@@ -646,12 +662,29 @@ changelev(0);
 	function BackToTempHum() {
 		document.getElementById('welcomeDiv').style.display = "block";
 		document.getElementById('welcomeDiv2').style.display = "none";
+		document.getElementById('hum_storico_Div').style.display = "none";
 		
 	}
+	function OpenHumStoricoArea() {
+		document.getElementById('welcomeDiv').style.display = "none";
+		document.getElementById('hum_storico_Div').style.display = "block";
+		
+	}
+
 	function OpenPresStoricoArea() {
 		document.getElementById('qual_pres_Div').style.display = "none";
-		document.getElementById('welcomeDiv2').style.display = "block";
+		document.getElementById('pres_storico_Div').style.display = "block";
 		
+	}
+	function OpenQualStoricoArea() {
+		document.getElementById('qual_pres_Div').style.display = "none";
+		document.getElementById('qual_storico_Div').style.display = "block";
+		
+	}
+	function BackToQualPres() {
+		document.getElementById('qual_pres_Div').style.display = "block";
+		document.getElementById('pres_storico_Div').style.display = "none";
+		document.getElementById('qual_storico_Div').style.display = "none";
 	}
 	
 		function closeSensorArea() {
@@ -691,6 +724,9 @@ changelev(0);
 		document.getElementById('welcomeDiv').style.display = "none";
 		document.getElementById('welcomeDiv2').style.display = "none";
 		document.getElementById('qual_pres_Div').style.display = "none";
+		document.getElementById('hum_storico_Div').style.display = "none";
+		document.getElementById('pres_storico_Div').style.display = "none";
+		document.getElementById('qual_storico_Div').style.display = "none";
 		
 	}
 

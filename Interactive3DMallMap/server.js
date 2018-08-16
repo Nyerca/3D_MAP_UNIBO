@@ -37,11 +37,26 @@ con2.connect(function(err) {
 var IdEntrance = 1;
 
 var dim;
+var count = 0 //Number of values read
 var ind = 0;
 var opendata = [];
 var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
+emitSensData();
+setInterval(function() {
+		var current;
+		checkForNewData(function(current) {
+			if(current > count) {
+				if(count > 0) {
+					emitSensData();
+				}
+				count = current;
+			}
+		});
+		
+    }, 1000);
+	
     socket.on('deleteValue', function(data) {
 		console.log(data[2]);
 		
@@ -64,6 +79,14 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 	emitData();
    //console.log('someone connected');
 });
+
+//Function that checks for new deta into the table
+function checkForNewData (callback) {
+  con2.query("SELECT COUNT(*) AS num FROM `valori`", function (err, result, fields) {
+    if (err) throw err;
+	callback(result[0].num); //callback function
+  });
+}
 
 
 http.listen(3000, function() {
@@ -190,10 +213,30 @@ function emitData() {
 		min = min.slice(0, -1);
 		if (err) throw err;
 	});
-
 	
 	
 	 interval = setInterval(check, 250);
+	
+}
+
+
+function emitSensData() {
+	
+	con2.query("SELECT * FROM `valori` ORDER  BY IdValue DESC LIMIT 3", function (err, result, fields) {
+		var sensor_val="";
+		for(val in result) {
+		sensor_val = sensor_val + result[val].IdCanarin;
+		sensor_val = sensor_val + "***" + result[val].Value;
+		sensor_val = sensor_val + ";";
+	}
+	
+	sensor_val = sensor_val.slice(0, -1);
+	namespace.emit('sens', sensor_val);
+		if (err) throw err;
+	});
+
+	
+	 
 	
 }
 

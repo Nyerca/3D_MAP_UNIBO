@@ -22,7 +22,7 @@
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	
-
+<link rel="stylesheet" href="/css/style_qual.css">
 	
 	
 	
@@ -37,7 +37,7 @@
   
       <link rel="stylesheet" href="/css/style_humidity.css">
       <link rel="stylesheet" href="/css/style_temp.css">
-<script  src="/js/index_temp.js"></script>
+
 
 <script src='https://cdn.zingchart.com/zingchart.min.js'></script>
 <script type="text/javascript">
@@ -388,6 +388,7 @@ $.ajaxSetup({ cache: true });
 
 
 socket.on('hi',function(data) {	
+
 	var box = document.getElementsByClassName("box")[0];
 	while (box.firstChild) {
     box.removeChild(box.firstChild);
@@ -1411,6 +1412,10 @@ hideAndShow();
 $( ".mallnav__button--up" ).click(function() {
 hideAndShow();
 });
+
+
+
+
 				
 });
 
@@ -1684,6 +1689,12 @@ function showArea(number){
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
  </button>
+ <button id="hum_storico_button">
+    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+ </button>
  <button id="close_button" class="close_button">
     <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
  </button>
@@ -1757,6 +1768,22 @@ function showArea(number){
  </div>
  
  
+   <div id="hum_storico_Div"  style="display:none;" class="content__sensor" > 
+    <button id="back_button" class ="back_tempHum_button">
+    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+ </button>
+<button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
+ 
+ <section class="dashboard" id="main-column">
+
+ 
+  <div id="myChart"></div>
+</section>
+ </div>
+ 
+ 
   <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
  <section class="dashboard" id="main-column">
   <button id="pres_storico_button">
@@ -1765,21 +1792,7 @@ function showArea(number){
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
  </button>
- <button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
-  <div id="sensorValues">
-   
-
-	
-  </div>
-  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
-</section>
- </div>
- 
-   <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
- <section class="dashboard" id="main-column">
-  <button id="pres_storico_button">
+  <button id="qual_storico_button">
     <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         <path d="M0 0h24v24H0z" fill="none"/>
@@ -1788,15 +1801,54 @@ function showArea(number){
  <button id="close_button" class="close_button">
     <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
  </button>
-  <div id="sensorValues">
+
+  <div id="sensorValues2">
    
+
+ <div class ="p_move">
+   <div id="prog_q" data-perc="0">
+	<div class="bar_q"><span></span></div>
+	<div class="label_q"><span></span></div>
+</div>
+</div>
+<div id='pChart'></div>
 
 	
   </div>
-  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
+  <div id="sensorData2" style="width:100%; height:20%; margin: 0 0;"></div>
 </section>
  </div>
  
+ 
+ 
+   <div id="pres_storico_Div"  style="display:none;" class="content__sensor" > 
+   <button id="back_button" class ="back_qualPres_button">
+    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+ </button>
+<button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
+ <section class="dashboard" id="main-column">
+
+ 
+  <div id="myChart"></div>
+</section>
+ </div>
+ 
+ 
+   <div id="qual_storico_Div"  style="display:none;" class="content__sensor" > 
+   <button id="back_button" class ="back_qualPres_button">
+    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+ </button>
+<button id="close_button" class="close_button">
+    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+ </button>
+ <section class="dashboard" id="main-column">
+
+ 
+  <div id="myChart"></div>
+</section>
+ </div>
  
  
  
@@ -2100,7 +2152,8 @@ class="map__outline" />
 		<!-- /container -->
 		<script src="/js/classie.js"></script>
 		<script src="/js/list.min.js"></script>
-	</body>
-	<script>
 
-	</script>
+	</body>
+<script  src="/js/index_qual.js"></script>
+<script  src="/js/index_pres.js"></script>
+<script  src="/js/index_temp.js"></script>

@@ -1,25 +1,25 @@
 var colorInc = 100 / 3;
    
    	$(document).ready(function() {
-	var valore, val1 = 0, val2 = 0, val3 = 0;
+	var valore_server, value1 = 0, value2 = 0, value3 = 0;
 	
-	/*
-	var socket = io('/mySensorNamespace');
-      socket.on('hi',function(data) {
-		 valore = data.split(';');
-		for(var field in valore) {
-			var line = valore[field].split('***');
+	
+
+      socket.on('sens',function(data) {
+		 valore_server = data.split(';');
+		for(var field in valore_server) {
+			var line = valore_server[field].split('***');
 			if(line[0] == "1") {
-				val1 = line[1];
+				value1 = line[1];
 			} else if(line[0] == "2") {
-				val2 = line[1];
+				value2 = line[1];
 			} else if(line[0] == "3") {
-				val3 = line[1];
+				value3 = line[1];
 			}
 		}		
 
       });
-	  */
+	  
 	  
 		var $delay = 2000,
 			vMin = 11.5,
@@ -145,9 +145,9 @@ var colorInc = 100 / 3;
 								mPercent = getRandomInt(mMin, mMax);
 								*/
 							x = (new Date()).getTime(),
-								volts = (Math.round(val1 * 2) / 2),
-								amps = (Math.round(val2 * 2) / 2),
-								mPercent = (Math.round(val3 * 2) / 2);
+								volts = (Math.round(value1 * 2) / 2),
+								amps = (Math.round(value2 * 2) / 2),
+								mPercent = (Math.round(value3 * 2) / 2);
 							
 							voltage.addPoint([x, volts], false, true);
 							current.addPoint([x, amps], false, true);
@@ -286,6 +286,165 @@ var colorInc = 100 / 3;
 			}]
 		});
 		
-		
+
+		$('#sensorData2').highcharts({
+			chart: {
+				type: 'spline',
+				events: {
+					load: function() {
+						var voltage = this.series[0];
+						var current = this.series[1];
+						var moisture = this.series[2];
+						var x, volts, amps, mPercent;
+
+						// faking sensor data
+						// data will be coming from sensors on the MKR1000
+						setInterval(function() {
+						/*
+							x = (new Date()).getTime(),
+								volts = getRandomInt(vMin, vMax),
+								amps = getRandomInt(cMin, cMax),
+								mPercent = getRandomInt(mMin, mMax);
+								*/
+							x = (new Date()).getTime(),
+								volts = (Math.round(value1 * 2) / 2),
+								amps = (Math.round(value2 * 2) / 2),
+								mPercent = (Math.round(value3 * 2) / 2);
+							
+							voltage.addPoint([x, volts], false, true);
+							current.addPoint([x, amps], false, true);
+							moisture.addPoint([x, mPercent], true, true);
+							
+							
+							updateSensorDisplayValues([volts, amps, mPercent]);
+							
 	
+						}, $delay);
+					}
+				}
+			},
+			title: {
+				text: 'Dati Canarin'
+			},
+			xAxis: {
+				type: 'datetime',
+				tickPixelInterval: 500
+			},
+			yAxis: [{
+				title: {
+					text: 'GRADI',
+					style: {
+						color: '#2b908f',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 15,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			}, {
+				title: {
+					text: 'UMIDITA',
+					style: {
+						color: '#90ee7e',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 6,
+				opposite: true,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			}, {
+				title: {
+					text: 'INQUINAMENTO',
+					style: {
+						color: '#f45b5b',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 100,
+				opposite: true,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			}],
+			tooltip: {
+				formatter: function() {
+					var unitOfMeasurement = this.series.name === 'GRADI' ? ' °C' : ' A';
+					return '<b>' + this.series.name + '</b><br/>' +
+						Highcharts.numberFormat(this.y, 1) + unitOfMeasurement;
+				}
+			},
+			legend: {
+				enabled: true
+			},
+			exporting: {
+				enabled: false
+			},
+			series: [{
+				name: 'TEMPERATURA',
+				yAxis: 0,
+				style: {
+					color: '#2b908f'
+				},
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i <= 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(12, 12)
+						});
+					}
+					return data;
+				}())
+			}, {
+				name: 'UMIDITA',
+				yAxis: 1,
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i <= 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(.7, .7)
+						});
+					}
+					return data;
+				}())
+			}, {
+				name: 'INQUINAMENTO',
+				yAxis: 2,
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i <= 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(1, 1)
+						});
+					}
+					return data;
+				}())
+			}]
+		});
 	});
