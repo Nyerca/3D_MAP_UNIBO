@@ -55,7 +55,7 @@ setInterval(function() {
 			}
 		});
 		
-    }, 1000);
+    }, 60000);
 	
     socket.on('deleteValue', function(data) {
 		console.log(data[2]);
@@ -96,9 +96,8 @@ http.listen(3000, function() {
 
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
-var str = "", max = "", min = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && str.length > 0 && max.length > 0 && min.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
 		var vals = { 
 			info: info, 
 			figura: figura, 
@@ -106,19 +105,37 @@ function check() {
 			pin: pin,
 			css: css,
 			opendata : singleData,
-			str: str,
-			max: max,
-			min: min,
 		}
 		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="", css="";
-		str = "", max = "", min = "";
 		namespace.emit('hi', vals);
 		console.log("emit");
 		clearInterval(interval);
 	}
 	
 }
-
+var interval2;
+var temp_avg_val="";
+var hum_avg_val="";
+	var temp_max_val="";
+	var temp_min_val="";
+function checkSens() {
+	if(temp_avg_val.length > 0 && temp_max_val.length > 0 && temp_min_val.length > 0 && hum_avg_val.length > 0) {
+			var vals_storico_temp = { 
+			temp_avg_val: temp_avg_val, 
+			temp_min_val: temp_min_val, 
+			temp_max_val: temp_max_val, 
+			hum_avg_val: hum_avg_val,
+		}
+		
+		
+		temp_avg_val = "", temp_max_val = "",temp_min_val = "";
+		hum_avg_val = "";
+		namespace.emit('temp_storico', vals_storico_temp);
+		console.log("emit2");
+		clearInterval(interval2);
+	}
+	
+}
 //Function that select values from the table and emits data to indexSensori.html
 function emitData() {
 	
@@ -186,33 +203,7 @@ function emitData() {
 		pin = pin.slice(0, -1);
 		if (err) throw err;
 	});
-	con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
-		
-		for(val in result) {
-			str = str + result[val].media;
-			str = str + "***" + result[val].Giorno;
-			str = str + "***" + result[val].IdCanarin;
-			str = str + ";";
-		}
-		str = str.slice(0, -1);
-		if (err) throw err;
-	});
-	con2.query("SELECT MAX(Value) AS Max FROM `valori`", function (err, result, fields) {
-		for(val in result) {
-			max = max + result[val].Max;
-			max = max + ";";
-		}
-		max = max.slice(0, -1);
-		if (err) throw err;
-	});
-	con2.query("SELECT MIN(Value) AS Min FROM `valori`", function (err, result, fields) {
-		for(val in result) {
-			min = min + result[val].Min;
-			min = min + ";";
-		}
-		min = min.slice(0, -1);
-		if (err) throw err;
-	});
+
 	
 	
 	 interval = setInterval(check, 250);
@@ -229,14 +220,61 @@ function emitSensData() {
 		sensor_val = sensor_val + "***" + result[val].Value;
 		sensor_val = sensor_val + ";";
 	}
-	
 	sensor_val = sensor_val.slice(0, -1);
-	namespace.emit('sens', sensor_val);
+	namespace.emit('realtime_vals', sensor_val);
 		if (err) throw err;
 	});
 
 	
-	 
+	
+	
+	 con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
+		
+		for(val in result) {
+			temp_avg_val = temp_avg_val + result[val].media;
+			temp_avg_val = temp_avg_val + "***" + result[val].Giorno;
+			temp_avg_val = temp_avg_val + "***" + result[val].IdCanarin;
+			temp_avg_val = temp_avg_val + ";";
+		}
+		temp_avg_val = temp_avg_val.slice(0, -1);
+		if (err) throw err;
+	});
+	
+	con2.query("SELECT MAX(Value) AS Max FROM `valori`", function (err, result, fields) {
+		for(val in result) {
+			temp_max_val = temp_max_val + result[val].Max;
+			temp_max_val = temp_max_val + ";";
+		}
+		temp_max_val = temp_max_val.slice(0, -1);
+		console.log("MAX: " + temp_max_val);
+		if (err) throw err;
+	});
+
+	con2.query("SELECT MIN(Value) AS Min FROM `valori`", function (err, result, fields) {
+		
+		for(val in result) {
+			temp_min_val = temp_min_val + result[val].Min;
+			temp_min_val = temp_min_val + ";";
+		}
+		temp_min_val = temp_min_val.slice(0, -1);
+		if (err) throw err;
+	});
+	
+ con2.query("SELECT * FROM `hum_avg`", function (err, result, fields) {
+		
+		for(val in result) {
+			hum_avg_val = hum_avg_val + result[val].media;
+			hum_avg_val = hum_avg_val + "***" + result[val].Giorno;
+			hum_avg_val = hum_avg_val + "***" + result[val].IdCanarin;
+			hum_avg_val = hum_avg_val + ";";
+		}
+		hum_avg_val = hum_avg_val.slice(0, -1);
+		if (err) throw err;
+	});
+	
+		interval2 = setInterval(checkSens, 250);
+		
+		
 	
 }
 

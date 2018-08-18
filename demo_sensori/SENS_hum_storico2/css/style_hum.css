@@ -1,0 +1,71 @@
+.wrap {
+  margin: 3em auto;
+  padding: 3em 0 0;
+  width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.barra {
+  display: inline-block;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.barra.barra1 {
+  background: #89B800;
+  box-shadow: 1px -1px #7aa400, 2px -2px #7aa400, 3px -3px #7aa400, 4px -4px #7aa400, 5px -5px #7aa400, 6px -6px #7aa400, 7px -7px #7aa400, 8px -8px #7aa400, 9px -9px #7aa400, 10px -10px #7aa400;
+  height: 50px;
+  width: 30px;
+}
+.barra.barra2 {
+  background: #D54F2A;
+  box-shadow: 1px -1px #bd4625, 2px -2px #bd4625, 3px -3px #bd4625, 4px -4px #bd4625, 5px -5px #bd4625, 6px -6px #bd4625, 7px -7px #bd4625, 8px -8px #bd4625, 9px -9px #bd4625, 10px -10px #bd4625;
+  height: 200px;
+  width: 30px;
+}
+.barra.barra3 {
+  background: #DA9421;
+  box-shadow: 1px -1px #c2841d, 2px -2px #c2841d, 3px -3px #c2841d, 4px -4px #c2841d, 5px -5px #c2841d, 6px -6px #c2841d, 7px -7px #c2841d, 8px -8px #c2841d, 9px -9px #c2841d, 10px -10px #c2841d;
+  height: 150px;
+  width: 30px;
+}
+.barra.barra4 {
+  background: #2F1B08;
+  box-shadow: 1px -1px #2a1807, 2px -2px #2a1807, 3px -3px #2a1807, 4px -4px #2a1807, 5px -5px #2a1807, 6px -6px #2a1807, 7px -7px #2a1807, 8px -8px #2a1807, 9px -9px #2a1807, 10px -10px #2a1807;
+  height: 100px;
+  width: 30px;
+}
+.barra.barra5 {
+  background: #EEF4B2;
+  box-shadow: 1px -1px #d4d99e, 2px -2px #d4d99e, 3px -3px #d4d99e, 4px -4px #d4d99e, 5px -5px #d4d99e, 6px -6px #d4d99e, 7px -7px #d4d99e, 8px -8px #d4d99e, 9px -9px #d4d99e, 10px -10px #d4d99e;
+  height: 25px;
+  width: 30px;
+}
+
+.pointer {
+  position: absolute;
+  width: 100px;
+  height: 25px;
+  background: grey;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: white;
+  font-weight: bold;
+  font-family: Helvetica;
+  font-size: 10px;
+  text-align: center;
+  line-height: 25px;
+  display: none;
+}
+
+.pointer:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid grey;
+  bottom: -10px;
+  left: 10px;
+}

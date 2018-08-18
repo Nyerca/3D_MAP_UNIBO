@@ -1117,3 +1117,21 @@ p_move {
 #sensorData2 {
 	margin: -9% 0 0 0 !important;
 }
+#myChart-top {
+	width: 100% !important;
+}
+
+.individual-bubble {
+position: absolute;
+z-index: 10;
+border-radius: 100%;
+bottom: 40px;
+color: #6895d1;
+background-color: #6895d1;
+}
+#span_barra2 {
+display:table-cell;
+position:relative;
+bottom:20px;
+left:10px;
+}

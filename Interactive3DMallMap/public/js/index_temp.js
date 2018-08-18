@@ -5,23 +5,10 @@ var colorInc = 100 / 3;
 	
 	
 
-      socket.on('sens',function(data) {
-		 valore_server = data.split(';');
-		for(var field in valore_server) {
-			var line = valore_server[field].split('***');
-			if(line[0] == "1") {
-				value1 = line[1];
-			} else if(line[0] == "2") {
-				value2 = line[1];
-			} else if(line[0] == "3") {
-				value3 = line[1];
-			}
-		}		
-
-      });
+      
 	  
 	  
-		var $delay = 2000,
+		var $delay = 60000,
 			vMin = 11.5,
 			vMax = 15.5,
 			cMin = .3,
@@ -108,6 +95,38 @@ var colorInc = 100 / 3;
 			updateCurrent(d[1]);
 			updateMoisture(d[2]);
 		}
+		var just_once = -1;
+		var voltage;
+		var current;
+		var moisture;
+		socket.on('realtime_vals',function(data) {
+		 valore_server = data.split(';');
+		for(var field in valore_server) {
+			
+			var line = valore_server[field].split('***');
+			if(line[0] == "1") {
+				value1 = line[1];
+			} else if(line[0] == "2") {
+				value2 = line[1];
+			} else if(line[0] == "3") {
+				value3 = line[1];
+			}
+		}	
+
+if(just_once == -1) {
+	just_once = 0;
+	updateSensorDisplayValues([value1,value2,value3]);
+	var x, volts, amps, mPercent;
+	x = (new Date()).getTime(),
+								volts = (Math.round(value1 * 2) / 2),
+								amps = (Math.round(value2 * 2) / 2),
+								mPercent = (Math.round(value3 * 2) / 2);
+							
+							voltage.addPoint([x, volts], false, true);
+							current.addPoint([x, amps], false, true);
+							moisture.addPoint([x, mPercent], true, true);
+}
+      });
 
 		Highcharts.setOptions({
 			global: {
@@ -125,15 +144,18 @@ var colorInc = 100 / 3;
 			}
 		});
 
+		
 		$('#sensorData').highcharts({
 			chart: {
 				type: 'spline',
 				events: {
 					load: function() {
-						var voltage = this.series[0];
-						var current = this.series[1];
-						var moisture = this.series[2];
+						voltage = this.series[0];
+						current = this.series[1];
+						moisture = this.series[2];
 						var x, volts, amps, mPercent;
+						
+						
 
 						// faking sensor data
 						// data will be coming from sensors on the MKR1000
@@ -166,7 +188,7 @@ var colorInc = 100 / 3;
 			},
 			xAxis: {
 				type: 'datetime',
-				tickPixelInterval: 500
+				tickPixelInterval: 50
 			},
 			yAxis: [{
 				title: {
@@ -208,7 +230,7 @@ var colorInc = 100 / 3;
 					}
 				},
 				min: 0,
-				max: 100,
+				max: 20,
 				opposite: true,
 				plotLines: [{
 					value: 0,
@@ -241,7 +263,7 @@ var colorInc = 100 / 3;
 						time = (new Date()).getTime(),
 						i;
 
-					for (i = -totalPoints; i <= 0; i += 1) {
+					for (i = -totalPoints; i < 0; i += 1) {
 						data.push({
 							x: time + i * $delay,
 							y: getRandomInt(12, 12)
@@ -258,7 +280,7 @@ var colorInc = 100 / 3;
 						time = (new Date()).getTime(),
 						i;
 
-					for (i = -totalPoints; i <= 0; i += 1) {
+					for (i = -totalPoints; i < 0; i += 1) {
 						data.push({
 							x: time + i * $delay,
 							y: getRandomInt(.7, .7)
@@ -275,7 +297,7 @@ var colorInc = 100 / 3;
 						time = (new Date()).getTime(),
 						i;
 
-					for (i = -totalPoints; i <= 0; i += 1) {
+					for (i = -totalPoints; i < 0; i += 1) {
 						data.push({
 							x: time + i * $delay,
 							y: getRandomInt(1, 1)

@@ -163,16 +163,18 @@ storicoTemp.on("click", function() {
 
 });
 
-var storicoTemp = $("#hum_storico_button");
 
-storicoTemp.on("click", function() {
+var storicoHum = $("#hum_storico_button");
+
+storicoHum.on("click", function() {
   OpenHumStoricoArea();
-
+  window.dispatchEvent(new Event('resize'));
 });
 
 var backTemp = $(".back_tempHum_button");
 backTemp.on("click", function() {
 	BackToTempHum();
+	window.dispatchEvent(new Event('resize'));
 });
 
 var storicoPres = $("#pres_storico_button");
@@ -191,7 +193,6 @@ var storicoQual = $("#qual_storico_button");
 
 storicoQual.on("click", function() {
   OpenQualStoricoArea();
-
 });
 
 
@@ -656,6 +657,7 @@ changelev(0);
 	
 	function OpenTempStoricoArea() {
 		document.getElementById('welcomeDiv').style.display = "none";
+		
 		document.getElementById('welcomeDiv2').style.display = "block";
 		
 	}

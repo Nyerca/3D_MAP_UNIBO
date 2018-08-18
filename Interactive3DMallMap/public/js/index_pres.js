@@ -139,7 +139,7 @@ var myConfig = {
       type:"feed",
       transport:"js",
       url:"feed()",
-      interval:100
+      interval:60000
   },
 	series : [
 		{

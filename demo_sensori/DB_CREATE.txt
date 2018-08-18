@@ -1,0 +1,87 @@
+//Per entrare in maria db:
+sudo mysql -p
+
+//Per eseguire
+node server.js
+node crud.js
+
+E cercare su google:
+isi-studio8bis.csr.unibo.it
+
+
+----------------------------- CREARE IL DATABASE -----------------------------------
+
+Da MariaDB
+
+create database sensori;
+
+create table valori (
+     IdValue int not null AUTO_INCREMENT,
+     IdCanarin int not null,
+     Value float not null,
+     Giorno date,
+     constraint IdValue primary key (IdValue))ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create user 'sens'@'localhost' identified by '123abc';
+grant all on sensori.* to 'sens' identified by '123abc';
+
+##################################
+
+CREATE VIEW `hum_avg` AS 
+SELECT AVG(Value) AS media, Giorno FROM `valori` GROUP BY Giorno
+
+CREATE VIEW `temp_avg` AS 
+SELECT AVG(Value) AS media, Giorno, IdCanarin FROM `valori` WHERE IdCanarin BETWEEN 1 AND 2 GROUP BY Giorno, IdCanarin
+
+
+INSERT INTO `valori`(`IdCanarin`, `Value`, `Giorno`) VALUES 
+(1,2,'2018-08-12'),
+(1,3,'2018-08-12'),
+(2,5,'2018-08-12'),
+(1,2,'2018-08-12'),
+(1,2,'2018-08-12'),
+(1,1,'2018-08-12'),
+(2,4,'2018-08-12'),
+(1,2,'2018-08-12'),
+(1,2,'2018-08-12'),
+(1,13,'2018-08-13'),
+(2,15,'2018-08-13'),
+(1,12,'2018-08-13'),
+(1,2,'2018-08-12'),
+(1,9,'2018-08-12'),
+(2,9,'2018-08-13'),
+(1,7,'2018-08-14'),
+(1,23,'2018-08-14'),
+(2,25,'2018-08-14'),
+(1,22,'2018-08-14'),
+(1,12,'2018-08-14'),
+(1,19,'2018-08-14'),
+(2,19,'2018-08-14'),
+(1,13,'2018-08-14'),
+(1,33,'2018-08-15'),
+(1,35,'2018-08-15'),
+(2,35,'2018-08-15'),
+(1,32,'2018-08-15'),
+(1,22,'2018-08-15'),
+(1,39,'2018-08-15'),
+(2,39,'2018-08-15'),
+(1,33,'2018-08-15'),
+(1,1,'2018-08-16'),
+(1,2,'2018-08-16'),
+(2,3,'2018-08-16'),
+(1,4,'2018-08-16'),
+(1,5,'2018-08-16'),
+(1,6,'2018-08-16'),
+(2,7,'2018-08-16'),
+(1,8,'2018-08-16'),
+(1,41,'2018-08-17'),
+(1,42,'2018-08-17'),
+(2,43,'2018-08-17'),
+(1,44,'2018-08-17'),
+(1,45,'2018-08-17'),
+(1,46,'2018-08-17'),
+(2,47,'2018-08-17'),
+(1,48,'2018-08-17'),
+(1,31,'2018-08-18'),
+(1,6,'2018-08-18'),
+(2,22,'2018-08-18');
