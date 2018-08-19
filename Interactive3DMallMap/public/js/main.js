@@ -104,7 +104,7 @@
 
 		
 	}
-
+var closeSens = $(".close_button");
 
 	/**
 	 * Initialize/Bind events fn.
@@ -149,7 +149,7 @@ qual_pres.on("click", function() {
   window.dispatchEvent(new Event('resize'));
 });
 
-		var closeSens = $(".close_button");
+		
 
 closeSens.on("click", function() {
   closeSensorArea();
@@ -187,12 +187,14 @@ storicoPres.on("click", function() {
 var backTemp = $(".back_qualPres_button");
 backTemp.on("click", function() {
 	BackToQualPres();
+	window.dispatchEvent(new Event('resize'));
 });
 
 var storicoQual = $("#qual_storico_button");
 
 storicoQual.on("click", function() {
   OpenQualStoricoArea();
+  window.dispatchEvent(new Event('resize'));
 });
 
 
@@ -311,6 +313,7 @@ storicoQual.on("click", function() {
 	 }
 	 
 	function showLevel(level) {
+		closeSens.click();
 		changelev(level);
 		if (i==0) {
 		$('.clickable_space').on("click", pinClick);
@@ -344,6 +347,7 @@ i++;
 			
 			
 		}
+		
 
 			// show level pins
 			//showPins();

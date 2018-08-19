@@ -116,20 +116,23 @@ function check() {
 var interval2;
 var temp_avg_val="";
 var hum_avg_val="";
+var qual_avg_val="";
 	var temp_max_val="";
 	var temp_min_val="";
 function checkSens() {
-	if(temp_avg_val.length > 0 && temp_max_val.length > 0 && temp_min_val.length > 0 && hum_avg_val.length > 0) {
+	if(temp_avg_val.length > 0 && temp_max_val.length > 0 && temp_min_val.length > 0 && hum_avg_val.length > 0&& qual_avg_val.length > 0) {
 			var vals_storico_temp = { 
 			temp_avg_val: temp_avg_val, 
 			temp_min_val: temp_min_val, 
 			temp_max_val: temp_max_val, 
 			hum_avg_val: hum_avg_val,
+			qual_avg_val: qual_avg_val,
 		}
 		
 		
 		temp_avg_val = "", temp_max_val = "",temp_min_val = "";
 		hum_avg_val = "";
+		qual_avg_val = "";
 		namespace.emit('temp_storico', vals_storico_temp);
 		console.log("emit2");
 		clearInterval(interval2);
@@ -265,10 +268,21 @@ function emitSensData() {
 		for(val in result) {
 			hum_avg_val = hum_avg_val + result[val].media;
 			hum_avg_val = hum_avg_val + "***" + result[val].Giorno;
-			hum_avg_val = hum_avg_val + "***" + result[val].IdCanarin;
 			hum_avg_val = hum_avg_val + ";";
 		}
 		hum_avg_val = hum_avg_val.slice(0, -1);
+		if (err) throw err;
+	});
+	
+	 con2.query("SELECT * FROM `qual_avg`", function (err, result, fields) {
+		
+		for(val in result) {
+			qual_avg_val = qual_avg_val + result[val].media;
+			qual_avg_val = qual_avg_val + "***" + result[val].Giorno;
+			qual_avg_val = qual_avg_val + "***" + result[val].Ora;
+			qual_avg_val = qual_avg_val + ";";
+		}
+		qual_avg_val = qual_avg_val.slice(0, -1);
 		if (err) throw err;
 	});
 	

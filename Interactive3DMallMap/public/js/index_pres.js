@@ -2,7 +2,7 @@
 	var valore, val1 = 0;
 	
 
-      socket.on('sens',function(data) {
+      socket.on('realtime_vals',function(data) {
 		 valore = data.split(';');
 		for(var field in valore) {
 			var line = valore[field].split('***');
@@ -10,11 +10,21 @@
 				val1 = line[1];
 			}
 		}		
+		console.log("ECCELLENTE: " + val1);
+		var latest_val = parseFloat(val1) + 350;
+		zingchart.exec('pChart', 'setnodevalue', {
+    graphid : 0,
+    plotindex : 0,
+    nodeindex : 0,
+    value : latest_val
+});
       });
 
 window.feed = function(callback) {
+	console.log("REFRESH_TIME " + refresh_time);
   var tick = {};
   tick.plot0 = Math.ceil(350 + parseFloat(val1));
+  console.log("ECCELLENTE: " + Math.ceil(350 + parseFloat(val1)));
   callback(JSON.stringify(tick));
 };
 
@@ -139,6 +149,7 @@ var myConfig = {
       type:"feed",
       transport:"js",
       url:"feed()",
+	  "stop-timeout": 25,
       interval:60000
   },
 	series : [
@@ -162,4 +173,6 @@ zingchart.render({
 	height: 220, 
 	width: '100%'
 });
+
+
 	});

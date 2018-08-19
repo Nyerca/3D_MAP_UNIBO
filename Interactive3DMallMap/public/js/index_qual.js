@@ -1,19 +1,5 @@
 $(document).ready(function() {
-	var valore, val1 = 0;
-	
 
-      socket.on('sens',function(data) {
-		 valore = data.split(';');
-		for(var field in valore) {
-			var line = valore[field].split('***');
-			if(line[0] == "2") {
-				val1 = 	Math.round(line[1]);
-				
-				document.getElementById("prog_q").setAttribute("data-perc", val1);
-
-			}
-		}		
-      });
 
 	  $(function() {
 			   $('#prog_q').each(function(){

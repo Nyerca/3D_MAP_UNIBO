@@ -1,36 +1,39 @@
-var qin= [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-var avg_qin = [3, 3, 4, 7, 4, 3, 3];
+var qin_day0 = [30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day4 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day5 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var qin_day6 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 
 
 	$(document).ready(function() {
 
 
-	socket.on('sens',function(data) {	
+	socket.on('temp_storico',function(data) {	
 
-		var valori = data.split(';');
+		var valori = data.qual_avg_val.split(';');
 		for(var field in valori) {
 			var line = valori[field].split('***');
 
-			if(line[2] == '1') {
-						console.log(line[0]);
-				var d = new Date("" + line[1]);
+			var d = new Date("" + line[1]);
 				var str = $.datepicker.formatDate('yy-mm-dd', d);
 				if(str === day0) {
-					avg_tin[0] = parseFloat(line[0]);
+					qin_day0[line[2]] = parseFloat(line[0]);
 				} else if(str == day1) {
-					avg_tin[1] = parseFloat(line[0]);
+					qin_day1[line[2]] = parseFloat(line[0]);
 				} else if(str == day2) {
-					avg_tin[2] = parseFloat(line[0]);
+					qin_day2[line[2]] = parseFloat(line[0]);
 				} else if(str == day3) {
-					avg_tin[3] = parseFloat(line[0]);
+					qin_day3[line[2]] = parseFloat(line[0]);
 				} else if(str == day4) {
-					avg_tin[4] = parseFloat(line[0]);
+					qin_day4[line[2]] = parseFloat(line[0]);
 				} else if(str == day5) {
-					avg_tin[5] = parseFloat(line[0]);
+					qin_day5[line[2]] = parseFloat(line[0]);
 				} else if(str == day6) {
-					avg_tin[6] = parseFloat(line[0]);
+					qin_day6[line[2]] = parseFloat(line[0]);
 				}
-			}
 
 		}
 
@@ -48,9 +51,9 @@ var myConfig = {
             "theme":"classic",
 			'zooming':false,
             "title":{
-                "text":"Surf Height",
+                "text":"Inquinamento dell'aria",
                 "background-color":"none",
-                "font-color":"#05636c",
+                "font-color":"white",
                 "font-size":"24px",
                 "adjust-layout":true,
                 "padding-bottom":25
@@ -58,15 +61,16 @@ var myConfig = {
             "subtitle":{
                 "y":"38.5px",
                 "x":"-9.5px",
-                "text":"Black's Beach - La Jolla",
+                "text":"Valori medi di inquinamento settimanali",
                 "background-color":"none",
-                "font-color":"#05636c",
+                "font-color":"white",
                 "font-size":"14px",
                 "height":"25px"
             },
-            "backgroundColor":"#fff",
+            "backgroundColor":"#3d3d3d",
             "plotarea":{
-                "margin":"dynamic"
+                "margin":"dynamic",
+				"background-color": 'rgba(45, 45, 45, 1.0)'
             },
             "scaleX":{
 			"zooming":"false",
@@ -75,7 +79,7 @@ var myConfig = {
                 "item":{
                     "border-color":"none",
                     "size":"13px",
-                    "font-color":"#05636c"
+                    "font-color":"white"
                 },
                 "guide":{
                     "visible":false
@@ -88,7 +92,7 @@ var myConfig = {
             "scroll-x": {
               "bar":{
                 "border-radius":3,
-                "background-color":"#01579B",
+                "background-color":"white",
                 "alpha":.5
               },
               "handle":{
@@ -103,7 +107,7 @@ var myConfig = {
             "scroll-y": {
               "bar":{
                 "border-radius":3,
-                "background-color":"#01579B",
+                "background-color":"white",
                 "alpha":.5
               },
               "handle":{
@@ -127,7 +131,7 @@ var myConfig = {
                 "item":{
                     "border-color":"none",
                     "size":"13px",
-                    "font-color":"#05636c"
+                    "font-color":"white"
                 },
                 "values":["Mo","Tu","We","Th","Fr","Sa","Su"]
             },
@@ -171,82 +175,87 @@ var myConfig = {
                 },
                 "rules":[
                     {
-                        "rule":"%node-value > 6",
-                        "backgroundColor":"#081D58",
+                        "rule":"%node-value >= 6",
+                        "backgroundColor":"#2A0000",
                         "font-color":"#05636c"
                     },
                     {
                         "rule":"%node-value > 4 && %node-value <= 5",
-                        "backgroundColor":"#253494",
+                        "backgroundColor":"#460303",
                         "font-color":"#05636c"
                     },
                     {
                         "rule":"%node-value > 3 && %node-value <= 4",
-                        "backgroundColor":"#225EA8",
+                        "backgroundColor":"#6B0000",
                         "font-color":"#05636c"
                     },
                     {
                         "rule":"%node-value > 2 && %node-value <= 3",
-                        "backgroundColor":"#1D91C0",
+                        "backgroundColor":"#910000",
                         "font-color":"#05636c"
                     },
                     {
                         "rule":"%node-value > 1 && %node-value <= 2",
-                        "backgroundColor":"#41B6C4",
+                        "backgroundColor":"#D41C1C",
                         "font-color":"#05636c"
                     },
                     {
                         "rule":"%node-value > 0 && %node-value <= 1",
-                        "backgroundColor":"#7FCDBB",
+                        "backgroundColor":"#E34848",
                         "font-color":"#05636c"
-                    }
+                    },
+					{
+                        "rule":"%node-value == 0",
+                        "backgroundColor":"#FF9A9A",
+                        "font-color":"#05636c"
+                    },
                 ]
             },
             "series":[
                 {
-                    "values":qin,
+                    "values":qin_day0,
                     "text":"2-3 Ft",
                     "legend-marker":{
                         "backgroundColor":"#7FCDBB"
                     }
                 },
                 {
-                    "values":[2,2,2,2,2,2,3,3,3,2,2,3,3,3,3,2,2,2,2,1,2,3,2,2],
+                    "values":qin_day1,
                     "text":"3-4 Ft",
                     "legend-marker":{
                         "backgroundColor":"#41B6C4"
                     }
                 },
                 {
-                    "values":[2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,3,3,3,2,2,2],
+                    "values":qin_day3,
                     "text":"4-5 Ft",
                     "legend-marker":{
                         "backgroundColor":"#1D91C0"
                     }
                 },
                 {
-                    "values":[2,3,3,2,3,3,3,4,5,4,4,5,4,4,5,4,4,3,3,3,3,3,2,2],
+                    "values":qin_day3,
                     "text":"5-6 Ft",
                     "legend-marker":{
                         "backgroundColor":"#225EA8"
                     }
                 },
                 {
-                    "values":[3,2,3,2,3,3,4,4,4,5,5,5,5,4,4,5,4,3,2,3,4,4,2,2],
+                    "values":qin_day4,
                     "text":"6-7 Ft",
                     "legend-marker":{
                         "backgroundColor":"#253494"
                     }
                 },
                 {
-                    "values":[2,3,5,6,5,6,5,6,5,6,6,6,6,5,6,5,6,4,5,4,4,4,2,2],
+                    "values":qin_day5,
                     "text":"7-8 Ft",
                     "legend-marker":{
                         "backgroundColor":"#081D58"
                     }
                 },
                 {
-                    "values":[3,2,3,2,3,3,4,4,4,5,5,5,5,4,4,5,4,3,2,3,4,4,2,2],
+                    "values":qin_day6,
                     "text":"1-2 Ft",
                     "legend-marker":{
                         "backgroundColor":"#fff"

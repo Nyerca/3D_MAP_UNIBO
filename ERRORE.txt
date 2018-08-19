@@ -1,0 +1,3 @@
+ ER_ACCESS_DENIED_ERROR: Access denied for user 'canarin'@'localhost' (using password: YES)
+
+

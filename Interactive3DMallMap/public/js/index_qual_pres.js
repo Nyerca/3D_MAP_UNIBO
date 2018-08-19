@@ -1,5 +1,3 @@
-var colorInc = 100 / 3;
-   
    	$(document).ready(function() {
 	var valore_server, value1 = 0, value2 = 0, value3 = 0;
 	
@@ -31,69 +29,20 @@ var colorInc = 100 / 3;
 		
 		function updateVoltage(value) {
 			
-			var spn = document.createElement('span');
-			var str = "" + value;
-			$voltageDisplay.html(str.split(".")[0]);
 			
-			var n = str.includes(".");
-
-			if(n != false) {
-		spn.innerHTML = "." +  str.split(".")[1];
-	document.getElementsByClassName('volts')[0].appendChild(spn);
-	}
 		}
 		
 		function updateCurrent(value) {
 	
-	var spn = document.createElement('span');
-			var str = "" + value;
-			$currentDisplay.html(str.split(".")[0]);
-			
-			var n = str.includes(".");
-
-			if(n != false) {
-		spn.innerHTML = "." +  str.split(".")[1];
-	document.getElementsByClassName('amps')[0].appendChild(spn);
-	}
+	document.getElementById("prog_q").setAttribute("data-perc", "" + value);
 			
 		}
 		
-		function updateMoisture(value) {
-			$moistureDisplay.html(value + '<span>%</span>');
 
-			
-			
-      
-      var valOrig = value;
-      val = 100 - value;
-      
-      if(valOrig == 0)
-      {
-        $("#percent-box").val(0);
-        $(".progress .percent").text(0 + "%");
-      }
-      else $(".progress .percent").text(valOrig + "%");
-      
-      $(".progress").parent().removeClass();
-      $(".progress .water").css("top", val + "%");
-      
-      if(valOrig < colorInc * 1)
-        $(".progress").parent().addClass("red");
-      else if(valOrig < colorInc * 2)
-        $(".progress").parent().addClass("orange");
-      else
-        $(".progress").parent().addClass("green");
-			
-			
-			
-			
-			
-		}
 		
 		function updateSensorDisplayValues(d) {
 			updateVoltage(d[0]);
 			updateCurrent(d[1]);
-			updateMoisture(d[2]);
 		}
 		var just_once = -1;
 		var voltage;
@@ -115,16 +64,15 @@ var colorInc = 100 / 3;
 
 if(just_once == -1) {
 	just_once = 0;
-	updateSensorDisplayValues([value1,value2,value3]);
+	updateSensorDisplayValues([value1,value2]);
 	var x, volts, amps, mPercent;
 	x = (new Date()).getTime(),
 								volts = (Math.round(value1 * 2) / 2),
 								amps = (Math.round(value2 * 2) / 2),
 								mPercent = (Math.round(value3 * 2) / 2);
 							
-							voltage.addPoint([x, volts], false, true);
-							current.addPoint([x, amps], false, true);
-							moisture.addPoint([x, mPercent], true, true);
+							voltage.addPoint([x, volts], true, false);
+							current.addPoint([x, amps], true, false);
 }
       });
 
@@ -145,7 +93,7 @@ if(just_once == -1) {
 		});
 
 		
-		$('#sensorData').highcharts({
+		$('#sensorData2').highcharts({
 			chart: {
 				type: 'spline',
 				events: {
@@ -172,11 +120,11 @@ if(just_once == -1) {
 								mPercent = (Math.round(value3 * 2) / 2);
 							
 							voltage.addPoint([x, volts], false, true);
-							current.addPoint([x, amps], false, true);
-							moisture.addPoint([x, mPercent], true, true);
+							current.addPoint([x, amps], true, true);
+
 							
 							
-							updateSensorDisplayValues([volts, amps, mPercent]);
+							updateSensorDisplayValues([volts, amps]);
 							
 	
 						}, $delay);
@@ -215,22 +163,6 @@ if(just_once == -1) {
 				},
 				min: 0,
 				max: 4,
-				opposite: true,
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
-				}]
-			}, {
-				title: {
-					text: 'INQUINAMENTO',
-					style: {
-						color: '#f45b5b',
-						font: '13px sans-serif'
-					}
-				},
-				min: 0,
-				max: 20,
 				opposite: true,
 				plotLines: [{
 					value: 0,
@@ -284,23 +216,6 @@ if(just_once == -1) {
 						data.push({
 							x: time + i * $delay,
 							y: getRandomInt(.7, .7)
-						});
-					}
-					return data;
-				}())
-			}, {
-				name: 'INQUINAMENTO',
-				yAxis: 2,
-				data: (function() {
-					// generate an array of random data
-					var data = [],
-						time = (new Date()).getTime(),
-						i;
-
-					for (i = -totalPoints; i < 0; i += 1) {
-						data.push({
-							x: time + i * $delay,
-							y: getRandomInt(1, 1)
 						});
 					}
 					return data;

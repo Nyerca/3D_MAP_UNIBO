@@ -55,7 +55,7 @@ day += "-" + day_n
 			
 function sendData1() {
 	var val = getRandomInt(vMin, vMax);
-	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno) VALUES (1,'" + val + "','" + day + "')";
+	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno, Ora) VALUES (1,'" + val + "','" + day + "','" + new Date().getHours() + "')";
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
@@ -64,7 +64,7 @@ function sendData1() {
 
 function sendData2() {
 	var val = getRandomInt(cMin, cMax);
-	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno) VALUES (2,'" + val + "','" + day + "')";
+	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno, Ora) VALUES (2,'" + val + "','" + day + "','" + new Date().getHours() + "')";
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
@@ -73,9 +73,9 @@ function sendData2() {
 
 function sendData3() {
 	var val = getRandomInt(mMin, mMax);
-	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno) VALUES (3,'" + val + "','" + day + "')";
+	var sql = "INSERT INTO `valori` (idcanarin, value, Giorno, Ora) VALUES (3,'" + val + "','" + day + "','" + new Date().getHours() + "')";
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
-	console.log("sent " + val + " date: " + day);
+	console.log("sent " + val + " date: " + day + " " + new Date().getHours());
 }
