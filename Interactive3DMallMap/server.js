@@ -20,14 +20,13 @@ var con = mysql.createConnection({
 });
 var con2 = mysql.createConnection({
   host: "localhost",
-  user: "canarin",
+  user: "sens",
   password: "123abc",
   database: "sensori"
 });
 
 con.connect(function(err) {
   if (err) throw err;
-  //console.log("Connected!");
 });
 con2.connect(function(err) {
   if (err) throw err;
@@ -55,7 +54,7 @@ setInterval(function() {
 			}
 		});
 		
-    }, 60000);
+    }, 6000);
 	
     socket.on('deleteValue', function(data) {
 		console.log(data[2]);
@@ -76,6 +75,7 @@ setInterval(function() {
 	socket.on('dimValue', function(data) {
 		dim = data;
 	});
+	
 	emitData();
    //console.log('someone connected');
 });
@@ -134,7 +134,7 @@ function checkSens() {
 		hum_avg_val = "";
 		qual_avg_val = "";
 		namespace.emit('temp_storico', vals_storico_temp);
-		console.log("emit2");
+		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
 	}
 	
@@ -216,6 +216,8 @@ function emitData() {
 
 function emitSensData() {
 	
+	
+	
 	con2.query("SELECT * FROM `valori` ORDER  BY IdValue DESC LIMIT 3", function (err, result, fields) {
 		var sensor_val="";
 		for(val in result) {
@@ -249,7 +251,6 @@ function emitSensData() {
 			temp_max_val = temp_max_val + ";";
 		}
 		temp_max_val = temp_max_val.slice(0, -1);
-		console.log("MAX: " + temp_max_val);
 		if (err) throw err;
 	});
 
@@ -267,6 +268,8 @@ function emitSensData() {
 		
 		for(val in result) {
 			hum_avg_val = hum_avg_val + result[val].media;
+			hum_avg_val = hum_avg_val + "***" + result[val].max;
+			hum_avg_val = hum_avg_val + "***" + result[val].min;
 			hum_avg_val = hum_avg_val + "***" + result[val].Giorno;
 			hum_avg_val = hum_avg_val + ";";
 		}

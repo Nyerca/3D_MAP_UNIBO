@@ -1,8 +1,8 @@
 
 
 
-		var avg_tin = [0,0,0,0,0,0,0];
-var avg_tout = [3, 3, 4, 7, 4, 3, 3];
+var avg_tin = [0,0,0,0,0,0,0];
+var avg_tout = [0,0,0,0,0,0,0];
 var max;
 var min;
 
@@ -60,13 +60,13 @@ var min;
 		var valori = data.temp_min_val.split(';');
 		for(var field in valori) {
 			min = valori[field];
-			console.log("miiiiiiiiiiiin: " + valori[field]);
+			document.getElementsByClassName("tmin")[0].innerHTML = "" + min;
 		}
 		
 		var valori = data.temp_max_val.split(';');
 		for(var field in valori) {
 			max = valori[field];
-			
+			document.getElementsByClassName("tmax")[0].innerHTML = "" + max;
 		}	
 		
 		// Chart Configuration

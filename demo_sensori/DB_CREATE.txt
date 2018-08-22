@@ -29,7 +29,7 @@ grant all on sensori.* to 'sens' identified by '123abc';
 ##################################
 
 CREATE VIEW `hum_avg` AS 
-SELECT AVG(Value) AS media, Giorno FROM `valori` GROUP BY Giorno
+SELECT AVG(Value) AS media, MAX(Value) AS max, MIN(Value) AS min, Giorno FROM `valori` GROUP BY Giorno
 
 CREATE VIEW `temp_avg` AS 
 SELECT AVG(Value) AS media, Giorno, IdCanarin FROM `valori` WHERE IdCanarin BETWEEN 1 AND 2 GROUP BY Giorno, IdCanarin

@@ -16,6 +16,8 @@ var qin_day6 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 		var valori = data.qual_avg_val.split(';');
 		for(var field in valori) {
 			var line = valori[field].split('***');
+			
+			console.log("new valore di OGGIIIIIIIIIIIIIIIIIIIIIIIIIIII: " + line[0]);
 
 			var d = new Date("" + line[1]);
 				var str = $.datepicker.formatDate('yy-mm-dd', d);
@@ -170,7 +172,7 @@ var myConfig = {
                 "tooltip":{
                     "font-size":"14px",
                     "font-color":"white",
-                    "text":" The surf will be about %v feet.",
+                    "text":" La qualità è: %v.",
                     "text-align":"left"
                 },
                 "rules":[
@@ -180,7 +182,7 @@ var myConfig = {
                         "font-color":"#05636c"
                     },
                     {
-                        "rule":"%node-value > 4 && %node-value <= 5",
+                        "rule":"%node-value > 4 && %node-value <= 6",
                         "backgroundColor":"#460303",
                         "font-color":"#05636c"
                     },

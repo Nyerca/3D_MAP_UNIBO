@@ -1,3 +1,14 @@
  ER_ACCESS_DENIED_ERROR: Access denied for user 'canarin'@'localhost' (using password: YES)
 
 
+SELECT host, user, password FROM mysql.user;
+
+var con2 = mysql.createConnection({
+  host: "localhost",
+  user: "sens",
+  password: "123abc",
+  database: "sensori"
+});
+
+
+NOTA: user è differente

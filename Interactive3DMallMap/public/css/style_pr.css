@@ -139,6 +139,38 @@
 }
 
 
+
+
+
+
+.meter2 {
+  position: relative;
+  top: 0px;
+  left: -30px;
+  height: 30px;
+  width: 1200px;
+
+}
+
+.meter2 > * {
+	  color: #656565;
+  text-align: right;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+
+
+.meter2 > span { 
+    margin-left:6.3%;
+}
+
+.meter2 > :first-child { 
+    margin-left:15%;
+}
+
 /* ---------------------
   Vertical bar_ps
 ----------------------*/
@@ -181,35 +213,35 @@
 
 .two {
   left: 12.5%;
-  height: 7%;
+  height: 0%;
 }
 
 .three {
   left: 25%;
-  height: 85%;
+  height: 0%;
 }
 
 .four {
   left: 37.5%;
-  height: 35%;
+  height: 0%;
 }
 
 .five {
   left: 50%;
-  height: 63%;
+  height: 0%;
 }
 
 .six {
   left: 62.5%;
-  height: 45%;
+  height: 0%;
 }
 
 .seven {
   left: 75%;
-  height: 15%;
+  height: 0%;
 }
 
 .eight {
   left: 87.5%;
-  height: 32%;
+  height: 0%;
 }
