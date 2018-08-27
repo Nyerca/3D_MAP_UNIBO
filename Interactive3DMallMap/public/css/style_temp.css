@@ -1,13 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Dosis:200,400,500,600);
 
-body { background: #f2f2f2; }
-
 
 .container2 { width: 300px; margin: 250px 400px 0; }
 .de .den, .de .dene, .de .denem, .de .deneme, 
 .de2 .den, .de2 .dene, .de2 .denem, .de2 .deneme { position: absolute;  left: 50%; top: 50%; }
 .de {
-    position: relative;
+	position: relative;
     width: 140px;
     height: 140px;
     border-radius: 100%;
@@ -69,7 +67,7 @@ body { background: #f2f2f2; }
     text-align: center;
 }
 .deneme span { font-size: 10px; font-weight: 100; }
-.deneme strong { position: absolute; right: 10px; top: 25px; font-size: 14px; }
+.deneme strong { position: absolute; right: -32px; top: 15px; font-size: 14px; }
 
 .de2 {
     position: relative;

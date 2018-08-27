@@ -1,0 +1,261 @@
+.font--robotoslab {
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-weight: 700;
+}
+
+.font--roboto {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 400;
+}
+
+.font--lobster {
+  font-family: 'Lobster', cursive;
+  font-weight: 400;
+}
+
+.font--cabin {
+  font-family: 'Cabin', Arial, sans-serif;
+  font-weight: 400;
+}
+
+.font--eczar {
+  font-family: 'Eczar', Georgia, serif;
+  font-weight: 700;
+}
+
+.font--gentium {
+  font-family: 'Gentium Basic', Georgia, serif;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Roboto', Georgia, sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(to bottom, #EDF1F2, #D5E2F2);
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  display: flex;
+}
+
+h1 {
+  font-size: 3.5em;
+  margin: 0;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 3em;
+  margin: 0;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 2.125em;
+  margin: 0;
+  font-weight: normal;
+}
+
+h5 {
+  font-size: 1.75em;
+  margin: 0;
+  font-weight: normal;
+}
+
+h6 {
+  font-size: 1.25em;
+  margin: 0;
+  font-weight: normal;
+}
+
+.author {
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+  color: #999;
+}
+.author a {
+  color: #A1BEE6;
+  text-decoration: none;
+}
+.author a:hover {
+  color: #327CCB;
+}
+
+.bx-viewport {
+  overflow: visible !important;
+}
+
+.bx-pager {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+  background: #666;
+  text-indent: -9999px;
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0 10px;
+  outline: 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.full-card {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 60px;
+  height: 80vh;
+  max-height: 600px;
+  background: white;
+  width: 90%;
+  max-width: 1300px;
+  box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 55px 50px -35px rgba(0, 0, 0, 0.3), 0 85px 60px -25px rgba(0, 0, 0, 0.1);
+}
+
+.font-card {
+  position: relative;
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: linear-gradient(45deg, #9fbee6 0%, #dfeaee 100%);
+  padding: 20px 20px;
+  color: white;
+  margin: 0 15px;
+  text-align: center;
+  box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 55px 50px -35px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s, -webkit-transform 0.3s;
+  transition-delay: 0.15s;
+}
+.font-card.hovered-card {
+  box-shadow: 0 5px 3px -5px rgba(0, 0, 0, 0.3), 0 2px 8px -5px rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+.font-card p {
+  line-height: 1.4;
+}
+
+.font-description {
+  padding: 0 30px;
+  margin: 15px;
+  width: 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.font-description h2 {
+  color: #56575e;
+}
+.font-description h2 span {
+  color: #d2d2d2;
+}
+.font-description p {
+  padding-left: 15px;
+  color: #777;
+  line-height: 1.8;
+}
+.font-description p:before {
+  content: "\2014";
+  margin-left: -15px;
+  margin-right: 4px;
+}
+
+.explore-button {
+  font-size: 0.9em;
+  background: white;
+  width: 80%;
+  color: #a7a7a7;
+  display: inline-block;
+  padding: 1em;
+  margin-top: 2em;
+  border-radius: 5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.3);
+  transition: color 0.6s, box-shadow 0.3s, -webkit-transform 0.3s;
+  transition: color 0.6s, box-shadow 0.3s, transform 0.3s;
+  transition: color 0.6s, box-shadow 0.3s, transform 0.3s, -webkit-transform 0.3s;
+}
+.explore-button:hover {
+  box-shadow: 0 3px 5px -5px rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  color: #6f6f6f;
+}
+
+@media screen and (max-width: 991px) {
+  .full-card {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 30px 60px;
+  }
+
+  .font-card {
+    width: calc(50% - 30px);
+  }
+
+  .font-description {
+    width: 100%;
+  }
+}
+.robotoslab-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480286526/Roboto-slab-image_mtwren.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.roboto-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480287191/robot-image_iai6lv.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.lobster-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480349796/lobster-image_pznrao.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.cabin-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480350297/cabin-image_dqxlwi.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.eczar-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480522564/turtle-image_nblim1.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.gentium-card {
+  background: url(https://res.cloudinary.com/dqj168cdc/image/upload/v1480522983/penguin-image_dufrwg.jpg) no-repeat center center;
+  background-size: cover;
+}

@@ -3,7 +3,7 @@ var random = require('random');
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "canarin",
+  user: "sens",
   password: "123abc",
   database: "sensori"
 });

@@ -1,12 +1,6 @@
-var colorInc = 100 / 3;
-   
+/* Javascript temperature and humidity realtime graphs */
    	$(document).ready(function() {
-	var valore_server, value1 = 0, value2 = 0, value3 = 0;
-	
-	
-
-      
-	  
+		var valore_server, value1 = 0, value2 = 0, value3 = 0;
 	  
 		var $delay = 60000,
 			vMin = 11.5,
@@ -29,6 +23,7 @@ var colorInc = 100 / 3;
 			return (Math.round(reading * 2) / 2)
 		}
 		
+/* Function which update the number visualization inside the three circles */	
 		function updateVoltage(value) {
 			
 			var spn = document.createElement('span');
@@ -38,56 +33,42 @@ var colorInc = 100 / 3;
 			var n = str.includes(".");
 
 			if(n != false) {
-		spn.innerHTML = "." +  str.split(".")[1];
-	document.getElementsByClassName('volts')[0].appendChild(spn);
-	}
+				spn.innerHTML = "." +  str.split(".")[1];
+				document.getElementsByClassName('volts')[0].appendChild(spn);
+			}
+	
+			changeColor(value,1);
 		}
 		
 		function updateCurrent(value) {
-	
-	var spn = document.createElement('span');
+			changeColor(value,2);
+			var spn = document.createElement('span');
 			var str = "" + value;
 			$currentDisplay.html(str.split(".")[0]);
 			
 			var n = str.includes(".");
 
 			if(n != false) {
-		spn.innerHTML = "." +  str.split(".")[1];
-	document.getElementsByClassName('amps')[0].appendChild(spn);
-	}
-			
+				spn.innerHTML = "." +  str.split(".")[1];
+				document.getElementsByClassName('amps')[0].appendChild(spn);
+			}
 		}
 		
 		function updateMoisture(value) {
 			$moistureDisplay.html(value + '<span>%</span>');
 
-			
-			
+			var valOrig = value;
+			val = 100 - value;
       
-      var valOrig = value;
-      val = 100 - value;
+			if(valOrig == 0) {
+				$("#percent-box").val(0);
+				$(".progress .percent").text(0 + "%");
+			} else $(".progress .percent").text(valOrig + "%");
       
-      if(valOrig == 0)
-      {
-        $("#percent-box").val(0);
-        $(".progress .percent").text(0 + "%");
-      }
-      else $(".progress .percent").text(valOrig + "%");
+			$(".progress").parent().removeClass();
+			$(".progress .water").css("top", val + "%");
       
-      $(".progress").parent().removeClass();
-      $(".progress .water").css("top", val + "%");
-      
-      if(valOrig < colorInc * 1)
-        $(".progress").parent().addClass("red");
-      else if(valOrig < colorInc * 2)
-        $(".progress").parent().addClass("orange");
-      else
-        $(".progress").parent().addClass("green");
-			
-			
-			
-			
-			
+			$(".progress").parent().addClass("green");
 		}
 		
 		function updateSensorDisplayValues(d) {
@@ -95,39 +76,47 @@ var colorInc = 100 / 3;
 			updateCurrent(d[1]);
 			updateMoisture(d[2]);
 		}
+		
 		var just_once = -1;
 		var voltage;
 		var current;
 		var moisture;
+/* 
+	On receiving new values from the node file 
+		the current value is inserted in the variables
+		the charts realtime values are then updated
+*/	
 		socket.on('realtime_vals',function(data) {
-		 valore_server = data.split(';');
-		for(var field in valore_server) {
-			
-			var line = valore_server[field].split('***');
-			if(line[0] == "1") {
-				value1 = line[1];
-			} else if(line[0] == "2") {
-				value2 = line[1];
-			} else if(line[0] == "3") {
-				value3 = line[1];
+			valore_server = data.split(';');
+			for(var field in valore_server) {
+				var line = valore_server[field].split('***');
+				if(line[0] == "1") {
+					value1 = line[1];
+				} else if(line[0] == "2") {
+					value2 = line[1];
+				} else if(line[0] == "3") {
+					value3 = line[1];
+				}
+			}	
+
+			if(just_once == -1) {
+				just_once = 0;
+				updateSensorDisplayValues([value1,value2,value3]);
+				var x, volts, amps, mPercent;
+				x = (new Date()).getTime(),
+					volts = (Math.round(value1 * 2) / 2),
+					amps = (Math.round(value2 * 2) / 2),
+					mPercent = (Math.round(value3 * 2) / 2);
+								
+					voltage.addPoint([x, volts], false, true);
+					current.addPoint([x, amps], false, true);
+					moisture.addPoint([x, mPercent], true, true);
 			}
-		}	
-
-if(just_once == -1) {
-	just_once = 0;
-	updateSensorDisplayValues([value1,value2,value3]);
-	var x, volts, amps, mPercent;
-	x = (new Date()).getTime(),
-								volts = (Math.round(value1 * 2) / 2),
-								amps = (Math.round(value2 * 2) / 2),
-								mPercent = (Math.round(value3 * 2) / 2);
-							
-							voltage.addPoint([x, volts], false, true);
-							current.addPoint([x, amps], false, true);
-							moisture.addPoint([x, mPercent], true, true);
-}
-      });
-
+		});
+		
+/* 
+	highcharts library used to create the chart.
+*/	
 		Highcharts.setOptions({
 			global: {
 				useUTC: false
@@ -144,7 +133,9 @@ if(just_once == -1) {
 			}
 		});
 
-		
+		var min_graphh = 0;
+		var max_graph = 0;
+
 		$('#sensorData').highcharts({
 			chart: {
 				type: 'spline',
@@ -155,21 +146,17 @@ if(just_once == -1) {
 						moisture = this.series[2];
 						var x, volts, amps, mPercent;
 						
-						
-
-						// faking sensor data
-						// data will be coming from sensors on the MKR1000
+					
 						setInterval(function() {
-						/*
-							x = (new Date()).getTime(),
-								volts = getRandomInt(vMin, vMax),
-								amps = getRandomInt(cMin, cMax),
-								mPercent = getRandomInt(mMin, mMax);
-								*/
 							x = (new Date()).getTime(),
 								volts = (Math.round(value1 * 2) / 2),
 								amps = (Math.round(value2 * 2) / 2),
 								mPercent = (Math.round(value3 * 2) / 2);
+								
+							if(volts > max_graph) max_graph = volts;
+							if(volts < min_graphh) min_graphh = volts;
+							var chart_t = $('#sensorData').highcharts();
+							chart_t .yAxis[0].setExtremes(min_graphh,max_graph);
 							
 							voltage.addPoint([x, volts], false, true);
 							current.addPoint([x, amps], false, true);
@@ -177,8 +164,6 @@ if(just_once == -1) {
 							
 							
 							updateSensorDisplayValues([volts, amps, mPercent]);
-							
-	
 						}, $delay);
 					}
 				}
@@ -199,7 +184,7 @@ if(just_once == -1) {
 					}
 				},
 				min: 0,
-				max: 15,
+				max: 45,
 				plotLines: [{
 					value: 0,
 					width: 1,
@@ -307,5 +292,4 @@ if(just_once == -1) {
 				}())
 			}]
 		});
-		
-});
+	});

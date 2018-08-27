@@ -113,7 +113,7 @@ button:focus {
 }
 
 .mall.mall--content-open {
-	-webkit-transform: translate3d(0,-25%,0) scale3d(0.9,0.9,1);
+	-webkit-transform: translate3d(0,-20%,0) scale3d(0.9,0.9,1);
 	transform: translate3d(0,-20%,0) scale3d(0.9,0.9,1);
 }
 
@@ -150,66 +150,66 @@ button:focus {
 /*********************** PAGE LOAD ***********************/
 #pageLoad {
 	position: fixed;
-		background-color: #6B0808;
-		z-index: 400;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		min-width: 100%;
-		padding-top: 10%;
-		overflow-y: hidden;
-		overflow-x: hidden;
+	background-color: #6B0808;
+	z-index: 400;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	min-width: 100%;
+	padding-top: 10%;
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 .spinner {
-  width: 100px;
-  height: 50px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  text-align: center;
+	width: 100px;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	text-align: center;
 }
 .spinner .ball {
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  display: inline-block;
-          animation: motion 3s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+	animation: motion 3s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
 p {
-  color: #fff;
-  margin-top: 5px;
-  font-family: sans-serif;
-  letter-spacing: 3px;
-  font-size: 10px;
+	color: #fff;
+	margin-top: 5px;
+	font-family: sans-serif;
+	letter-spacing: 3px;
+	font-size: 10px;
 }
 
 @keyframes motion {
-  0% {
-    -webkit-transform: translateX(0) scale(1);
-            transform: translateX(0) scale(1);
-  }
-  25% {
-    -webkit-transform: translateX(-50px) scale(0.3);
-            transform: translateX(-50px) scale(0.3);
-  }
-  50% {
-    -webkit-transform: translateX(0) scale(1);
-            transform: translateX(0) scale(1);
-  }
-  75% {
-    -webkit-transform: translateX(50px) scale(0.3);
-            transform: translateX(50px) scale(0.3);
-  }
-  100% {
-    -webkit-transform: translateX(0) scale(1);
-            transform: translateX(0) scale(1);
-  }
+	0% {
+		-webkit-transform: translateX(0) scale(1);
+		transform: translateX(0) scale(1);
+	}
+	25% {
+		-webkit-transform: translateX(-50px) scale(0.3);
+		transform: translateX(-50px) scale(0.3);
+	}
+	50% {
+    	-webkit-transform: translateX(0) scale(1);
+		transform: translateX(0) scale(1);
+	}
+	75% {
+		-webkit-transform: translateX(50px) scale(0.3);
+		transform: translateX(50px) scale(0.3);
+	}
+	100% {
+		-webkit-transform: translateX(0) scale(1);
+		transform: translateX(0) scale(1);
+	}
 }
 
 /*************************************************/
@@ -372,9 +372,7 @@ p {
 	color: #fff;
 	border: 0;
 	opacity: 0.7;
-	background-color: #BB2E29;
-	
-	
+	background-color: #BB2E29;	
 }
 
 .boxbutton--dark {
@@ -770,7 +768,7 @@ p {
    50% {
 	   margin-top: -25%;
 	   margin-left: 0.5%;
-  }
+	}
 }
 
 .pin--active .icon--pin {
@@ -874,8 +872,8 @@ section.box {
 	bottom:0;
 	margin: 0 0 20px 74%;
 	z-index: 100;
-  font-family: 'Roboto', sans-serif;
-  transition: all 0.3s ease-in-out;
+	font-family: 'Roboto', sans-serif;
+	transition: all 0.3s ease-in-out;
 }
 
 @keyframes moveLeg {
@@ -893,19 +891,19 @@ section.box {
 }
 
 #rowLegend {
-	 display: flex;
-  width: 100%;
-  background-color:transparent;
-  justify-content: space-between;
+	display: flex;
+	width: 100%;
+	background-color:transparent;
+	justify-content: space-between;
 }
 
 
 @keyframes fadein {
     0%   { 
-	border: 1px solid black}
+		border: 1px solid black}
     100% {
-	border: 1px solid black
-		}
+		border: 1px solid black
+	}
 }
 @keyframes fadeOut {
     0%   { opacity: 1; }
@@ -919,7 +917,7 @@ section.box {
 }
 
 section.box p {
-  margin: 0;
+	margin: 0;
 	border: 0;
 	font: inherit;
 	vertical-align: baseline; 
@@ -942,19 +940,18 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 }
 
 @keyframes changeHeight {
-  0% {
-     height: 100%;
-  }
-  100% {
-     height: 130%;
-	 margin: -20% 0 0 0;
-	 z-index:200;
-  }
+	0% {
+		height: 100%;
+	}
+	100% {
+		height: 130%;
+		margin: -20% 0 0 0;
+		z-index:200;
+	}
 }
 
 .level--current {
-	    animation: changeHeight 1s forwards;
-		
+	animation: changeHeight 1s forwards;
 }
 .iconSum {
 	width: 30%;
@@ -969,10 +966,9 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 
 .close_button {
 	position: absolute;
-  top: 0;
-  right:0;
-  z-index: 160;
-  
+	top: 0;
+	right:0;
+	z-index: 160;
   	font-size: 2em;
 	display: block;
 	width: 2em;
@@ -986,47 +982,61 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 }
     
 .close_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 #temp_storico_button {
 	position: absolute;
-  width: 100px;
-  height: 50px;
-  top: 0;
-  left:0;
-  z-index: 160;
+	top: 0;
+	left:0;
+	z-index: 160;
+  	font-size: 2em;
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	border: 0;
+	opacity: 0.7;
+	background-color: #BB2E29;
+	
 }
     
 #temp_storico_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 #hum_storico_button {
 	position: absolute;
-  width: 100px;
-  height: 50px;
-  top: 0;
-  left:100px;
-  z-index: 160;
+	top: 0;
+	left:2em;
+	z-index: 160;
+  	font-size: 2em;
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	border: 0;
+	opacity: 0.7;
+	background-color: #BB2E29;
+	border-left: 1px solid black;
 }
     
 #hum_storico_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 #back_button {
 	position: absolute;
-  top: 0;
-  left:0;
-  z-index: 160;
-  
-  font-size: 2em;
+	top: 0;
+	left:0;
+	z-index: 160;
+	font-size: 2em;
 	display: block;
 	width: 2em;
 	height: 2em;
@@ -1040,61 +1050,73 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 }
     
 #back_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
-#myChart-graph-id0-legend-frame {
 
-}
 #myChart {
 	padding: 0 !important;
 }
 
 
  @keyframes horizontal{
-      0%{bottom:-100%;}
-      50%{bottom: -50%;}
-      100%{bottom:0;}
-    }
+	0%{bottom:-100%;}
+	50%{bottom: -50%;}
+	100%{bottom:0;}
+}
 	
 
-    
-
-
 #pres_storico_button {
-	position: absolute;
-  width: 100px;
-  height: 50px;
-  top: 0;
-  left:0;
-  z-index: 160;
+		position: absolute;
+	top: 0;
+	left:0;
+	z-index: 160;
+  	font-size: 2em;
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	border: 0;
+	opacity: 0.7;
+	background-color: #BB2E29;
 }
     
 #pres_storico_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 #qual_storico_button {
 	position: absolute;
-  width: 100px;
-  height: 50px;
-  top: 0;
-  left:100px;
-  z-index: 160;
+	top: 0;
+	left:2em;
+	z-index: 160;
+  	font-size: 2em;
+	display: block;
+	width: 2em;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	border: 0;
+	opacity: 0.7;
+	background-color: #BB2E29;
+	border-left: 1px solid black;
 }
     
 #qual_storico_button svg {
-	
-  width: 25px;
-  height: 25px;
+	width: 25px;
+	height: 25px;
 }
 .dashboard {
-  background: #3d3d3d;
+	background: #3d3d3d;
 }
 #pChart {
-	margin:-7% 0 0 30% !important;
+	margin:-7% 0 -20% 30% !important;
+}
+#pChart-wrapper {
+	margin-top: 10px !important;
 }
 #pChart-top svg {
 	padding-top: 27px !important;
@@ -1108,23 +1130,38 @@ p_move {
 #myChart-top {
 	width: 100% !important;
 }
+#myChart_q_storico {
+	margin:1% 0 0 0 !important;
+	padding:0 !important;
+}
 
-.individual-bubble {
-position: absolute;
-z-index: 10;
-border-radius: 100%;
-bottom: 40px;
-color: #6895d1;
-background-color: #6895d1;
-}
-#span_barra2 {
-display:table-cell;
-position:relative;
-bottom:20px;
-left:10px;
-}
-@media screen and (max-width: 600px) {
-  .box {
+#myChart_q_storico-license-text {
 	display:none !important;
 }
+.highcharts-axis-labels + text {
+	display:none !important;
+}
+
+/* Code to hide the legend on smaller screen */
+@media screen and (max-width: 600px) {
+	.box {
+		display:none !important;
+	}
+	#search-button {
+		display:none !important;
+	}
+	#qual_temp-button {
+		display:none !important;
+	}
+	#atomic {
+		display:none !important;
+	}
+}
+
+.font--robotoslab {
+	font-family: 'Roboto Slab', Georgia, serif;
+	font-weight: 700;
+}
+.max_temp_reach {
+	color: red;
 }

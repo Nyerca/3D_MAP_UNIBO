@@ -45,7 +45,27 @@ var xmlns = "http://www.w3.org/2000/svg";
 var lev = 0;
 var socket = io('/mySensorNamespace');	
 
+function changeColor (valore, num_cerchio) {
 
+var style = document.createElement('style');
+		style.type = 'text/css';
+		if(num_cerchio == 1) {
+			if(valore <= 30 && valore > 20) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
+			else if(valore <= 20  && valore > 10) style.innerHTML = ".de .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
+			else if(valore <= 10  && valore > 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
+			else if(valore <= 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
+			else style.innerHTML = ".de .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
+		} else {
+			if(valore <= 30 && valore > 20) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
+			else if(valore <= 20  && valore > 10) style.innerHTML = ".de2 .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
+			else if(valore <= 10  && valore > 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
+			else if(valore <= 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
+			else style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
+		}
+		
+		
+		document.getElementsByTagName('head')[0].appendChild(style);
+}
 
 var day0, day1, day2, day3, day4, day5, day6;
 	for(var i= 0; i < 7; i++) {
@@ -1258,6 +1278,106 @@ hideAndShow();
 	  <stop offset="100%"   stop-color="black"/>
     </linearGradient>
 			<pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nOScgaGVpZ2h0PSc5JyBmaWxsPSdibGFjaycgLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern>
+				<symbol id="hum_btn" viewBox="0 0 512 512">
+					<title>hum_btn</title>
+						<path style="fill:#64B5F6;" d="M110.741,278.144c-3.985-1.654-8.574-0.745-11.627,2.304L64,315.584l-35.115-35.136
+	c-4.16-4.171-10.914-4.179-15.085-0.019c-2.011,2.006-3.139,4.731-3.134,7.571v213.333c0,5.891,4.776,10.667,10.667,10.667h85.333
+	c5.891,0,10.667-4.776,10.667-10.667V288C117.333,283.684,114.73,279.793,110.741,278.144z"/>
+<path style="fill:#42A5F5;" d="M199.552,195.115c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
+	c-2.007,2.001-3.135,4.718-3.136,7.552v256c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667v-256
+	c0.005-2.831-1.115-5.548-3.115-7.552L199.552,195.115z"/>
+<path style="fill:#2196F3;" d="M327.552,152.448c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
+	c-2.007,2.001-3.135,4.718-3.136,7.552v298.667c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667
+	V202.667c0.005-2.831-1.115-5.548-3.115-7.552L327.552,152.448z"/>
+<path style="fill:#1976D2;" d="M498.219,131.115l-21.333-21.333c-2.004-1.999-4.721-3.12-7.552-3.115H448
+	c-2.831-0.005-5.548,1.115-7.552,3.115l-42.667,42.667c-1.999,2.004-3.12,4.721-3.115,7.552v341.333
+	c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667V138.667
+	C501.338,135.836,500.218,133.119,498.219,131.115z"/>
+<path style="fill:black;" d="M490.667,0h-64c-5.891-0.011-10.675,4.757-10.686,10.648c-0.005,2.84,1.123,5.565,3.134,7.571
+	l24.469,24.448l-80.917,80.917l-35.115-35.136c-4.165-4.164-10.917-4.164-15.083,0l-77.803,77.803l-35.115-35.136
+	c-4.165-4.164-10.917-4.164-15.083,0L64,251.584l-35.115-35.136c-4.237-4.093-10.99-3.975-15.083,0.262
+	c-3.992,4.134-3.992,10.687,0,14.82l42.667,42.667c4.165,4.164,10.917,4.164,15.083,0L192,153.749l35.115,35.115
+	c4.165,4.164,10.917,4.164,15.083,0L320,111.083l35.115,35.115c4.165,4.164,10.917,4.164,15.083,0l88.469-88.448l24.448,24.448
+	c2.001,2.007,4.718,3.135,7.552,3.136c1.399,0.003,2.784-0.273,4.075-0.811c3.989-1.649,6.591-5.539,6.592-9.856v-64
+	C501.333,4.776,496.558,0,490.667,0z"/>
+				</symbol>
+				<symbol id="temp_btn" viewBox="0 0 512 512">
+					<title>temp_btn</title>
+						<rect x="17.763" y="50.155" style="fill:#F2F2F2;" width="466.024" height="281.078"/>
+<g>
+	<rect y="331.233" style="fill:#89D6F7;" width="501.551" height="50.155"/>
+	<rect style="fill:#89D6F7;" width="501.551" height="50.155"/>
+</g>
+<polygon style="fill:#ACB3BA;" points="340.637,501.551 428.408,501.551 392.882,397.061 387.657,381.388 300.931,381.388 
+	306.155,397.061 311.38,412.735 190.171,412.735 195.396,397.061 200.62,381.388 113.894,381.388 108.669,397.061 73.143,501.551 
+	159.869,501.551 175.543,457.665 326.008,457.665 "/>
+<rect x="17.763" y="50.155" style="fill:#E4EAEF;" width="466.024" height="15.673"/>
+<g>
+	<polygon style="fill:#9EAAB5;" points="200.62,381.388 195.396,397.061 108.669,397.061 113.894,381.388 	"/>
+	<polygon style="fill:#9EAAB5;" points="392.882,397.061 306.155,397.061 300.931,381.388 387.657,381.388 	"/>
+</g>
+<polygon style="fill:#CDD6E0;" points="132.702,253.91 118.073,239.282 216.294,141.061 285.257,210.024 368.849,125.388 
+	383.478,140.016 285.257,239.282 216.294,170.318 "/>
+<circle style="fill:#FF7058;" cx="125.388" cy="246.596" r="25.078"/>
+<circle style="fill:#FFD15C;" cx="216.294" cy="155.69" r="25.078"/>
+<circle style="fill:#54C0EB;" cx="282.122" cy="221.518" r="25.078"/>
+<circle style="fill:#4CDBC4;" cx="376.163" cy="134.792" r="25.078"/>
+				</symbol>
+				<symbol id="pres_btn" viewBox="0 0 512 512">
+					<title>pres_btn</title>
+						<path style="fill:#61BFAF;" d="M504.123,133.908h-6.302l-103.975,49.625v170.929l110.277-55.926
+	C504.123,298.535,504.123,133.908,504.123,133.908z"/>
+<path style="fill:#37A18E;" d="M393.846,183.532l-103.975-49.625h-6.302v164.628l110.277,55.926V183.532z"/>
+<path style="fill:#3DB39E;" d="M283.569,133.908L393.846,78.77l110.277,55.138l-110.277,55.138L283.569,133.908z"/>
+<path style="fill:#E5766D;" d="M362.338,55.138h-6.302l-103.975,49.625v324.529l110.277-55.926V55.138z"/>
+<path style="fill:#CB4E44;" d="M252.062,104.763L148.086,55.138h-6.302v318.228l110.277,55.926
+	C252.062,429.292,252.062,104.763,252.062,104.763z"/>
+<path style="fill:#E2574C;" d="M141.785,55.138L252.062,0l110.277,55.138l-110.277,55.138L141.785,55.138z"/>
+<path style="fill:#EFCF7B;" d="M220.554,189.046h-6.302l-103.975,49.625v265.452l110.277-55.926V189.046z"/>
+<path style="fill:#D7B354;" d="M110.277,238.671L6.302,189.046H0v259.151l110.277,55.926V238.671z"/>
+<path style="fill:#EFC75E;" d="M0,189.046l110.277-55.138l110.277,55.138l-110.277,55.138L0,189.046z"/>
+				</symbol>
+				<symbol id="qual_btn" viewBox="0 0 512 512">
+					<title>qual_btn</title>
+
+		<path style="fill:#D8DCE1;" d="M0,134v328c0,22.055,17.945,40,40,40h432c22.055,0,40-17.945,40-40V134H0z"/>
+
+		<path style="fill:#FF4F19;" d="M472,22H40C17.945,22,0,39.945,0,62v72h512V62C512,39.945,494.054,22,472,22z M64,102
+			c-13.255,0-24-10.745-24-24s10.745-24,24-24s24,10.745,24,24S77.255,102,64,102z M448,102c-13.255,0-24-10.745-24-24
+			s10.745-24,24-24s24,10.745,24,24S461.255,102,448,102z"/>
+			<path style="fill:#FFFFFF;" d="M256,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,206,256,206z"/>
+			<path style="fill:#FFFFFF;" d="M176,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,206,176,206z"/>
+			<path style="fill:#FFFFFF;" d="M96,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,206,96,206z"/>
+			<path style="fill:#FFFFFF;" d="M336,206c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+				S353.648,206,336,206z"/>
+			<path style="fill:#FFFFFF;" d="M416,270c17.648,0,32-14.352,32-32s-14.352-32-32-32c-17.648,0-32,14.352-32,32
+				S398.351,270,416,270z"/>
+			<path style="fill:#FFFFFF;" d="M256,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,286,256,286z"/>
+			<path style="fill:#FFFFFF;" d="M176,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,286,176,286z"/>
+			<path style="fill:#FFFFFF;" d="M96,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,286,96,286z"/>
+			<path style="fill:#FFFFFF;" d="M336,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+				S353.648,286,336,286z"/>
+			<path style="fill:#FFFFFF;" d="M416,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+				S433.648,286,416,286z"/>
+			<path style="fill:#FFFFFF;" d="M256,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+				C288,380.351,273.648,366,256,366z"/>
+			<path style="fill:#FFFFFF;" d="M176,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+				C208,380.351,193.648,366,176,366z"/>
+			<path style="fill:#FFFFFF;" d="M96,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+				C128,380.351,113.648,366,96,366z"/>
+			<path style="fill:#FFFFFF;" d="M336,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
+				C368,380.351,353.648,366,336,366z"/>
+			<path style="fill:#FFFFFF;" d="M416,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
+				C448,380.351,433.648,366,416,366z"/>
+			<path style="fill:#5C546A;" d="M64,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
+				C76,84.629,70.625,90,64,90z"/>
+			<path style="fill:#5C546A;" d="M448,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
+				C460,84.629,454.625,90,448,90z"/>
+		<circle style="fill:#FFD200;" cx="96" cy="238" r="32"/>
+		<circle style="fill:#FF9600;" cx="256" cy="398" r="32"/>
+		<circle style="fill:#FF4F19;" cx="336" cy="318" r="32"/>
+
+				</symbol>
 				<symbol id="back" viewBox="0 0 650 512">
 					<title>back</title>
 					<path d="M496.5,233.842c-30.841-76.706-114.112-115.06-249.823-115.06h-63.953V45.693c0-4.952-1.809-9.235-5.424-12.85
@@ -1502,16 +1622,10 @@ hideAndShow();
  
  <section class="dashboard" id="main-column">
   <button id="temp_storico_button">
-    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
+    <svg class="icon icon--cross"><use xlink:href="#temp_btn"></use></svg>
  </button>
  <button id="hum_storico_button">
-    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
+    <svg class="icon icon--cross"><use xlink:href="#hum_btn"></use></svg>
  </button>
  <button id="close_button" class="close_button">
     <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
@@ -1579,10 +1693,6 @@ hideAndShow();
  </button>
  
  <section class="dashboard" id="main-column">
-<div>
-<div>Tmax: <span class="tmax"></span></div>
-<div>Tmin: <span class="tmin"></span></div>
-</div>
  
   <div id="myChart"></div>
 </section>
@@ -1600,7 +1710,7 @@ hideAndShow();
  <section class="dashboard" id="main-column">
  
  <div>
-
+<span class="font--robotoslab med-hum">Valori medi di umidità</span>
   <div class="wrap_h">
   <div class="barra barra1 bubbles"> <span id="span_barra2">LU</span>
   </div>
@@ -1642,16 +1752,10 @@ hideAndShow();
   <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
  <section class="dashboard" id="main-column">
   <button id="pres_storico_button">
-    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
+    <svg class="icon icon--cross"><use xlink:href="#pres_btn"></use></svg>
  </button>
   <button id="qual_storico_button">
-    <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
+    <svg class="icon icon--cross"><use xlink:href="#qual_btn"></use></svg>
  </button>
  <button id="close_button" class="close_button">
     <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
@@ -1774,9 +1878,9 @@ hideAndShow();
 <div id="boxContainer" class="contPr">
     <div class='box_cont blue arrow-left-center'>
 	<div class='centererer'><button id="btnClosePrInfos" class='close'>Close</button></div>
-	<span class ='avg_span'>Umidità Media</span> <span class="avg_span_val avgPr">34</span>
-	<span class ='max_span'>Umidità Max</span> <span class="max_span_val maxPr">44</span>
-	<span class ='min_span'>Umidità Min</span> <span class="min_span_val minPr">22</span>
+	<span class ='avg_span'>Pressione Media</span> <span class="avg_span_val avgPr">34</span>
+	<span class ='max_span'>Pressione Max</span> <span class="max_span_val maxPr">44</span>
+	<span class ='min_span'>Pressione Min</span> <span class="min_span_val minPr">22</span>
 	</div>
 	
   </div>

@@ -43,6 +43,7 @@ var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
 emitSensData();
+
 setInterval(function() {
 		var current;
 		checkForNewData(function(current) {
@@ -108,7 +109,7 @@ function check() {
 		}
 		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="", css="";
 		namespace.emit('hi', vals);
-		console.log("emit");
+		console.log("emit MAPPA");
 		clearInterval(interval);
 	}
 	

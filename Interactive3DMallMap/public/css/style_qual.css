@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Aldrich);
-
-body{background:#333;}
+/* Code to style the air quality div in the airQuality and pressure div */
 #prog_q{
     position:relative;
 	z-index:100;
