@@ -9,32 +9,31 @@ var express = require('express');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function(req, res) {
-   res.sendFile('prova.html', { root: __dirname });
+	res.sendFile('prova.html', { root: __dirname });
 });
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "admin",
-  password: "123abc",
-  database: "db_unibo"
+	host: "localhost",
+	user: "admin",
+	password: "123abc",
+	database: "db_unibo"
 });
 var con2 = mysql.createConnection({
-  host: "localhost",
-  user: "sens",
-  password: "123abc",
-  database: "sensori"
+	host: "localhost",
+	user: "sens",
+	password: "123abc",
+	database: "sensori"
 });
 
 con.connect(function(err) {
-  if (err) throw err;
+	if (err) throw err;
 });
 con2.connect(function(err) {
-  if (err) throw err;
-  //console.log("Connected!");
+	if (err) throw err;
+	//console.log("Connected!");
 });
 
 var IdEntrance = 1;
-
 var dim;
 var count = 0 //Number of values read
 var ind = 0;
@@ -42,9 +41,9 @@ var opendata = [];
 var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
-emitSensData();
+	emitSensData();
 
-setInterval(function() {
+	setInterval(function() {
 		var current;
 		checkForNewData(function(current) {
 			if(current > count) {
@@ -83,12 +82,11 @@ setInterval(function() {
 
 //Function that checks for new deta into the table
 function checkForNewData (callback) {
-  con2.query("SELECT COUNT(*) AS num FROM `valori`", function (err, result, fields) {
-    if (err) throw err;
-	callback(result[0].num); //callback function
-  });
+	con2.query("SELECT COUNT(*) AS num FROM `valori`", function (err, result, fields) {
+		if (err) throw err;
+		callback(result[0].num); //callback function
+	});
 }
-
 
 http.listen(3000, function() {
    console.log('listening on localhost:3000');
@@ -112,14 +110,15 @@ function check() {
 		console.log("emit MAPPA");
 		clearInterval(interval);
 	}
-	
 }
+
 var interval2;
 var temp_avg_val="";
 var hum_avg_val="";
 var qual_avg_val="";
-	var temp_max_val="";
-	var temp_min_val="";
+var temp_max_val="";
+var temp_min_val="";
+
 function checkSens() {
 	if(temp_avg_val.length > 0 && temp_max_val.length > 0 && temp_min_val.length > 0 && hum_avg_val.length > 0&& qual_avg_val.length > 0) {
 			var vals_storico_temp = { 
@@ -138,11 +137,11 @@ function checkSens() {
 		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
 	}
-	
 }
+
 //Function that select values from the table and emits data to indexSensori.html
 function emitData() {
-	
+	console.log("emitting");
 	con.query("SELECT * FROM `entrancecss` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
 		for(val in result) {
 			css = css + result[val].Css;
@@ -208,17 +207,11 @@ function emitData() {
 		if (err) throw err;
 	});
 
-	
-	
-	 interval = setInterval(check, 250);
-	
+	interval = setInterval(check, 250);
 }
 
 
 function emitSensData() {
-	
-	
-	
 	con2.query("SELECT * FROM `valori` ORDER  BY IdValue DESC LIMIT 3", function (err, result, fields) {
 		var sensor_val="";
 		for(val in result) {
@@ -231,10 +224,7 @@ function emitSensData() {
 		if (err) throw err;
 	});
 
-	
-	
-	
-	 con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
+	con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
 		
 		for(val in result) {
 			temp_avg_val = temp_avg_val + result[val].media;
@@ -265,7 +255,7 @@ function emitSensData() {
 		if (err) throw err;
 	});
 	
- con2.query("SELECT * FROM `hum_avg`", function (err, result, fields) {
+	con2.query("SELECT * FROM `hum_avg`", function (err, result, fields) {
 		
 		for(val in result) {
 			hum_avg_val = hum_avg_val + result[val].media;
@@ -278,8 +268,8 @@ function emitSensData() {
 		if (err) throw err;
 	});
 	
-	 con2.query("SELECT * FROM `qual_avg`", function (err, result, fields) {
-		
+	
+	con2.query("SELECT * FROM `qual_avg`", function (err, result, fields) {
 		for(val in result) {
 			qual_avg_val = qual_avg_val + result[val].media;
 			qual_avg_val = qual_avg_val + "***" + result[val].Giorno;
@@ -290,9 +280,6 @@ function emitSensData() {
 		if (err) throw err;
 	});
 	
-		interval2 = setInterval(checkSens, 250);
-		
-		
-	
+	interval2 = setInterval(checkSens, 250);
 }
 

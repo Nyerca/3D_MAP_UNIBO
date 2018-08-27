@@ -15,1381 +15,1329 @@
 		<script src="js/modernizr-custom.js"></script>
 		<script src = "/socket.io/socket.io.js"></script>
 		
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	
-<link rel="stylesheet" href="/css/style_qual.css">
+		<link rel="stylesheet" href="/css/style_qual.css">
 	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-      <link rel="stylesheet" href="/css/style_pr.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+		<link rel="stylesheet" href="/css/style_pr.css">
 	
 	
-      <link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
-     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
+		<link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
 	 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
 
-  <link rel="stylesheet" href="css/style_info.css">
-      <link rel="stylesheet" href="/css/style_humidity.css">
-      <link rel="stylesheet" href="/css/style_temp.css">
-<link rel="stylesheet" type="text/css" href="/css/style_hum.css" />
+		<link rel="stylesheet" href="css/style_info.css">
+		<link rel="stylesheet" href="/css/style_humidity.css">
+		<link rel="stylesheet" href="/css/style_temp.css">
+		<link rel="stylesheet" type="text/css" href="/css/style_hum.css" />
 
-<script src='https://cdn.zingchart.com/zingchart.min.js'></script>
-<script type="text/javascript">
-var xmlns = "http://www.w3.org/2000/svg";
-var lev = 0;
-var socket = io('/mySensorNamespace');	
+		<script src='https://cdn.zingchart.com/zingchart.min.js'></script>
+		<script type="text/javascript">
+			var xmlns = "http://www.w3.org/2000/svg";
+			var lev = 0;
+			var socket = io('/mySensorNamespace');	
 
-function changeColor (valore, num_cerchio) {
+			function changeColor (valore, num_cerchio) {
+				var style = document.createElement('style');
+				style.type = 'text/css';
+				if(num_cerchio == 1) {
+					if(valore <= 30 && valore > 20) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
+					else if(valore <= 20  && valore > 10) style.innerHTML = ".de .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
+					else if(valore <= 10  && valore > 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
+					else if(valore <= 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
+					else style.innerHTML = ".de .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
+				} else {
+					if(valore <= 30 && valore > 20) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
+					else if(valore <= 20  && valore > 10) style.innerHTML = ".de2 .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
+					else if(valore <= 10  && valore > 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
+					else if(valore <= 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
+					else style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
+				}
 
-var style = document.createElement('style');
-		style.type = 'text/css';
-		if(num_cerchio == 1) {
-			if(valore <= 30 && valore > 20) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
-			else if(valore <= 20  && valore > 10) style.innerHTML = ".de .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
-			else if(valore <= 10  && valore > 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
-			else if(valore <= 0) style.innerHTML = ".de .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
-			else style.innerHTML = ".de .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
-		} else {
-			if(valore <= 30 && valore > 20) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #eb5353, #fc7340, #ff9728, #fcbc0b, #ebe212);}";
-			else if(valore <= 20  && valore > 10) style.innerHTML = ".de2 .den {background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);}";
-			else if(valore <= 10  && valore > 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #2cf1cf, #71f49e, #b3f067, #f6e535);}";
-			else if(valore <= 0) style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #2ae9f2, #00ccff, #00aaff, #0081ff, #3546f6);}";
-			else style.innerHTML = ".de2 .den {background-image: linear-gradient(to right, #f22a2a, #da211f, #c21715, #ab0d0b, #940101);}"; 
-		}
-		
-		
-		document.getElementsByTagName('head')[0].appendChild(style);
-}
+				document.getElementsByTagName('head')[0].appendChild(style);
+			}
 
-var day0, day1, day2, day3, day4, day5, day6;
-	for(var i= 0; i < 7; i++) {
-var day = new Date();
-day.setDate(day.getDate() - i);
+			var day0, day1, day2, day3, day4, day5, day6;
+			for(var i= 0; i < 7; i++) {
+				var day = new Date();
+				day.setDate(day.getDate() - i);
 
-var month_n = day.getUTCMonth() + 1; //months from 1-12
-var day_n = day.getUTCDate();
-var year_n = day.getUTCFullYear();
-var day = year_n
-if(("" + month_n).length == 1) {
-day += "-0" + month_n
-} else {
-day += "-" + month_n
-}
-if(("" +day_n).length == 1) {
-day += "-0" + day_n
-} else {
-day += "-" + day_n
-}
+				var month_n = day.getUTCMonth() + 1; //months from 1-12
+				var day_n = day.getUTCDate();
+				var year_n = day.getUTCFullYear();
+				var day = year_n
+				if(("" + month_n).length == 1) {
+					day += "-0" + month_n
+				} else {
+					day += "-" + month_n
+				}
+				if(("" +day_n).length == 1) {
+					day += "-0" + day_n
+				} else {
+					day += "-" + day_n
+				}
 
-switch(i) {
-	case 0: day0 = day; break;
-	case 1: day1 = day; break;
-	case 2: day2 = day; break;
-	case 3: day3 = day; break;
-	case 4: day4 = day; break;
-	case 5: day5 = day; break;
-	case 6: day6 = day; break;
-}
+				switch(i) {
+					case 0: day0 = day; break;
+					case 1: day1 = day; break;
+					case 2: day2 = day; break;
+					case 3: day3 = day; break;
+					case 4: day4 = day; break;
+					case 5: day5 = day; break;
+					case 6: day6 = day; break;
+				}
+			}
 
-}
-
-var firstOpen = 1;
-	var secondOpen = 1;
-	var thirdOpen = 1;
-	var fourthOpen = 1;
-	var fifthOpen = 1;
+			var firstOpen = 1;
+			var secondOpen = 1;
+			var thirdOpen = 1;
+			var fourthOpen = 1;
+			var fifthOpen = 1;
 	
-	function changeListArrow(number, className, symbol) {
-		if(document.querySelector("." + className) != null) {
-			var style_list = document.createElement('style');
-			style_list.type = 'text/css';
+			function changeListArrow(number, className, symbol) {
+				if(document.querySelector("." + className) != null) {
+					var style_list = document.createElement('style');
+					style_list.type = 'text/css';
+					
+					var str = getComputedStyle(document.querySelector("." + className), ':before').getPropertyValue('content');
+					str = str.substr(1,str.length - 3);
+					str = str.concat("" + symbol);
+
+
+					style_list.innerHTML = ".grouped-by-category [data-category='" + number + "']:first-child::before, .grouped-by-category :not([data-category='" + number + "']) + [data-category='" + number + "']::before {content: '" + str + "';";
+					document.getElementsByTagName('head')[0].appendChild(style_list);
+				}
+			}
+
+						
+			function Show(num) {
+							
+				switch(num) {
+					case '1':
+						if(firstOpen == 0) {
+							console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().fadeIn();		
+								}
+							});
+
+							firstOpen = 1;
+							
+							changeListArrow(1, "firstTitle", "▲");
+							
 			
-			var str = getComputedStyle(document.querySelector("." + className), ':before').getPropertyValue('content');
-			str = str.substr(1,str.length - 3);
-			str = str.concat("" + symbol);
+							if(secondOpen == 1) Show('2');
+							if(thirdOpen == 1) Show('3');
+							if(fourthOpen == 1) Show('4');
+							if(fifthOpen == 1) Show('5');
+						}
+						else {
+						console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().each(function( index ) {
+										if(( this ).text != "▼") $(this).hide();
+									});
+								}
+							});
+							firstOpen = 0;
+							
+							changeListArrow(1, "firstTitle", "▼");
 
-
-			style_list.innerHTML = ".grouped-by-category [data-category='" + number + "']:first-child::before, .grouped-by-category :not([data-category='" + number + "']) + [data-category='" + number + "']::before {content: '" + str + "';";
-			document.getElementsByTagName('head')[0].appendChild(style_list);
-		}
-	}
-
+						}
 						
-	function Show(num) {
+						break;
+					case '2':
+						if(secondOpen == 0) {
+							console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().fadeIn();
+								}
+							});
+							secondOpen = 1;
+							
+							changeListArrow(2, "secondTitle", "▲");
+							
+							if(firstOpen == 1) Show('1');
+							if(thirdOpen == 1) Show('3');
+							if(fourthOpen == 1) Show('4');
+							if(fifthOpen == 1) Show('5');
+						}
+						else {
+							console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().each(function( index ) {
+									  if(( this ).text != "▼") $(this).hide();
+									});
+								}
+							});
+							secondOpen = 0;
+							changeListArrow(2, "secondTitle", "▼");
+						}
+						break;
+					case '3':
+						if(thirdOpen == 0) {
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().fadeIn();
+								}
+							});
+							thirdOpen = 1;
+							changeListArrow(3, "thirdTitle", "▲");
+							if(secondOpen == 1) Show('2');
+							if(firstOpen == 1) Show('1');
+							if(fourthOpen == 1) Show('4');
+							if(fifthOpen == 1) Show('5');
+						}
+						else {
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().each(function( index ) {
+									  if(( this ).text != "▼") $(this).hide();
+									});
+								}
+							});
+							thirdOpen = 0;	
+							changeListArrow(3, "thirdTitle", "▼");
+						}
+						break;
+					case '4':
+						if(fourthOpen == 0) {
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
 
-						
-		switch(num) {
-			case '1':
-				if(firstOpen == 0) {
-					console.log("Il livello: " + num + " era chiuso ora viene APERTO");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().fadeIn();		
-							}
-						});
+									$(this).children().fadeIn();
+								}
+							});
 
-						firstOpen = 1;
-						
-						changeListArrow(1, "firstTitle", "▲");
-						
-		
-						if(secondOpen == 1) Show('2');
-						if(thirdOpen == 1) Show('3');
-						if(fourthOpen == 1) Show('4');
-						if(fifthOpen == 1) Show('5');
+							fourthOpen = 1;
+							changeListArrow(4, "fourthTitle", "▲");
+							if(secondOpen == 1) Show('2');
+							if(firstOpen == 1) Show('1');
+							if(thirdOpen == 1) Show('3');
+							if(fifthOpen == 1) Show('5');
+						}
+						else {
+
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().each(function( index ) {
+									  if(( this ).text != "▼") $(this).hide();
+									});
+								}
+							});
+							fourthOpen = 0;
+							changeListArrow(4, "fourthTitle", "▼");
+							
+							
+						}
+						break;
+					case '5':
+						if(fifthOpen == 0) {
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+
+									$(this).children().fadeIn();
+								}
+							});
+
+							fifthOpen = 1;
+							changeListArrow(5, "fifthTitle", "▲");
+							if(secondOpen == 1) Show('2');
+							if(firstOpen == 1) Show('1');
+							if(thirdOpen == 1) Show('3');
+							if(fourthOpen == 1) Show('4');
+						}
+						else {
+						console.log("CLOSE");
+							$( "ul.list li" ).each(function( index ) {
+								if($(this).attr("data-category") == num) {
+									$(this).children().each(function( index ) {
+										if(( this ).text != "▼") $(this).hide();
+									});
+								}
+							});
+							fifthOpen = 0;
+							changeListArrow(5, "fifthTitle", "▼");
+						}
+					break;
+				}
+			}
+
+			function hideAllMarksBut(number) {
+				$( ".firstTitle" ).each(function( index ) {
+				
+					if($(this).attr("data-level") != number) {
+						$(this).hide();
+					} else {
+						$(this).show();
 					}
-					else {
-					console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().each(function( index ) {
-									if(( this ).text != "▼") $(this).hide();
-								});
-							}
-						});
-						firstOpen = 0;
-						
-						changeListArrow(1, "firstTitle", "▼");
-
+				});
+				$( ".secondTitle" ).each(function( index ) {
+				
+					if($(this).attr("data-level") != number) {
+						$(this).hide();
+					} else {
+						$(this).show();
 					}
-					
-				break;
-			case '2':
-				if(secondOpen == 0) {
-						console.log("Il livello: " + num + " era chiuso ora viene APERTO");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().fadeIn();
-							}
-						});
-						secondOpen = 1;
-						
-						changeListArrow(2, "secondTitle", "▲");
-						
-						if(firstOpen == 1) Show('1');
-						if(thirdOpen == 1) Show('3');
-						if(fourthOpen == 1) Show('4');
-						if(fifthOpen == 1) Show('5');
+				});
+				$( ".thirdTitle" ).each(function( index ) {
+				
+					if($(this).attr("data-level") != number) {
+						$(this).hide();
+					} else {
+						$(this).show();
 					}
-					else {
-					console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().each(function( index ) {
-								  if(( this ).text != "▼") $(this).hide();
-								});
-							}
-						});
-						secondOpen = 0;
-						changeListArrow(2, "secondTitle", "▼");
-
+				});
+				$( ".fourthTitle" ).each(function( index ) {
+				
+					if($(this).attr("data-level") != number) {
+						$(this).hide();
+					} else {
+						$(this).show();
 					}
-				break;
-			case '3':
-				if(thirdOpen == 0) {
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-
-								$(this).children().fadeIn();
-							}
-						});
-						thirdOpen = 1;
-						changeListArrow(3, "thirdTitle", "▲");
-						if(secondOpen == 1) Show('2');
-						if(firstOpen == 1) Show('1');
-						if(fourthOpen == 1) Show('4');
-						if(fifthOpen == 1) Show('5');
+				});
+				$( ".fifthTitle" ).each(function( index ) {
+				
+					if($(this).attr("data-level") != number) {
+						$(this).hide();
+					} else {
+						$(this).show();
 					}
-					else {
-					
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().each(function( index ) {
-								  if(( this ).text != "▼") $(this).hide();
-								});
-							}
-						});
-						thirdOpen = 0;	
-						changeListArrow(3, "thirdTitle", "▼");
-					}
-				break;
-			case '4':
-				if(fourthOpen == 0) {
-
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-
-								$(this).children().fadeIn();
-							}
-						});
-
-						fourthOpen = 1;
-						changeListArrow(4, "fourthTitle", "▲");
-						if(secondOpen == 1) Show('2');
-						if(firstOpen == 1) Show('1');
-						if(thirdOpen == 1) Show('3');
-						if(fifthOpen == 1) Show('5');
-					}
-					else {
-
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().each(function( index ) {
-								  if(( this ).text != "▼") $(this).hide();
-								});
-							}
-						});
-						fourthOpen = 0;
-						changeListArrow(4, "fourthTitle", "▼");
-						
-						
-					}
-				break;
-				case '5':
-				if(fifthOpen == 0) {
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-
-								$(this).children().fadeIn();
-							}
-						});
-
-						fifthOpen = 1;
-						changeListArrow(5, "fifthTitle", "▲");
-						if(secondOpen == 1) Show('2');
-						if(firstOpen == 1) Show('1');
-						if(thirdOpen == 1) Show('3');
-						if(fourthOpen == 1) Show('4');
-					}
-					else {
-					console.log("CLOSE");
-						$( "ul.list li" ).each(function( index ) {
-							if($(this).attr("data-category") == num) {
-								$(this).children().each(function( index ) {
-  if(( this ).text != "▼") $(this).hide();
-});
-							}
-						});
-						fifthOpen = 0;
-						changeListArrow(5, "fifthTitle", "▼");
-						
-					}
-				break;
-		}
-		
-	}
-
-function hideAllMarksBut(number) {
-	$( ".firstTitle" ).each(function( index ) {
-	
-		if($(this).attr("data-level") != number) {
-			$(this).hide();
-		} else {
-			$(this).show();
-		}
-	});
-	$( ".secondTitle" ).each(function( index ) {
-	
-		if($(this).attr("data-level") != number) {
-			$(this).hide();
-		} else {
-			$(this).show();
-		}
-	});
-	$( ".thirdTitle" ).each(function( index ) {
-	
-		if($(this).attr("data-level") != number) {
-			$(this).hide();
-		} else {
-			$(this).show();
-		}
-	});
-	$( ".fourthTitle" ).each(function( index ) {
-	
-		if($(this).attr("data-level") != number) {
-			$(this).hide();
-		} else {
-			$(this).show();
-		}
-	});
-	$( ".fifthTitle" ).each(function( index ) {
-	
-		if($(this).attr("data-level") != number) {
-			$(this).hide();
-		} else {
-			$(this).show();
-		}
-	});
-   }
+				});
+			}
   
-var switch_lev = function navigate_lev (value) {
-lev = value;
+			var switch_lev = function navigate_lev (value) {
+				lev = value;
+				hideAllMarksBut(lev);
 
-hideAllMarksBut(lev);
+				if(firstOpen == 1) valore = 1;
+				if(secondOpen == 1) valore = 2;
+				if(thirdOpen == 1) valore = 3;
+				if(fourthOpen == 1) valore = 4;
+				if(fifthOpen == 1) valore = 5;
 
-if(firstOpen == 1) valore = 1;
-if(secondOpen == 1) valore = 2;
-if(thirdOpen == 1) valore = 3;
-if(fourthOpen == 1) valore = 4;
-if(fifthOpen == 1) valore = 5;
+				for(var n = 0; n<2; n++)  Show('1');
+				for(var n = 0; n<2; n++)  Show('2');
+				for(var n = 0; n<2; n++)  Show('3');
+				for(var n = 0; n<2; n++)  Show('4');
+				for(var n = 0; n<2; n++)  Show('5');
 
-for(var n = 0; n<2; n++)  Show('1');
-for(var n = 0; n<2; n++)  Show('2');
-for(var n = 0; n<2; n++)  Show('3');
-for(var n = 0; n<2; n++)  Show('4');
-for(var n = 0; n<2; n++)  Show('5');
-
-if(valore == 1) Show('1');
-if(valore == 2) Show('2');
-if(valore == 3) Show('3');
-if(valore == 4) Show('4');
-if(valore == 5) Show('5');
-}
+				if(valore == 1) Show('1');
+				if(valore == 2) Show('2');
+				if(valore == 3) Show('3');
+				if(valore == 4) Show('4');
+				if(valore == 5) Show('5');
+			}
 
   
-var changelev = function selLevel(value) {
-lev = value;
+			var changelev = function selLevel(value) {
+				lev = value;
 
-hideAllMarksBut(lev);
-if(lev == 0) {
-var valore = 0;
+				hideAllMarksBut(lev);
+				if(lev == 0) {
+					var valore = 0;
 
-if(firstOpen == 1) valore = 1;
-if(secondOpen == 1) valore = 2;
-if(thirdOpen == 1) valore = 3;
-if(fourthOpen == 1) valore = 4;
-if(fifthOpen == 1) valore = 5;
+					if(firstOpen == 1) valore = 1;
+					if(secondOpen == 1) valore = 2;
+					if(thirdOpen == 1) valore = 3;
+					if(fourthOpen == 1) valore = 4;
+					if(fifthOpen == 1) valore = 5;
 
-for(var n = 0; n<2; n++)  Show('1');
-for(var n = 0; n<2; n++)  Show('2');
-for(var n = 0; n<2; n++)  Show('3');
-for(var n = 0; n<2; n++)  Show('4');
-for(var n = 0; n<2; n++)  Show('5');
+					for(var n = 0; n<2; n++)  Show('1');
+					for(var n = 0; n<2; n++)  Show('2');
+					for(var n = 0; n<2; n++)  Show('3');
+					for(var n = 0; n<2; n++)  Show('4');
+					for(var n = 0; n<2; n++)  Show('5');
 
 
 
-if(valore == 1) Show('1');
-if(valore == 2) Show('2');
-if(valore == 3) Show('3');
-if(valore == 4) Show('4');
-if(valore == 5) Show('5');
-}
-}
+					if(valore == 1) Show('1');
+					if(valore == 2) Show('2');
+					if(valore == 3) Show('3');
+					if(valore == 4) Show('4');
+					if(valore == 5) Show('5');
+				}
+			}
 
-var currents = [];
-var current;
-$.ajaxSetup({ cache: true });
-	$.ajax({
-            //url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT inizio, fine, ins.materia_descrizione from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id WHERE aula_codici LIKE '61_WP01_003'",
-			url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id JOIN aule_2017 aule ON aula_codici = aula_codice WHERE aula_nome LIKE 'AULA 5.5' AND inizio >= '2018-03-08' AND inizio < '2018-03-09'",
-			type: "get",
-            dataType: "jsonp",
-			success: function(data){
-			var dim = data.result.records.length;
-			socket.emit('dimValue', dim);
-				for (i in data.result.records) {
-                    var current = data.result.records[i];
-					var vect = ["" +current.aula_nome, "" + current.inizio, "" +current.materia_descrizione];
-                    console.log(" A " + vect[1]);
-					socket.emit('deleteValue', vect);
+			var currents = [];
+			var current;
+			$.ajaxSetup({ cache: true });
+			$.ajax({
+				//url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT inizio, fine, ins.materia_descrizione from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id WHERE aula_codici LIKE '61_WP01_003'",
+				url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id JOIN aule_2017 aule ON aula_codici = aula_codice WHERE aula_nome LIKE 'AULA 5.5' AND inizio >= '2018-03-08' AND inizio < '2018-03-09'",
+				type: "get",
+				dataType: "jsonp",
+				success: function(data){
+					var dim = data.result.records.length;
+					socket.emit('dimValue', dim);
+					for (i in data.result.records) {
+						var current = data.result.records[i];
+						var vect = ["" +current.aula_nome, "" + current.inizio, "" +current.materia_descrizione];
+						console.log(" A " + vect[1]);
+						socket.emit('deleteValue', vect);
 					}
-
-				console.log(" A " + data.result.records[0].inizio);
-
-            }
-        });
+					console.log(" A " + data.result.records[0].inizio);
+				}
+			});
 
 
-socket.on('hi',function(data) {	
+			socket.on('hi',function(data) {	
 
-	var box = document.getElementsByClassName("box")[0];
-	while (box.firstChild) {
-    box.removeChild(box.firstChild);
-}
+				var box = document.getElementsByClassName("box")[0];
+				while (box.firstChild) {
+					box.removeChild(box.firstChild);
+				}
 
-	setTimeout(function () {
-		 $("#pageLoad").remove();
-		  },300);
+				setTimeout(function () {
+					$("#pageLoad").remove();
+				},300);
 
 //Carico la tabella entrancecss
 
-	var valori = data.css.split(';');
-	for(var field in valori) {
-		var line = valori[field].split('***');
-		
-		var style = document.createElement('style');
-		style.type = 'text/css';
+				var valori = data.css.split(';');
+				for(var field in valori) {
+					var line = valori[field].split('***');
+					
+					var style = document.createElement('style');
+					style.type = 'text/css';
+					
+					style.innerHTML = "" + line[0];
+					document.getElementsByTagName('head')[0].appendChild(style);
+				}
 
-		
-		style.innerHTML = "" + line[0];
-		document.getElementsByTagName('head')[0].appendChild(style);
-	}
 
-
-	//Carico il css descritto nella tabella datacategory
-	var valori = data.datacategory.split(';');
-	var indCategories = 0;
-	console.log("VAL LEN: " + valori.length);
+//Carico il css descritto nella tabella datacategory
+				var valori = data.datacategory.split(';');
+				var indCategories = 0;
+				console.log("VAL LEN: " + valori.length);
 	
-document.getElementById("level__pins_1").innerHTML = "";
-document.getElementById("level__pins_2").innerHTML = "";
-document.getElementById("level__pins_3").innerHTML = "";
-document.getElementById("ulList").innerHTML = "";
-
-	
-	var style0 = document.createElement('style');
-	style0.type = 'text/css';
-	var wdt = valori.length * 130;
-	style0.innerHTML = "section.box { width: : '" + wdt + "' !important; }";
-	document.getElementsByTagName('head')[0].appendChild(style0);
+				document.getElementById("level__pins_1").innerHTML = "";
+				document.getElementById("level__pins_2").innerHTML = "";
+				document.getElementById("level__pins_3").innerHTML = "";
+				document.getElementById("ulList").innerHTML = "";
 
 	
-	for(var field in valori) {
-		var line = valori[field].split('***');
-		
-		var style = document.createElement('style');
-		style.type = 'text/css';
-		var style2 = document.createElement('style');
-		style2.type = 'text/css';
-		var style3 = document.createElement('style');
-		style3.type = 'text/css';
-		var style4 = document.createElement('style');
-		style4.type = 'text/css';
-		var style5 = document.createElement('style');
-		style5.type = 'text/css';
-		var style6 = document.createElement('style');
-		style6.type = 'text/css';
+				var style0 = document.createElement('style');
+				style0.type = 'text/css';
+				var wdt = valori.length * 130;
+				style0.innerHTML = "section.box { width: : '" + wdt + "' !important; }";
+				document.getElementsByTagName('head')[0].appendChild(style0);
 
-		
-		style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▼'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
-		style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
-		style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
-		style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
-		style5.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { font-size: 1.25em; position: absolute; top: -1.75em; left: 0; }";
+	
+				for(var field in valori) {
+					var line = valori[field].split('***');
+					
+					var style = document.createElement('style');
+					style.type = 'text/css';
+					var style2 = document.createElement('style');
+					style2.type = 'text/css';
+					var style3 = document.createElement('style');
+					style3.type = 'text/css';
+					var style4 = document.createElement('style');
+					style4.type = 'text/css';
+					var style5 = document.createElement('style');
+					style5.type = 'text/css';
+					var style6 = document.createElement('style');
+					style6.type = 'text/css';
+					
+					style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▼'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
+					style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
+					style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
+					style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
+					style5.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { font-size: 1.25em; position: absolute; top: -1.75em; left: 0; }";
 
+					document.getElementsByTagName('head')[0].appendChild(style);
+					document.getElementsByTagName('head')[0].appendChild(style2);
+					document.getElementsByTagName('head')[0].appendChild(style3);
+					document.getElementsByTagName('head')[0].appendChild(style4);
+					document.getElementsByTagName('head')[0].appendChild(style5);
 
-		
-		document.getElementsByTagName('head')[0].appendChild(style);
-		document.getElementsByTagName('head')[0].appendChild(style2);
-		document.getElementsByTagName('head')[0].appendChild(style3);
-		document.getElementsByTagName('head')[0].appendChild(style4);
-		document.getElementsByTagName('head')[0].appendChild(style5);
-
-		
-		var box = document.getElementsByClassName("box")[0];
-		
-		var span = document.createElement("span");
-		span.setAttribute("id","color" + line[0]);
-		span.setAttribute("class","opacityOut");
-		/*
-		span.onclick = (function() {
-		var idC = line[0];
-      var currentI = line[1];
-      return function() { 
-          showLegend(currentI + '', idC + '');
-      }
-   })();
-		*/
-		
-		if(indCategories == 0) {
-			span.setAttribute("class","color-left " + line[1]);
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
-		}
-		else if(indCategories == valori.length - 1) {
-			span.setAttribute("class","color-right " + line[1]);
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
-		}
-		else  {
-			span.setAttribute("class","color-center " + line[1])
-			style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
-		}
-		indCategories ++;
-		document.getElementsByTagName('head')[0].appendChild(style6);
-		
-		var svg2_node = document.createElementNS(xmlns, "svg");
-		svg2_node.setAttribute("class", "iconSum");
-		var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use2SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-' +line[3]);
-		svg2_node.appendChild(use2SVG);
-		
-		var div = document.createElement("div");
-		div.setAttribute("id","rowLegend");
-		
-		var style7 = document.createElement('style');
-		style7.type = 'text/css';
-		//style7.innerHTML = "row." + line[1] + "{background-color: " + line[2] + "; width: 52px; height: 30px; border-top-left-radius: 5px; display: block; float: right;opacity: 1;}";
-		//document.getElementsByTagName('head')[0].appendChild(style7);
-		
-		
-		var p = document.createElement("p");
-		p.innerHTML = "" + line[1];
-		p.setAttribute("id","leftLegend");
-		
-		
-		span.appendChild(svg2_node);
-		div.appendChild(p);
-		div.appendChild(span);
-		box.appendChild(div);
-	}
+					var box = document.getElementsByClassName("box")[0];
+					
+					var span = document.createElement("span");
+					span.setAttribute("id","color" + line[0]);
+					span.setAttribute("class","opacityOut");
+					/*
+					span.onclick = (function() {
+					var idC = line[0];
+				  var currentI = line[1];
+				  return function() { 
+					  showLegend(currentI + '', idC + '');
+				  }
+			   })();
+					*/
+					if(indCategories == 0) {
+						span.setAttribute("class","color-left " + line[1]);
+						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
+					}
+					else if(indCategories == valori.length - 1) {
+						span.setAttribute("class","color-right " + line[1]);
+						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
+					}
+					else  {
+						span.setAttribute("class","color-center " + line[1])
+						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
+					}
+					indCategories ++;
+					document.getElementsByTagName('head')[0].appendChild(style6);
+					
+					var svg2_node = document.createElementNS(xmlns, "svg");
+					svg2_node.setAttribute("class", "iconSum");
+					var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+					use2SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-' +line[3]);
+					svg2_node.appendChild(use2SVG);
+					
+					var div = document.createElement("div");
+					div.setAttribute("id","rowLegend");
+					
+					var style7 = document.createElement('style');
+					style7.type = 'text/css';
+					//style7.innerHTML = "row." + line[1] + "{background-color: " + line[2] + "; width: 52px; height: 30px; border-top-left-radius: 5px; display: block; float: right;opacity: 1;}";
+					//document.getElementsByTagName('head')[0].appendChild(style7);
+					
+					
+					var p = document.createElement("p");
+					p.innerHTML = "" + line[1];
+					p.setAttribute("id","leftLegend");
+					
+					
+					span.appendChild(svg2_node);
+					div.appendChild(p);
+					div.appendChild(span);
+					box.appendChild(div);
+				}
 	
 	
-	//Carico la vista view_svg
-	var piani = 0;
-	var valori = data.figura.split(';');
-	for(var field in valori) {
-		var line = valori[field].split('***');
-		
-		if(line[8] > piani) piani = line[8];
-		
-		var node = document.createElementNS(xmlns, line[1]);
-		node.setAttribute("data-space",line[0]);
-		if(line[0] != "null") {
-			node.setAttribute("class","changeCol clickable_space " + line[2]);
-			node.style.fill= null;
-			node.setAttribute("id",line[9]);
-		} else {
-			node.setAttribute("class", line[2]);
-		}
+//Carico la vista view_svg
+				var piani = 0;
+				var valori = data.figura.split(';');
+				for(var field in valori) {
+					var line = valori[field].split('***');
+					
+					if(line[8] > piani) piani = line[8];
+					
+					var node = document.createElementNS(xmlns, line[1]);
+					node.setAttribute("data-space",line[0]);
+					if(line[0] != "null") {
+						node.setAttribute("class","changeCol clickable_space " + line[2]);
+						node.style.fill= null;
+						node.setAttribute("id",line[9]);
+					} else {
+						node.setAttribute("class", line[2]);
+					}
 
-		
-
-		if(line[6] != "null") {
-			node.setAttribute("x", line[3]);
-			node.setAttribute("y", line[4]);
-			node.setAttribute("width", line[5]);
-			node.setAttribute("height", line[6]);
-		} else if(line[5] != "null") {
-			node.setAttribute("cx", line[3]);
-			node.setAttribute("cy", line[4]);
-			node.setAttribute("r", line[5]);
-		} else {
-			node.setAttribute("points", line[7]);
-		}
-		document.getElementById("lev"+line[8]).appendChild(node);
-
-	}
+					if(line[6] != "null") {
+						node.setAttribute("x", line[3]);
+						node.setAttribute("y", line[4]);
+						node.setAttribute("width", line[5]);
+						node.setAttribute("height", line[6]);
+					} else if(line[5] != "null") {
+						node.setAttribute("cx", line[3]);
+						node.setAttribute("cy", line[4]);
+						node.setAttribute("r", line[5]);
+					} else {
+						node.setAttribute("points", line[7]);
+					}
+					document.getElementById("lev"+line[8]).appendChild(node);
+				}
 	
-	//carico il css relativo ai piani
-	for(i = 0; i <piani; i++) {
-	var styleP = document.createElement('style');
-	styleP.type = 'text/css';
+//carico il css relativo ai piani
+				for(i = 0; i <piani; i++) {
+					var styleP = document.createElement('style');
+					styleP.type = 'text/css';
 
-	var val = i + 1;
-	styleP.innerHTML = ".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}";
-	console.log(".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}");
-	document.getElementsByTagName('head')[0].appendChild(styleP);
-	}
+					var val = i + 1;
+					styleP.innerHTML = ".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}";
+					console.log(".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}");
+					document.getElementsByTagName('head')[0].appendChild(styleP);
+				}
 	
-	var styleP = document.createElement('style');
-	styleP.type = 'text/css';
+				var styleP = document.createElement('style');
+				styleP.type = 'text/css';
 
-	styleP.innerHTML = ".levels--open .level.level--current {opacity: 1;}";
-	document.getElementsByTagName('head')[0].appendChild(styleP);
+				styleP.innerHTML = ".levels--open .level.level--current {opacity: 1;}";
+				document.getElementsByTagName('head')[0].appendChild(styleP);
+				
+				var styleP2 = document.createElement('style');
+				styleP2.type = 'text/css';
+				styleP2.innerHTML = ".levels--open .level.level--moveOutUp, .levels--open .level.level--moveOutDown {opacity: 0;}";
+				document.getElementsByTagName('head')[0].appendChild(styleP2);
 	
-	var styleP2 = document.createElement('style');
-	styleP2.type = 'text/css';
-	styleP2.innerHTML = ".levels--open .level.level--moveOutUp, .levels--open .level.level--moveOutDown {opacity: 0;}";
-	document.getElementsByTagName('head')[0].appendChild(styleP2);
-	
-	//Carico la vista level_pins
-	var valori = data.pin.split(';');
-	var pins = 0;
-	for(var field in valori) {
-		var line = valori[field].split('***');
-		pins = pins + 1;
-		
-		var style = document.createElement('style');
-		style.type = 'text/css';
-		style.innerHTML = ".pin--" + pins + " { top: " + line[4] + "%; left: " + line[5] + "%; }";
-		document.getElementsByTagName('head')[0].appendChild(style);
-		
-		
-		var a_node = document.createElement("a");
-		a_node.setAttribute("id", "DS"+line[0]);
-		a_node.setAttribute("class","pin pin--" +pins);
-		a_node.setAttribute("data-category", line[2]);
-		a_node.setAttribute("data-space",line[0]);
-		a_node.setAttribute("href","#");
-		a_node.setAttribute("aria-label","PIN");
-		a_node.style.display = "none";
-		
-		
-		var span_node = document.createElement("span");
-		span_node.setAttribute("class", "pin__icon");
-		
-		var svg1_node = document.createElementNS(xmlns, "svg");
-		svg1_node.setAttribute("class", "icon icon--pin");
-		var use1SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use1SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-pin');
-		svg1_node.appendChild(use1SVG);
-		
-		var svg2_node = document.createElementNS(xmlns, "svg");
-		svg2_node.setAttribute("class", "icon icon--logo icon--" + line[3]);
-		var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		use2SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-' +line[3]);
-		svg2_node.appendChild(use2SVG);
-		
-		span_node.appendChild(svg1_node);
-		span_node.appendChild(svg2_node);
-		a_node.appendChild(span_node);
-		
-		document.getElementById("level__pins_"+line[6]).appendChild(a_node);
-	}
+//Carico la vista level_pins
+				var valori = data.pin.split(';');
+				var pins = 0;
+				for(var field in valori) {
+					var line = valori[field].split('***');
+					pins = pins + 1;
+					
+					var style = document.createElement('style');
+					style.type = 'text/css';
+					style.innerHTML = ".pin--" + pins + " { top: " + line[4] + "%; left: " + line[5] + "%; }";
+					document.getElementsByTagName('head')[0].appendChild(style);
+					
+					
+					var a_node = document.createElement("a");
+					a_node.setAttribute("id", "DS"+line[0]);
+					a_node.setAttribute("class","pin pin--" +pins);
+					a_node.setAttribute("data-category", line[2]);
+					a_node.setAttribute("data-space",line[0]);
+					a_node.setAttribute("href","#");
+					a_node.setAttribute("aria-label","PIN");
+					a_node.style.display = "none";
+					
+					
+					var span_node = document.createElement("span");
+					span_node.setAttribute("class", "pin__icon");
+					
+					var svg1_node = document.createElementNS(xmlns, "svg");
+					svg1_node.setAttribute("class", "icon icon--pin");
+					var use1SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+					use1SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-pin');
+					svg1_node.appendChild(use1SVG);
+					
+					var svg2_node = document.createElementNS(xmlns, "svg");
+					svg2_node.setAttribute("class", "icon icon--logo icon--" + line[3]);
+					var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+					use2SVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-' +line[3]);
+					svg2_node.appendChild(use2SVG);
+					
+					span_node.appendChild(svg1_node);
+					span_node.appendChild(svg2_node);
+					a_node.appendChild(span_node);
+					
+					document.getElementById("level__pins_"+line[6]).appendChild(a_node);
+				}
 					
    
    
-   //Carico la vista view_content
-	var valori = data.info.split(';');
-	for(var field in valori) {
-		var line = valori[field].split('***');
+//Carico la vista view_content
+				var valori = data.info.split(';');
+				for(var field in valori) {
+					var line = valori[field].split('***');
 
-		var div = document.createElement("div");
-		div.setAttribute("class","content__item");
-		div.setAttribute("data-space",line[0]);
-		div.setAttribute("data-category", line[1]);
-		
-		
-		var h3 = document.createElement("h3");
-		h3.setAttribute("class","content__item-title");
-		var th3 = document.createTextNode("" + line[2]);
-		h3.appendChild(th3);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class","content__item-details");
-		
-		var p = document.createElement("p");
-		p.setAttribute("class","content__meta");
-		
-		var span = document.createElement("span");
-		span.setAttribute("class","content__meta-item");
-		
-		if(line[4] != "null") {
-			var strong = document.createElement("strong");
-			var t = document.createTextNode("Posti:");
-			var t2 = document.createTextNode(" " + line[4]);
-		}
-		
-		
-		var p2 = document.createElement("p");
-		p2.setAttribute("class","content__desc");
-		var t3 = document.createTextNode("" + line[3]);
-		
-		p2.appendChild(t3);
-		
-		if(line[4] != "null") {
-			strong.appendChild(t);
-			span.appendChild(strong);
-			span.appendChild(t2);
-		}
-		
-		var content = document.getElementById("content");
-		p.appendChild(span);
-		div2.appendChild(p);
-		div2.appendChild(p2);
-		div.appendChild(h3);
-		div.appendChild(div2);
-		content.appendChild(div);
-		
-	}
-		
-		var btn = document.createElement("button");
-		btn.setAttribute("class","boxbutton boxbutton--dark content__button content__button--hidden");
-	btn.setAttribute("aria-label","Close details");
-	
-var svg_node = document.createElementNS(xmlns, "svg");
-		svg_node.setAttribute("class", "icon icon--cross");
-		var useSVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-		useSVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-cross');
-		svg_node.appendChild(useSVG);
-		
-	var content = document.getElementById("content");
-	svg_node.appendChild(useSVG);
-	btn.appendChild(svg_node);
-	content.appendChild(btn);
-	
-	
-	//Riuso la vista view_content per: list grouped-by-category
-	var valori = data.info.split(';');
-	var indx1 = 0;
-	var indx2 = 0;
-	var indx3 = 0;
-	var indx4 = 0;
-	var indx5 = 0;
-	
-	
-	
-	var listener = function(event){
-		if(event.target.tagName == "LI") Show(event.target.id);
-	};
-	var event_list = ['click'];
-	
-	var L1_1 = 0, L1_2 = 0, L1_3 = 0, L1_4 = 0, L1_5 = 0;
-	var L2_1 = 0, L2_2 = 0, L2_3 = 0, L2_4 = 0, L2_5 = 0;
-	var L3_1 = 0, L3_2 = 0, L3_3 = 0, L3_4 = 0, L3_5 = 0;
-	
-	for(var field in valori) {
-		var line = valori[field].split('***');
+					var div = document.createElement("div");
+					div.setAttribute("class","content__item");
+					div.setAttribute("data-space",line[0]);
+					div.setAttribute("data-category", line[1]);
 					
-		
-		var li = document.createElement("li");
-		li.setAttribute("id",line[1]);
-		li.setAttribute("class","list__item");
-		li.setAttribute("data-level",line[5]);
-		li.setAttribute("data-category", line[1]);
-		li.setAttribute("data-space",line[0]);
-		
-		var a = document.createElement("a");
-		a.setAttribute("href","#");
-		a.setAttribute("class","list__link");
-		a.innerHTML = line[2];
-		
-		
-		
-		li.appendChild(a);
-		
-		//switch sul livello
-		switch(line[1]) {
-			case '1':
-				if(indx1 == 0) { //se categoria 1
-					var x0_tmp = document.createElement("li");
-					x0_tmp.setAttribute("id",line[1]);
-					x0_tmp.setAttribute("class","list__item");
-					x0_tmp.setAttribute("data-level","0");
-					x0_tmp.setAttribute("data-category", line[1]);
-		
-					var a0_tmp = document.createElement("a");
-					a0_tmp.innerHTML = "▼";
-					x0_tmp.appendChild(a0_tmp);
-
-					x0_tmp.classList.add("firstTitle");
-					event_list.forEach(function(ev, ev_index){
-						x0_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x0_tmp);
-				}
-				/************************************************************/
-				
-				if(line[5] == 1 && L1_1 == 0) {
-					var x_tmp = document.createElement("li");
-					x_tmp.setAttribute("id",line[1]);
-					x_tmp.setAttribute("class","list__item");
-					x_tmp.setAttribute("data-level","1");
-					x_tmp.setAttribute("data-category", line[1]);
-		
-					var a_tmp = document.createElement("a");
-					a_tmp.innerHTML = "▼";
-					x_tmp.appendChild(a_tmp);
-
-					x_tmp.classList.add("firstTitle");
-					event_list.forEach(function(ev, ev_index){
-						x_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x_tmp);
-					L1_1 ++;
-				}
-				/************************************************************/
-				if(line[5] == 2 && L2_1 == 0) {
-					var x2_tmp = document.createElement("li");
-					x2_tmp.setAttribute("id",line[1]);
-					x2_tmp.setAttribute("class","list__item");
-					x2_tmp.setAttribute("data-level","2");
-					x2_tmp.setAttribute("data-category", line[1]);
-		
-					var a2_tmp = document.createElement("a");
-					a2_tmp.innerHTML = "▼";
-					x2_tmp.appendChild(a2_tmp);
-
-					x2_tmp.classList.add("firstTitle");
-					event_list.forEach(function(ev, ev_index){
-						x2_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x2_tmp);
-					L2_1 ++;
-				}
-				/************************************************************/
-				if(line[5] == 3 && L3_1 == 0) {
-					var x3_tmp = document.createElement("li");
-					x3_tmp.setAttribute("id",line[1]);
-					x3_tmp.setAttribute("class","list__item");
-					x3_tmp.setAttribute("data-level","3");
-					x3_tmp.setAttribute("data-category", line[1]);
-		
-		
-					var a3_tmp = document.createElement("a");
-					a3_tmp.innerHTML = "▼";
-					x3_tmp.appendChild(a3_tmp);
-
-					x3_tmp.classList.add("firstTitle");
-					event_list.forEach(function(ev, ev_index){
-						x3_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x3_tmp);
-					L3_1 ++;
-				}
-			
-				
-				indx1 ++;
-				break;
-			case '2':
-				if(indx2 == 0) {				
-				var x0_tmp = document.createElement("li");
-					x0_tmp.setAttribute("id",line[1]);
-					x0_tmp.setAttribute("class","list__item");
-					x0_tmp.setAttribute("data-level","0");
-					x0_tmp.setAttribute("data-category", line[1]);
-		
-					var a0_tmp = document.createElement("a");
-					a0_tmp.innerHTML = "▼";
-					x0_tmp.appendChild(a0_tmp);
-
-					x0_tmp.classList.add("secondTitle");
-					event_list.forEach(function(ev, ev_index){
-						x0_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x0_tmp);
-				}
-				/************************************************************/
-				if(line[5] == 1 && L1_2 == 0) {
-					var x_tmp = document.createElement("li");
-					x_tmp.setAttribute("id",line[1]);
-					x_tmp.setAttribute("class","list__item");
-					x_tmp.setAttribute("data-level","1");
-					x_tmp.setAttribute("data-category", line[1]);
-		
-					var a_tmp = document.createElement("a");
-					a_tmp.innerHTML = "▼";
-					x_tmp.appendChild(a_tmp);
-
-					x_tmp.classList.add("secondTitle");
-					event_list.forEach(function(ev, ev_index){
-						x_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x_tmp);
-					L1_2++;
-				}
-				/************************************************************/
-				if(line[5] == 2 && L2_2 == 0) {
-					var x2_tmp = document.createElement("li");
-					x2_tmp.setAttribute("id",line[1]);
-					x2_tmp.setAttribute("class","list__item");
-					x2_tmp.setAttribute("data-level","2");
-					x2_tmp.setAttribute("data-category", line[1]);
-		
-					var a2_tmp = document.createElement("a");
-					a2_tmp.innerHTML = "▼";
-					x2_tmp.appendChild(a2_tmp);
-
-					x2_tmp.classList.add("secondTitle");
-					event_list.forEach(function(ev, ev_index){
-						x2_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x2_tmp);
-					L2_2 ++;
-				}
-				/************************************************************/
-				if(line[5] == 3 && L3_2 == 0) {
-					var x3_tmp = document.createElement("li");
-					x3_tmp.setAttribute("id",line[1]);
-					x3_tmp.setAttribute("class","list__item");
-					x3_tmp.setAttribute("data-level","3");
-					x3_tmp.setAttribute("data-category", line[1]);
-		
-		
-					var a3_tmp = document.createElement("a");
-					a3_tmp.innerHTML = "▼";
-					x3_tmp.appendChild(a3_tmp);
-
-					x3_tmp.classList.add("secondTitle");
-					event_list.forEach(function(ev, ev_index){
-						x3_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x3_tmp);
-					L3_2 ++;
-				}
-				
-				indx2 ++;
-				
-				break;
-			case '3':
-				if(indx3 == 0) {
-				var x0_tmp = document.createElement("li");
-					x0_tmp.setAttribute("id",line[1]);
-					x0_tmp.setAttribute("class","list__item");
-					x0_tmp.setAttribute("data-level","0");
-					x0_tmp.setAttribute("data-category", line[1]);
-		
-					var a0_tmp = document.createElement("a");
-					a0_tmp.innerHTML = "▼";
-					x0_tmp.appendChild(a0_tmp);
-
-					x0_tmp.classList.add("thirdTitle");
-					event_list.forEach(function(ev, ev_index){
-						x0_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x0_tmp);
-				}
-				/************************************************************/
-				if(line[5] == 1 && L1_3 == 0) {
-					var x_tmp = document.createElement("li");
-					x_tmp.setAttribute("id",line[1]);
-					x_tmp.setAttribute("class","list__item");
-					x_tmp.setAttribute("data-level","1");
-					x_tmp.setAttribute("data-category", line[1]);
-		
-					var a_tmp = document.createElement("a");
-					a_tmp.innerHTML = "▼";
-					x_tmp.appendChild(a_tmp);
-
-					x_tmp.classList.add("thirdTitle");
-					event_list.forEach(function(ev, ev_index){
-						x_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x_tmp);
-					L1_3 ++;
-				}
-				/************************************************************/
-				if(line[5] == 2 && L2_3 == 0) {
-					var x2_tmp = document.createElement("li");
-					x2_tmp.setAttribute("id",line[1]);
-					x2_tmp.setAttribute("class","list__item");
-					x2_tmp.setAttribute("data-level","2");
-					x2_tmp.setAttribute("data-category", line[1]);
-		
-					var a2_tmp = document.createElement("a");
-					a2_tmp.innerHTML = "▼";
-					x2_tmp.appendChild(a2_tmp);
-
-					x2_tmp.classList.add("thirdTitle");
-					event_list.forEach(function(ev, ev_index){
-						x2_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x2_tmp);
-					L2_3 ++;
-				}
-				/************************************************************/
-				if(line[5] == 3 && L3_3 == 0) {
-					var x3_tmp = document.createElement("li");
-					x3_tmp.setAttribute("id",line[1]);
-					x3_tmp.setAttribute("class","list__item");
-					x3_tmp.setAttribute("data-level","3");
-					x3_tmp.setAttribute("data-category", line[1]);
-		
-		
-					var a3_tmp = document.createElement("a");
-					a3_tmp.innerHTML = "▼";
-					x3_tmp.appendChild(a3_tmp);
-
-					x3_tmp.classList.add("thirdTitle");
-					event_list.forEach(function(ev, ev_index){
-						x3_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x3_tmp);
-					L3_3 ++;
-				}
-
-				
-				indx3 ++;
-				break;
-			case '4':
-				if(indx4 == 0) {
 					
-					var x0_tmp = document.createElement("li");
-					x0_tmp.setAttribute("id",line[1]);
-					x0_tmp.setAttribute("class","list__item");
-					x0_tmp.setAttribute("data-level","0");
-					x0_tmp.setAttribute("data-category", line[1]);
-		
-					var a0_tmp = document.createElement("a");
-					a0_tmp.innerHTML = "▼";
-					x0_tmp.appendChild(a0_tmp);
-
-					x0_tmp.classList.add("fourthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x0_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x0_tmp);
+					var h3 = document.createElement("h3");
+					h3.setAttribute("class","content__item-title");
+					var th3 = document.createTextNode("" + line[2]);
+					h3.appendChild(th3);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class","content__item-details");
+					
+					var p = document.createElement("p");
+					p.setAttribute("class","content__meta");
+					
+					var span = document.createElement("span");
+					span.setAttribute("class","content__meta-item");
+					
+					if(line[4] != "null") {
+						var strong = document.createElement("strong");
+						var t = document.createTextNode("Posti:");
+						var t2 = document.createTextNode(" " + line[4]);
+					}
+					
+					
+					var p2 = document.createElement("p");
+					p2.setAttribute("class","content__desc");
+					var t3 = document.createTextNode("" + line[3]);
+					
+					p2.appendChild(t3);
+					
+					if(line[4] != "null") {
+						strong.appendChild(t);
+						span.appendChild(strong);
+						span.appendChild(t2);
+					}
+					
+					var content = document.getElementById("content");
+					p.appendChild(span);
+					div2.appendChild(p);
+					div2.appendChild(p2);
+					div.appendChild(h3);
+					div.appendChild(div2);
+					content.appendChild(div);
 				}
-				/************************************************************/
-				if(line[5] == 1 && L1_4 == 0) {
-					var x_tmp = document.createElement("li");
-					x_tmp.setAttribute("id",line[1]);
-					x_tmp.setAttribute("class","list__item");
-					x_tmp.setAttribute("data-level","1");
-					x_tmp.setAttribute("data-category", line[1]);
 		
-					var a_tmp = document.createElement("a");
-					a_tmp.innerHTML = "▼";
-					x_tmp.appendChild(a_tmp);
-
-					x_tmp.classList.add("fourthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x_tmp);
-					L1_4++;
-				}
-				/************************************************************/
-				if(line[5] == 2 && L2_4 == 0) {
-					var x2_tmp = document.createElement("li");
-					x2_tmp.setAttribute("id",line[1]);
-					x2_tmp.setAttribute("class","list__item");
-					x2_tmp.setAttribute("data-level","2");
-					x2_tmp.setAttribute("data-category", line[1]);
+				var btn = document.createElement("button");
+				btn.setAttribute("class","boxbutton boxbutton--dark content__button content__button--hidden");
+				btn.setAttribute("aria-label","Close details");
+	
+				var svg_node = document.createElementNS(xmlns, "svg");
+				svg_node.setAttribute("class", "icon icon--cross");
+				var useSVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+				useSVG.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href','#icon-cross');
+				svg_node.appendChild(useSVG);
 		
-					var a2_tmp = document.createElement("a");
-					a2_tmp.innerHTML = "▼";
-					x2_tmp.appendChild(a2_tmp);
-
-					x2_tmp.classList.add("fourthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x2_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x2_tmp);
-					L2_4++;
-				}
-				/************************************************************/
-				if(line[5] == 3 && L3_4 == 0) {
-					var x3_tmp = document.createElement("li");
-					x3_tmp.setAttribute("id",line[1]);
-					x3_tmp.setAttribute("class","list__item");
-					x3_tmp.setAttribute("data-level","3");
-					x3_tmp.setAttribute("data-category", line[1]);
-		
-		
-					var a3_tmp = document.createElement("a");
-					a3_tmp.innerHTML = "▼";
-					x3_tmp.appendChild(a3_tmp);
-
-					x3_tmp.classList.add("fourthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x3_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x3_tmp);
-					L3_4++;
+				var content = document.getElementById("content");
+				svg_node.appendChild(useSVG);
+				btn.appendChild(svg_node);
+				content.appendChild(btn);
+	
+	
+//Riuso la vista view_content per: list grouped-by-category
+				var valori = data.info.split(';');
+				var indx1 = 0;
+				var indx2 = 0;
+				var indx3 = 0;
+				var indx4 = 0;
+				var indx5 = 0;
+	
+	
+	
+				var listener = function(event){
+					if(event.target.tagName == "LI") Show(event.target.id);
+				};
+				var event_list = ['click'];
 				
+				var L1_1 = 0, L1_2 = 0, L1_3 = 0, L1_4 = 0, L1_5 = 0;
+				var L2_1 = 0, L2_2 = 0, L2_3 = 0, L2_4 = 0, L2_5 = 0;
+				var L3_1 = 0, L3_2 = 0, L3_3 = 0, L3_4 = 0, L3_5 = 0;
+	
+				for(var field in valori) {
+					var line = valori[field].split('***');
+		
+					var li = document.createElement("li");
+					li.setAttribute("id",line[1]);
+					li.setAttribute("class","list__item");
+					li.setAttribute("data-level",line[5]);
+					li.setAttribute("data-category", line[1]);
+					li.setAttribute("data-space",line[0]);
+					
+					var a = document.createElement("a");
+					a.setAttribute("href","#");
+					a.setAttribute("class","list__link");
+					a.innerHTML = line[2];
+		
+					li.appendChild(a);
+		
+//switch sul livello
+					switch(line[1]) {
+						case '1':
+							if(indx1 == 0) { //se categoria 1
+								var x0_tmp = document.createElement("li");
+								x0_tmp.setAttribute("id",line[1]);
+								x0_tmp.setAttribute("class","list__item");
+								x0_tmp.setAttribute("data-level","0");
+								x0_tmp.setAttribute("data-category", line[1]);
+					
+								var a0_tmp = document.createElement("a");
+								a0_tmp.innerHTML = "▼";
+								x0_tmp.appendChild(a0_tmp);
+
+								x0_tmp.classList.add("firstTitle");
+								event_list.forEach(function(ev, ev_index){
+									x0_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x0_tmp);
+							}
+							/************************************************************/
+							
+							if(line[5] == 1 && L1_1 == 0) {
+								var x_tmp = document.createElement("li");
+								x_tmp.setAttribute("id",line[1]);
+								x_tmp.setAttribute("class","list__item");
+								x_tmp.setAttribute("data-level","1");
+								x_tmp.setAttribute("data-category", line[1]);
+					
+								var a_tmp = document.createElement("a");
+								a_tmp.innerHTML = "▼";
+								x_tmp.appendChild(a_tmp);
+
+								x_tmp.classList.add("firstTitle");
+								event_list.forEach(function(ev, ev_index){
+									x_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x_tmp);
+								L1_1 ++;
+							}
+							/************************************************************/
+							if(line[5] == 2 && L2_1 == 0) {
+								var x2_tmp = document.createElement("li");
+								x2_tmp.setAttribute("id",line[1]);
+								x2_tmp.setAttribute("class","list__item");
+								x2_tmp.setAttribute("data-level","2");
+								x2_tmp.setAttribute("data-category", line[1]);
+					
+								var a2_tmp = document.createElement("a");
+								a2_tmp.innerHTML = "▼";
+								x2_tmp.appendChild(a2_tmp);
+
+								x2_tmp.classList.add("firstTitle");
+								event_list.forEach(function(ev, ev_index){
+									x2_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x2_tmp);
+								L2_1 ++;
+							}
+							/************************************************************/
+							if(line[5] == 3 && L3_1 == 0) {
+								var x3_tmp = document.createElement("li");
+								x3_tmp.setAttribute("id",line[1]);
+								x3_tmp.setAttribute("class","list__item");
+								x3_tmp.setAttribute("data-level","3");
+								x3_tmp.setAttribute("data-category", line[1]);
+					
+					
+								var a3_tmp = document.createElement("a");
+								a3_tmp.innerHTML = "▼";
+								x3_tmp.appendChild(a3_tmp);
+
+								x3_tmp.classList.add("firstTitle");
+								event_list.forEach(function(ev, ev_index){
+									x3_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x3_tmp);
+								L3_1 ++;
+							}
+							indx1 ++;
+							break;
+						case '2':
+							if(indx2 == 0) {				
+							var x0_tmp = document.createElement("li");
+								x0_tmp.setAttribute("id",line[1]);
+								x0_tmp.setAttribute("class","list__item");
+								x0_tmp.setAttribute("data-level","0");
+								x0_tmp.setAttribute("data-category", line[1]);
+					
+								var a0_tmp = document.createElement("a");
+								a0_tmp.innerHTML = "▼";
+								x0_tmp.appendChild(a0_tmp);
+
+								x0_tmp.classList.add("secondTitle");
+								event_list.forEach(function(ev, ev_index){
+									x0_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x0_tmp);
+							}
+							/************************************************************/
+							if(line[5] == 1 && L1_2 == 0) {
+								var x_tmp = document.createElement("li");
+								x_tmp.setAttribute("id",line[1]);
+								x_tmp.setAttribute("class","list__item");
+								x_tmp.setAttribute("data-level","1");
+								x_tmp.setAttribute("data-category", line[1]);
+					
+								var a_tmp = document.createElement("a");
+								a_tmp.innerHTML = "▼";
+								x_tmp.appendChild(a_tmp);
+
+								x_tmp.classList.add("secondTitle");
+								event_list.forEach(function(ev, ev_index){
+									x_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x_tmp);
+								L1_2++;
+							}
+							/************************************************************/
+							if(line[5] == 2 && L2_2 == 0) {
+								var x2_tmp = document.createElement("li");
+								x2_tmp.setAttribute("id",line[1]);
+								x2_tmp.setAttribute("class","list__item");
+								x2_tmp.setAttribute("data-level","2");
+								x2_tmp.setAttribute("data-category", line[1]);
+					
+								var a2_tmp = document.createElement("a");
+								a2_tmp.innerHTML = "▼";
+								x2_tmp.appendChild(a2_tmp);
+
+								x2_tmp.classList.add("secondTitle");
+								event_list.forEach(function(ev, ev_index){
+									x2_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x2_tmp);
+								L2_2 ++;
+							}
+							/************************************************************/
+							if(line[5] == 3 && L3_2 == 0) {
+								var x3_tmp = document.createElement("li");
+								x3_tmp.setAttribute("id",line[1]);
+								x3_tmp.setAttribute("class","list__item");
+								x3_tmp.setAttribute("data-level","3");
+								x3_tmp.setAttribute("data-category", line[1]);
+					
+					
+								var a3_tmp = document.createElement("a");
+								a3_tmp.innerHTML = "▼";
+								x3_tmp.appendChild(a3_tmp);
+
+								x3_tmp.classList.add("secondTitle");
+								event_list.forEach(function(ev, ev_index){
+									x3_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x3_tmp);
+								L3_2 ++;
+							}
+							
+							indx2 ++;
+							
+							break;
+						case '3':
+							if(indx3 == 0) {
+							var x0_tmp = document.createElement("li");
+								x0_tmp.setAttribute("id",line[1]);
+								x0_tmp.setAttribute("class","list__item");
+								x0_tmp.setAttribute("data-level","0");
+								x0_tmp.setAttribute("data-category", line[1]);
+					
+								var a0_tmp = document.createElement("a");
+								a0_tmp.innerHTML = "▼";
+								x0_tmp.appendChild(a0_tmp);
+
+								x0_tmp.classList.add("thirdTitle");
+								event_list.forEach(function(ev, ev_index){
+									x0_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x0_tmp);
+							}
+							/************************************************************/
+							if(line[5] == 1 && L1_3 == 0) {
+								var x_tmp = document.createElement("li");
+								x_tmp.setAttribute("id",line[1]);
+								x_tmp.setAttribute("class","list__item");
+								x_tmp.setAttribute("data-level","1");
+								x_tmp.setAttribute("data-category", line[1]);
+					
+								var a_tmp = document.createElement("a");
+								a_tmp.innerHTML = "▼";
+								x_tmp.appendChild(a_tmp);
+
+								x_tmp.classList.add("thirdTitle");
+								event_list.forEach(function(ev, ev_index){
+									x_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x_tmp);
+								L1_3 ++;
+							}
+							/************************************************************/
+							if(line[5] == 2 && L2_3 == 0) {
+								var x2_tmp = document.createElement("li");
+								x2_tmp.setAttribute("id",line[1]);
+								x2_tmp.setAttribute("class","list__item");
+								x2_tmp.setAttribute("data-level","2");
+								x2_tmp.setAttribute("data-category", line[1]);
+					
+								var a2_tmp = document.createElement("a");
+								a2_tmp.innerHTML = "▼";
+								x2_tmp.appendChild(a2_tmp);
+
+								x2_tmp.classList.add("thirdTitle");
+								event_list.forEach(function(ev, ev_index){
+									x2_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x2_tmp);
+								L2_3 ++;
+							}
+							/************************************************************/
+							if(line[5] == 3 && L3_3 == 0) {
+								var x3_tmp = document.createElement("li");
+								x3_tmp.setAttribute("id",line[1]);
+								x3_tmp.setAttribute("class","list__item");
+								x3_tmp.setAttribute("data-level","3");
+								x3_tmp.setAttribute("data-category", line[1]);
+					
+					
+								var a3_tmp = document.createElement("a");
+								a3_tmp.innerHTML = "▼";
+								x3_tmp.appendChild(a3_tmp);
+
+								x3_tmp.classList.add("thirdTitle");
+								event_list.forEach(function(ev, ev_index){
+									x3_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x3_tmp);
+								L3_3 ++;
+							}
+
+							
+							indx3 ++;
+							break;
+						case '4':
+							if(indx4 == 0) {
+								
+								var x0_tmp = document.createElement("li");
+								x0_tmp.setAttribute("id",line[1]);
+								x0_tmp.setAttribute("class","list__item");
+								x0_tmp.setAttribute("data-level","0");
+								x0_tmp.setAttribute("data-category", line[1]);
+					
+								var a0_tmp = document.createElement("a");
+								a0_tmp.innerHTML = "▼";
+								x0_tmp.appendChild(a0_tmp);
+
+								x0_tmp.classList.add("fourthTitle");
+								event_list.forEach(function(ev, ev_index){
+									x0_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x0_tmp);
+							}
+							/************************************************************/
+							if(line[5] == 1 && L1_4 == 0) {
+								var x_tmp = document.createElement("li");
+								x_tmp.setAttribute("id",line[1]);
+								x_tmp.setAttribute("class","list__item");
+								x_tmp.setAttribute("data-level","1");
+								x_tmp.setAttribute("data-category", line[1]);
+					
+								var a_tmp = document.createElement("a");
+								a_tmp.innerHTML = "▼";
+								x_tmp.appendChild(a_tmp);
+
+								x_tmp.classList.add("fourthTitle");
+								event_list.forEach(function(ev, ev_index){
+									x_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x_tmp);
+								L1_4++;
+							}
+							/************************************************************/
+							if(line[5] == 2 && L2_4 == 0) {
+								var x2_tmp = document.createElement("li");
+								x2_tmp.setAttribute("id",line[1]);
+								x2_tmp.setAttribute("class","list__item");
+								x2_tmp.setAttribute("data-level","2");
+								x2_tmp.setAttribute("data-category", line[1]);
+					
+								var a2_tmp = document.createElement("a");
+								a2_tmp.innerHTML = "▼";
+								x2_tmp.appendChild(a2_tmp);
+
+								x2_tmp.classList.add("fourthTitle");
+								event_list.forEach(function(ev, ev_index){
+									x2_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x2_tmp);
+								L2_4++;
+							}
+							/************************************************************/
+							if(line[5] == 3 && L3_4 == 0) {
+								var x3_tmp = document.createElement("li");
+								x3_tmp.setAttribute("id",line[1]);
+								x3_tmp.setAttribute("class","list__item");
+								x3_tmp.setAttribute("data-level","3");
+								x3_tmp.setAttribute("data-category", line[1]);
+					
+					
+								var a3_tmp = document.createElement("a");
+								a3_tmp.innerHTML = "▼";
+								x3_tmp.appendChild(a3_tmp);
+
+								x3_tmp.classList.add("fourthTitle");
+								event_list.forEach(function(ev, ev_index){
+									x3_tmp.addEventListener(ev, listener, false);
+								});
+								document.getElementById("ulList").appendChild(x3_tmp);
+								L3_4++;
+							
+							}
+							indx4 ++;
+							break;
+					}
+					document.getElementById("ulList").appendChild(li);
 				}
-
-				
-				indx4 ++;
-				break;
-		}
-		
-		
-		
-		
-		
-
-		
-		document.getElementById("ulList").appendChild(li);
-	}
 	
-	var head= document.getElementsByTagName('head')[0];
-   var script= document.createElement('script');
-   script.type= 'text/javascript';
-   script.src= '/js/main.js';
-   head.appendChild(script);
+				var head= document.getElementsByTagName('head')[0];
+				var script= document.createElement('script');
+				script.type= 'text/javascript';
+				script.src= '/js/main.js';
+				head.appendChild(script);
    
-   
-   
-	
-	
-	
-	
 	//Prova inserimento elemento in lista per vedere se si potranno utilizzare gli open data successivamente.
 
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	var valori = data.opendata.split(';');
-	for(var field in valori) {
+				var valori = data.opendata.split(';');
+				for(var field in valori) {
 
-		var line = valori[field].split('***');
+					var line = valori[field].split('***');
 
-			if(typeof line[2] === "undefined")console.log("UNDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-			if(typeof line[2] !== "undefined") {
-			console.log("LUU" + line[2]);
-	var li = document.createElement("li");
-	li.setAttribute("id",5);
-	li.setAttribute("class","list__item");
-	li.setAttribute("data-level",""+line[1]);
-	li.setAttribute("data-category", "5");
-	li.setAttribute("data-space",""+line[0]);
+					if(typeof line[2] !== "undefined") {
+						console.log("LUU" + line[2]);
+						var li = document.createElement("li");
+						li.setAttribute("id",5);
+						li.setAttribute("class","list__item");
+						li.setAttribute("data-level",""+line[1]);
+						li.setAttribute("data-category", "5");
+						li.setAttribute("data-space",""+line[0]);
+								
+						var a = document.createElement("a");
+						a.setAttribute("href","#");
+						a.setAttribute("class","list__link");
+						a.innerHTML = "" + line[2] + line[3];
+	
+						if(indx5 == 0) {
+							var x0_tmp = document.createElement("li");
+							x0_tmp.setAttribute("id",5);
+							x0_tmp.setAttribute("class","list__item");
+							x0_tmp.setAttribute("data-level","0");
+							x0_tmp.setAttribute("data-category", "5");
+				
+							var a0_tmp = document.createElement("a");
+							a0_tmp.innerHTML = "▼";
+							x0_tmp.appendChild(a0_tmp);
+
+							x0_tmp.classList.add("fifthTitle");
+							event_list.forEach(function(ev, ev_index){
+								x0_tmp.addEventListener(ev, listener, false);
+							});
+							document.getElementById("ulList").appendChild(x0_tmp);
+						}
+						/************************************************************/
+						if(line[5] == 1 && L1_5 == 0) {
+							var x_tmp = document.createElement("li");
+							x_tmp.setAttribute("id",5);
+							x_tmp.setAttribute("class","list__item");
+							x_tmp.setAttribute("data-level","1");
+							x_tmp.setAttribute("data-category", "5");
+				
+							var a_tmp = document.createElement("a");
+							a_tmp.innerHTML = "▼";
+							x_tmp.appendChild(a_tmp);
+
+							x_tmp.classList.add("fifthTitle");
+							event_list.forEach(function(ev, ev_index){
+								x_tmp.addEventListener(ev, listener, false);
+							});
+							document.getElementById("ulList").appendChild(x_tmp);
+							L1_5++;
+						}
+						/************************************************************/
+						if(line[5] == 2 && L2_5 == 0) {
+							var x2_tmp = document.createElement("li");
+							x2_tmp.setAttribute("id",5);
+							x2_tmp.setAttribute("class","list__item");
+							x2_tmp.setAttribute("data-level","2");
+							x2_tmp.setAttribute("data-category", "5");
+				
+							var a2_tmp = document.createElement("a");
+							a2_tmp.innerHTML = "▼";
+							x2_tmp.appendChild(a2_tmp);
+
+							x2_tmp.classList.add("fifthTitle");
+							event_list.forEach(function(ev, ev_index){
+								x2_tmp.addEventListener(ev, listener, false);
+							});
+							document.getElementById("ulList").appendChild(x2_tmp);
+							L2_5++;
+						}
+						/************************************************************/
+						if(line[5] == 3 && L3_5 == 0) {
+							var x3_tmp = document.createElement("li");
+							x3_tmp.setAttribute("id",5);
+							x3_tmp.setAttribute("class","list__item");
+							x3_tmp.setAttribute("data-level","3");
+							x3_tmp.setAttribute("data-category", "5");
+				
+				
+							var a3_tmp = document.createElement("a");
+							a3_tmp.innerHTML = "▼";
+							x3_tmp.appendChild(a3_tmp);
+
+							x3_tmp.classList.add("fifthTitle");
+							event_list.forEach(function(ev, ev_index){
+								x3_tmp.addEventListener(ev, listener, false);
+							});
+							document.getElementById("ulList").appendChild(x3_tmp);
+							L3_5++;
+						}
 			
-	var a = document.createElement("a");
-	a.setAttribute("href","#");
-	a.setAttribute("class","list__link");
-	a.innerHTML = "" + line[2] + line[3];
-	
-				if(indx5 == 0) {
-				var x0_tmp = document.createElement("li");
-					x0_tmp.setAttribute("id",5);
-					x0_tmp.setAttribute("class","list__item");
-					x0_tmp.setAttribute("data-level","0");
-					x0_tmp.setAttribute("data-category", "5");
-		
-					var a0_tmp = document.createElement("a");
-					a0_tmp.innerHTML = "▼";
-					x0_tmp.appendChild(a0_tmp);
+						indx5 ++;
 
-					x0_tmp.classList.add("fifthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x0_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x0_tmp);
+						li.appendChild(a);
+						document.getElementById("ulList").appendChild(li);
+					}
+		
 				}
-				/************************************************************/
-				if(line[5] == 1 && L1_5 == 0) {
-					var x_tmp = document.createElement("li");
-					x_tmp.setAttribute("id",5);
-					x_tmp.setAttribute("class","list__item");
-					x_tmp.setAttribute("data-level","1");
-					x_tmp.setAttribute("data-category", "5");
-		
-					var a_tmp = document.createElement("a");
-					a_tmp.innerHTML = "▼";
-					x_tmp.appendChild(a_tmp);
-
-					x_tmp.classList.add("fifthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x_tmp);
-					L1_5++;
+				hideAllMarksBut(0);
+				for(var j = 1; j < 6; j++) {
+					Show('' + j);
 				}
-				/************************************************************/
-				if(line[5] == 2 && L2_5 == 0) {
-					var x2_tmp = document.createElement("li");
-					x2_tmp.setAttribute("id",5);
-					x2_tmp.setAttribute("class","list__item");
-					x2_tmp.setAttribute("data-level","2");
-					x2_tmp.setAttribute("data-category", "5");
-		
-					var a2_tmp = document.createElement("a");
-					a2_tmp.innerHTML = "▼";
-					x2_tmp.appendChild(a2_tmp);
-
-					x2_tmp.classList.add("fifthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x2_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x2_tmp);
-					L2_5++;
-				}
-				/************************************************************/
-				if(line[5] == 3 && L3_5 == 0) {
-					var x3_tmp = document.createElement("li");
-					x3_tmp.setAttribute("id",5);
-					x3_tmp.setAttribute("class","list__item");
-					x3_tmp.setAttribute("data-level","3");
-					x3_tmp.setAttribute("data-category", "5");
-		
-		
-					var a3_tmp = document.createElement("a");
-					a3_tmp.innerHTML = "▼";
-					x3_tmp.appendChild(a3_tmp);
-
-					x3_tmp.classList.add("fifthTitle");
-					event_list.forEach(function(ev, ev_index){
-						x3_tmp.addEventListener(ev, listener, false);
-					});
-					document.getElementById("ulList").appendChild(x3_tmp);
-				L3_5++;
-	}
-	indx5 ++;
 	
-	
-	li.appendChild(a);
-	document.getElementById("ulList").appendChild(li);
-	}
-		
-	}
-	hideAllMarksBut(0);
-	for(var j = 1; j < 6; j++) {
-		Show('' + j);
-	}
-	
-		var elems = document.getElementsByClassName("clickable_space");
+				var elems = document.getElementsByClassName("clickable_space");
 		
 	
-function hideAndShow() {
-$(".level--1").attr('data-content','');
-		 $(".level--2").attr('data-content','');
-		 $(".level--3").attr('data-content','');
-		 
-classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
-		 classie.add(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
-		 classie.add(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
+				function hideAndShow() {
+					$(".level--1").attr('data-content','');
+					$(".level--2").attr('data-content','');
+					$(".level--3").attr('data-content','');
+						 
+					classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
+					classie.add(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
+					classie.add(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
 
-		 
-		 setTimeout(function () {
-		 $(".level--1").attr('data-content','L1');
-		  $(".level--2").attr('data-content','L2');
-		  $(".level--3").attr('data-content','L3');
-		   classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
-		   classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
-		 classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
-		  }, 1000);
-}	
-
-		
-
-		
-		
-$( ".mallnav__button--all-levels" ).click(function() {
-  var list= document.getElementsByClassName("changeCol");
-		for (var i = 0; i < list.length; i++) {
-	list[i].style.fill= null;
-}
-hideAndShow();
-});		
+						 
+					setTimeout(function () {
+						$(".level--1").attr('data-content','L1');
+						$(".level--2").attr('data-content','L2');
+						$(".level--3").attr('data-content','L3');
+						classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
+						classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
+						classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
+					}, 1000);
+				}	
 
 
-$( ".mallnav__button--down" ).click(function() {
-hideAndShow();
-});	
+				$( ".mallnav__button--all-levels" ).click(function() {
+					var list= document.getElementsByClassName("changeCol");
+					for (var i = 0; i < list.length; i++) {
+						list[i].style.fill= null;
+					}
+					hideAndShow();
+				});		
 
-$( ".mallnav__button--up" ).click(function() {
-hideAndShow();
-});
+
+				$( ".mallnav__button--down" ).click(function() {
+					hideAndShow();
+				});	
+
+				$( ".mallnav__button--up" ).click(function() {
+					hideAndShow();
+				});
 
 
 
 
 				
-});
+			});
 
-			   
-
-</script>
+		</script>
 	</head>
 	<body>
 		<svg class="hidden">
 			<defs>
-			<linearGradient id="linear" x1="40%" y1="0%" x2="60%" y2="0%" spreadMethod="repeat">
-      <stop offset="0%"   stop-color="black"/>
-      <stop offset="50%" stop-color="white"/>
-	  <stop offset="100%"   stop-color="black"/>
-    </linearGradient>
-			<pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nOScgaGVpZ2h0PSc5JyBmaWxsPSdibGFjaycgLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern>
+				<linearGradient id="linear" x1="40%" y1="0%" x2="60%" y2="0%" spreadMethod="repeat">
+					<stop offset="0%"   stop-color="black"/>
+					<stop offset="50%" stop-color="white"/>
+					<stop offset="100%"   stop-color="black"/>
+				</linearGradient>
+				<pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScgLz4KICA8cmVjdCB4PScwJyB5PScwJyB3aWR0aD0nOScgaGVpZ2h0PSc5JyBmaWxsPSdibGFjaycgLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern>
 				<symbol id="hum_btn" viewBox="0 0 512 512">
 					<title>hum_btn</title>
-						<path style="fill:#64B5F6;" d="M110.741,278.144c-3.985-1.654-8.574-0.745-11.627,2.304L64,315.584l-35.115-35.136
-	c-4.16-4.171-10.914-4.179-15.085-0.019c-2.011,2.006-3.139,4.731-3.134,7.571v213.333c0,5.891,4.776,10.667,10.667,10.667h85.333
-	c5.891,0,10.667-4.776,10.667-10.667V288C117.333,283.684,114.73,279.793,110.741,278.144z"/>
-<path style="fill:#42A5F5;" d="M199.552,195.115c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
-	c-2.007,2.001-3.135,4.718-3.136,7.552v256c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667v-256
-	c0.005-2.831-1.115-5.548-3.115-7.552L199.552,195.115z"/>
-<path style="fill:#2196F3;" d="M327.552,152.448c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
-	c-2.007,2.001-3.135,4.718-3.136,7.552v298.667c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667
-	V202.667c0.005-2.831-1.115-5.548-3.115-7.552L327.552,152.448z"/>
-<path style="fill:#1976D2;" d="M498.219,131.115l-21.333-21.333c-2.004-1.999-4.721-3.12-7.552-3.115H448
-	c-2.831-0.005-5.548,1.115-7.552,3.115l-42.667,42.667c-1.999,2.004-3.12,4.721-3.115,7.552v341.333
-	c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667V138.667
-	C501.338,135.836,500.218,133.119,498.219,131.115z"/>
-<path style="fill:black;" d="M490.667,0h-64c-5.891-0.011-10.675,4.757-10.686,10.648c-0.005,2.84,1.123,5.565,3.134,7.571
-	l24.469,24.448l-80.917,80.917l-35.115-35.136c-4.165-4.164-10.917-4.164-15.083,0l-77.803,77.803l-35.115-35.136
-	c-4.165-4.164-10.917-4.164-15.083,0L64,251.584l-35.115-35.136c-4.237-4.093-10.99-3.975-15.083,0.262
-	c-3.992,4.134-3.992,10.687,0,14.82l42.667,42.667c4.165,4.164,10.917,4.164,15.083,0L192,153.749l35.115,35.115
-	c4.165,4.164,10.917,4.164,15.083,0L320,111.083l35.115,35.115c4.165,4.164,10.917,4.164,15.083,0l88.469-88.448l24.448,24.448
-	c2.001,2.007,4.718,3.135,7.552,3.136c1.399,0.003,2.784-0.273,4.075-0.811c3.989-1.649,6.591-5.539,6.592-9.856v-64
-	C501.333,4.776,496.558,0,490.667,0z"/>
+					<path style="fill:#64B5F6;" d="M110.741,278.144c-3.985-1.654-8.574-0.745-11.627,2.304L64,315.584l-35.115-35.136
+						c-4.16-4.171-10.914-4.179-15.085-0.019c-2.011,2.006-3.139,4.731-3.134,7.571v213.333c0,5.891,4.776,10.667,10.667,10.667h85.333
+						c5.891,0,10.667-4.776,10.667-10.667V288C117.333,283.684,114.73,279.793,110.741,278.144z"/>
+					<path style="fill:#42A5F5;" d="M199.552,195.115c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
+						c-2.007,2.001-3.135,4.718-3.136,7.552v256c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667v-256
+						c0.005-2.831-1.115-5.548-3.115-7.552L199.552,195.115z"/>
+					<path style="fill:#2196F3;" d="M327.552,152.448c-4.165-4.164-10.917-4.164-15.083,0l-42.667,42.667
+						c-2.007,2.001-3.135,4.718-3.136,7.552v298.667c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667
+						V202.667c0.005-2.831-1.115-5.548-3.115-7.552L327.552,152.448z"/>
+					<path style="fill:#1976D2;" d="M498.219,131.115l-21.333-21.333c-2.004-1.999-4.721-3.12-7.552-3.115H448
+						c-2.831-0.005-5.548,1.115-7.552,3.115l-42.667,42.667c-1.999,2.004-3.12,4.721-3.115,7.552v341.333
+						c0,5.891,4.776,10.667,10.667,10.667h85.333c5.891,0,10.667-4.776,10.667-10.667V138.667
+						C501.338,135.836,500.218,133.119,498.219,131.115z"/>
+					<path style="fill:black;" d="M490.667,0h-64c-5.891-0.011-10.675,4.757-10.686,10.648c-0.005,2.84,1.123,5.565,3.134,7.571
+						l24.469,24.448l-80.917,80.917l-35.115-35.136c-4.165-4.164-10.917-4.164-15.083,0l-77.803,77.803l-35.115-35.136
+						c-4.165-4.164-10.917-4.164-15.083,0L64,251.584l-35.115-35.136c-4.237-4.093-10.99-3.975-15.083,0.262
+						c-3.992,4.134-3.992,10.687,0,14.82l42.667,42.667c4.165,4.164,10.917,4.164,15.083,0L192,153.749l35.115,35.115
+						c4.165,4.164,10.917,4.164,15.083,0L320,111.083l35.115,35.115c4.165,4.164,10.917,4.164,15.083,0l88.469-88.448l24.448,24.448
+						c2.001,2.007,4.718,3.135,7.552,3.136c1.399,0.003,2.784-0.273,4.075-0.811c3.989-1.649,6.591-5.539,6.592-9.856v-64
+						C501.333,4.776,496.558,0,490.667,0z"/>
 				</symbol>
 				<symbol id="temp_btn" viewBox="0 0 512 512">
 					<title>temp_btn</title>
-						<rect x="17.763" y="50.155" style="fill:#F2F2F2;" width="466.024" height="281.078"/>
-<g>
-	<rect y="331.233" style="fill:#89D6F7;" width="501.551" height="50.155"/>
-	<rect style="fill:#89D6F7;" width="501.551" height="50.155"/>
-</g>
-<polygon style="fill:#ACB3BA;" points="340.637,501.551 428.408,501.551 392.882,397.061 387.657,381.388 300.931,381.388 
-	306.155,397.061 311.38,412.735 190.171,412.735 195.396,397.061 200.62,381.388 113.894,381.388 108.669,397.061 73.143,501.551 
-	159.869,501.551 175.543,457.665 326.008,457.665 "/>
-<rect x="17.763" y="50.155" style="fill:#E4EAEF;" width="466.024" height="15.673"/>
-<g>
-	<polygon style="fill:#9EAAB5;" points="200.62,381.388 195.396,397.061 108.669,397.061 113.894,381.388 	"/>
-	<polygon style="fill:#9EAAB5;" points="392.882,397.061 306.155,397.061 300.931,381.388 387.657,381.388 	"/>
-</g>
-<polygon style="fill:#CDD6E0;" points="132.702,253.91 118.073,239.282 216.294,141.061 285.257,210.024 368.849,125.388 
-	383.478,140.016 285.257,239.282 216.294,170.318 "/>
-<circle style="fill:#FF7058;" cx="125.388" cy="246.596" r="25.078"/>
-<circle style="fill:#FFD15C;" cx="216.294" cy="155.69" r="25.078"/>
-<circle style="fill:#54C0EB;" cx="282.122" cy="221.518" r="25.078"/>
-<circle style="fill:#4CDBC4;" cx="376.163" cy="134.792" r="25.078"/>
+					<rect x="17.763" y="50.155" style="fill:#F2F2F2;" width="466.024" height="281.078"/>
+					<g>
+						<rect y="331.233" style="fill:#89D6F7;" width="501.551" height="50.155"/>
+						<rect style="fill:#89D6F7;" width="501.551" height="50.155"/>
+					</g>
+					<polygon style="fill:#ACB3BA;" points="340.637,501.551 428.408,501.551 392.882,397.061 387.657,381.388 300.931,381.388 
+						306.155,397.061 311.38,412.735 190.171,412.735 195.396,397.061 200.62,381.388 113.894,381.388 108.669,397.061 73.143,501.551 
+						159.869,501.551 175.543,457.665 326.008,457.665 "/>
+					<rect x="17.763" y="50.155" style="fill:#E4EAEF;" width="466.024" height="15.673"/>
+					<g>
+						<polygon style="fill:#9EAAB5;" points="200.62,381.388 195.396,397.061 108.669,397.061 113.894,381.388 	"/>
+						<polygon style="fill:#9EAAB5;" points="392.882,397.061 306.155,397.061 300.931,381.388 387.657,381.388 	"/>
+					</g>
+					<polygon style="fill:#CDD6E0;" points="132.702,253.91 118.073,239.282 216.294,141.061 285.257,210.024 368.849,125.388 
+						383.478,140.016 285.257,239.282 216.294,170.318 "/>
+					<circle style="fill:#FF7058;" cx="125.388" cy="246.596" r="25.078"/>
+					<circle style="fill:#FFD15C;" cx="216.294" cy="155.69" r="25.078"/>
+					<circle style="fill:#54C0EB;" cx="282.122" cy="221.518" r="25.078"/>
+					<circle style="fill:#4CDBC4;" cx="376.163" cy="134.792" r="25.078"/>
 				</symbol>
 				<symbol id="pres_btn" viewBox="0 0 512 512">
 					<title>pres_btn</title>
 						<path style="fill:#61BFAF;" d="M504.123,133.908h-6.302l-103.975,49.625v170.929l110.277-55.926
-	C504.123,298.535,504.123,133.908,504.123,133.908z"/>
-<path style="fill:#37A18E;" d="M393.846,183.532l-103.975-49.625h-6.302v164.628l110.277,55.926V183.532z"/>
-<path style="fill:#3DB39E;" d="M283.569,133.908L393.846,78.77l110.277,55.138l-110.277,55.138L283.569,133.908z"/>
-<path style="fill:#E5766D;" d="M362.338,55.138h-6.302l-103.975,49.625v324.529l110.277-55.926V55.138z"/>
-<path style="fill:#CB4E44;" d="M252.062,104.763L148.086,55.138h-6.302v318.228l110.277,55.926
-	C252.062,429.292,252.062,104.763,252.062,104.763z"/>
-<path style="fill:#E2574C;" d="M141.785,55.138L252.062,0l110.277,55.138l-110.277,55.138L141.785,55.138z"/>
-<path style="fill:#EFCF7B;" d="M220.554,189.046h-6.302l-103.975,49.625v265.452l110.277-55.926V189.046z"/>
-<path style="fill:#D7B354;" d="M110.277,238.671L6.302,189.046H0v259.151l110.277,55.926V238.671z"/>
-<path style="fill:#EFC75E;" d="M0,189.046l110.277-55.138l110.277,55.138l-110.277,55.138L0,189.046z"/>
+							C504.123,298.535,504.123,133.908,504.123,133.908z"/>
+						<path style="fill:#37A18E;" d="M393.846,183.532l-103.975-49.625h-6.302v164.628l110.277,55.926V183.532z"/>
+						<path style="fill:#3DB39E;" d="M283.569,133.908L393.846,78.77l110.277,55.138l-110.277,55.138L283.569,133.908z"/>
+						<path style="fill:#E5766D;" d="M362.338,55.138h-6.302l-103.975,49.625v324.529l110.277-55.926V55.138z"/>
+						<path style="fill:#CB4E44;" d="M252.062,104.763L148.086,55.138h-6.302v318.228l110.277,55.926
+							C252.062,429.292,252.062,104.763,252.062,104.763z"/>
+						<path style="fill:#E2574C;" d="M141.785,55.138L252.062,0l110.277,55.138l-110.277,55.138L141.785,55.138z"/>
+						<path style="fill:#EFCF7B;" d="M220.554,189.046h-6.302l-103.975,49.625v265.452l110.277-55.926V189.046z"/>
+						<path style="fill:#D7B354;" d="M110.277,238.671L6.302,189.046H0v259.151l110.277,55.926V238.671z"/>
+						<path style="fill:#EFC75E;" d="M0,189.046l110.277-55.138l110.277,55.138l-110.277,55.138L0,189.046z"/>
 				</symbol>
 				<symbol id="qual_btn" viewBox="0 0 512 512">
 					<title>qual_btn</title>
-
-		<path style="fill:#D8DCE1;" d="M0,134v328c0,22.055,17.945,40,40,40h432c22.055,0,40-17.945,40-40V134H0z"/>
-
-		<path style="fill:#FF4F19;" d="M472,22H40C17.945,22,0,39.945,0,62v72h512V62C512,39.945,494.054,22,472,22z M64,102
-			c-13.255,0-24-10.745-24-24s10.745-24,24-24s24,10.745,24,24S77.255,102,64,102z M448,102c-13.255,0-24-10.745-24-24
-			s10.745-24,24-24s24,10.745,24,24S461.255,102,448,102z"/>
-			<path style="fill:#FFFFFF;" d="M256,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,206,256,206z"/>
-			<path style="fill:#FFFFFF;" d="M176,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,206,176,206z"/>
-			<path style="fill:#FFFFFF;" d="M96,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,206,96,206z"/>
-			<path style="fill:#FFFFFF;" d="M336,206c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
-				S353.648,206,336,206z"/>
-			<path style="fill:#FFFFFF;" d="M416,270c17.648,0,32-14.352,32-32s-14.352-32-32-32c-17.648,0-32,14.352-32,32
-				S398.351,270,416,270z"/>
-			<path style="fill:#FFFFFF;" d="M256,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,286,256,286z"/>
-			<path style="fill:#FFFFFF;" d="M176,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,286,176,286z"/>
-			<path style="fill:#FFFFFF;" d="M96,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,286,96,286z"/>
-			<path style="fill:#FFFFFF;" d="M336,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
-				S353.648,286,336,286z"/>
-			<path style="fill:#FFFFFF;" d="M416,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
-				S433.648,286,416,286z"/>
-			<path style="fill:#FFFFFF;" d="M256,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
-				C288,380.351,273.648,366,256,366z"/>
-			<path style="fill:#FFFFFF;" d="M176,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
-				C208,380.351,193.648,366,176,366z"/>
-			<path style="fill:#FFFFFF;" d="M96,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
-				C128,380.351,113.648,366,96,366z"/>
-			<path style="fill:#FFFFFF;" d="M336,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
-				C368,380.351,353.648,366,336,366z"/>
-			<path style="fill:#FFFFFF;" d="M416,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
-				C448,380.351,433.648,366,416,366z"/>
-			<path style="fill:#5C546A;" d="M64,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
-				C76,84.629,70.625,90,64,90z"/>
-			<path style="fill:#5C546A;" d="M448,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
-				C460,84.629,454.625,90,448,90z"/>
-		<circle style="fill:#FFD200;" cx="96" cy="238" r="32"/>
-		<circle style="fill:#FF9600;" cx="256" cy="398" r="32"/>
-		<circle style="fill:#FF4F19;" cx="336" cy="318" r="32"/>
-
+					<path style="fill:#D8DCE1;" d="M0,134v328c0,22.055,17.945,40,40,40h432c22.055,0,40-17.945,40-40V134H0z"/>
+						<path style="fill:#FF4F19;" d="M472,22H40C17.945,22,0,39.945,0,62v72h512V62C512,39.945,494.054,22,472,22z M64,102
+						c-13.255,0-24-10.745-24-24s10.745-24,24-24s24,10.745,24,24S77.255,102,64,102z M448,102c-13.255,0-24-10.745-24-24
+						s10.745-24,24-24s24,10.745,24,24S461.255,102,448,102z"/>
+					<path style="fill:#FFFFFF;" d="M256,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,206,256,206z"/>
+					<path style="fill:#FFFFFF;" d="M176,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,206,176,206z"/>
+					<path style="fill:#FFFFFF;" d="M96,206c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,206,96,206z"/>
+					<path style="fill:#FFFFFF;" d="M336,206c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+							S353.648,206,336,206z"/>
+					<path style="fill:#FFFFFF;" d="M416,270c17.648,0,32-14.352,32-32s-14.352-32-32-32c-17.648,0-32,14.352-32,32
+							S398.351,270,416,270z"/>
+					<path style="fill:#FFFFFF;" d="M256,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S273.648,286,256,286z"/>
+					<path style="fill:#FFFFFF;" d="M176,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S193.648,286,176,286z"/>
+					<path style="fill:#FFFFFF;" d="M96,286c-17.648,0-32,14.352-32,32s14.352,32,32,32s32-14.352,32-32S113.648,286,96,286z"/>
+					<path style="fill:#FFFFFF;" d="M336,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+							S353.648,286,336,286z"/>
+					<path style="fill:#FFFFFF;" d="M416,286c-17.648,0-32,14.352-32,32s14.352,32,32,32c17.648,0,32-14.352,32-32
+							S433.648,286,416,286z"/>
+					<path style="fill:#FFFFFF;" d="M256,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+							C288,380.351,273.648,366,256,366z"/>
+					<path style="fill:#FFFFFF;" d="M176,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+							C208,380.351,193.648,366,176,366z"/>
+					<path style="fill:#FFFFFF;" d="M96,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32s32-14.352,32-32
+							C128,380.351,113.648,366,96,366z"/>
+					<path style="fill:#FFFFFF;" d="M336,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
+							C368,380.351,353.648,366,336,366z"/>
+					<path style="fill:#FFFFFF;" d="M416,366c-17.648,0-32,14.352-32,32c0,17.648,14.352,32,32,32c17.648,0,32-14.352,32-32
+							C448,380.351,433.648,366,416,366z"/>
+					<path style="fill:#5C546A;" d="M64,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
+							C76,84.629,70.625,90,64,90z"/>
+					<path style="fill:#5C546A;" d="M448,90c-6.625,0-12-5.371-12-12V22c0-6.629,5.375-12,12-12s12,5.371,12,12v56
+							C460,84.629,454.625,90,448,90z"/>
+					<circle style="fill:#FFD200;" cx="96" cy="238" r="32"/>
+					<circle style="fill:#FF9600;" cx="256" cy="398" r="32"/>
+					<circle style="fill:#FF4F19;" cx="336" cy="318" r="32"/>
 				</symbol>
 				<symbol id="back" viewBox="0 0 650 512">
 					<title>back</title>
 					<path d="M496.5,233.842c-30.841-76.706-114.112-115.06-249.823-115.06h-63.953V45.693c0-4.952-1.809-9.235-5.424-12.85
-		c-3.617-3.617-7.896-5.426-12.847-5.426c-4.952,0-9.235,1.809-12.85,5.426L5.424,179.021C1.809,182.641,0,186.922,0,191.871
-		c0,4.948,1.809,9.229,5.424,12.847L151.604,350.9c3.619,3.613,7.902,5.428,12.85,5.428c4.947,0,9.229-1.814,12.847-5.428
-		c3.616-3.614,5.424-7.898,5.424-12.848v-73.094h63.953c18.649,0,35.349,0.568,50.099,1.708c14.749,1.143,29.413,3.189,43.968,6.143
-		c14.564,2.95,27.224,6.991,37.979,12.135c10.753,5.144,20.794,11.756,30.122,19.842c9.329,8.094,16.943,17.7,22.847,28.839
-		c5.896,11.136,10.513,24.311,13.846,39.539c3.326,15.229,4.997,32.456,4.997,51.675c0,10.466-0.479,22.176-1.428,35.118
-		c0,1.137-0.236,3.375-0.715,6.708c-0.473,3.333-0.712,5.852-0.712,7.562c0,2.851,0.808,5.232,2.423,7.136
-		c1.622,1.902,3.86,2.851,6.714,2.851c3.046,0,5.708-1.615,7.994-4.853c1.328-1.711,2.561-3.806,3.71-6.283
-		c1.143-2.471,2.43-5.325,3.854-8.562c1.431-3.237,2.43-5.513,2.998-6.848c24.17-54.238,36.258-97.158,36.258-128.756
-		C511.63,291.039,506.589,259.344,496.5,233.842z"></path>
+						c-3.617-3.617-7.896-5.426-12.847-5.426c-4.952,0-9.235,1.809-12.85,5.426L5.424,179.021C1.809,182.641,0,186.922,0,191.871
+						c0,4.948,1.809,9.229,5.424,12.847L151.604,350.9c3.619,3.613,7.902,5.428,12.85,5.428c4.947,0,9.229-1.814,12.847-5.428
+						c3.616-3.614,5.424-7.898,5.424-12.848v-73.094h63.953c18.649,0,35.349,0.568,50.099,1.708c14.749,1.143,29.413,3.189,43.968,6.143
+						c14.564,2.95,27.224,6.991,37.979,12.135c10.753,5.144,20.794,11.756,30.122,19.842c9.329,8.094,16.943,17.7,22.847,28.839
+						c5.896,11.136,10.513,24.311,13.846,39.539c3.326,15.229,4.997,32.456,4.997,51.675c0,10.466-0.479,22.176-1.428,35.118
+						c0,1.137-0.236,3.375-0.715,6.708c-0.473,3.333-0.712,5.852-0.712,7.562c0,2.851,0.808,5.232,2.423,7.136
+						c1.622,1.902,3.86,2.851,6.714,2.851c3.046,0,5.708-1.615,7.994-4.853c1.328-1.711,2.561-3.806,3.71-6.283
+						c1.143-2.471,2.43-5.325,3.854-8.562c1.431-3.237,2.43-5.513,2.998-6.848c24.17-54.238,36.258-97.158,36.258-128.756
+						C511.63,291.039,506.589,259.344,496.5,233.842z"></path>
 				</symbol>
 				<symbol id="icon-pencil" viewBox="0 0 32 32">
 					<title>pencil</title>
@@ -1405,7 +1353,7 @@ hideAndShow();
 				</symbol>
 				<symbol id="icon-search" viewBox="0 0 32 32">
 					<title>search</title>
-					<path class="path1" d="M26.819 24.917c0.262 0.262 0.262 0.688 0 0.951l-0.951 0.951c-0.263 0.262-0.688 0.262-0.951 0l-6.656-6.656c-0.072-0.072-0.12-0.158-0.153-0.248-1.365 0.998-3.041 1.593-4.862 1.593-4.562 0-8.261-3.699-8.261-8.261s3.699-8.261 8.261-8.261c4.562 0 8.261 3.699 8.261 8.261 0 1.821-0.595 3.497-1.593 4.862 0.091 0.032 0.176 0.080 0.248 0.153l6.656 6.656zM13.246 7.739c-3.041 0-5.508 2.466-5.508 5.508s2.466 5.508 5.508 5.508 5.508-2.466 5.508-5.508c0-3.041-2.466-5.508-5.508-5.508z"></path>
+						<path class="path1" d="M26.819 24.917c0.262 0.262 0.262 0.688 0 0.951l-0.951 0.951c-0.263 0.262-0.688 0.262-0.951 0l-6.656-6.656c-0.072-0.072-0.12-0.158-0.153-0.248-1.365 0.998-3.041 1.593-4.862 1.593-4.562 0-8.261-3.699-8.261-8.261s3.699-8.261 8.261-8.261c4.562 0 8.261 3.699 8.261 8.261 0 1.821-0.595 3.497-1.593 4.862 0.091 0.032 0.176 0.080 0.248 0.153l6.656 6.656zM13.246 7.739c-3.041 0-5.508 2.466-5.508 5.508s2.466 5.508 5.508 5.508 5.508-2.466 5.508-5.508c0-3.041-2.466-5.508-5.508-5.508z"></path>
 				</symbol>
 				<symbol id="icon-stack" viewBox="0 0 32 32">
 					<title>stack</title>
@@ -1596,491 +1544,430 @@ hideAndShow();
 			</defs>
 		</svg>
 		<div class="container">
-		<div id="pageLoad">
-		<div class="spinner">
-  <div class="ball"></div>
-  <p>LOADING</p>
-</div>
-</div>
+			<div id="pageLoad">
+				<div class="spinner">
+					<div class="ball"></div>
+					<p>LOADING</p>
+				</div>
+			</div>
 			<div class="main">		
 				<header class="codrops-header">
 					<img class="logoUnibo" src="/img/logo.png" alt=""/>
-				</header>
+				</header>			
+
+				<svg id="search-button">
+					<image xlink:href="/img/temp_hum.svg">
+				</svg>
+
+				<svg id="qual_temp-button">
+					<image xlink:href="/img/qual_pres.svg">
+				</svg>
+	 
+				<div id="welcomeDiv"  style="display:none;" class="content__sensor" > 
+					<section class="dashboard" id="main-column">
+						<button id="temp_storico_button">
+							<svg class="icon icon--cross"><use xlink:href="#temp_btn"></use></svg>
+						</button>
+						<button id="hum_storico_button">
+							<svg class="icon icon--cross"><use xlink:href="#hum_btn"></use></svg>
+						</button>
+						<button id="close_button" class="close_button">
+							<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+						</button>
+						<div id="sensorValues">
+							<div class="con">
+								<div class="de">
+									<div class="den">
+									  <div class="dene">
+										<div class="denem">
+										  <div class="deneme">
+											<div class="volts">23</div><strong>&deg;</strong>
+										  </div>
+										</div>
+									  </div>
+									</div>
+								</div>
+								
+								<div class="de2">
+									<div class="den">
+									  <div class="dene">
+										<div class="denem">
+										  <div class="deneme">
+											<div class="amps">23</div><strong>&deg;</strong>
+										  </div>
+										</div>
+									  </div>
+									</div>
+								</div>
+							
+								<div class="wrapper">
+									<div class="green">
+										<div class="progress">
+											<div class="inner">
+												<div class="percent"><span><div class="moisture">67</div></span></div>
+												<div class="water"></div>
+												<div class="glare"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
+					</section>
+				</div>
+
 				
+				<div id="welcomeDiv2"  style="display:none;" class="content__sensor" > 
+					<button id="back_button" class ="back_tempHum_button">
+						<svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+					</button>
+					<button id="close_button" class="close_button">
+						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+					</button>
+	 
+					<section class="dashboard" id="main-column">
+						<div id="myChart"></div>
+					</section>
+				</div>
+	 
+	 
+				<div id="hum_storico_Div"  style="display:none;" class="content__sensor" > 
+					<button id="back_button" class ="back_tempHum_button">
+						<svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+					</button>
+					<button id="close_button" class="close_button">
+						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+					</button>
 
+					<section class="dashboard" id="main-column">
+						<div>
+							<span class="font--robotoslab med-hum">Valori medi di umidità</span>
+							<div class="wrap_h">
+								<div class="barra barra1 bubbles"> <span id="span_barra2">LU</span></div>
+								<div class="barra barra2 bubbles2"><span id="span_barra2">MA</span></div>
+								<div class="barra barra3 bubbles3"><span id="span_barra2">ME</span></div>
+								<div class="barra barra4 bubbles4"><span id="span_barra2">GI</span></div>
+								<div class="barra barra5 bubbles5"><span id="span_barra2">VE</span></div>
+								<div class="barra barra6 bubbles6"><span id="span_barra2">SA<span></div>
+								<div class="barra barra7 bubbles7"><span id="span_barra2">DO</span></div>
+								<div class="pointer_height">Height:
+									<span class="data-height"></span>
+								</div>
+							</div>
+							
+							<div id="boxContainer">
+								<div class='box_cont blue arrow-left-center'>
+								<div class='centererer'><button id="btnCloseHumInfos" class='close'>Close</button></div>
+								<span class ='avg_span'>Umidità Media</span> <span class="avg_span_val">34</span>
+								<span class ='max_span'>Umidità Max</span> <span class="max_span_val">44</span>
+								<span class ='min_span'>Umidità Min</span> <span class="min_span_val">22</span>
+								</div>
+							</div>
 
-	<svg id="search-button">
-	<image xlink:href="/img/temp_hum.svg">
-</svg>
+						</div>
+					</section>
+				</div>
+	 
+	 
+				<div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
+					<section class="dashboard" id="main-column">
+						<button id="pres_storico_button">
+							<svg class="icon icon--cross"><use xlink:href="#pres_btn"></use></svg>
+						</button>
+						<button id="qual_storico_button">
+							<svg class="icon icon--cross"><use xlink:href="#qual_btn"></use></svg>
+						</button>
+						<button id="close_button" class="close_button">
+							<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+						</button>
 
-<svg id="qual_temp-button">
-	<image xlink:href="/img/qual_pres.svg">
-</svg>
- 
- <div id="welcomeDiv"  style="display:none;" class="content__sensor" > 
+						<div id="sensorValues2">
+							<div class ="p_move">
+								<div id="prog_q" data-perc="0">
+									<div class="bar_q"><span></span></div>
+									<div class="label_q"><span></span></div>
+								</div>
+							</div>
+							<div id='pChart'></div>
 
- 
- <section class="dashboard" id="main-column">
-  <button id="temp_storico_button">
-    <svg class="icon icon--cross"><use xlink:href="#temp_btn"></use></svg>
- </button>
- <button id="hum_storico_button">
-    <svg class="icon icon--cross"><use xlink:href="#hum_btn"></use></svg>
- </button>
- <button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
-  <div id="sensorValues">
-   
-  
-  <div class="con">
-    <div class="de">
-        <div class="den">
-          <div class="dene">
-            <div class="denem">
-              <div class="deneme">
-                <div class="volts">23</div><strong>&deg;</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-	
-	<div class="de2">
-        <div class="den">
-          <div class="dene">
-            <div class="denem">
-              <div class="deneme">
-                <div class="amps">23</div><strong>&deg;</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-	
-	<div class="wrapper">
-  
-	  <div class="green">
-		<div class="progress">
-		  <div class="inner">
-			<div class="percent"><span><div class="moisture">67</div></span></div>
-			<div class="water"></div>
-			<div class="glare"></div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-</div>
+						</div>
+						<div id="sensorData2" style="width:100%; height:20%; margin: 0 0;"></div>
+					</section>
+				</div>
+	 
+	 
+	 
+				<div id="pres_storico_Div"  style="display:none;" class="content__sensor" > 
+					<button id="back_button" class ="back_qualPres_button">
+						<svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+					</button>
+					<button id="close_button" class="close_button">
+						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+					</button>
+					<section class="dashboard" id="main-column">
 
+						<div class="external_p">
+							<div class="chart-container">
+								<div class="base"></div>
+									<!-- Left Side Meter-->
+								<ul class="meter">
+									<li><div>$100,000</div></li>
+									<li><div>$80,000</div></li>
+									<li><div>$60,000</div></li>
+									<li><div>$40,000</div></li>
+									<li><div>Less Than $20,000</div></li>
+								</ul>
+								<div class="meter2">
+									<span>LU</span>
+									<span>MA</span>
+									<span>ME</span>
+									<span>GI</span>
+									<span>VE</span>
+									<span>SA</span>
+									<span>DO</span>
+								</div>
+								<!-- Background-Grid -->
+								<table>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+								<!-- End Background Grid -->
 
-	
-  </div>
-  <div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
-</section>
- </div>
- 
- 
- 
- 
- 
- 
-  <div id="welcomeDiv2"  style="display:none;" class="content__sensor" > 
-    <button id="back_button" class ="back_tempHum_button">
-    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
- </button>
-<button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
- 
- <section class="dashboard" id="main-column">
- 
-  <div id="myChart"></div>
-</section>
- </div>
- 
- 
-   <div id="hum_storico_Div"  style="display:none;" class="content__sensor" > 
-    <button id="back_button" class ="back_tempHum_button">
-    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
- </button>
-<button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
- 
- <section class="dashboard" id="main-column">
- 
- <div>
-<span class="font--robotoslab med-hum">Valori medi di umidità</span>
-  <div class="wrap_h">
-  <div class="barra barra1 bubbles"> <span id="span_barra2">LU</span>
-  </div>
-  <div class="barra barra2 bubbles2"><span id="span_barra2">MA</span>
-  </div>
-  <div class="barra barra3 bubbles3"><span id="span_barra2">ME</span>
-  </div>
-  <div class="barra barra4 bubbles4"><span id="span_barra2">GI</span>
-  </div>
-  <div class="barra barra5 bubbles5"><span id="span_barra2">VE</span>
-  </div>
-   <div class="barra barra6 bubbles6"><span id="span_barra2">SA<span>
-  </div>
-   <div class="barra barra7 bubbles7"><span id="span_barra2">DO</span>
-  </div>
-  <div class="pointer_height">Height:
-      <span class="data-height"></span>
-  </div>
-  
-  
-</div>
-<div id="boxContainer">
-    <div class='box_cont blue arrow-left-center'>
-	<div class='centererer'><button id="btnCloseHumInfos" class='close'>Close</button></div>
-	<span class ='avg_span'>Umidità Media</span> <span class="avg_span_val">34</span>
-	<span class ='max_span'>Umidità Max</span> <span class="max_span_val">44</span>
-	<span class ='min_span'>Umidità Min</span> <span class="min_span_val">22</span>
-	</div>
-	
-  </div>
+								<div class="bar_p two"></div>   
+								<div class="bar_p three"></div>
+								<div class="bar_p four"></div>   
+								<div class="bar_p five"></div>   
+								<div class="bar_p six"></div>
+								<div class="bar_p seven"></div>   
+								<div class="bar_p eight"></div>  
+							</div>
+						</div>
+					</section>
 
-</div>
+					<div id="boxContainer" class="contPr">
+						<div class='box_cont blue arrow-left-center'>
+							<div class='centererer'><button id="btnClosePrInfos" class='close'>Close</button></div>
+							<span class ='avg_span'>Pressione Media</span> <span class="avg_span_val avgPr">34</span>
+							<span class ='max_span'>Pressione Max</span> <span class="max_span_val maxPr">44</span>
+							<span class ='min_span'>Pressione Min</span> <span class="min_span_val minPr">22</span>
+						</div>
+		
+					</div>
+				</div>
+	 
+	 
+				<div id="qual_storico_Div"  style="display:none;" class="content__sensor" > 
+					<button id="back_button" class ="back_qualPres_button">
+						<svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
+					</button>
+					<button id="close_button" class="close_button">
+						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
+					</button>
+					<section class="dashboard" id="main-column">
+						<div id="myChart_q_storico"></div>
+					</section>
+				</div>
+	 
+	 
+				<div class="bg">
+					<svg version="1.1"  id="atomic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+						width="350px" height="350px" viewBox="0 0 400 400" xml:space="preserve">
+						<circle fill="none" cx="204.413" cy="203.177" r="141.493"/>
+						<g class="atom">
+							<path fill="#7A9C49" d="M204.035,252.4c-9.988,0-17.812-21.622-17.812-49.225c0-27.599,7.824-49.219,17.812-49.219
+								c9.991,0,17.816,21.62,17.816,49.219C221.852,230.778,214.026,252.4,204.035,252.4z M204.035,154.957
+								c-9.27,0-16.812,21.631-16.812,48.219c0,26.591,7.542,48.225,16.812,48.225c9.272,0,16.816-21.633,16.816-48.225
+								C220.852,176.588,213.308,154.957,204.035,154.957z"/>
+							<path fill="#7A9C49" d="M172.597,232.828c-5.347,0-9.068-1.491-10.761-4.312c-2.5-4.16-0.378-10.7,5.974-18.417
+								c6.242-7.584,15.853-15.467,27.061-22.195c14.763-8.864,30.322-14.371,40.605-14.371c5.348,0,9.07,1.491,10.764,4.312
+								c5.138,8.561-9.371,26.397-33.031,40.607C198.439,227.319,182.878,232.828,172.597,232.828z M235.476,174.533
+								c-10.112,0-25.474,5.452-40.09,14.228c-11.113,6.671-20.632,14.475-26.804,21.974c-5.974,7.258-8.121,13.552-5.888,17.267
+								c1.502,2.503,4.927,3.826,9.903,3.826c10.11,0,25.475-5.454,40.097-14.234c22.793-13.688,37.457-31.29,32.688-39.235
+								C243.879,175.856,240.454,174.533,235.476,174.533z"/>
+							<path fill="#7A9C49" d="M235.32,231.218c-10.358,0-25.183-4.604-39.655-12.314c-24.36-12.975-39.768-30.046-35.076-38.865
+								c1.708-3.204,5.913-4.897,12.161-4.897c10.359,0,25.186,4.603,39.662,12.313c24.357,12.973,39.761,30.045,35.068,38.865
+								C245.772,229.525,241.567,231.218,235.32,231.218z M172.75,176.143c-5.855,0-9.755,1.51-11.278,4.367
+								c-4.355,8.185,11.195,25.013,34.663,37.512c14.335,7.637,28.983,12.197,39.186,12.197c5.855,0,9.754-1.51,11.277-4.368
+								c4.355-8.186-11.19-25.014-34.655-37.512C197.604,180.702,182.952,176.143,172.75,176.143z"/>
+							<path fill="#7A9C49" d="M204.034,211.087c-4.36,0-7.907-3.549-7.907-7.911c0-4.36,3.547-7.908,7.907-7.908
+								c4.361,0,7.908,3.548,7.908,7.908C211.942,207.538,208.395,211.087,204.034,211.087z M204.034,196.268
+								c-3.809,0-6.907,3.099-6.907,6.908c0,3.811,3.099,6.911,6.907,6.911c3.809,0,6.908-3.1,6.908-6.911
+								C210.942,199.367,207.843,196.268,204.034,196.268z"/>
+						</g>
 
-
- </section>
- </div>
- 
- 
-  <div id="qual_pres_Div"  style="display:none;" class="content__sensor" > 
- <section class="dashboard" id="main-column">
-  <button id="pres_storico_button">
-    <svg class="icon icon--cross"><use xlink:href="#pres_btn"></use></svg>
- </button>
-  <button id="qual_storico_button">
-    <svg class="icon icon--cross"><use xlink:href="#qual_btn"></use></svg>
- </button>
- <button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
-
-  <div id="sensorValues2">
-   
-
- <div class ="p_move">
-   <div id="prog_q" data-perc="0">
-	<div class="bar_q"><span></span></div>
-	<div class="label_q"><span></span></div>
-</div>
-</div>
-<div id='pChart'></div>
-
-	
-  </div>
-  <div id="sensorData2" style="width:100%; height:20%; margin: 0 0;"></div>
-</section>
- </div>
- 
- 
- 
-   <div id="pres_storico_Div"  style="display:none;" class="content__sensor" > 
-   <button id="back_button" class ="back_qualPres_button">
-    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
- </button>
-<button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
- <section class="dashboard" id="main-column">
-
- <div class="external_p">
-    <div class="chart-container">
-    <div class="base"></div>
-        <!-- Left Side Meter-->
-    <ul class="meter">
-      <li><div>$100,000</div></li>
-      <li><div>$80,000</div></li>
-      <li><div>$60,000</div></li>
-      <li><div>$40,000</div></li>
-      <li><div>Less Than $20,000</div></li>
-    </ul>
-	<div class="meter2">
-      <span>LU</span>
-	  <span>MA</span>
-	  <span>ME</span>
-	  <span>GI</span>
-	  <span>VE</span>
-	  <span>SA</span>
-	  <span>DO</span>
-    </div>
-    <!-- Background-Grid -->
-    <table>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-    <!-- End Background Grid -->
-
-    <div class="bar_p two"></div>   
-    <div class="bar_p three"></div>
-    <div class="bar_p four"></div>   
-    <div class="bar_p five"></div>   
-    <div class="bar_p six"></div>
-    <div class="bar_p seven"></div>   
-	<div class="bar_p eight"></div>  
-  </div>
-  </div>
-</section>
-
-<div id="boxContainer" class="contPr">
-    <div class='box_cont blue arrow-left-center'>
-	<div class='centererer'><button id="btnClosePrInfos" class='close'>Close</button></div>
-	<span class ='avg_span'>Pressione Media</span> <span class="avg_span_val avgPr">34</span>
-	<span class ='max_span'>Pressione Max</span> <span class="max_span_val maxPr">44</span>
-	<span class ='min_span'>Pressione Min</span> <span class="min_span_val minPr">22</span>
-	</div>
-	
-  </div>
- </div>
- 
- 
-   <div id="qual_storico_Div"  style="display:none;" class="content__sensor" > 
-   <button id="back_button" class ="back_qualPres_button">
-    <svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
- </button>
-<button id="close_button" class="close_button">
-    <svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
- </button>
- <section class="dashboard" id="main-column">
-
- 
-  <div id="myChart_q_storico"></div>
-</section>
- </div>
- 
- 
- 
- 
-  <div class="bg">
-
-<svg version="1.1"  id="atomic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-	 width="350px" height="350px" viewBox="0 0 400 400" xml:space="preserve">
- <defs>
-  </defs>
-<circle fill="none" cx="204.413" cy="203.177" r="141.493"/>
-
-
-<g class="atom">
-	<path fill="#7A9C49" d="M204.035,252.4c-9.988,0-17.812-21.622-17.812-49.225c0-27.599,7.824-49.219,17.812-49.219
-		c9.991,0,17.816,21.62,17.816,49.219C221.852,230.778,214.026,252.4,204.035,252.4z M204.035,154.957
-		c-9.27,0-16.812,21.631-16.812,48.219c0,26.591,7.542,48.225,16.812,48.225c9.272,0,16.816-21.633,16.816-48.225
-		C220.852,176.588,213.308,154.957,204.035,154.957z"/>
-	<path fill="#7A9C49" d="M172.597,232.828c-5.347,0-9.068-1.491-10.761-4.312c-2.5-4.16-0.378-10.7,5.974-18.417
-		c6.242-7.584,15.853-15.467,27.061-22.195c14.763-8.864,30.322-14.371,40.605-14.371c5.348,0,9.07,1.491,10.764,4.312
-		c5.138,8.561-9.371,26.397-33.031,40.607C198.439,227.319,182.878,232.828,172.597,232.828z M235.476,174.533
-		c-10.112,0-25.474,5.452-40.09,14.228c-11.113,6.671-20.632,14.475-26.804,21.974c-5.974,7.258-8.121,13.552-5.888,17.267
-		c1.502,2.503,4.927,3.826,9.903,3.826c10.11,0,25.475-5.454,40.097-14.234c22.793-13.688,37.457-31.29,32.688-39.235
-		C243.879,175.856,240.454,174.533,235.476,174.533z"/>
-	<path fill="#7A9C49" d="M235.32,231.218c-10.358,0-25.183-4.604-39.655-12.314c-24.36-12.975-39.768-30.046-35.076-38.865
-		c1.708-3.204,5.913-4.897,12.161-4.897c10.359,0,25.186,4.603,39.662,12.313c24.357,12.973,39.761,30.045,35.068,38.865
-		C245.772,229.525,241.567,231.218,235.32,231.218z M172.75,176.143c-5.855,0-9.755,1.51-11.278,4.367
-		c-4.355,8.185,11.195,25.013,34.663,37.512c14.335,7.637,28.983,12.197,39.186,12.197c5.855,0,9.754-1.51,11.277-4.368
-		c4.355-8.186-11.19-25.014-34.655-37.512C197.604,180.702,182.952,176.143,172.75,176.143z"/>
-	<path fill="#7A9C49" d="M204.034,211.087c-4.36,0-7.907-3.549-7.907-7.911c0-4.36,3.547-7.908,7.907-7.908
-		c4.361,0,7.908,3.548,7.908,7.908C211.942,207.538,208.395,211.087,204.034,211.087z M204.034,196.268
-		c-3.809,0-6.907,3.099-6.907,6.908c0,3.811,3.099,6.911,6.907,6.911c3.809,0,6.908-3.1,6.908-6.911
-		C210.942,199.367,207.843,196.268,204.034,196.268z"/>
-</g>
-
-</svg>
-</div>
+					</svg>
+				</div>
 				<section class="box">
 				</section>
 				<div class="mall">
 					<div class="surroundings">
-					
-<!--
-						<svg id="svgCar" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" 
-	viewBox="0 0 7900 6000" xmlns:xlink="http://www.w3.org/1999/xlink" smiling="fake">
-	<script type="text/ecmascript" xlink:href="https://cdn.rawgit.com/FakeSmile/FakeSmile/master/smil.user.js"></script>
-	 	<defs>
-		<g id="coche">
-			<polygon fill="#73808B" points="37.3,207.1 37.3,220 69.5,220 69.5,207.1 "/>
-			<polygon fill="#73808B" points="198.3,207.1 198.3,220 230.4,220 230.4,207.1 "/>
-			<path fill="#FF6A00" d="M101.7 71.9l64.4 0c20.9,0 38.6,17.7 38.6,38.6l0 0 0 152.9c0,17.6 -6.5,33.8 -19.4,46.6 -12.9,12.9 -28.9,19.3 -46.6,19.3l-9.7 0c-17.6,0 -33.8,-6.4 -46.6,-19.3 -12.9,-12.9 -19.3,-29 -19.3,-46.6l0 -154.5c0,-20.9 17.7,-37 38.6,-37 0,0 0,0 0,0l0 0z"/>
-			<path fill="#D76A00" d="M185.4 226.4c0,40.2 -17.7,77.2 -48.3,102.9l1.6 0c37,0 66,-28.9 66,-65.9l0 -154.5c0,-20.9 -17.7,-38.6 -38.6,-38.6l0 0 -64.4 0c-14.5,0 -27.4,8 -33.8,20.9 67.6,9.7 117.5,66 117.5,135.2l0 0z"/>
-			<path fill="#73808B" d="M178.9 219.9l0 -103 -90.1 0 0 103c29,8.1 61.2,8.1 90.1,0l0 0zm-19.3 -77.2l0 45.1 -51.5 0 0 -45.1 51.5 0z"/>
-			<path fill="#AAB4BC" d="M108.1 187.8l51.5 0 19.3 32.1c-28.9,8.1 -61.1,8.1 -90,0l19.2 -32.1z"/>
-			<polygon fill="#AAB4BC" points="159.6,142.7 108.1,142.7 88.8,116.9 178.9,116.9 "/>
-			<path fill="#80DCFE" d="M88.8 265l-25.8 0c0,27.4 19.3,51.5 45.1,61.1l0 -41.8 -19.3 -19.3z"/>
-			<path fill="#80DCFE" d="M159.6 284.3l0 41.8c25.8,-8 45.1,-33.8 45.1,-61.1l-25.8 0 -19.3 19.3z"/>
-		</g>
-		<g id="police">
-			<polygon fill="#6d99e0" points="37.3,207.1 37.3,220 69.5,220 69.5,207.1 "/>
-			<polygon fill="#6d99e0" points="198.3,207.1 198.3,220 230.4,220 230.4,207.1 "/>
-			
-			<path fill="#608dd6" d="M101.7 71.9l64.4 0c20.9,0 38.6,17.7 38.6,38.6l0 0 0 152.9c0,17.6 -6.5,33.8 -19.4,46.6 -12.9,12.9 -28.9,19.3 -46.6,19.3l-9.7 0c-17.6,0 -33.8,-6.4 -46.6,-19.3 -12.9,-12.9 -19.3,-29 -19.3,-46.6l0 -154.5c0,-20.9 17.7,-37 38.6,-37 0,0 0,0 0,0l0 0z"/>
-			<path fill="#6d99e0" d="M185.4 226.4c0,40.2 -17.7,77.2 -48.3,102.9l1.6 0c37,0 66,-28.9 66,-65.9l0 -154.5c0,-20.9 -17.7,-38.6 -38.6,-38.6l0 0 -64.4 0c-14.5,0 -27.4,8 -33.8,20.9 67.6,9.7 117.5,66 117.5,135.2l0 0z"/>
-			
-			
-			<path fill="#ff3902" d="M108.1 187.8l51.5 0 19.3 32.1c-28.9,8.1 -61.1,8.1 -90,0l19.2 -32.1z"/>
-
-			<rect fill="white" x="120" y="190" width="20" height="30"/>
-  
-			<path fill="white" d="M88.8 265l-25.8 0c0,27.4 19.3,51.5 45.1,61.1l0 -41.8 -19.3 -19.3z"/>
-			<path fill="white" d="M159.6 284.3l0 41.8c25.8,-8 45.1,-33.8 45.1,-61.1l-25.8 0 -19.3 19.3z"/>
-		</g>
-	</defs>
-		<g style="">
-		<use x="0" y="0" xlink:href="#coche" transform="rotate(-90) translate(-120 -200)"/>
-		<animateMotion
-			path="M1690 5200,1720 1200,2000 920, 7500 920"
-
-			begin="0s"
-			dur="11s"
-			fill="freeze"
-			repeatCount="indefinite"
-			rotate="auto"
-			/>
-		</g>
-		
-		<g style="">
-		<use x="0" y="0" xlink:href="#police" transform="rotate(-90) translate(-120 -200)"/>
-		<animateMotion
-			path="M1690 8200,1690 5500,1700 4700,1490 3000,1550 1400,2100 920, 7500 920"
-
-			begin="0s"
-			dur="6s"
-			fill="freeze"
-			repeatCount="1"
-			rotate="auto"
-			/>
-		</g>
-
-</svg>
--->
-						<img class="surroundings__map" src="/img/surroundings.svg" alt="Surroundings"/>
 						
-					
+	<!--
+							<svg id="svgCar" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" 
+		viewBox="0 0 7900 6000" xmlns:xlink="http://www.w3.org/1999/xlink" smiling="fake">
+		<script type="text/ecmascript" xlink:href="https://cdn.rawgit.com/FakeSmile/FakeSmile/master/smil.user.js"></script>
+			<defs>
+			<g id="coche">
+				<polygon fill="#73808B" points="37.3,207.1 37.3,220 69.5,220 69.5,207.1 "/>
+				<polygon fill="#73808B" points="198.3,207.1 198.3,220 230.4,220 230.4,207.1 "/>
+				<path fill="#FF6A00" d="M101.7 71.9l64.4 0c20.9,0 38.6,17.7 38.6,38.6l0 0 0 152.9c0,17.6 -6.5,33.8 -19.4,46.6 -12.9,12.9 -28.9,19.3 -46.6,19.3l-9.7 0c-17.6,0 -33.8,-6.4 -46.6,-19.3 -12.9,-12.9 -19.3,-29 -19.3,-46.6l0 -154.5c0,-20.9 17.7,-37 38.6,-37 0,0 0,0 0,0l0 0z"/>
+				<path fill="#D76A00" d="M185.4 226.4c0,40.2 -17.7,77.2 -48.3,102.9l1.6 0c37,0 66,-28.9 66,-65.9l0 -154.5c0,-20.9 -17.7,-38.6 -38.6,-38.6l0 0 -64.4 0c-14.5,0 -27.4,8 -33.8,20.9 67.6,9.7 117.5,66 117.5,135.2l0 0z"/>
+				<path fill="#73808B" d="M178.9 219.9l0 -103 -90.1 0 0 103c29,8.1 61.2,8.1 90.1,0l0 0zm-19.3 -77.2l0 45.1 -51.5 0 0 -45.1 51.5 0z"/>
+				<path fill="#AAB4BC" d="M108.1 187.8l51.5 0 19.3 32.1c-28.9,8.1 -61.1,8.1 -90,0l19.2 -32.1z"/>
+				<polygon fill="#AAB4BC" points="159.6,142.7 108.1,142.7 88.8,116.9 178.9,116.9 "/>
+				<path fill="#80DCFE" d="M88.8 265l-25.8 0c0,27.4 19.3,51.5 45.1,61.1l0 -41.8 -19.3 -19.3z"/>
+				<path fill="#80DCFE" d="M159.6 284.3l0 41.8c25.8,-8 45.1,-33.8 45.1,-61.1l-25.8 0 -19.3 19.3z"/>
+			</g>
+			<g id="police">
+				<polygon fill="#6d99e0" points="37.3,207.1 37.3,220 69.5,220 69.5,207.1 "/>
+				<polygon fill="#6d99e0" points="198.3,207.1 198.3,220 230.4,220 230.4,207.1 "/>
 				
+				<path fill="#608dd6" d="M101.7 71.9l64.4 0c20.9,0 38.6,17.7 38.6,38.6l0 0 0 152.9c0,17.6 -6.5,33.8 -19.4,46.6 -12.9,12.9 -28.9,19.3 -46.6,19.3l-9.7 0c-17.6,0 -33.8,-6.4 -46.6,-19.3 -12.9,-12.9 -19.3,-29 -19.3,-46.6l0 -154.5c0,-20.9 17.7,-37 38.6,-37 0,0 0,0 0,0l0 0z"/>
+				<path fill="#6d99e0" d="M185.4 226.4c0,40.2 -17.7,77.2 -48.3,102.9l1.6 0c37,0 66,-28.9 66,-65.9l0 -154.5c0,-20.9 -17.7,-38.6 -38.6,-38.6l0 0 -64.4 0c-14.5,0 -27.4,8 -33.8,20.9 67.6,9.7 117.5,66 117.5,135.2l0 0z"/>
+				
+				
+				<path fill="#ff3902" d="M108.1 187.8l51.5 0 19.3 32.1c-28.9,8.1 -61.1,8.1 -90,0l19.2 -32.1z"/>
 
+				<rect fill="white" x="120" y="190" width="20" height="30"/>
+	  
+				<path fill="white" d="M88.8 265l-25.8 0c0,27.4 19.3,51.5 45.1,61.1l0 -41.8 -19.3 -19.3z"/>
+				<path fill="white" d="M159.6 284.3l0 41.8c25.8,-8 45.1,-33.8 45.1,-61.1l-25.8 0 -19.3 19.3z"/>
+			</g>
+		</defs>
+			<g style="">
+			<use x="0" y="0" xlink:href="#coche" transform="rotate(-90) translate(-120 -200)"/>
+			<animateMotion
+				path="M1690 5200,1720 1200,2000 920, 7500 920"
+
+				begin="0s"
+				dur="11s"
+				fill="freeze"
+				repeatCount="indefinite"
+				rotate="auto"
+				/>
+			</g>
+			
+			<g style="">
+			<use x="0" y="0" xlink:href="#police" transform="rotate(-90) translate(-120 -200)"/>
+			<animateMotion
+				path="M1690 8200,1690 5500,1700 4700,1490 3000,1550 1400,2100 920, 7500 920"
+
+				begin="0s"
+				dur="6s"
+				fill="freeze"
+				repeatCount="1"
+				rotate="auto"
+				/>
+			</g>
+
+	</svg>
+	-->
+						<img class="surroundings__map" src="/img/surroundings.svg" alt="Surroundings"/>
+							
 					</div>
 					<div class="levels">
 						<div class="level level--1" data-content="L1" aria-label="Level 1">
 							<svg id="lev1" class="map map--1" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 1</title>
 								<polygon points="200,100 1500,100 1500,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
-1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
+									1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
 								<path d="M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
-M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90" 
-class="map__outline" />
+								M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90" 
+								class="map__outline" />
 
-
-
-		
 							</svg>
-							<div id="level__pins_1" class="level__pins">
-							</div>
-							<!-- /level__pins -->
+							<div id="level__pins_1" class="level__pins"></div>
 						</div>
 						<div class="level level--2" data-content="L2" aria-label="Level 2">
 							<svg id="lev2" class="map map--2" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 2</title>
 								<polygon points="200,100 1385,100 1385,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
-1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
+									1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
 								<path d="M200 100 H1385 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
-M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1395 V90" 
-class="map__outline" />
-
-
-
-
+								M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1395 V90" 
+								class="map__outline" />
 							</svg>
-							<div id="level__pins_2" class="level__pins">
-							</div>
-							<!-- /level__pins -->
+							<div id="level__pins_2" class="level__pins"></div>
 						</div>
-					<div class="level level--3" data-content="L3" aria-label="Level 3">
+						<div class="level level--3" data-content="L3" aria-label="Level 3">
 							<svg id="lev3" class="map map--3" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 3</title>
 								<polygon points="300,145 1070,145 1070,100 1370,100 
-1370,525 960,525 960,425 400,425 
-400,950 1200,950 1200,925 
-1305,925 1305,1040 
-1400,1040 1400,1375 
-1210,1375 1210,1270
-240,1270 240,1350 100,1350 100,525 300,525"  class="map__ground" />
+								1370,525 960,525 960,425 400,425 
+								400,950 1200,950 1200,925 
+								1305,925 1305,1040 
+								1400,1040 1400,1375 
+								1210,1375 1210,1270
+								240,1270 240,1350 100,1350 100,525 300,525"  class="map__ground" />
 
-<path d="M300 145 H1070 V100 H1370 V525 H960 V425 H400 
-V950 H1200 V925
-H1305 V1040
-H1400 V1350 H1400
-V1375 H1210 V1270
-H240 V1350 H100 V525 H300 Z
-                                
-M290 135 V515 H90 V1360 H250
-V1280 H1200
-V1385 H1410 V1360 H1410 
-V1030 H 1315
-V915 H1190 V940 H410 V435 H950 V535 H1380 V90 H1060 V135" 
-class="map__outline" />
-								
-
-
-
-								
+								<path d="M300 145 H1070 V100 H1370 V525 H960 V425 H400 
+								V950 H1200 V925
+								H1305 V1040
+								H1400 V1350 H1400
+								V1375 H1210 V1270
+								H240 V1350 H100 V525 H300 Z
+																
+								M290 135 V515 H90 V1360 H250
+								V1280 H1200
+								V1385 H1410 V1360 H1410 
+								V1030 H 1315
+								V915 H1190 V940 H410 V435 H950 V535 H1380 V90 H1060 V135" 
+								class="map__outline" />
+		
 							</svg>
-							<div id="level__pins_3" class="level__pins">
-								
-							</div>
-							<!-- /level__pins -->
-						</div>
-						
+							<div id="level__pins_3" class="level__pins"></div>
+						</div>	
 					</div>
-					<!-- /levels -->
+						<!-- /levels -->
 				</div>
 				<!-- /mall -->
 				<button class="boxbutton boxbutton--dark open-search" aria-label="Show search"><svg class="icon icon--search"><use xlink:href="#icon-search"></use></svg></button>
@@ -2089,9 +1976,7 @@ class="map__outline" />
 					<button class="boxbutton boxbutton--dark mallnav__button--all-levels" aria-label="Back to all levels"><svg class="icon icon--stack"><use xlink:href="#icon-stack"></use></svg></button>
 					<button class="boxbutton mallnav__button--down" aria-label="Go down"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
 				</nav>
-				<div id="content" class="content">
-					
-				</div>
+				<div id="content" class="content"></div>
 				<!-- content -->
 			</div>
 			<!-- /main -->
@@ -2104,22 +1989,21 @@ class="map__outline" />
 					<input id="sort-by-name" class="label__checkbox" type="checkbox" aria-label="Show alphabetically"/>
 					<label class="label__text">A - Z</label>
 				</span>
-				<ul id="ulList" class="list grouped-by-category">
-					
-				</ul>
+				<ul id="ulList" class="list grouped-by-category"></ul>
 			</aside>
 			<!-- /spaces-list -->
 		</div>
 		<!-- /container -->
 		<script src="/js/classie.js"></script>
 		<script src="/js/list.min.js"></script>
-
 	</body>
+	
 	<script  src="/js/index_temp_storico.js"></script>
-<script  src="/js/index_qual.js"></script>
-<script  src="/js/index_pres.js"></script>
-<script  src="/js/index_temp.js"></script>
-<script  src="/js/index_pr.js"></script>
-<script  src="/js/index_qual_stor.js"></script>
-<script  src="/js/index_hum.js"></script>
-<script  src="/js/index_qual_pres.js"></script>
+	<script  src="/js/index_qual.js"></script>
+	<script  src="/js/index_pres.js"></script>
+	<script  src="/js/index_temp.js"></script>
+	<script  src="/js/index_pr.js"></script>
+	<script  src="/js/index_qual_stor.js"></script>
+	<script  src="/js/index_hum.js"></script>
+	<script  src="/js/index_qual_pres.js"></script>
+</html>

@@ -6,48 +6,48 @@ var bodyParser= require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function(req, res) {
-   res.sendFile('CRUD_bootstrap.html', { root: __dirname });
+	res.sendFile('CRUD_bootstrap.html', { root: __dirname });
 });
 
 app.post('/info', (req, res) => {
-  insert_informazioni(req.body.Nome, req.body.Descrizione, req.body.Posti);
-  res.redirect('/');
-  res.end();
+	insert_informazioni(req.body.Nome, req.body.Descrizione, req.body.Posti);
+	res.redirect('/');
+	res.end();
 })
 app.post('/datacategory', (req, res) => {
-  insert_datacategory(req.body.Nome, req.body.Colore, req.body.Icon);
-  res.redirect('/');
-  res.end();
+	insert_datacategory(req.body.Nome, req.body.Colore, req.body.Icon);
+	res.redirect('/');
+	res.end();
 })
 app.post('/dataspace', (req, res) => {
-  insert_dataspace(req.body.IdDataSpace, req.body.IdInfo, req.body.IdFigura, req.body.IdDataCategory, req.body.IdPin, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	insert_dataspace(req.body.IdDataSpace, req.body.IdInfo, req.body.IdFigura, req.body.IdDataCategory, req.body.IdPin, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/figura', (req, res) => {
-  insert_figura(req.body.Tipo, req.body.Class, req.body.x, req.body.y, req.body.width, req.body.height, req.body.Points, req.body.Piano);
-  res.redirect('/');
-  res.end();
+	insert_figura(req.body.Tipo, req.body.Class, req.body.x, req.body.y, req.body.width, req.body.height, req.body.Points, req.body.Piano);
+	res.redirect('/');
+	res.end();
 })
 app.post('/pin', (req, res) => {
-  insert_pin(req.body.Icon, req.body.Top_distance, req.body.Left_distance, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	insert_pin(req.body.Icon, req.body.Top_distance, req.body.Left_distance, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/entrance', (req, res) => {
-  insert_entrance(req.body.Descrizione);
-  res.redirect('/');
-  res.end();
+	insert_entrance(req.body.Descrizione);
+	res.redirect('/');
+	res.end();
 })
 app.post('/entrancecss', (req, res) => {
-  insert_entrancecss(req.body.Css, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	insert_entrancecss(req.body.Css, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/toopendata', (req, res) => {
-  insert_toopendata(req.body.IdInfo, req.body.NomeTabellaOpenData);
-  res.redirect('/');
-  res.end();
+	insert_toopendata(req.body.IdInfo, req.body.NomeTabellaOpenData);
+	res.redirect('/');
+	res.end();
 })
 
 function insert_informazioni(Nome, Descrizione, Posti) {
@@ -55,13 +55,11 @@ function insert_informazioni(Nome, Descrizione, Posti) {
 	else if(Posti == "") var sql = "INSERT INTO `informazioni` (`Nome`, `Descrizione`) VALUES ('" + Nome + "','" + Descrizione + "')";
 	else
 		var sql = "INSERT INTO `informazioni` (`Nome`, `Descrizione`, `Posti`) VALUES ('" + Nome + "','" + Descrizione + "','" + Posti + "')";
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 }
 function insert_datacategory(Nome, Colore, Icon) {
 	var sql = "INSERT INTO `datacategory` (`Nome`, `Colore`, `Icon`) VALUES ('" + Nome + "','" + Colore + "','" + Icon + "')";
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 }
 function insert_dataspace(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance) {
 	if(IdPin == "")	var sql = "INSERT INTO `dataspace` (`IdDataSpace`, `IdInfo`, `IdFigura`, `IdDataCategory`, `IdEntrance`) VALUES ('" + IdDataSpace + "','" + IdInfo + "','" 
@@ -80,8 +78,7 @@ function insert_figura(Tipo, Class, x, y, width, height, Points, Piano) {
 	else
 		var sql = "INSERT INTO `figura` (`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Piano`) VALUES ('" + Tipo + "','" + Class + "','" 
 	+ x + "','" + y + "','" + width + "','" + height + "','" + Piano + "')";
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 }
 function insert_pin(Icon, Top_distance, Left_distance, IdEntrance) {
 	var sql = "INSERT INTO `pin` (`Icon`, `Top_distance`, `Left_distance`, `IdEntrance`) VALUES ('" + Icon + "','" + Top_distance + "','" 
@@ -92,8 +89,7 @@ function insert_pin(Icon, Top_distance, Left_distance, IdEntrance) {
 }
 function insert_entrance(Descrizione) {
 	var sql = "INSERT INTO `entrance` (`Descrizione`) VALUES ('" + Descrizione + "')";
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 }
 function insert_entrancecss(Css, IdEntrance) {
 	var sql = "INSERT INTO `entrancecss` (`Css`, `IdEntrance`) VALUES ('" + Css + "','" + IdEntrance + "')";
@@ -110,45 +106,45 @@ function insert_toopendata(IdInfo, NomeTabellaOpenData) {
 
 
 app.post('/infoMod', (req, res) => {
-  update_info(req.body.id, req.body.Nome, req.body.Descrizione, req.body.Posti);
-  res.redirect('/');
-  res.end();
+	update_info(req.body.id, req.body.Nome, req.body.Descrizione, req.body.Posti);
+	res.redirect('/');
+	res.end();
 })
 app.post('/datacategoryMod', (req, res) => {
-  update_datacategory(req.body.id, req.body.Nome, req.body.Colore, req.body.Icon);
-  res.redirect('/');
-  res.end();
+	update_datacategory(req.body.id, req.body.Nome, req.body.Colore, req.body.Icon);
+	res.redirect('/');
+	res.end();
 })
 app.post('/dataspaceMod', (req, res) => {
-  update_dataspace(req.body.id, req.body.IdDataSpace, req.body.IdInfo, req.body.IdFigura, req.body.IdDataCategory, req.body.IdPin, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	update_dataspace(req.body.id, req.body.IdDataSpace, req.body.IdInfo, req.body.IdFigura, req.body.IdDataCategory, req.body.IdPin, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/figuraMod', (req, res) => {
-  update_figura(req.body.id, req.body.Tipo, req.body.Class, req.body.x, req.body.y, req.body.width, req.body.height, req.body.Points, req.body.Piano);
-  res.redirect('/');
-  res.end();
+	update_figura(req.body.id, req.body.Tipo, req.body.Class, req.body.x, req.body.y, req.body.width, req.body.height, req.body.Points, req.body.Piano);
+	res.redirect('/');
+	res.end();
 })
 app.post('/pinMod', (req, res) => {
-  update_pin(req.body.id, req.body.Icon, req.body.Top_distance, req.body.Left_distance, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	update_pin(req.body.id, req.body.Icon, req.body.Top_distance, req.body.Left_distance, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/entranceMod', (req, res) => {
 	console.log("LOG:" + req.body.id);
-  update_entrance(req.body.id, req.body.Descrizione);
-  res.redirect('/');
-  res.end();
+	update_entrance(req.body.id, req.body.Descrizione);
+	res.redirect('/');
+	res.end();
 })
 app.post('/entrancecssMod', (req, res) => {
-  update_entrancecss(req.body.id, req.body.Css, req.body.IdEntrance);
-  res.redirect('/');
-  res.end();
+	update_entrancecss(req.body.id, req.body.Css, req.body.IdEntrance);
+	res.redirect('/');
+	res.end();
 })
 app.post('/toopendataMod', (req, res) => {
-  update_toopendata(req.body.id, req.body.IdInfo, req.body.NomeTabellaOpenData);
-  res.redirect('/');
-  res.end();
+	update_toopendata(req.body.id, req.body.IdInfo, req.body.NomeTabellaOpenData);
+	res.redirect('/');
+	res.end();
 })
 
 
@@ -157,16 +153,14 @@ function update_info(IdInfo, Nome, Descrizione, Posti) {
 	else if(Posti == "") var sql = "UPDATE `informazioni` SET `Nome` = '" + Nome + "', `Descrizione` = '" + Descrizione + "', `Posti` = NULL  WHERE `IdInfo` = " + IdInfo;
 	else
 		var sql = "UPDATE `informazioni` SET `Nome` = '" + Nome + "', `Descrizione` = '" + Descrizione + "', `Posti` = " + Posti + "  WHERE `IdInfo` = " + IdInfo;
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 	correcttab = 1;
 	emitData();
 }
 function update_datacategory(IdDataCategory, Nome, Colore, Icon) {
 	var sql = "UPDATE `datacategory` SET Nome = '" + Nome + "', Colore = '" + Colore + "', Icon = '" + Icon + "' WHERE IdDataCategory = " + IdDataCategory;
 
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 	correcttab = 2;
 	emitData();
 }
@@ -182,14 +176,11 @@ function update_dataspace(oldIdDataSpace, IdDataSpace, IdInfo, IdFigura, IdDataC
 	emitData();
 }
 function update_figura(IdFigura, Tipo, Class, x, y, width, height, Points, Piano) {
-
-	
 	if( (Points == "" && height == "") || (Points == "null" && height == ""))	var sql = "UPDATE `figura` SET Tipo = '" + Tipo + "', Class = '" + Class + "', x = " + x + ", y = " + y + ", width = " + width + ", height = NULL, Points = NULL, `Piano` = " + Piano + " WHERE IdFigura = " + IdFigura;
 	else if(width == "" && height == "") var sql = "UPDATE `figura` SET Tipo = '" + Tipo + "', Class = '" + Class + "', x = null, y = null, width = null, height = null, Points = '" + Points + "', `Piano` = " + Piano + " WHERE IdFigura = " + IdFigura;
 	else
 		var sql = "UPDATE `figura` SET Tipo = '" + Tipo + "', Class = '" + Class + "', x = " + x + ", y = " + y + ", width = " + width + ", height = " + height + ", Points = null, `Piano` = " + Piano + " WHERE IdFigura = " + IdFigura;
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 	correcttab = 4;
 	emitData();
 }
@@ -205,8 +196,7 @@ function update_pin(IdPin, Icon, Top_distance, Left_distance, IdEntrance) {
 function update_entrance(IdEntrance, Descrizione) {
 	var sql = "UPDATE `entrance` SET Descrizione = '" + Descrizione + "'  WHERE IdEntrance = " + IdEntrance;
 
-	con.query(sql, function (err, result) {
-	});
+	con.query(sql, function (err, result) {});
 	correcttab = 6;
 	emitData();
 }
@@ -231,27 +221,27 @@ function update_toopendata(oldIdInfo, IdInfo, NomeTabellaOpenData) {
 
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "admin",
-  password: "123abc",
-  database: "db_unibo"
+	host: "localhost",
+	user: "admin",
+	password: "123abc",
+	database: "db_unibo"
 });
 
 con.connect(function(err) {
-  if (err) throw err;
+	if (err) throw err;
   //console.log("Connected!");
 });
 
 function checka() {
 	var current;
-		checkForNewData(function(current) {
-			if(current != count) {
-				if(count > 0) {
-					emitData();
-				}
-				count = current;
+	checkForNewData(function(current) {
+		if(current != count) {
+			if(count > 0) {
+				emitData();
 			}
-		});
+			count = current;
+		}
+	});
 }
 
 var count_info = 0 //Number of values read
@@ -306,99 +296,99 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		});
 	});
 
-   emitData();
+	emitData();
 	setInterval(check, 1000);
    //console.log('someone connected');
 });
 
 
 http.listen(3000, function() {
-   console.log('listening on localhost:3000');
+	console.log('listening on localhost:3000');
 });
 
 var correcttab = 0;
 //Function that checks for new deta into the table
 function checkForNewData () {
-  con.query("SELECT COUNT(*) AS num FROM `informazioni`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_info) {
-		if(count_info > 0) {
-			correcttab = 1;
-			emitData();
+	con.query("SELECT COUNT(*) AS num FROM `informazioni`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_info) {
+			if(count_info > 0) {
+				correcttab = 1;
+				emitData();
+			}
+			count_info = result[0].num;
 		}
-		count_info = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `datacategory`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_datacategory) {
-		if(count_datacategory > 0) {
-			correcttab = 2;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `datacategory`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_datacategory) {
+			if(count_datacategory > 0) {
+				correcttab = 2;
+				emitData();
+			}
+			count_datacategory = result[0].num;
 		}
-		count_datacategory = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `dataspace`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_dataspace) {
-		if(count_dataspace > 0) {
-			correcttab = 3;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `dataspace`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_dataspace) {
+			if(count_dataspace > 0) {
+				correcttab = 3;
+				emitData();
+			}
+			count_dataspace = result[0].num;
 		}
-		count_dataspace = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `figura`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_figura) {
-		if(count_figura > 0) {
-			correcttab = 4;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `figura`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_figura) {
+			if(count_figura > 0) {
+				correcttab = 4;
+				emitData();
+			}
+			count_figura = result[0].num;
 		}
-		count_figura = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `pin`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_pin) {
-		if(count_pin > 0) {
-			correcttab = 5;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `pin`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_pin) {
+			if(count_pin > 0) {
+				correcttab = 5;
+				emitData();
+			}
+			count_pin = result[0].num;
 		}
-		count_pin = result[0].num;
-	}
-  });
+	});
     con.query("SELECT COUNT(*) AS num FROM `entrance`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_entrance) {
-		if(count_entrance > 0) {
-			correcttab = 6;
-			emitData();
+		if (err) throw err;
+		if(result[0].num != count_entrance) {
+			if(count_entrance > 0) {
+				correcttab = 6;
+				emitData();
+			}
+			count_entrance = result[0].num;
 		}
-		count_entrance = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `entrancecss`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_entrancecss) {
-		if(count_entrancecss > 0) {
-			correcttab = 7;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `entrancecss`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_entrancecss) {
+			if(count_entrancecss > 0) {
+				correcttab = 7;
+				emitData();
+			}
+			count_entrancecss = result[0].num;
 		}
-		count_entrancecss = result[0].num;
-	}
-  });
-  con.query("SELECT COUNT(*) AS num FROM `toopendata`", function (err, result, fields) {
-    if (err) throw err;
-	if(result[0].num != count_toopendata) {
-		if(count_toopendata > 0) {
-			correcttab = 8;
-			emitData();
+	});
+	con.query("SELECT COUNT(*) AS num FROM `toopendata`", function (err, result, fields) {
+		if (err) throw err;
+		if(result[0].num != count_toopendata) {
+			if(count_toopendata > 0) {
+				correcttab = 8;
+				emitData();
+			}
+			count_toopendata = result[0].num;
 		}
-		count_toopendata = result[0].num;
-	}
-  });
+	});
 }
 
 //Function that select values from the table and emits data to indexSensori.html

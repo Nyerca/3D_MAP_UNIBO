@@ -1,2041 +1,2036 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src = "/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src = "/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="http://botmonster.com/jquery-bootpag/jquery.bootpag.js"></script>
-<style type="text/css">
-#ttt {
+	<script type="text/javascript" src="http://botmonster.com/jquery-bootpag/jquery.bootpag.js"></script>
+	<style type="text/css">
+		#ttt {
 
-}
-
-	#toBlack {
-		color : black; 
-		width: 20%;
-		text-align: center;
-	}
-    body {
-        color: #566787;
-		background: #f5f5f5;
-		font-family: 'Varela Round', sans-serif;
-		font-size: 13px;
-	}
-	.table-wrapper {
-        background: #fff;
-        padding: 20px 25px;
-        margin: 30px 0;
-		border-radius: 3px;
-        box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    }
-	.table-title {        
-		padding-bottom: 15px;
-		background: #435d7d;
-		color: #fff;
-		padding: 16px 30px;
-		margin: -20px -25px 10px;
-		border-radius: 3px 3px 0 0;
-    }
-    .table-title h2 {
-		margin: 5px 0 0;
-		font-size: 24px;
-	}
-	.table-title .btn-group {
-		float: right;
-	}
-	.table-title .btn {
-		color: #fff;
-		float: right;
-		font-size: 13px;
-		border: none;
-		min-width: 50px;
-		border-radius: 2px;
-		border: none;
-		outline: none !important;
-		margin-left: 10px;
-	}
-	.table-title .btn i {
-		float: left;
-		font-size: 21px;
-		margin-right: 5px;
-	}
-	.table-title .btn span {
-		float: left;
-		margin-top: 2px;
-	}
-    table.table tr th, table.table tr td {
-        border-color: #e9e9e9;
-		padding: 12px 15px;
-		vertical-align: middle;
-    }
-	table.table tr th:first-child {
-		width: 60px;
-	}
-	table.table tr th:last-child {
-		width: 100px;
-	}
-    table.table-striped tbody tr:nth-of-type(odd) {
-    	background-color: #fcfcfc;
-	}
-	table.table-striped.table-hover tbody tr:hover {
-		background: #f5f5f5;
-	}
-    table.table th i {
-        font-size: 13px;
-        margin: 0 5px;
-        cursor: pointer;
-    }	
-    table.table td:last-child i {
-		opacity: 0.9;
-		font-size: 22px;
-        margin: 0 5px;
-    }
-	table.table td a {
-		font-weight: bold;
-		color: #566787;
-		display: inline-block;
-		text-decoration: none;
-		outline: none !important;
-	}
-	table.table td a:hover {
-		color: #2196F3;
-	}
-	table.table td a.edit {
-        color: #FFC107;
-    }
-    table.table td a.delete {
-        color: #F44336;
-    }
-    table.table td i {
-        font-size: 19px;
-    }
-	table.table .avatar {
-		border-radius: 50%;
-		vertical-align: middle;
-		margin-right: 10px;
-	}
-    .pagination {
-        float: right;
-        margin: 0 0 5px;
-    }
-    .pagination li a {
-        border: none;
-        font-size: 13px;
-        min-width: 30px;
-        min-height: 30px;
-        color: #999;
-        margin: 0 2px;
-        line-height: 30px;
-        border-radius: 2px !important;
-        text-align: center;
-        padding: 0 6px;
-    }
-    .pagination li a:hover {
-        color: #666;
-    }	
-    .pagination li.active a, .pagination li.active a.page-link {
-        background: #03A9F4;
-    }
-    .pagination li.active a:hover {        
-        background: #0397d6;
-    }
-	.pagination li.disabled i {
-        color: #ccc;
-    }
-    .pagination li i {
-        font-size: 16px;
-        padding-top: 6px
-    }
-    .hint-text {
-        float: left;
-        margin-top: 10px;
-        font-size: 13px;
-    }    
-	/* Custom checkbox */
-	.custom-checkbox {
-		position: relative;
-	}
-	.custom-checkbox input[type="checkbox"] {    
-		opacity: 0;
-		position: absolute;
-		margin: 5px 0 0 3px;
-		z-index: 9;
-	}
-	.custom-checkbox label:before{
-		width: 18px;
-		height: 18px;
-	}
-	.custom-checkbox label:before {
-		content: '';
-		margin-right: 10px;
-		display: inline-block;
-		vertical-align: text-top;
-		background: white;
-		border: 1px solid #bbb;
-		border-radius: 2px;
-		box-sizing: border-box;
-		z-index: 2;
-	}
-	.custom-checkbox input[type="checkbox"]:checked + label:after {
-		content: '';
-		position: absolute;
-		left: 6px;
-		top: 3px;
-		width: 6px;
-		height: 11px;
-		border: solid #000;
-		border-width: 0 3px 3px 0;
-		transform: inherit;
-		z-index: 3;
-		transform: rotateZ(45deg);
-	}
-	.custom-checkbox input[type="checkbox"]:checked + label:before {
-		border-color: #03A9F4;
-		background: #03A9F4;
-	}
-	.custom-checkbox input[type="checkbox"]:checked + label:after {
-		border-color: #fff;
-	}
-	.custom-checkbox input[type="checkbox"]:disabled + label:before {
-		color: #b8b8b8;
-		cursor: auto;
-		box-shadow: none;
-		background: #ddd;
-	}
-	/* Modal styles */
-	.modal .modal-dialog {
-		max-width: 400px;
-	}
-	.modal .modal-header, .modal .modal-body, .modal .modal-footer {
-		padding: 20px 30px;
-	}
-	.modal .modal-content {
-		border-radius: 3px;
-	}
-	.modal .modal-footer {
-		background: #ecf0f1;
-		border-radius: 0 0 3px 3px;
-	}
-    .modal .modal-title {
-        display: inline-block;
-    }
-	.modal .form-control {
-		border-radius: 2px;
-		box-shadow: none;
-		border-color: #dddddd;
-	}
-	.modal textarea.form-control {
-		resize: vertical;
-	}
-	.modal .btn {
-		border-radius: 2px;
-		min-width: 100px;
-	}	
-	.modal form label {
-		font-weight: normal;
-	}
-
-</style>
-<script type="text/javascript">
-
-var selectedId = -1;
-var delOne = 0;
-const MAX_VISIBLE = 5;
-var checkbox = $('table tbody input[type="checkbox"]');
-
-var selectedTab; //Current tab selected from c1 to c5
-var info;
-var figura;
-var datacategory;
-var pin;
-var dataspace;
-var entrance;
-var entrancecss;
-var toopendata;
-var total
-
-function toHome() {
-	$("#floors").hide();
-	selectedTab = "c0";
-	$("#c1").hide();
-	$("#c0").fadeIn();
-	document.getElementById("table_val").innerHTML = '';
-}
-
-function selectMe(id) {
-	selectedId = id;
-	delOne = 1;
-}
-function added() {
-	$('#addModal').modal('hide');
-}
-
-function selectMore() {
-	delOne = 0;
-}
-
-function editInfo(IdInfo, Nome, Descrizione, Posti) {
-	selectedId = IdInfo;
-	
-	document.getElementById("id_hidden").value = IdInfo;
-	document.getElementById("edit_Nome").value = Nome;
-	document.getElementById("edit_Descrizione").value = Descrizione;
-	document.getElementById("edit_Posti").value = Posti;
-	
-}
-
-function editDataCategory(IdDataCategory, Nome, Colore, Icon) {
-	selectedId = IdDataCategory;
-	
-	document.getElementById("id_hidden").value = IdDataCategory;
-	document.getElementById("edit_Nome").value = Nome;
-	document.getElementById("edit_Colore").value = Colore;
-	document.getElementById("edit_Icon").value = Icon;
-}
-
-function editDataSpace(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance) {
-	selectedId = IdDataSpace;
-	document.getElementById("id_hidden").value = IdDataSpace;
-	document.getElementById("edit_IdDataSpace").value = IdDataSpace;
-	document.getElementById("edit_IdInfo").value = IdInfo;
-	document.getElementById("edit_IdFigura").value = IdFigura;
-	document.getElementById("edit_IdDataCategory").value = IdDataCategory;
-	document.getElementById("edit_IdPin").value = IdPin;
-	document.getElementById("edit_IdEntrance2").value = IdEntrance;
-}
-
-function editFigura(IdFigura, Tipo, Class, x, y, width, height, Points, Piano) {
-	selectedId = IdFigura;
-	
-	document.getElementById("id_hidden").value = IdFigura;
-	document.getElementById("edit_Tipo").value = Tipo;
-	document.getElementById("edit_Class").value = Class;
-	document.getElementById("edit_x").value = x;
-	document.getElementById("edit_y").value = y;
-	document.getElementById("edit_width").value = width;
-	document.getElementById("edit_height").value = height;
-	document.getElementById("edit_Points").value = Points;
-	document.getElementById("edit_Piano").value = Piano;
-}
-
-function editPin(IdPin, Icon, Top_distance, Left_distance, IdEntrance) {
-	selectedId = IdPin;
-	
-	document.getElementById("id_hidden").value = IdPin;
-	document.getElementById("edit_Icon").value = Icon;
-	document.getElementById("edit_Top_distance").value = Top_distance;
-	document.getElementById("edit_Left_distance").value = Left_distance;
-	document.getElementById("edit_IdEntrance").value = IdEntrance;
-}
-
-function editEntrance(IdEntrance, Descrizione) {
-	selectedId = IdEntrance;
-	
-	document.getElementById("id_hidden").value = IdEntrance;
-	document.getElementById("edit_Descrizione").value = Descrizione;
-}
-
-function editEntrancecss(IdCss, Css, IdEntrance) {
-	selectedId = IdCss;
-	
-	document.getElementById("id_hidden").value = IdCss;
-	document.getElementById("edit_Css").value = Css;
-	document.getElementById("edit_IdEntrance").value = IdEntrance;
-}
-function editToopendata(IdInfo, NomeTabellaOpenData) {
-	selectedId = IdInfo;
-	
-	document.getElementById("id_hidden").value = IdInfo;
-	document.getElementById("edit_IdInfo").value = IdInfo;
-	document.getElementById("edit_NomeTabellaOpenData").value = NomeTabellaOpenData;
-}
-$(document).ready(function(){
-document.getElementById("table_val").innerHTML = '';
-var e = document.getElementById('toBlack');
-       e.oninput = pressed;
-       e.onpropertychange = e.oninput; // for IE8
-$("#floors").hide();
-$("#c1").hide();
-
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	document.getElementById("deleteMore").addEventListener('click',function(){selectMore()},false);
-		
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
 		}
-	});
-});
 
-
-function deleteValue() {
-	if(delOne==1) {
-		delOne = 0;
-		var changeDetails = { 
-			id: selectedId, 
-			tab: selectedTab, 
+		#toBlack {
+			color : black; 
+			width: 20%;
+			text-align: center;
 		}
-		socket.emit('deleteValue', changeDetails);
-	} else {
-	
+		body {
+			color: #566787;
+			background: #f5f5f5;
+			font-family: 'Varela Round', sans-serif;
+			font-size: 13px;
+		}
+		.table-wrapper {
+			background: #fff;
+			padding: 20px 25px;
+			margin: 30px 0;
+			border-radius: 3px;
+			box-shadow: 0 1px 1px rgba(0,0,0,.05);
+		}
+		.table-title {        
+			padding-bottom: 15px;
+			background: #435d7d;
+			color: #fff;
+			padding: 16px 30px;
+			margin: -20px -25px 10px;
+			border-radius: 3px 3px 0 0;
+		}
+		.table-title h2 {
+			margin: 5px 0 0;
+			font-size: 24px;
+		}
+		.table-title .btn-group {
+			float: right;
+		}
+		.table-title .btn {
+			color: #fff;
+			float: right;
+			font-size: 13px;
+			border: none;
+			min-width: 50px;
+			border-radius: 2px;
+			border: none;
+			outline: none !important;
+			margin-left: 10px;
+		}
+		.table-title .btn i {
+			float: left;
+			font-size: 21px;
+			margin-right: 5px;
+		}
+		.table-title .btn span {
+			float: left;
+			margin-top: 2px;
+		}
+		table.table tr th, table.table tr td {
+			border-color: #e9e9e9;
+			padding: 12px 15px;
+			vertical-align: middle;
+		}
+		table.table tr th:first-child {
+			width: 60px;
+		}
+		table.table tr th:last-child {
+			width: 100px;
+		}
+		table.table-striped tbody tr:nth-of-type(odd) {
+			background-color: #fcfcfc;
+		}
+		table.table-striped.table-hover tbody tr:hover {
+			background: #f5f5f5;
+		}
+		table.table th i {
+			font-size: 13px;
+			margin: 0 5px;
+			cursor: pointer;
+		}	
+		table.table td:last-child i {
+			opacity: 0.9;
+			font-size: 22px;
+			margin: 0 5px;
+		}
+		table.table td a {
+			font-weight: bold;
+			color: #566787;
+			display: inline-block;
+			text-decoration: none;
+			outline: none !important;
+		}
+		table.table td a:hover {
+			color: #2196F3;
+		}
+		table.table td a.edit {
+			color: #FFC107;
+		}
+		table.table td a.delete {
+			color: #F44336;
+		}
+		table.table td i {
+			font-size: 19px;
+		}
+		table.table .avatar {
+			border-radius: 50%;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+		.pagination {
+			float: right;
+			margin: 0 0 5px;
+		}
+		.pagination li a {
+			border: none;
+			font-size: 13px;
+			min-width: 30px;
+			min-height: 30px;
+			color: #999;
+			margin: 0 2px;
+			line-height: 30px;
+			border-radius: 2px !important;
+			text-align: center;
+			padding: 0 6px;
+		}
+		.pagination li a:hover {
+			color: #666;
+		}	
+		.pagination li.active a, .pagination li.active a.page-link {
+			background: #03A9F4;
+		}
+		.pagination li.active a:hover {        
+			background: #0397d6;
+		}
+		.pagination li.disabled i {
+			color: #ccc;
+		}
+		.pagination li i {
+			font-size: 16px;
+			padding-top: 6px
+		}
+		.hint-text {
+			float: left;
+			margin-top: 10px;
+			font-size: 13px;
+		}    
+		/* Custom checkbox */
+		.custom-checkbox {
+			position: relative;
+		}
+		.custom-checkbox input[type="checkbox"] {    
+			opacity: 0;
+			position: absolute;
+			margin: 5px 0 0 3px;
+			z-index: 9;
+		}
+		.custom-checkbox label:before{
+			width: 18px;
+			height: 18px;
+		}
+		.custom-checkbox label:before {
+			content: '';
+			margin-right: 10px;
+			display: inline-block;
+			vertical-align: text-top;
+			background: white;
+			border: 1px solid #bbb;
+			border-radius: 2px;
+			box-sizing: border-box;
+			z-index: 2;
+		}
+		.custom-checkbox input[type="checkbox"]:checked + label:after {
+			content: '';
+			position: absolute;
+			left: 6px;
+			top: 3px;
+			width: 6px;
+			height: 11px;
+			border: solid #000;
+			border-width: 0 3px 3px 0;
+			transform: inherit;
+			z-index: 3;
+			transform: rotateZ(45deg);
+		}
+		.custom-checkbox input[type="checkbox"]:checked + label:before {
+			border-color: #03A9F4;
+			background: #03A9F4;
+		}
+		.custom-checkbox input[type="checkbox"]:checked + label:after {
+			border-color: #fff;
+		}
+		.custom-checkbox input[type="checkbox"]:disabled + label:before {
+			color: #b8b8b8;
+			cursor: auto;
+			box-shadow: none;
+			background: #ddd;
+		}
+		/* Modal styles */
+		.modal .modal-dialog {
+			max-width: 400px;
+		}
+		.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+			padding: 20px 30px;
+		}
+		.modal .modal-content {
+			border-radius: 3px;
+		}
+		.modal .modal-footer {
+			background: #ecf0f1;
+			border-radius: 0 0 3px 3px;
+		}
+		.modal .modal-title {
+			display: inline-block;
+		}
+		.modal .form-control {
+			border-radius: 2px;
+			box-shadow: none;
+			border-color: #dddddd;
+		}
+		.modal textarea.form-control {
+			resize: vertical;
+		}
+		.modal .btn {
+			border-radius: 2px;
+			min-width: 100px;
+		}	
+		.modal form label {
+			font-weight: normal;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var selectedId = -1;
+		var delOne = 0;
+		const MAX_VISIBLE = 5;
 		var checkbox = $('table tbody input[type="checkbox"]');
-		checkbox.each(function(){
-			if(this.checked == true) {
+
+		var selectedTab; //Current tab selected from c1 to c5
+		var info;
+		var figura;
+		var datacategory;
+		var pin;
+		var dataspace;
+		var entrance;
+		var entrancecss;
+		var toopendata;
+		var total
+
+		function toHome() {
+			$("#floors").hide();
+			selectedTab = "c0";
+			$("#c1").hide();
+			$("#c0").fadeIn();
+			document.getElementById("table_val").innerHTML = '';
+		}
+
+		function selectMe(id) {
+			selectedId = id;
+			delOne = 1;
+		}
+		function added() {
+			$('#addModal').modal('hide');
+		}
+
+		function selectMore() {
+			delOne = 0;
+		}
+
+		function editInfo(IdInfo, Nome, Descrizione, Posti) {
+			selectedId = IdInfo;
+			
+			document.getElementById("id_hidden").value = IdInfo;
+			document.getElementById("edit_Nome").value = Nome;
+			document.getElementById("edit_Descrizione").value = Descrizione;
+			document.getElementById("edit_Posti").value = Posti;
+			
+		}
+
+		function editDataCategory(IdDataCategory, Nome, Colore, Icon) {
+			selectedId = IdDataCategory;
+			
+			document.getElementById("id_hidden").value = IdDataCategory;
+			document.getElementById("edit_Nome").value = Nome;
+			document.getElementById("edit_Colore").value = Colore;
+			document.getElementById("edit_Icon").value = Icon;
+		}
+
+		function editDataSpace(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance) {
+			selectedId = IdDataSpace;
+			document.getElementById("id_hidden").value = IdDataSpace;
+			document.getElementById("edit_IdDataSpace").value = IdDataSpace;
+			document.getElementById("edit_IdInfo").value = IdInfo;
+			document.getElementById("edit_IdFigura").value = IdFigura;
+			document.getElementById("edit_IdDataCategory").value = IdDataCategory;
+			document.getElementById("edit_IdPin").value = IdPin;
+			document.getElementById("edit_IdEntrance2").value = IdEntrance;
+		}
+
+		function editFigura(IdFigura, Tipo, Class, x, y, width, height, Points, Piano) {
+			selectedId = IdFigura;
+			
+			document.getElementById("id_hidden").value = IdFigura;
+			document.getElementById("edit_Tipo").value = Tipo;
+			document.getElementById("edit_Class").value = Class;
+			document.getElementById("edit_x").value = x;
+			document.getElementById("edit_y").value = y;
+			document.getElementById("edit_width").value = width;
+			document.getElementById("edit_height").value = height;
+			document.getElementById("edit_Points").value = Points;
+			document.getElementById("edit_Piano").value = Piano;
+		}
+
+		function editPin(IdPin, Icon, Top_distance, Left_distance, IdEntrance) {
+			selectedId = IdPin;
+			
+			document.getElementById("id_hidden").value = IdPin;
+			document.getElementById("edit_Icon").value = Icon;
+			document.getElementById("edit_Top_distance").value = Top_distance;
+			document.getElementById("edit_Left_distance").value = Left_distance;
+			document.getElementById("edit_IdEntrance").value = IdEntrance;
+		}
+
+		function editEntrance(IdEntrance, Descrizione) {
+			selectedId = IdEntrance;
+			
+			document.getElementById("id_hidden").value = IdEntrance;
+			document.getElementById("edit_Descrizione").value = Descrizione;
+		}
+
+		function editEntrancecss(IdCss, Css, IdEntrance) {
+			selectedId = IdCss;
+			
+			document.getElementById("id_hidden").value = IdCss;
+			document.getElementById("edit_Css").value = Css;
+			document.getElementById("edit_IdEntrance").value = IdEntrance;
+		}
+		function editToopendata(IdInfo, NomeTabellaOpenData) {
+			selectedId = IdInfo;
+			
+			document.getElementById("id_hidden").value = IdInfo;
+			document.getElementById("edit_IdInfo").value = IdInfo;
+			document.getElementById("edit_NomeTabellaOpenData").value = NomeTabellaOpenData;
+		}
+		
+		$(document).ready(function(){
+			document.getElementById("table_val").innerHTML = '';
+			var e = document.getElementById('toBlack');
+			e.oninput = pressed;
+			e.onpropertychange = e.oninput; // for IE8
+			$("#floors").hide();
+			$("#c1").hide();
+
+			// Activate tooltip
+			$('[data-toggle="tooltip"]').tooltip();
+			document.getElementById("deleteMore").addEventListener('click',function(){selectMore()},false);
+				
+			$("#selectAll").click(function(){
+				if(this.checked){
+					checkbox.each(function(){
+						this.checked = true;                        
+					});
+				} else{
+					checkbox.each(function(){
+						this.checked = false;                        
+					});
+				} 
+			});
+			checkbox.click(function(){
+				if(!this.checked){
+					$("#selectAll").prop("checked", false);
+				}
+			});
+		});
+
+
+		function deleteValue() {
+			if(delOne==1) {
+				delOne = 0;
 				var changeDetails = { 
-					id: this.id.substring(8), 
+					id: selectedId, 
 					tab: selectedTab, 
 				}
 				socket.emit('deleteValue', changeDetails);
-			}			
-		});
-	}
-	var checkTop = $('input[type="checkbox"]');
-	checkTop.each(function(){
-		this.checked = false;                        
-	});
-	$('#deleteModal').modal('hide');
-}
-
-function modifyValue() {
-	$('#editModal').modal('hide');
-}
-
-function addRandom() {
-	socket.emit('addRandomValue', 1);
-}
-
-function fadeIn(fadein) {
-	$("#c0").hide()
-	$("#c1").fadeIn()
-	selectedTab = fadein;
-	var valori;
-	
-	document.getElementById("modal-body").innerHTML = "";
-	
-	switch(fadein) {
-    case "c1":
-        valori = info;
-		
-		document.getElementById("opened").innerHTML = "Informazioni";
-		document.getElementById("addForm").setAttribute("action", "/info");
-		document.getElementById("modForm").setAttribute("action", "/infoMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Nome";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Nome");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Nome");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "Descrizione";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_Descrizione");
-		input2.setAttribute("type", "text");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "Descrizione");
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		var div3 = document.createElement("div");
-		div3.setAttribute("class", "form-group");
-		var label3 = document.createElement("label");
-		label3.innerHTML = "Posti";
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "edit_Posti");
-		input3.setAttribute("type", "number");
-		input3.setAttribute("class", "form-control");
-		input3.setAttribute("name", "Posti");
-		div3.appendChild(label3);
-		div3.appendChild(input3);
-		
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		document.getElementById("modal-body").appendChild(div3);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add3 = div3.cloneNode(true);
-		div_add3.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-		document.getElementById("add-body").appendChild(div_add3);
-
-		
-        break;
-    case "c2":
-        valori = datacategory;
-		
-		document.getElementById("opened").innerHTML = "Data Category";
-		document.getElementById("addForm").setAttribute("action", "/datacategory");
-		document.getElementById("modForm").setAttribute("action", "/datacategoryMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Nome";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Nome");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Nome");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "Colore";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_Colore");
-		input2.setAttribute("type", "text");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "Colore");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		var div3 = document.createElement("div");
-		div3.setAttribute("class", "form-group");
-		var label3 = document.createElement("label");
-		label3.innerHTML = "Icon";
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "edit_Icon");
-		input3.setAttribute("type", "text");
-		input3.setAttribute("class", "form-control");
-		input3.setAttribute("name", "Icon");
-		input3.required = true;
-		div3.appendChild(label3);
-		div3.appendChild(input3);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		document.getElementById("modal-body").appendChild(div3);
-
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add3 = div3.cloneNode(true);
-		div_add3.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-		document.getElementById("add-body").appendChild(div_add3);
-		
-        break;
-    case "c3":
-        valori = dataspace;
-		
-		document.getElementById("opened").innerHTML = "Data Space";
-		document.getElementById("addForm").setAttribute("action", "/dataspace");
-		document.getElementById("modForm").setAttribute("action", "/dataspaceMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "IdDataSpace";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_IdDataSpace");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "IdDataSpace");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "IdInfo";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_IdInfo");
-		input2.setAttribute("type", "number");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "IdInfo");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		var div3 = document.createElement("div");
-		div3.setAttribute("class", "form-group");
-		var label3 = document.createElement("label");
-		label3.innerHTML = "IdFigura";
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "edit_IdFigura");
-		input3.setAttribute("type", "number");
-		input3.setAttribute("class", "form-control");
-		input3.setAttribute("name", "IdFigura");
-		input3.required = true;
-		div3.appendChild(label3);
-		div3.appendChild(input3);
-		
-		var div4 = document.createElement("div");
-		div4.setAttribute("class", "form-group");
-		var label4 = document.createElement("label");
-		label4.innerHTML = "IdDataCategory";
-		var input4 = document.createElement("input");
-		input4.setAttribute("id", "edit_IdDataCategory");
-		input4.setAttribute("type", "number");
-		input4.setAttribute("class", "form-control");
-		input4.setAttribute("name", "IdDataCategory");
-		input4.required = true;
-		div4.appendChild(label4);
-		div4.appendChild(input4);
-		
-		var div5 = document.createElement("div");
-		div5.setAttribute("class", "form-group");
-		var label5 = document.createElement("label");
-		label5.innerHTML = "IdPin";
-		var input5 = document.createElement("input");
-		input5.setAttribute("id", "edit_IdPin");
-		input5.setAttribute("type", "number");
-		input5.setAttribute("class", "form-control");
-		input5.setAttribute("name", "IdPin");
-		div5.appendChild(label5);
-		div5.appendChild(input5);
-		
-		var div6 = document.createElement("div");
-		div6.setAttribute("class", "form-group");
-		var label6 = document.createElement("label");
-		label6.innerHTML = "IdEntrance";
-		var input6 = document.createElement("input");
-		input6.setAttribute("id", "edit_IdEntrance2");
-		input6.setAttribute("type", "number");
-		input6.setAttribute("class", "form-control");
-		input6.setAttribute("name", "IdEntrance");
-		div6.appendChild(label6);
-		div6.appendChild(input6);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add3 = div3.cloneNode(true);
-		div_add3.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add4 = div4.cloneNode(true);
-		div_add4.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add5 = div5.cloneNode(true);
-		div_add5.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add6 = div6.cloneNode(true);
-		div_add6.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-		document.getElementById("add-body").appendChild(div_add3);
-		document.getElementById("add-body").appendChild(div_add4);
-		document.getElementById("add-body").appendChild(div_add5);
-		document.getElementById("add-body").appendChild(div_add6);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		document.getElementById("modal-body").appendChild(div3);
-		document.getElementById("modal-body").appendChild(div4);
-		document.getElementById("modal-body").appendChild(div5);
-		document.getElementById("modal-body").appendChild(div6);
-        break;
-    case "c4":
-        valori = figura;
-		
-		$("#floors").fadeIn();
-		document.getElementById("toBlack").value = "1";
-		pressed();
-		
-		document.getElementById("opened").innerHTML = "Figura";
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		document.getElementById("addForm").setAttribute("action", "/figura");
-		document.getElementById("modForm").setAttribute("action", "/figuraMod");
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Tipo";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Tipo");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Tipo");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "Class";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_Class");
-		input2.setAttribute("type", "text");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "Class");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		var div3 = document.createElement("div");
-		div3.setAttribute("class", "form-group");
-		var label3 = document.createElement("label");
-		label3.innerHTML = "X";
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "edit_x");
-		input3.setAttribute("type", "number");
-		input3.setAttribute("class", "form-control");
-		input3.setAttribute("name", "x");
-		div3.appendChild(label3);
-		div3.appendChild(input3);
-		
-		var div4 = document.createElement("div");
-		div4.setAttribute("class", "form-group");
-		var label4 = document.createElement("label");
-		label4.innerHTML = "Y";
-		var input4 = document.createElement("input");
-		input4.setAttribute("id", "edit_y");
-		input4.setAttribute("type", "number");
-		input4.setAttribute("class", "form-control");
-		input4.setAttribute("name", "y");
-		div4.appendChild(label4);
-		div4.appendChild(input4);
-		
-		var div5 = document.createElement("div");
-		div5.setAttribute("class", "form-group");
-		var label5 = document.createElement("label");
-		label5.innerHTML = "Width";
-		var input5 = document.createElement("input");
-		input5.setAttribute("id", "edit_width");
-		input5.setAttribute("type", "number");
-		input5.setAttribute("class", "form-control");
-		input5.setAttribute("name", "width");
-		div5.appendChild(label5);
-		div5.appendChild(input5);
-		
-		var div6 = document.createElement("div");
-		div6.setAttribute("class", "form-group");
-		var label6 = document.createElement("label");
-		label6.innerHTML = "Height";
-		var input6 = document.createElement("input");
-		input6.setAttribute("id", "edit_height");
-		input6.setAttribute("type", "number");
-		input6.setAttribute("class", "form-control");
-		input6.setAttribute("name", "height");
-		div6.appendChild(label6);
-		div6.appendChild(input6);
-		
-		var div7 = document.createElement("div");
-		div7.setAttribute("class", "form-group");
-		var label7 = document.createElement("label");
-		label7.innerHTML = "Points";
-		var input7 = document.createElement("input");
-		input7.setAttribute("id", "edit_Points");
-		input7.setAttribute("type", "text");
-		input7.setAttribute("class", "form-control");
-		input7.setAttribute("name", "Points");
-		div7.appendChild(label7);
-		div7.appendChild(input7);
-		
-		var div8 = document.createElement("div");
-		div8.setAttribute("class", "form-group");
-		var label8 = document.createElement("label");
-		label8.innerHTML = "Piano";
-		var input8 = document.createElement("input");
-		input8.setAttribute("id", "edit_Piano");
-		input8.setAttribute("type", "number");
-		input8.setAttribute("class", "form-control");
-		input8.setAttribute("name", "Piano");
-		input8.required = true;
-		div8.appendChild(label8);
-		div8.appendChild(input8);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		document.getElementById("modal-body").appendChild(div3);
-		document.getElementById("modal-body").appendChild(div4);
-		document.getElementById("modal-body").appendChild(div5);
-		document.getElementById("modal-body").appendChild(div6);
-		document.getElementById("modal-body").appendChild(div7);
-		document.getElementById("modal-body").appendChild(div8);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add3 = div3.cloneNode(true);
-		div_add3.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add4 = div4.cloneNode(true);
-		div_add4.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add5 = div5.cloneNode(true);
-		div_add5.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add6 = div6.cloneNode(true);
-		div_add6.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add7 = div7.cloneNode(true);
-		div_add7.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add8 = div8.cloneNode(true);
-		div_add8.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-		document.getElementById("add-body").appendChild(div_add3);
-		document.getElementById("add-body").appendChild(div_add4);
-		document.getElementById("add-body").appendChild(div_add5);
-		document.getElementById("add-body").appendChild(div_add6);
-		document.getElementById("add-body").appendChild(div_add7);
-		document.getElementById("add-body").appendChild(div_add8);
-		
-        break;
-	case "c5":
-        valori = pin;
-		
-		document.getElementById("opened").innerHTML = "Pin";
-		document.getElementById("addForm").setAttribute("action", "/pin");
-		document.getElementById("modForm").setAttribute("action", "/pinMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Icon";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Icon");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Icon");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "Top_distance";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_Top_distance");
-		input2.setAttribute("type", "number");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "Top_distance");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		var div3 = document.createElement("div");
-		div3.setAttribute("class", "form-group");
-		var label3 = document.createElement("label");
-		label3.innerHTML = "Left_distance";
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "edit_Left_distance");
-		input3.setAttribute("type", "number");
-		input3.setAttribute("class", "form-control");
-		input3.setAttribute("name", "Left_distance");
-		input3.required = true;
-		div3.appendChild(label3);
-		div3.appendChild(input3);
-
-		var div4 = document.createElement("div");
-		div4.setAttribute("class", "form-group");
-		var label4 = document.createElement("label");
-		label4.innerHTML = "IdEntrance";
-		var input4 = document.createElement("input");
-		input4.setAttribute("id", "edit_IdEntrance");
-		input4.setAttribute("type", "number");
-		input4.setAttribute("class", "form-control");
-		input4.setAttribute("name", "IdEntrance");
-		input4.required = true;
-		div4.appendChild(label4);
-		div4.appendChild(input4);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		document.getElementById("modal-body").appendChild(div3);
-		document.getElementById("modal-body").appendChild(div4);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add3 = div3.cloneNode(true);
-		div_add3.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add4 = div4.cloneNode(true);
-		div_add4.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-		document.getElementById("add-body").appendChild(div_add3);
-		document.getElementById("add-body").appendChild(div_add4);
-        break;
-	case "c6":
-        valori = entrance;
-		document.getElementById("opened").innerHTML = "Entrance";
-		document.getElementById("addForm").setAttribute("action", "/entrance");
-		document.getElementById("modForm").setAttribute("action", "/entranceMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Descrizione";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Descrizione");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Descrizione");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		
-		document.getElementById("modal-body").appendChild(div);
-
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-        break;
-		
-	case "c7":
-        valori = entrancecss;
-		
-		document.getElementById("opened").innerHTML = "EntranceCss";
-		document.getElementById("addForm").setAttribute("action", "/entrancecss");
-		document.getElementById("modForm").setAttribute("action", "/entrancecssMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "Css";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_Css");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "Css");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "IdEntrance";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_IdEntrance");
-		input2.setAttribute("type", "text");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "IdEntrance");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-        break;
-	case "c8":
-        valori = toopendata;
-		
-		document.getElementById("opened").innerHTML = "ToOpenData";
-		document.getElementById("addForm").setAttribute("action", "/toopendata");
-		document.getElementById("modForm").setAttribute("action", "/toopendataMod");
-		
-		var input0 = document.createElement("input");
-		input0.setAttribute("id", "id_hidden");
-		input0.setAttribute("type", "hidden");
-		input0.setAttribute("name", "id");
-		document.getElementById("modal-body").appendChild(input0);
-		
-		var div = document.createElement("div");
-		div.setAttribute("class", "form-group");
-		var label = document.createElement("label");
-		label.innerHTML = "IdInfo";
-		var input = document.createElement("input");
-		input.setAttribute("id", "edit_IdInfo");
-		input.setAttribute("type", "text");
-		input.setAttribute("class", "form-control");
-		input.setAttribute("name", "IdInfo");
-		input.required = true;
-		div.appendChild(label);
-		div.appendChild(input);
-		
-		var div2 = document.createElement("div");
-		div2.setAttribute("class", "form-group");
-		var label2 = document.createElement("label");
-		label2.innerHTML = "NomeTabellaOpenData";
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "edit_NomeTabellaOpenData");
-		input2.setAttribute("type", "text");
-		input2.setAttribute("class", "form-control");
-		input2.setAttribute("name", "NomeTabellaOpenData");
-		input2.required = true;
-		div2.appendChild(label2);
-		div2.appendChild(input2);
-		
-		document.getElementById("modal-body").appendChild(div);
-		document.getElementById("modal-body").appendChild(div2);
-		
-		var div_add = div.cloneNode(true);
-		div_add.getElementsByTagName('input')[0].id = "addInfo";
-		var div_add2 = div2.cloneNode(true);
-		div_add2.getElementsByTagName('input')[0].id = "addInfo";
-		
-		document.getElementById("add-body").innerHTML = "";
-		document.getElementById("add-body").appendChild(div_add);
-		document.getElementById("add-body").appendChild(div_add2);
-        break;
-	}
-	
-	
-	document.getElementById("val2").innerHTML = valori.length;
-	for(var field in valori) {
-		if(field < MAX_VISIBLE) {
-			var line = valori[field].split('***');
-	switch(fadein) {
-    case "c1":
-        createInfoTr(line[0], line[1], line[2], line[3]);
-        break;
-    case "c2":
-		createDataCategoryTr(line[0], line[1], line[2], line[3]);
-        break;
-    case "c3":
-		createDataSpaceTr(line[0], line[1], line[2], line[3], line[4], line[5]);
-        break;
-    case "c4":
-		createFiguraTr(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
-        break;
-	case "c5":
-		createPinTr(line[0], line[1], line[2], line[3], line[4]);
-        break;
-	case "c6":
-		createEntranceTr(line[0], line[1]);
-        break;
-	case "c7":
-		createEntrancecssTr(line[0], line[1], line[2]);
-        break;
-	case "c8":
-		createToopendataTr(line[0], line[1]);
-        break;
-	}
+			} else {
 			
-			document.getElementById("val1").innerHTML = parseInt(field) + 1;
-			checks();
+				var checkbox = $('table tbody input[type="checkbox"]');
+				checkbox.each(function(){
+					if(this.checked == true) {
+						var changeDetails = { 
+							id: this.id.substring(8), 
+							tab: selectedTab, 
+						}
+						socket.emit('deleteValue', changeDetails);
+					}			
+				});
+			}
+			var checkTop = $('input[type="checkbox"]');
+			checkTop.each(function(){
+				this.checked = false;                        
+			});
+			$('#deleteModal').modal('hide');
 		}
-	}
 
-	total = parseInt(valori.length / MAX_VISIBLE);
-
-	if(valori.length % MAX_VISIBLE > 0) {
-		total = total + 1;
-	}
-
-	$('#pagination-here').bootpag({
-		total: total,          
-		page: 1,            
-		maxVisible: MAX_VISIBLE,     
-		leaps: true,
-		href: "#result-page-{{number}}",
-	})
-
-	//page click action
-	$('#pagination-here').on("page", function(event, num){
-
-		var checkTop = $('input[type="checkbox"]');
-		checkTop.each(function(){
-			this.checked = false;                        
-		});
-
-		document.getElementById("table_val").innerHTML = '';
-		var start = MAX_VISIBLE * (num - 1);
-		var end = MAX_VISIBLE * (num - 1) + (MAX_VISIBLE);
-		if(end > valori.length)  {
-		end = valori.length;
+		function modifyValue() {
+			$('#editModal').modal('hide');
 		}
-		document.getElementById("val1").innerHTML = end - start;
-		for(i = start; i < end; i++) {
-			var line = valori[i].split('***');
-				switch(fadein) {
-    case "c1":
-        createInfoTr(line[0], line[1], line[2], line[3]);
-        break;
-    case "c2":
-		createDataCategoryTr(line[0], line[1], line[2], line[3]);
-        break;
-    case "c3":
-		createDataSpaceTr(line[0], line[1], line[2], line[3], line[4], line[5]);
-        break;
-    case "c4":
-		createFiguraTr(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
-        break;
-	case "c5":
-		createPinTr(line[0], line[1], line[2], line[3], line[4]);
-        break;
-	case "c6":
-		createEntranceTr(line[0], line[1]);
-        break;
-	case "c7":
-		createEntrancecssTr(line[0], line[1], line[2]);
-        break;
-	case "c8":
-		createToopendataTr(line[0], line[1]);
-        break;
-	}
-			checks();
+
+		function addRandom() {
+			socket.emit('addRandomValue', 1);
 		}
-	});	
-}
 
-function createInfoTr(IdInfo, Nome, Descrizione, Posti) {
-	$("#headValues").children(":not(#th0)").remove();
+		function fadeIn(fadein) {
+			$("#c0").hide()
+			$("#c1").fadeIn()
+			selectedTab = fadein;
+			var valori;
+			
+			document.getElementById("modal-body").innerHTML = "";
+			
+			switch(fadein) {
+				case "c1":
+					valori = info;
+					
+					document.getElementById("opened").innerHTML = "Informazioni";
+					document.getElementById("addForm").setAttribute("action", "/info");
+					document.getElementById("modForm").setAttribute("action", "/infoMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Nome";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Nome");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Nome");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "Descrizione";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_Descrizione");
+					input2.setAttribute("type", "text");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "Descrizione");
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					var div3 = document.createElement("div");
+					div3.setAttribute("class", "form-group");
+					var label3 = document.createElement("label");
+					label3.innerHTML = "Posti";
+					var input3 = document.createElement("input");
+					input3.setAttribute("id", "edit_Posti");
+					input3.setAttribute("type", "number");
+					input3.setAttribute("class", "form-control");
+					input3.setAttribute("name", "Posti");
+					div3.appendChild(label3);
+					div3.appendChild(input3);
+					
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					document.getElementById("modal-body").appendChild(div3);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add3 = div3.cloneNode(true);
+					div_add3.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					document.getElementById("add-body").appendChild(div_add3);
 
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdInfo";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Nome";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "Descrizione";
-	var th4 = document.createElement("TH");
-	th4.innerHTML = "Posti";
-	var th6 = document.createElement("TH");
-	th6.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th4);
-	document.getElementById("headValues").appendChild(th6);
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_4 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdInfo);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdInfo);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdInfo);
-	var t_2 = document.createTextNode(Nome);
-	var t_3 = document.createTextNode(Descrizione);
-	var t_4 = document.createTextNode(Posti);
+					
+					break;
+				case "c2":
+					valori = datacategory;
+					
+					document.getElementById("opened").innerHTML = "Data Category";
+					document.getElementById("addForm").setAttribute("action", "/datacategory");
+					document.getElementById("modForm").setAttribute("action", "/datacategoryMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Nome";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Nome");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Nome");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "Colore";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_Colore");
+					input2.setAttribute("type", "text");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "Colore");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					var div3 = document.createElement("div");
+					div3.setAttribute("class", "form-group");
+					var label3 = document.createElement("label");
+					label3.innerHTML = "Icon";
+					var input3 = document.createElement("input");
+					input3.setAttribute("id", "edit_Icon");
+					input3.setAttribute("type", "text");
+					input3.setAttribute("class", "form-control");
+					input3.setAttribute("name", "Icon");
+					input3.required = true;
+					div3.appendChild(label3);
+					div3.appendChild(input3);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					document.getElementById("modal-body").appendChild(div3);
 
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	td_4.appendChild(t_4);
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add3 = div3.cloneNode(true);
+					div_add3.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					document.getElementById("add-body").appendChild(div_add3);
+					
+					break;
+				case "c3":
+					valori = dataspace;
+					
+					document.getElementById("opened").innerHTML = "Data Space";
+					document.getElementById("addForm").setAttribute("action", "/dataspace");
+					document.getElementById("modForm").setAttribute("action", "/dataspaceMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "IdDataSpace";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_IdDataSpace");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "IdDataSpace");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "IdInfo";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_IdInfo");
+					input2.setAttribute("type", "number");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "IdInfo");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					var div3 = document.createElement("div");
+					div3.setAttribute("class", "form-group");
+					var label3 = document.createElement("label");
+					label3.innerHTML = "IdFigura";
+					var input3 = document.createElement("input");
+					input3.setAttribute("id", "edit_IdFigura");
+					input3.setAttribute("type", "number");
+					input3.setAttribute("class", "form-control");
+					input3.setAttribute("name", "IdFigura");
+					input3.required = true;
+					div3.appendChild(label3);
+					div3.appendChild(input3);
+					
+					var div4 = document.createElement("div");
+					div4.setAttribute("class", "form-group");
+					var label4 = document.createElement("label");
+					label4.innerHTML = "IdDataCategory";
+					var input4 = document.createElement("input");
+					input4.setAttribute("id", "edit_IdDataCategory");
+					input4.setAttribute("type", "number");
+					input4.setAttribute("class", "form-control");
+					input4.setAttribute("name", "IdDataCategory");
+					input4.required = true;
+					div4.appendChild(label4);
+					div4.appendChild(input4);
+					
+					var div5 = document.createElement("div");
+					div5.setAttribute("class", "form-group");
+					var label5 = document.createElement("label");
+					label5.innerHTML = "IdPin";
+					var input5 = document.createElement("input");
+					input5.setAttribute("id", "edit_IdPin");
+					input5.setAttribute("type", "number");
+					input5.setAttribute("class", "form-control");
+					input5.setAttribute("name", "IdPin");
+					div5.appendChild(label5);
+					div5.appendChild(input5);
+					
+					var div6 = document.createElement("div");
+					div6.setAttribute("class", "form-group");
+					var label6 = document.createElement("label");
+					label6.innerHTML = "IdEntrance";
+					var input6 = document.createElement("input");
+					input6.setAttribute("id", "edit_IdEntrance2");
+					input6.setAttribute("type", "number");
+					input6.setAttribute("class", "form-control");
+					input6.setAttribute("name", "IdEntrance");
+					div6.appendChild(label6);
+					div6.appendChild(input6);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add3 = div3.cloneNode(true);
+					div_add3.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add4 = div4.cloneNode(true);
+					div_add4.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add5 = div5.cloneNode(true);
+					div_add5.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add6 = div6.cloneNode(true);
+					div_add6.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					document.getElementById("add-body").appendChild(div_add3);
+					document.getElementById("add-body").appendChild(div_add4);
+					document.getElementById("add-body").appendChild(div_add5);
+					document.getElementById("add-body").appendChild(div_add6);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					document.getElementById("modal-body").appendChild(div3);
+					document.getElementById("modal-body").appendChild(div4);
+					document.getElementById("modal-body").appendChild(div5);
+					document.getElementById("modal-body").appendChild(div6);
+					break;
+				case "c4":
+					valori = figura;
+					
+					$("#floors").fadeIn();
+					document.getElementById("toBlack").value = "1";
+					pressed();
+					
+					document.getElementById("opened").innerHTML = "Figura";
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					document.getElementById("addForm").setAttribute("action", "/figura");
+					document.getElementById("modForm").setAttribute("action", "/figuraMod");
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Tipo";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Tipo");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Tipo");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "Class";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_Class");
+					input2.setAttribute("type", "text");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "Class");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					var div3 = document.createElement("div");
+					div3.setAttribute("class", "form-group");
+					var label3 = document.createElement("label");
+					label3.innerHTML = "X";
+					var input3 = document.createElement("input");
+					input3.setAttribute("id", "edit_x");
+					input3.setAttribute("type", "number");
+					input3.setAttribute("class", "form-control");
+					input3.setAttribute("name", "x");
+					div3.appendChild(label3);
+					div3.appendChild(input3);
+					
+					var div4 = document.createElement("div");
+					div4.setAttribute("class", "form-group");
+					var label4 = document.createElement("label");
+					label4.innerHTML = "Y";
+					var input4 = document.createElement("input");
+					input4.setAttribute("id", "edit_y");
+					input4.setAttribute("type", "number");
+					input4.setAttribute("class", "form-control");
+					input4.setAttribute("name", "y");
+					div4.appendChild(label4);
+					div4.appendChild(input4);
+					
+					var div5 = document.createElement("div");
+					div5.setAttribute("class", "form-group");
+					var label5 = document.createElement("label");
+					label5.innerHTML = "Width";
+					var input5 = document.createElement("input");
+					input5.setAttribute("id", "edit_width");
+					input5.setAttribute("type", "number");
+					input5.setAttribute("class", "form-control");
+					input5.setAttribute("name", "width");
+					div5.appendChild(label5);
+					div5.appendChild(input5);
+					
+					var div6 = document.createElement("div");
+					div6.setAttribute("class", "form-group");
+					var label6 = document.createElement("label");
+					label6.innerHTML = "Height";
+					var input6 = document.createElement("input");
+					input6.setAttribute("id", "edit_height");
+					input6.setAttribute("type", "number");
+					input6.setAttribute("class", "form-control");
+					input6.setAttribute("name", "height");
+					div6.appendChild(label6);
+					div6.appendChild(input6);
+					
+					var div7 = document.createElement("div");
+					div7.setAttribute("class", "form-group");
+					var label7 = document.createElement("label");
+					label7.innerHTML = "Points";
+					var input7 = document.createElement("input");
+					input7.setAttribute("id", "edit_Points");
+					input7.setAttribute("type", "text");
+					input7.setAttribute("class", "form-control");
+					input7.setAttribute("name", "Points");
+					div7.appendChild(label7);
+					div7.appendChild(input7);
+					
+					var div8 = document.createElement("div");
+					div8.setAttribute("class", "form-group");
+					var label8 = document.createElement("label");
+					label8.innerHTML = "Piano";
+					var input8 = document.createElement("input");
+					input8.setAttribute("id", "edit_Piano");
+					input8.setAttribute("type", "number");
+					input8.setAttribute("class", "form-control");
+					input8.setAttribute("name", "Piano");
+					input8.required = true;
+					div8.appendChild(label8);
+					div8.appendChild(input8);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					document.getElementById("modal-body").appendChild(div3);
+					document.getElementById("modal-body").appendChild(div4);
+					document.getElementById("modal-body").appendChild(div5);
+					document.getElementById("modal-body").appendChild(div6);
+					document.getElementById("modal-body").appendChild(div7);
+					document.getElementById("modal-body").appendChild(div8);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add3 = div3.cloneNode(true);
+					div_add3.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add4 = div4.cloneNode(true);
+					div_add4.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add5 = div5.cloneNode(true);
+					div_add5.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add6 = div6.cloneNode(true);
+					div_add6.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add7 = div7.cloneNode(true);
+					div_add7.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add8 = div8.cloneNode(true);
+					div_add8.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					document.getElementById("add-body").appendChild(div_add3);
+					document.getElementById("add-body").appendChild(div_add4);
+					document.getElementById("add-body").appendChild(div_add5);
+					document.getElementById("add-body").appendChild(div_add6);
+					document.getElementById("add-body").appendChild(div_add7);
+					document.getElementById("add-body").appendChild(div_add8);
+					
+					break;
+				case "c5":
+					valori = pin;
+					
+					document.getElementById("opened").innerHTML = "Pin";
+					document.getElementById("addForm").setAttribute("action", "/pin");
+					document.getElementById("modForm").setAttribute("action", "/pinMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Icon";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Icon");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Icon");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "Top_distance";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_Top_distance");
+					input2.setAttribute("type", "number");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "Top_distance");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					var div3 = document.createElement("div");
+					div3.setAttribute("class", "form-group");
+					var label3 = document.createElement("label");
+					label3.innerHTML = "Left_distance";
+					var input3 = document.createElement("input");
+					input3.setAttribute("id", "edit_Left_distance");
+					input3.setAttribute("type", "number");
+					input3.setAttribute("class", "form-control");
+					input3.setAttribute("name", "Left_distance");
+					input3.required = true;
+					div3.appendChild(label3);
+					div3.appendChild(input3);
 
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	tr.appendChild(td_4);
+					var div4 = document.createElement("div");
+					div4.setAttribute("class", "form-group");
+					var label4 = document.createElement("label");
+					label4.innerHTML = "IdEntrance";
+					var input4 = document.createElement("input");
+					input4.setAttribute("id", "edit_IdEntrance");
+					input4.setAttribute("type", "number");
+					input4.setAttribute("class", "form-control");
+					input4.setAttribute("name", "IdEntrance");
+					input4.required = true;
+					div4.appendChild(label4);
+					div4.appendChild(input4);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					document.getElementById("modal-body").appendChild(div3);
+					document.getElementById("modal-body").appendChild(div4);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add3 = div3.cloneNode(true);
+					div_add3.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add4 = div4.cloneNode(true);
+					div_add4.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					document.getElementById("add-body").appendChild(div_add3);
+					document.getElementById("add-body").appendChild(div_add4);
+					break;
+				case "c6":
+					valori = entrance;
+					document.getElementById("opened").innerHTML = "Entrance";
+					document.getElementById("addForm").setAttribute("action", "/entrance");
+					document.getElementById("modForm").setAttribute("action", "/entranceMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Descrizione";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Descrizione");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Descrizione");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					
+					document.getElementById("modal-body").appendChild(div);
 
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editInfo(IdInfo, Nome, Descrizione, Posti)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdInfo)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
 
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);
-}
-
-
-function createDataCategoryTr(IdDataCategory, Nome, Colore, Icon) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdCataCategory";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Nome";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "Colore";
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Icon";
-	var th4 = document.createElement("TH");
-	th4.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th5);
-	document.getElementById("headValues").appendChild(th4);
-
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_5 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdDataCategory);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdDataCategory);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdDataCategory);
-	var t_2 = document.createTextNode(Nome);
-	var t_3 = document.createTextNode(Colore);
-	var t_5 = document.createTextNode(Icon);
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	td_5.appendChild(t_5);
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	tr.appendChild(td_5);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editDataCategory(IdDataCategory, Nome, Colore, Icon)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdDataCategory)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);
-}
-
-
-function createDataSpaceTr(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdDataSpace";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "IdInfo";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "IdFigura";
-	var th4 = document.createElement("TH");
-	th4.innerHTML = "IdDataCategory";
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "IdPin";
-	var th7= document.createElement("TH");
-	th7.innerHTML = "IdEntrance";
-	var th6 = document.createElement("TH");
-	th6.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th4);
-	document.getElementById("headValues").appendChild(th5);
-	document.getElementById("headValues").appendChild(th7);
-	document.getElementById("headValues").appendChild(th6);
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_4 = document.createElement("TD");
-	var td_5 = document.createElement("TD");
-	var td_7 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdDataSpace);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdDataSpace);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdDataSpace);
-	var t_2 = document.createTextNode(IdInfo);
-	var t_3 = document.createTextNode(IdFigura);
-	var t_4 = document.createTextNode(IdDataCategory);
-	var t_5 = document.createTextNode(IdPin);
-	var t_7 = document.createTextNode(IdEntrance);
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	td_4.appendChild(t_4);
-	td_5.appendChild(t_5);
-	td_7.appendChild(t_7);
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	tr.appendChild(td_4);
-	tr.appendChild(td_5);
-	tr.appendChild(td_7);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editDataSpace(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdDataSpace)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);
-}
-
-
-
-
-function createFiguraTr(IdFigura, Tipo, Class, x, y, width, height, Points, Piano) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdFigura";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Tipo";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "Class";
-	var th4 = document.createElement("TH");
-	th4.innerHTML = "X";
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Y";
-	var th6 = document.createElement("TH");
-	th6.innerHTML = "Width";
-	var th7 = document.createElement("TH");
-	th7.innerHTML = "Height";
-	var th8 = document.createElement("TH");
-	th8.innerHTML = "Points";
-	var th9 = document.createElement("TH");
-	th9.innerHTML = "Piano";
-	var th10 = document.createElement("TH");
-	th10.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th4);
-	document.getElementById("headValues").appendChild(th5);
-	document.getElementById("headValues").appendChild(th6);
-	document.getElementById("headValues").appendChild(th7);
-	document.getElementById("headValues").appendChild(th8);
-	document.getElementById("headValues").appendChild(th9);
-	document.getElementById("headValues").appendChild(th10);
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_4 = document.createElement("TD");
-	var td_5 = document.createElement("TD");
-	var td_width = document.createElement("TD");
-	var td_height = document.createElement("TD");
-	var td_points = document.createElement("TD");
-	var td_piano = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdFigura);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdFigura);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdFigura);
-	var t_2 = document.createTextNode(Tipo);
-	var t_3 = document.createTextNode(Class);
-	var t_4 = document.createTextNode(x);
-	var t_5 = document.createTextNode(y);
-	var t_width = document.createTextNode(width);
-	var t_height = document.createTextNode(height);
-	var t_points = document.createTextNode(Points);
-	var t_piano = document.createTextNode(Piano);
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	td_4.appendChild(t_4);
-	td_5.appendChild(t_5);
-	td_width.appendChild(t_width);
-	td_height.appendChild(t_height);
-	td_points.appendChild(t_points);
-	td_piano.appendChild(t_piano);
-
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	tr.appendChild(td_4);
-	tr.appendChild(td_5);
-	tr.appendChild(td_width);
-	tr.appendChild(td_height);
-	tr.appendChild(td_points);
-	tr.appendChild(td_piano);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editFigura(IdFigura, Tipo, Class, x, y, width, height, Points, Piano)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdFigura)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);
-}
-
-
-function createPinTr(IdPin, Icon, Top_distance, Left_distance, IdEntrance) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdPin";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Icon";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "Top_distance";
-	var th4 = document.createElement("TH");
-	th4.innerHTML = "Left_distance";
-	var th6 = document.createElement("TH");
-	th6.innerHTML = "IdEntrance";
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th4);
-	document.getElementById("headValues").appendChild(th6);
-	document.getElementById("headValues").appendChild(th5);
-
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_4 = document.createElement("TD");
-	var td_6 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdPin);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdPin);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdPin);
-	var t_2 = document.createTextNode(Icon);
-	var t_3 = document.createTextNode(Top_distance);
-	var t_4 = document.createTextNode(Left_distance);
-	var t_6 = document.createTextNode(IdEntrance);
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	td_4.appendChild(t_4);
-	td_6.appendChild(t_6);
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	tr.appendChild(td_4);
-	tr.appendChild(td_6);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editPin(IdPin, Icon, Top_distance, Left_distance, IdEntrance)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdPin)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);	
-}
-
-
-function createEntranceTr(IdEntrance, Descrizione) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdEntrance";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Descrizione";
-	
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-
-	document.getElementById("headValues").appendChild(th5);
-
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdEntrance);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdEntrance);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdEntrance);
-	var t_2 = document.createTextNode(Descrizione);
-
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editEntrance(IdEntrance, Descrizione)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdEntrance)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);	
-}
-
-
-
-function createEntrancecssTr(IdCss, Css, IdEntrance) {
-	$("#headValues").children(":not(#th0)").remove();
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdCss";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "Css";
-	var th3 = document.createElement("TH");
-	th3.innerHTML = "IdEntrance";
-	
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th3);
-	document.getElementById("headValues").appendChild(th5);
-
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_3 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdCss);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdCss);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdCss);
-	var t_2 = document.createTextNode(Css);
-	var t_3 = document.createTextNode(IdEntrance);
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	td_3.appendChild(t_3);
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	tr.appendChild(td_3);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editEntrancecss(IdCss, Css, IdEntrance)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdCss)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);	
-}
-
-function createToopendataTr(IdInfo, NomeTabellaOpenData) {
-	$("#headValues").children(":not(#th0)").remove();
-
-	var th1 = document.createElement("TH");
-	th1.innerHTML = "IdInfo";
-	var th2 = document.createElement("TH");
-	th2.innerHTML = "NomeTabellaOpenData";
-
-	
-	var th5 = document.createElement("TH");
-	th5.innerHTML = "Opzioni";
-	document.getElementById("headValues").appendChild(th1);
-	document.getElementById("headValues").appendChild(th2);
-	document.getElementById("headValues").appendChild(th5);
-
-	
-	
-	var tr = document.createElement("TR");
-	var td = document.createElement("TD");
-	var td_1 = document.createElement("TD");
-	var td_2 = document.createElement("TD");
-	var td_options = document.createElement("TD");
-	
-	var span = document.createElement("SPAN");
-	span.setAttribute("class", "custom-checkbox");
-	var input = document.createElement("INPUT");
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("id", "checkbox" + IdInfo);
-	input.setAttribute("name", "options[]");
-	input.setAttribute("value", "1");
-	var label = document.createElement("LABEL");
-	label.setAttribute("for", "checkbox" + IdInfo);
-	span.appendChild(input);
-	span.appendChild(label);
-	td.appendChild(span);
-	
-    var t_1 = document.createTextNode(IdInfo);
-	var t_2 = document.createTextNode(NomeTabellaOpenData);
-
-	
-	td_1.appendChild(t_1);
-	td_2.appendChild(t_2);
-	
-	tr.appendChild(td);
-	tr.appendChild(td_1);
-	tr.appendChild(td_2);
-	
-	var a_Modify = document.createElement("A");
-	a_Modify.addEventListener('click',function(){editToopendata(IdInfo, NomeTabellaOpenData)},false);
-	a_Modify.setAttribute("href", "#editModal");
-	a_Modify.setAttribute("class", "edit");
-	a_Modify.setAttribute("data-toggle", "modal");
-	var i_Modify = document.createElement("I");
-	i_Modify.setAttribute("title", "Edit");
-	i_Modify.setAttribute("class", "material-icons");
-	i_Modify.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("create");
-	i_Modify.appendChild(text_i);
-	a_Modify.appendChild(i_Modify);
-	
-	var a_Delete = document.createElement("A");
-	a_Delete.addEventListener('click',function(){selectMe(IdInfo)},false);
-	a_Delete.setAttribute("href", "#deleteModal");
-	a_Delete.setAttribute("class", "delete");
-	a_Delete.setAttribute("data-toggle", "modal");
-	var i_Delete = document.createElement("I");
-	i_Delete.setAttribute("title", "Delete");
-	i_Delete.setAttribute("class", "material-icons");
-	i_Delete.setAttribute("data-toggle", "tooltip");
-	var text_i = document.createTextNode("delete");
-	i_Delete.appendChild(text_i);
-	a_Delete.appendChild(i_Delete);
-
-	td_options.appendChild(a_Modify);
-	td_options.appendChild(a_Delete);
-	tr.appendChild(td_options);
-	
-	document.getElementById("table_val").appendChild(tr);	
-}
-
-
-
-
-function checks() {
-	checkbox = $('table tbody input[type="checkbox"]');
-}
-
-
-var socket = io('/mySensorNamespace');	
-socket.on('err',function(data) {
-	alert("" + data);
-});
-socket.on('hi',function(data) {
-
-	document.getElementById("table_val").innerHTML = '';
-	info = data.info.split('___');
-	figura = data.figura.split('___');
-	datacategory = data.datacategory.split('___');
-	pin = data.pin.split('___');
-	dataspace = data.dataspace.split('___');
-	entrance = data.entrance.split('___');
-	entrancecss = data.entrancecss.split('___');
-	toopendata = data.toopendata.split('___');
-	
-	selectedId = -1;
-	delOne = 0;
-	
-	if(data.correcttab > 0){
-		document.getElementById("a" + data.correcttab).click();
-	} else {
-		$("#c0").show()
-		$("#c1").hide()
-	}
-
-
-	//Riempio Show Floor
-	var xmlns = "http://www.w3.org/2000/svg";
-		var valori = data.svg.split('___');
-	for(var field in valori) {
-		var line = valori[field].split('***');
-		
-		var node = document.createElementNS(xmlns, line[1]);
-		node.setAttribute("data-space",line[0]);
-		node.setAttribute("class", line[2]);
-		node.setAttribute("id", "floor");
-		node.setAttribute("value", line[8]);
-		
-		if(line[6] != "null") {
-			node.setAttribute("x", line[3]);
-			node.setAttribute("y", line[4]);
-			node.setAttribute("width", line[5]);
-			node.setAttribute("height", line[6]);
-		} else if(line[5] != "null") {
-			node.setAttribute("cx", line[3]);
-			node.setAttribute("cy", line[4]);
-			node.setAttribute("r", line[5]);
-		} else {
-			node.setAttribute("points", line[7]);
-		}
-		document.getElementById("lev1").appendChild(node);
-
-	}	
-	$("[id]").each(function(){
-		if($(this).attr("id")=="floor"){
-			$(this).hide();
-		}
-	});
-	if(data.correcttab == 4){
-		pressed();
-	}
-	
-});
-
-	
-
-function pressed() {
-	if(document.getElementById("toBlack").value >= document.getElementById("toBlack").min &&
-	document.getElementById("toBlack").value <= document.getElementById("toBlack").max) {
-		if(document.getElementById("toBlack").value==1) {
-			document.getElementById("pathid").setAttribute("d","M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90");
-		}
-		if(document.getElementById("toBlack").value==2) {
-			document.getElementById("pathid").setAttribute("d","M200 100 H1385 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1395 V90");
-		}
-		if(document.getElementById("toBlack").value==3) {
-			document.getElementById("pathid").setAttribute("d","M300 145 H1070 V100 H1370 V525 H960 V425 H400 V950 H1200 V925 H1305 V1040 H1400 V1350 H1400 V1375 H1210 V1270 H240 V1350 H100 V525 H300 Z M290 135 V515 H90 V1360 H250 V1280 H1200 V1385 H1410 V1360 H1410 V1030 H 1315 V915 H1190 V940 H410 V435 H950 V535 H1380 V90 H1060 V135");
-		}
-		$("[id]").each(function(){
-			if($(this).attr("id")=="floor"){
-				if($(this).attr("value") == document.getElementById("toBlack").value){
-					$(this).fadeIn();
-				} else {
-					$(this).hide();
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					break;
+					
+				case "c7":
+					valori = entrancecss;
+					
+					document.getElementById("opened").innerHTML = "EntranceCss";
+					document.getElementById("addForm").setAttribute("action", "/entrancecss");
+					document.getElementById("modForm").setAttribute("action", "/entrancecssMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "Css";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_Css");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "Css");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "IdEntrance";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_IdEntrance");
+					input2.setAttribute("type", "text");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "IdEntrance");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					break;
+				case "c8":
+					valori = toopendata;
+					
+					document.getElementById("opened").innerHTML = "ToOpenData";
+					document.getElementById("addForm").setAttribute("action", "/toopendata");
+					document.getElementById("modForm").setAttribute("action", "/toopendataMod");
+					
+					var input0 = document.createElement("input");
+					input0.setAttribute("id", "id_hidden");
+					input0.setAttribute("type", "hidden");
+					input0.setAttribute("name", "id");
+					document.getElementById("modal-body").appendChild(input0);
+					
+					var div = document.createElement("div");
+					div.setAttribute("class", "form-group");
+					var label = document.createElement("label");
+					label.innerHTML = "IdInfo";
+					var input = document.createElement("input");
+					input.setAttribute("id", "edit_IdInfo");
+					input.setAttribute("type", "text");
+					input.setAttribute("class", "form-control");
+					input.setAttribute("name", "IdInfo");
+					input.required = true;
+					div.appendChild(label);
+					div.appendChild(input);
+					
+					var div2 = document.createElement("div");
+					div2.setAttribute("class", "form-group");
+					var label2 = document.createElement("label");
+					label2.innerHTML = "NomeTabellaOpenData";
+					var input2 = document.createElement("input");
+					input2.setAttribute("id", "edit_NomeTabellaOpenData");
+					input2.setAttribute("type", "text");
+					input2.setAttribute("class", "form-control");
+					input2.setAttribute("name", "NomeTabellaOpenData");
+					input2.required = true;
+					div2.appendChild(label2);
+					div2.appendChild(input2);
+					
+					document.getElementById("modal-body").appendChild(div);
+					document.getElementById("modal-body").appendChild(div2);
+					
+					var div_add = div.cloneNode(true);
+					div_add.getElementsByTagName('input')[0].id = "addInfo";
+					var div_add2 = div2.cloneNode(true);
+					div_add2.getElementsByTagName('input')[0].id = "addInfo";
+					
+					document.getElementById("add-body").innerHTML = "";
+					document.getElementById("add-body").appendChild(div_add);
+					document.getElementById("add-body").appendChild(div_add2);
+					break;
+			}
+			
+			document.getElementById("val2").innerHTML = valori.length;
+			for(var field in valori) {
+				if(field < MAX_VISIBLE) {
+					var line = valori[field].split('***');
+					switch(fadein) {
+						case "c1":
+							createInfoTr(line[0], line[1], line[2], line[3]);
+							break;
+						case "c2":
+							createDataCategoryTr(line[0], line[1], line[2], line[3]);
+							break;
+						case "c3":
+							createDataSpaceTr(line[0], line[1], line[2], line[3], line[4], line[5]);
+							break;
+						case "c4":
+							createFiguraTr(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
+							break;
+						case "c5":
+							createPinTr(line[0], line[1], line[2], line[3], line[4]);
+							break;
+						case "c6":
+							createEntranceTr(line[0], line[1]);
+							break;
+						case "c7":
+							createEntrancecssTr(line[0], line[1], line[2]);
+							break;
+						case "c8":
+							createToopendataTr(line[0], line[1]);
+							break;
+					}
+					
+					document.getElementById("val1").innerHTML = parseInt(field) + 1;
+					checks();
 				}
 			}
+
+			total = parseInt(valori.length / MAX_VISIBLE);
+
+			if(valori.length % MAX_VISIBLE > 0) {
+				total = total + 1;
+			}
+
+			$('#pagination-here').bootpag({
+				total: total,          
+				page: 1,            
+				maxVisible: MAX_VISIBLE,     
+				leaps: true,
+				href: "#result-page-{{number}}",
+			})
+
+			//page click action
+			$('#pagination-here').on("page", function(event, num){
+
+				var checkTop = $('input[type="checkbox"]');
+				checkTop.each(function(){
+					this.checked = false;                        
+				});
+
+				document.getElementById("table_val").innerHTML = '';
+				var start = MAX_VISIBLE * (num - 1);
+				var end = MAX_VISIBLE * (num - 1) + (MAX_VISIBLE);
+				if(end > valori.length)  {
+				end = valori.length;
+				}
+				document.getElementById("val1").innerHTML = end - start;
+				for(i = start; i < end; i++) {
+					var line = valori[i].split('***');
+					switch(fadein) {
+						case "c1":
+							createInfoTr(line[0], line[1], line[2], line[3]);
+							break;
+						case "c2":
+							createDataCategoryTr(line[0], line[1], line[2], line[3]);
+							break;
+						case "c3":
+							createDataSpaceTr(line[0], line[1], line[2], line[3], line[4], line[5]);
+							break;
+						case "c4":
+							createFiguraTr(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8]);
+							break;
+						case "c5":
+							createPinTr(line[0], line[1], line[2], line[3], line[4]);
+							break;
+						case "c6":
+							createEntranceTr(line[0], line[1]);
+							break;
+						case "c7":
+							createEntrancecssTr(line[0], line[1], line[2]);
+							break;
+						case "c8":
+							createToopendataTr(line[0], line[1]);
+							break;
+						}
+					checks();
+				}
+			});	
+		}
+
+		function createInfoTr(IdInfo, Nome, Descrizione, Posti) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdInfo";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Nome";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "Descrizione";
+			var th4 = document.createElement("TH");
+			th4.innerHTML = "Posti";
+			var th6 = document.createElement("TH");
+			th6.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th4);
+			document.getElementById("headValues").appendChild(th6);
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_4 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdInfo);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdInfo);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdInfo);
+			var t_2 = document.createTextNode(Nome);
+			var t_3 = document.createTextNode(Descrizione);
+			var t_4 = document.createTextNode(Posti);
+
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			td_4.appendChild(t_4);
+
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			tr.appendChild(td_4);
+
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editInfo(IdInfo, Nome, Descrizione, Posti)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdInfo)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);
+		}
+
+
+		function createDataCategoryTr(IdDataCategory, Nome, Colore, Icon) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdCataCategory";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Nome";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "Colore";
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Icon";
+			var th4 = document.createElement("TH");
+			th4.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th5);
+			document.getElementById("headValues").appendChild(th4);
+
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_5 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdDataCategory);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdDataCategory);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdDataCategory);
+			var t_2 = document.createTextNode(Nome);
+			var t_3 = document.createTextNode(Colore);
+			var t_5 = document.createTextNode(Icon);
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			td_5.appendChild(t_5);
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			tr.appendChild(td_5);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editDataCategory(IdDataCategory, Nome, Colore, Icon)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdDataCategory)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);
+		}
+
+
+		function createDataSpaceTr(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdDataSpace";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "IdInfo";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "IdFigura";
+			var th4 = document.createElement("TH");
+			th4.innerHTML = "IdDataCategory";
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "IdPin";
+			var th7= document.createElement("TH");
+			th7.innerHTML = "IdEntrance";
+			var th6 = document.createElement("TH");
+			th6.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th4);
+			document.getElementById("headValues").appendChild(th5);
+			document.getElementById("headValues").appendChild(th7);
+			document.getElementById("headValues").appendChild(th6);
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_4 = document.createElement("TD");
+			var td_5 = document.createElement("TD");
+			var td_7 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdDataSpace);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdDataSpace);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdDataSpace);
+			var t_2 = document.createTextNode(IdInfo);
+			var t_3 = document.createTextNode(IdFigura);
+			var t_4 = document.createTextNode(IdDataCategory);
+			var t_5 = document.createTextNode(IdPin);
+			var t_7 = document.createTextNode(IdEntrance);
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			td_4.appendChild(t_4);
+			td_5.appendChild(t_5);
+			td_7.appendChild(t_7);
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			tr.appendChild(td_4);
+			tr.appendChild(td_5);
+			tr.appendChild(td_7);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editDataSpace(IdDataSpace, IdInfo, IdFigura, IdDataCategory, IdPin, IdEntrance)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdDataSpace)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);
+		}
+
+
+		function createFiguraTr(IdFigura, Tipo, Class, x, y, width, height, Points, Piano) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdFigura";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Tipo";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "Class";
+			var th4 = document.createElement("TH");
+			th4.innerHTML = "X";
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Y";
+			var th6 = document.createElement("TH");
+			th6.innerHTML = "Width";
+			var th7 = document.createElement("TH");
+			th7.innerHTML = "Height";
+			var th8 = document.createElement("TH");
+			th8.innerHTML = "Points";
+			var th9 = document.createElement("TH");
+			th9.innerHTML = "Piano";
+			var th10 = document.createElement("TH");
+			th10.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th4);
+			document.getElementById("headValues").appendChild(th5);
+			document.getElementById("headValues").appendChild(th6);
+			document.getElementById("headValues").appendChild(th7);
+			document.getElementById("headValues").appendChild(th8);
+			document.getElementById("headValues").appendChild(th9);
+			document.getElementById("headValues").appendChild(th10);
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_4 = document.createElement("TD");
+			var td_5 = document.createElement("TD");
+			var td_width = document.createElement("TD");
+			var td_height = document.createElement("TD");
+			var td_points = document.createElement("TD");
+			var td_piano = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdFigura);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdFigura);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdFigura);
+			var t_2 = document.createTextNode(Tipo);
+			var t_3 = document.createTextNode(Class);
+			var t_4 = document.createTextNode(x);
+			var t_5 = document.createTextNode(y);
+			var t_width = document.createTextNode(width);
+			var t_height = document.createTextNode(height);
+			var t_points = document.createTextNode(Points);
+			var t_piano = document.createTextNode(Piano);
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			td_4.appendChild(t_4);
+			td_5.appendChild(t_5);
+			td_width.appendChild(t_width);
+			td_height.appendChild(t_height);
+			td_points.appendChild(t_points);
+			td_piano.appendChild(t_piano);
+
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			tr.appendChild(td_4);
+			tr.appendChild(td_5);
+			tr.appendChild(td_width);
+			tr.appendChild(td_height);
+			tr.appendChild(td_points);
+			tr.appendChild(td_piano);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editFigura(IdFigura, Tipo, Class, x, y, width, height, Points, Piano)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdFigura)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);
+		}
+
+
+		function createPinTr(IdPin, Icon, Top_distance, Left_distance, IdEntrance) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdPin";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Icon";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "Top_distance";
+			var th4 = document.createElement("TH");
+			th4.innerHTML = "Left_distance";
+			var th6 = document.createElement("TH");
+			th6.innerHTML = "IdEntrance";
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th4);
+			document.getElementById("headValues").appendChild(th6);
+			document.getElementById("headValues").appendChild(th5);
+
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_4 = document.createElement("TD");
+			var td_6 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdPin);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdPin);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdPin);
+			var t_2 = document.createTextNode(Icon);
+			var t_3 = document.createTextNode(Top_distance);
+			var t_4 = document.createTextNode(Left_distance);
+			var t_6 = document.createTextNode(IdEntrance);
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			td_4.appendChild(t_4);
+			td_6.appendChild(t_6);
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			tr.appendChild(td_4);
+			tr.appendChild(td_6);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editPin(IdPin, Icon, Top_distance, Left_distance, IdEntrance)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdPin)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);	
+		}
+
+
+		function createEntranceTr(IdEntrance, Descrizione) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdEntrance";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Descrizione";
+			
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+
+			document.getElementById("headValues").appendChild(th5);
+
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdEntrance);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdEntrance);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdEntrance);
+			var t_2 = document.createTextNode(Descrizione);
+
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editEntrance(IdEntrance, Descrizione)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdEntrance)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);	
+		}
+
+
+
+		function createEntrancecssTr(IdCss, Css, IdEntrance) {
+			$("#headValues").children(":not(#th0)").remove();
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdCss";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "Css";
+			var th3 = document.createElement("TH");
+			th3.innerHTML = "IdEntrance";
+			
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th3);
+			document.getElementById("headValues").appendChild(th5);
+
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_3 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdCss);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdCss);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdCss);
+			var t_2 = document.createTextNode(Css);
+			var t_3 = document.createTextNode(IdEntrance);
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			td_3.appendChild(t_3);
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			tr.appendChild(td_3);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editEntrancecss(IdCss, Css, IdEntrance)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdCss)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);	
+		}
+
+		function createToopendataTr(IdInfo, NomeTabellaOpenData) {
+			$("#headValues").children(":not(#th0)").remove();
+
+			var th1 = document.createElement("TH");
+			th1.innerHTML = "IdInfo";
+			var th2 = document.createElement("TH");
+			th2.innerHTML = "NomeTabellaOpenData";
+
+			
+			var th5 = document.createElement("TH");
+			th5.innerHTML = "Opzioni";
+			document.getElementById("headValues").appendChild(th1);
+			document.getElementById("headValues").appendChild(th2);
+			document.getElementById("headValues").appendChild(th5);
+
+			
+			
+			var tr = document.createElement("TR");
+			var td = document.createElement("TD");
+			var td_1 = document.createElement("TD");
+			var td_2 = document.createElement("TD");
+			var td_options = document.createElement("TD");
+			
+			var span = document.createElement("SPAN");
+			span.setAttribute("class", "custom-checkbox");
+			var input = document.createElement("INPUT");
+			input.setAttribute("type", "checkbox");
+			input.setAttribute("id", "checkbox" + IdInfo);
+			input.setAttribute("name", "options[]");
+			input.setAttribute("value", "1");
+			var label = document.createElement("LABEL");
+			label.setAttribute("for", "checkbox" + IdInfo);
+			span.appendChild(input);
+			span.appendChild(label);
+			td.appendChild(span);
+			
+			var t_1 = document.createTextNode(IdInfo);
+			var t_2 = document.createTextNode(NomeTabellaOpenData);
+
+			
+			td_1.appendChild(t_1);
+			td_2.appendChild(t_2);
+			
+			tr.appendChild(td);
+			tr.appendChild(td_1);
+			tr.appendChild(td_2);
+			
+			var a_Modify = document.createElement("A");
+			a_Modify.addEventListener('click',function(){editToopendata(IdInfo, NomeTabellaOpenData)},false);
+			a_Modify.setAttribute("href", "#editModal");
+			a_Modify.setAttribute("class", "edit");
+			a_Modify.setAttribute("data-toggle", "modal");
+			var i_Modify = document.createElement("I");
+			i_Modify.setAttribute("title", "Edit");
+			i_Modify.setAttribute("class", "material-icons");
+			i_Modify.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("create");
+			i_Modify.appendChild(text_i);
+			a_Modify.appendChild(i_Modify);
+			
+			var a_Delete = document.createElement("A");
+			a_Delete.addEventListener('click',function(){selectMe(IdInfo)},false);
+			a_Delete.setAttribute("href", "#deleteModal");
+			a_Delete.setAttribute("class", "delete");
+			a_Delete.setAttribute("data-toggle", "modal");
+			var i_Delete = document.createElement("I");
+			i_Delete.setAttribute("title", "Delete");
+			i_Delete.setAttribute("class", "material-icons");
+			i_Delete.setAttribute("data-toggle", "tooltip");
+			var text_i = document.createTextNode("delete");
+			i_Delete.appendChild(text_i);
+			a_Delete.appendChild(i_Delete);
+
+			td_options.appendChild(a_Modify);
+			td_options.appendChild(a_Delete);
+			tr.appendChild(td_options);
+			
+			document.getElementById("table_val").appendChild(tr);	
+		}
+
+
+
+
+		function checks() {
+			checkbox = $('table tbody input[type="checkbox"]');
+		}
+
+
+		var socket = io('/mySensorNamespace');	
+		socket.on('err',function(data) {
+			alert("" + data);
 		});
-	}
-}
-	
+		socket.on('hi',function(data) {
+
+			document.getElementById("table_val").innerHTML = '';
+			info = data.info.split('___');
+			figura = data.figura.split('___');
+			datacategory = data.datacategory.split('___');
+			pin = data.pin.split('___');
+			dataspace = data.dataspace.split('___');
+			entrance = data.entrance.split('___');
+			entrancecss = data.entrancecss.split('___');
+			toopendata = data.toopendata.split('___');
+			
+			selectedId = -1;
+			delOne = 0;
+			
+			if(data.correcttab > 0){
+				document.getElementById("a" + data.correcttab).click();
+			} else {
+				$("#c0").show()
+				$("#c1").hide()
+			}
+
+
+			//Riempio Show Floor
+			var xmlns = "http://www.w3.org/2000/svg";
+				var valori = data.svg.split('___');
+			for(var field in valori) {
+				var line = valori[field].split('***');
+				
+				var node = document.createElementNS(xmlns, line[1]);
+				node.setAttribute("data-space",line[0]);
+				node.setAttribute("class", line[2]);
+				node.setAttribute("id", "floor");
+				node.setAttribute("value", line[8]);
+				
+				if(line[6] != "null") {
+					node.setAttribute("x", line[3]);
+					node.setAttribute("y", line[4]);
+					node.setAttribute("width", line[5]);
+					node.setAttribute("height", line[6]);
+				} else if(line[5] != "null") {
+					node.setAttribute("cx", line[3]);
+					node.setAttribute("cy", line[4]);
+					node.setAttribute("r", line[5]);
+				} else {
+					node.setAttribute("points", line[7]);
+				}
+				document.getElementById("lev1").appendChild(node);
+
+			}	
+			$("[id]").each(function(){
+				if($(this).attr("id")=="floor"){
+					$(this).hide();
+				}
+			});
+			if(data.correcttab == 4){
+				pressed();
+			}
+			
+		});
+
 			
 
-</script>
+		function pressed() {
+			if(document.getElementById("toBlack").value >= document.getElementById("toBlack").min &&
+			document.getElementById("toBlack").value <= document.getElementById("toBlack").max) {
+				if(document.getElementById("toBlack").value==1) {
+					document.getElementById("pathid").setAttribute("d","M200 100 H1500 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1510 V90");
+				}
+				if(document.getElementById("toBlack").value==2) {
+					document.getElementById("pathid").setAttribute("d","M200 100 H1385 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1395 V90");
+				}
+				if(document.getElementById("toBlack").value==3) {
+					document.getElementById("pathid").setAttribute("d","M300 145 H1070 V100 H1370 V525 H960 V425 H400 V950 H1200 V925 H1305 V1040 H1400 V1350 H1400 V1375 H1210 V1270 H240 V1350 H100 V525 H300 Z M290 135 V515 H90 V1360 H250 V1280 H1200 V1385 H1410 V1360 H1410 V1030 H 1315 V915 H1190 V940 H410 V435 H950 V535 H1380 V90 H1060 V135");
+				}
+				$("[id]").each(function(){
+					if($(this).attr("id")=="floor"){
+						if($(this).attr("value") == document.getElementById("toBlack").value){
+							$(this).fadeIn();
+						} else {
+							$(this).hide();
+						}
+					}
+				});
+			}
+		}
+			
+	</script>
 </head>
 <body>
 	<div id="c0" class="container">
