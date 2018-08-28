@@ -193,7 +193,9 @@
 			// sort by name ctrl - add/remove category name (css pseudo element) from list and sorts the spaces by name 
 			sortByNameCtrl.addEventListener('click', function() {
 				if( this.checked ) {
+
 					classie.remove(spacesEl, 'grouped-by-category');
+					
 					spacesList.sort('list__link');
 				}
 				else {
@@ -292,6 +294,32 @@
 			// smaller screens: close the search bar
 			closeSearchCtrl.addEventListener('click', function() {
 				closeSearch();
+			});
+			
+			
+			$(".search").bind('keyup', function (e) {
+				spacesList.filter();
+				if(""+ document.getElementsByClassName('search__input')[0].value == "") {
+					if(selectedLevel !== undefined) showLevelSpaces();
+					Show('1');
+					Show('2');
+					Show('3');
+					Show('4');
+					Show('5');
+					if(firstOpen == 1) { Show('1');}
+					else if(secondOpen == 1) { Show('2');}
+					else if(thirdOpen == 1) { Show('3');}
+					else if(fourthOpen == 1) { Show('4');}
+					else if(fifthOpen == 1) { Show('5');}
+					
+					
+				} else {
+					$( "ul.list li" ).each(function( index ) {
+						$(this).children().fadeIn();		
+					});
+					
+				}
+
 			});
 			
 		}
@@ -842,7 +870,6 @@
 		function openSearch() {
 			// shows all levels - we want to show all the spaces for smaller screens 
 			showAllLevels();
-
 			classie.add(spacesListEl, 'spaces-list--open');
 			classie.add(containerEl, 'container--overflow');
 		}

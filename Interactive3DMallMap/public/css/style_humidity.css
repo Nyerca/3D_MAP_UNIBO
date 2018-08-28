@@ -9,8 +9,7 @@
 	-o-box-orient: vertical;
 	flex-direction: column;
 	height: 100%;
-	margin-left: 800%;
-	margin-top: -108%;
+	margin-left: 400%;
 }
 .green {
 	margin-top: 15px;
@@ -120,6 +119,9 @@
 	transition: all 1s ease;
 }
 
+.inner {
+	background: #484e59;
+}
 
 
 @-webkit-keyframes spin {

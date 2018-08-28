@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+.ub-button-2 {
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #5993c3;
+  margin: 20px 0 20px 20px;
+  z-index: 999;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  padding-right: 20px;
+  transition: background-color .3s ease;
+}
+.ub-button-2:before, .ub-button-2:after {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 10;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: #5993c3;
+  transition: background-color .3s ease;
+}
+.ub-button-2:before {
+  bottom: 0;
+  -webkit-transform: skew(-45deg);
+          transform: skew(-45deg);
+}
+.ub-button-2:after {
+  top: 0;
+  -webkit-transform: skew(45deg);
+          transform: skew(45deg);
+}

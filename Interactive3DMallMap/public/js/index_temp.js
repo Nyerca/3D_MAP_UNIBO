@@ -40,20 +40,6 @@
 			changeColor(value,1);
 		}
 		
-		function updateCurrent(value) {
-			changeColor(value,2);
-			var spn = document.createElement('span');
-			var str = "" + value;
-			$currentDisplay.html(str.split(".")[0]);
-			
-			var n = str.includes(".");
-
-			if(n != false) {
-				spn.innerHTML = "." +  str.split(".")[1];
-				document.getElementsByClassName('amps')[0].appendChild(spn);
-			}
-		}
-		
 		function updateMoisture(value) {
 			$moistureDisplay.html(value + '<span>%</span>');
 
@@ -73,8 +59,7 @@
 		
 		function updateSensorDisplayValues(d) {
 			updateVoltage(d[0]);
-			updateCurrent(d[1]);
-			updateMoisture(d[2]);
+			updateMoisture(d[1]);
 		}
 		
 		var just_once = -1;
@@ -92,8 +77,6 @@
 				var line = valore_server[field].split('***');
 				if(line[0] == "1") {
 					value1 = line[1];
-				} else if(line[0] == "2") {
-					value2 = line[1];
 				} else if(line[0] == "3") {
 					value3 = line[1];
 				}
@@ -101,15 +84,13 @@
 
 			if(just_once == -1) {
 				just_once = 0;
-				updateSensorDisplayValues([value1,value2,value3]);
-				var x, volts, amps, mPercent;
+				updateSensorDisplayValues([value1,value3]);
+				var x, volts, mPercent;
 				x = (new Date()).getTime(),
 					volts = (Math.round(value1 * 2) / 2),
-					amps = (Math.round(value2 * 2) / 2),
 					mPercent = (Math.round(value3 * 2) / 2);
 								
 					voltage.addPoint([x, volts], false, true);
-					current.addPoint([x, amps], false, true);
 					moisture.addPoint([x, mPercent], true, true);
 			}
 		});
@@ -142,15 +123,13 @@
 				events: {
 					load: function() {
 						voltage = this.series[0];
-						current = this.series[1];
-						moisture = this.series[2];
-						var x, volts, amps, mPercent;
+						moisture = this.series[1];
+						var x, volts, mPercent;
 						
 					
 						setInterval(function() {
 							x = (new Date()).getTime(),
 								volts = (Math.round(value1 * 2) / 2),
-								amps = (Math.round(value2 * 2) / 2),
 								mPercent = (Math.round(value3 * 2) / 2);
 								
 							if(volts > max_graph) max_graph = volts;
@@ -159,11 +138,10 @@
 							chart_t .yAxis[0].setExtremes(min_graphh,max_graph);
 							
 							voltage.addPoint([x, volts], false, true);
-							current.addPoint([x, amps], false, true);
 							moisture.addPoint([x, mPercent], true, true);
 							
 							
-							updateSensorDisplayValues([volts, amps, mPercent]);
+							updateSensorDisplayValues([volts, mPercent]);
 						}, $delay);
 					}
 				}
@@ -200,22 +178,6 @@
 				},
 				min: 0,
 				max: 4,
-				opposite: true,
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
-				}]
-			}, {
-				title: {
-					text: 'INQUINAMENTO',
-					style: {
-						color: '#f45b5b',
-						font: '13px sans-serif'
-					}
-				},
-				min: 0,
-				max: 20,
 				opposite: true,
 				plotLines: [{
 					value: 0,
@@ -269,23 +231,6 @@
 						data.push({
 							x: time + i * $delay,
 							y: getRandomInt(.7, .7)
-						});
-					}
-					return data;
-				}())
-			}, {
-				name: 'INQUINAMENTO',
-				yAxis: 2,
-				data: (function() {
-					// generate an array of random data
-					var data = [],
-						time = (new Date()).getTime(),
-						i;
-
-					for (i = -totalPoints; i < 0; i += 1) {
-						data.push({
-							x: time + i * $delay,
-							y: getRandomInt(1, 1)
 						});
 					}
 					return data;

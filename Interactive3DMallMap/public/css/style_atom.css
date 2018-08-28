@@ -3,19 +3,25 @@
 	position:fixed;
 	width: 50px;
 	height: 50px;
-	bottom:150px;
 	z-index: 160;
-	left:55px;
-}
 
+}
+#search-button svg {
+	opacity: 1 !important;
+
+
+}
+#search-button svg image {
+	opacity: 1 !important;
+
+}
 /* Button to open air quality and pressure div */
 #qual_temp-button {
 	position:fixed;
 	width: 50px;
 	height: 50px;
-	bottom:50px;
-	left:150px;
 	z-index: 160;
+	margin-left: 10px;
 }
 
 
@@ -68,3 +74,82 @@
 	}
 }
 
+.menu-toggler {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: -9999px;
+	margin: auto;
+	width: 40px;
+	height: 40px;
+	z-index: 2;
+
+	cursor: pointer;
+	margin-left:200px;
+	margin-bottom:200px;
+}
+
+
+.menu-toggler:checked ~ ul .menu-item {
+	opacity: 1;
+}
+
+.menu-toggler:checked ~ ul .menu-item:nth-child(1) {
+	-webkit-transform: rotate(100deg) translateX(-110px);
+	transform: rotate(100deg) translateX(-110px);
+}
+.menu-toggler:checked ~ ul .menu-item:nth-child(2) {
+	-webkit-transform: rotate(170deg) translateX(-110px);
+	transform: rotate(170deg) translateX(-140px);
+}
+
+.menu-item:nth-child(1) svg {
+	-webkit-transform: rotate(-100deg);
+	transform: rotate(-100deg);
+}
+
+.menu-item:nth-child(2) svg {
+	-webkit-transform: rotate(-170deg);
+	transform: rotate(-170deg);
+}
+
+.menu-toggler:checked ~ ul .menu-item svg {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.menu-item {
+	bottom:40px !important;
+	position: absolute;
+	display: block;
+ 
+	width: 80px;
+	height: 80px;
+	display: block;
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.menu-item svg {
+	display: block;
+	width: inherit;
+	height: inherit;
+	line-height: 80px;
+	color: black;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	text-align: center;
+	text-decoration: none;
+	font-size: 40px;
+	pointer-events: none;
+	opacity: 0;
+	transition: .2s;
+}
+.menu-item a:hover {
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+	color: white;
+	background: rgba(255, 255, 255, 0.3);
+	font-size: 44.4444444444px;
+}

@@ -66,6 +66,7 @@
 			}
 
 			var day0, day1, day2, day3, day4, day5, day6;
+			var day0_graphLabel, day1_graphLabel, day2_graphLabel, day3_graphLabel, day4_graphLabel, day5_graphLabel, day6_graphLabel;
 			for(var i= 0; i < 7; i++) {
 				var day = new Date();
 				day.setDate(day.getDate() - i);
@@ -86,15 +87,18 @@
 				}
 
 				switch(i) {
-					case 0: day0 = day; break;
-					case 1: day1 = day; break;
-					case 2: day2 = day; break;
-					case 3: day3 = day; break;
-					case 4: day4 = day; break;
-					case 5: day5 = day; break;
-					case 6: day6 = day; break;
+					case 0: day0 = day; day0_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3);  break;
+					case 1: day1 = day; day1_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
+					case 2: day2 = day; day2_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
+					case 3: day3 = day; day3_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
+					case 4: day4 = day; day4_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
+					case 5: day5 = day; day5_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
+					case 6: day6 = day; day6_graphLabel = day.substring(day.length - 2, day.length) + "/"+ day.substring(day.length - 5, day.length-3); break;
 				}
 			}
+			
+			 
+			
 
 			var firstOpen = 1;
 			var secondOpen = 1;
@@ -392,9 +396,11 @@
 				}
 			});
 
-
+var already_emitted = 0;
 			socket.on('hi',function(data) {	
-
+				if(already_emitted == 0) {
+					already_emitted ++;
+				console.log("EMITTED = " + already_emitted);
 				var box = document.getElementsByClassName("box")[0];
 				while (box.firstChild) {
 					box.removeChild(box.firstChild);
@@ -480,15 +486,15 @@
 					*/
 					if(indCategories == 0) {
 						span.setAttribute("class","color-left " + line[1]);
-						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
+						style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
 					}
 					else if(indCategories == valori.length - 1) {
 						span.setAttribute("class","color-right " + line[1]);
-						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
+						style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
 					}
 					else  {
 						span.setAttribute("class","color-center " + line[1])
-						style6.innerHTML = "." + line[1] + "{background-color: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
+						style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
 					}
 					indCategories ++;
 					document.getElementsByTagName('head')[0].appendChild(style6);
@@ -1214,8 +1220,21 @@
 
 
 
-
+				var checkBox = $(".bg");
+				checkBox.on("click", function() {
+					if($('.menu-toggler').prop('checked'))  $('.menu-toggler').prop( "checked", false );
+					else $('.menu-toggler').prop( "checked", true );
+				});
 				
+				var mainDiv = document.getElementsByClassName('meter2')[0];
+				mainDiv.children[0].innerHTML = day6_graphLabel;
+				mainDiv.children[1].innerHTML = day5_graphLabel;
+				mainDiv.children[2].innerHTML = day4_graphLabel;
+				mainDiv.children[3].innerHTML = day3_graphLabel;
+				mainDiv.children[4].innerHTML = day2_graphLabel;
+				mainDiv.children[5].innerHTML = day1_graphLabel;
+				mainDiv.children[6].innerHTML = day0_graphLabel;
+				}
 			});
 
 		</script>
@@ -1554,14 +1573,6 @@
 				<header class="codrops-header">
 					<img class="logoUnibo" src="/img/logo.png" alt=""/>
 				</header>			
-
-				<svg id="search-button">
-					<image xlink:href="/img/temp_hum.svg">
-				</svg>
-
-				<svg id="qual_temp-button">
-					<image xlink:href="/img/qual_pres.svg">
-				</svg>
 	 
 				<div id="welcomeDiv"  style="display:none;" class="content__sensor" > 
 					<section class="dashboard" id="main-column">
@@ -1576,6 +1587,7 @@
 						</button>
 						<div id="sensorValues">
 							<div class="con">
+							 <span class='ub-button'>Temperature</span>
 								<div class="de">
 									<div class="den">
 									  <div class="dene">
@@ -1587,19 +1599,8 @@
 									  </div>
 									</div>
 								</div>
-								
-								<div class="de2">
-									<div class="den">
-									  <div class="dene">
-										<div class="denem">
-										  <div class="deneme">
-											<div class="amps">23</div><strong>&deg;</strong>
-										  </div>
-										</div>
-									  </div>
-									</div>
-								</div>
-							
+
+							<span class='ub-button-2'>Humidity</span>
 								<div class="wrapper">
 									<div class="green">
 										<div class="progress">
@@ -1712,11 +1713,11 @@
 								<div class="base"></div>
 									<!-- Left Side Meter-->
 								<ul class="meter">
-									<li><div>$100,000</div></li>
-									<li><div>$80,000</div></li>
-									<li><div>$60,000</div></li>
-									<li><div>$40,000</div></li>
-									<li><div>Less Than $20,000</div></li>
+									<li><div>40</div></li>
+									<li><div>30</li>
+									<li><div>20</li>
+									<li><div>10</div></li>
+									<li><div>0</div></li>
 								</ul>
 								<div class="meter2">
 									<span>LU</span>
@@ -1817,35 +1818,87 @@
 					</section>
 				</div>
 	 
-	 
+	 <input class='menu-toggler' type='checkbox'>
+	 <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+	 									  <ul>
+
+
+				
+    <li class='menu-item'>
+      <svg id="search-button">
+					<image xlink:href="/img/temp_hum.svg">
+				</svg>
+    </li>
+    <li class='menu-item'>
+      <svg id="qual_temp-button">
+					<image xlink:href="/img/qual_pres.svg">
+				</svg>
+    </li>
+
+  </ul>
 				<div class="bg">
+				
 					<svg version="1.1"  id="atomic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-						width="350px" height="350px" viewBox="0 0 400 400" xml:space="preserve">
-						<circle fill="none" cx="204.413" cy="203.177" r="141.493"/>
+						width="350px" height="350px" viewBox="0 0 512 512" xml:space="preserve">
+
 						<g class="atom">
-							<path fill="#7A9C49" d="M204.035,252.4c-9.988,0-17.812-21.622-17.812-49.225c0-27.599,7.824-49.219,17.812-49.219
-								c9.991,0,17.816,21.62,17.816,49.219C221.852,230.778,214.026,252.4,204.035,252.4z M204.035,154.957
-								c-9.27,0-16.812,21.631-16.812,48.219c0,26.591,7.542,48.225,16.812,48.225c9.272,0,16.816-21.633,16.816-48.225
-								C220.852,176.588,213.308,154.957,204.035,154.957z"/>
-							<path fill="#7A9C49" d="M172.597,232.828c-5.347,0-9.068-1.491-10.761-4.312c-2.5-4.16-0.378-10.7,5.974-18.417
-								c6.242-7.584,15.853-15.467,27.061-22.195c14.763-8.864,30.322-14.371,40.605-14.371c5.348,0,9.07,1.491,10.764,4.312
-								c5.138,8.561-9.371,26.397-33.031,40.607C198.439,227.319,182.878,232.828,172.597,232.828z M235.476,174.533
-								c-10.112,0-25.474,5.452-40.09,14.228c-11.113,6.671-20.632,14.475-26.804,21.974c-5.974,7.258-8.121,13.552-5.888,17.267
-								c1.502,2.503,4.927,3.826,9.903,3.826c10.11,0,25.475-5.454,40.097-14.234c22.793-13.688,37.457-31.29,32.688-39.235
-								C243.879,175.856,240.454,174.533,235.476,174.533z"/>
-							<path fill="#7A9C49" d="M235.32,231.218c-10.358,0-25.183-4.604-39.655-12.314c-24.36-12.975-39.768-30.046-35.076-38.865
-								c1.708-3.204,5.913-4.897,12.161-4.897c10.359,0,25.186,4.603,39.662,12.313c24.357,12.973,39.761,30.045,35.068,38.865
-								C245.772,229.525,241.567,231.218,235.32,231.218z M172.75,176.143c-5.855,0-9.755,1.51-11.278,4.367
-								c-4.355,8.185,11.195,25.013,34.663,37.512c14.335,7.637,28.983,12.197,39.186,12.197c5.855,0,9.754-1.51,11.277-4.368
-								c4.355-8.186-11.19-25.014-34.655-37.512C197.604,180.702,182.952,176.143,172.75,176.143z"/>
-							<path fill="#7A9C49" d="M204.034,211.087c-4.36,0-7.907-3.549-7.907-7.911c0-4.36,3.547-7.908,7.907-7.908
-								c4.361,0,7.908,3.548,7.908,7.908C211.942,207.538,208.395,211.087,204.034,211.087z M204.034,196.268
-								c-3.809,0-6.907,3.099-6.907,6.908c0,3.811,3.099,6.911,6.907,6.911c3.809,0,6.908-3.1,6.908-6.911
-								C210.942,199.367,207.843,196.268,204.034,196.268z"/>
+							<path style="fill:#4D4D4D;" d="M104.988,82.328H405.02c13.766,0,24.925,11.159,24.925,24.925v300.032
+	c0,13.765-11.159,24.925-24.925,24.925H104.988c-13.765,0-24.925-11.159-24.925-24.925V107.253
+	C80.063,93.488,91.222,82.328,104.988,82.328z"/>
+<path style="fill:#3B3B3B;" d="M399.632,82.328h-40.938L151.313,432.21h248.319c16.741,0,30.312-13.571,30.312-30.312V112.64
+	C429.944,95.9,416.373,82.328,399.632,82.328z"/>
+<rect x="189.6" y="191.87" style="fill:#CCCCCC;" width="130.8" height="130.8"/>
+<polygon style="fill:#ADADAD;" points="320.402,322.667 320.402,191.871 293.767,191.871 216.241,322.667 "/>
+<g>
+	<path style="fill:#9e9e9e;" d="M142.447,110.45c-4.142,0-7.5-3.358-7.5-7.5V7.5c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C149.947,107.093,146.589,110.45,142.447,110.45z"/>
+	<path style="fill:#9e9e9e;" d="M199.224,110.45c-4.142,0-7.5-3.358-7.5-7.5V7.5c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C206.724,107.093,203.366,110.45,199.224,110.45z"/>
+	<path style="fill:#9e9e9e;" d="M256,110.45c-4.142,0-7.5-3.358-7.5-7.5V7.5c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C263.5,107.093,260.142,110.45,256,110.45z"/>
+	<path style="fill:#9e9e9e;" d="M312.777,110.45c-4.142,0-7.5-3.358-7.5-7.5V7.5c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C320.277,107.093,316.919,110.45,312.777,110.45z"/>
+	<path style="fill:#9e9e9e;" d="M369.553,110.45c-4.142,0-7.5-3.358-7.5-7.5V7.5c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C377.053,107.093,373.695,110.45,369.553,110.45z"/>
+	<path style="fill:#9e9e9e;" d="M142.447,512c-4.142,0-7.5-3.358-7.5-7.5v-95.45c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C149.947,508.642,146.589,512,142.447,512z"/>
+	<path style="fill:#9e9e9e;" d="M199.224,512c-4.142,0-7.5-3.358-7.5-7.5v-95.45c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C206.724,508.642,203.366,512,199.224,512z"/>
+	<path style="fill:#9e9e9e;" d="M256,512c-4.142,0-7.5-3.358-7.5-7.5v-95.45c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C263.5,508.642,260.142,512,256,512z"/>
+	<path style="fill:#9e9e9e;" d="M312.777,512c-4.142,0-7.5-3.358-7.5-7.5v-95.45c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C320.277,508.642,316.919,512,312.777,512z"/>
+	<path style="fill:#9e9e9e;" d="M369.553,512c-4.142,0-7.5-3.358-7.5-7.5v-95.45c0-4.142,3.358-7.5,7.5-7.5s7.5,3.358,7.5,7.5v95.45
+		C377.053,508.642,373.695,512,369.553,512z"/>
+	<path style="fill:#9e9e9e;" d="M504.5,149.947h-95.45c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.45
+		c4.142,0,7.5,3.358,7.5,7.5S508.642,149.947,504.5,149.947z"/>
+	<path style="fill:#9e9e9e;" d="M504.5,206.724h-95.45c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.45
+		c4.142,0,7.5,3.358,7.5,7.5S508.642,206.724,504.5,206.724z"/>
+	<path style="fill:#9e9e9e;" d="M504.5,263.5h-95.45c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.45c4.142,0,7.5,3.358,7.5,7.5
+		S508.642,263.5,504.5,263.5z"/>
+	<path style="fill:#9e9e9e;" d="M504.5,320.277h-95.45c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.45
+		c4.142,0,7.5,3.358,7.5,7.5S508.642,320.277,504.5,320.277z"/>
+	<path style="fill:#9e9e9e;" d="M504.5,377.053h-95.45c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.45
+		c4.142,0,7.5,3.358,7.5,7.5S508.642,377.053,504.5,377.053z"/>
+	<path style="fill:#9e9e9e;" d="M102.951,149.947H7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.451
+		c4.142,0,7.5,3.358,7.5,7.5S107.093,149.947,102.951,149.947z"/>
+	<path style="fill:#9e9e9e;" d="M102.951,206.724H7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.451
+		c4.142,0,7.5,3.358,7.5,7.5S107.093,206.724,102.951,206.724z"/>
+	<path style="fill:#9e9e9e;" d="M102.951,263.5H7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.451c4.142,0,7.5,3.358,7.5,7.5
+		S107.093,263.5,102.951,263.5z"/>
+	<path style="fill:#9e9e9e;" d="M102.951,320.277H7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.451
+		c4.142,0,7.5,3.358,7.5,7.5S107.093,320.277,102.951,320.277z"/>
+	<path style="fill:#9e9e9e;" d="M102.951,377.053H7.5c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5h95.451
+		c4.142,0,7.5,3.358,7.5,7.5S107.093,377.053,102.951,377.053z"/>
+</g>
 						</g>
 
 					</svg>
+					
+
 				</div>
+
+				
 				<section class="box">
 				</section>
 				<div class="mall">

@@ -138,13 +138,13 @@
 			},
 			scaleX: {
 				labels: [
-				  "Jul 16",
-				  "Aug 16",
-				  "Sep 16",
-				  "Oct 16",
-				  "Nov 16",
-				  "Dec 16",
-				  "Jan 17"
+					day6_graphLabel,
+					day5_graphLabel,
+					day4_graphLabel,
+					day3_graphLabel,
+					day2_graphLabel,
+					day1_graphLabel,
+					day0_graphLabel
 				],
 			},
 			"plotarea":{  
@@ -204,5 +204,6 @@
 			height: 500, 
 			width: '100%'
 		});
+		
     });
 	  
