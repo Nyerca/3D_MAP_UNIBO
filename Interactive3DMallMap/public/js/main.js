@@ -104,6 +104,20 @@
 		}
 		var moved_once = 0;
 		var closeSens = $(".close_button");
+		
+
+
+function Backspace() {
+
+	var txt = $('.search__input');
+txt.val('').trigger("keyup");
+					
+					
+					//if(selectedLevel !== undefined) showLevelSpaces();
+					//else spacesList.filter();
+					
+					
+}
 
 		/**
 		 * Initialize/Bind events fn.
@@ -296,11 +310,15 @@
 				closeSearch();
 			});
 			
-			
-			$(".search").bind('keyup', function (e) {
-				spacesList.filter();
+
+			$(".search__input").bind('change keyup click keydown', function (e) {
+				
 				if(""+ document.getElementsByClassName('search__input')[0].value == "") {
+					$(".temp_item").remove();
+					
+					
 					if(selectedLevel !== undefined) showLevelSpaces();
+					else spacesList.filter();
 					Show('1');
 					Show('2');
 					Show('3');
@@ -314,10 +332,104 @@
 					
 					
 				} else {
+					spacesList.filter();
 					$( "ul.list li" ).each(function( index ) {
 						$(this).children().fadeIn();		
 					});
 					
+				var listener = function(event){
+					if(event.target.tagName == "LI") Show(event.target.id);
+				};
+				var event_list = ['click'];
+				
+				if(document.getElementById("1") !== null) {
+				var x0_tmp = document.createElement("li");
+				x0_tmp.setAttribute("id","1");
+				x0_tmp.setAttribute("class","list__item temp_item");
+				x0_tmp.setAttribute("data-level","0");
+				x0_tmp.setAttribute("data-category",'1');
+					
+				var a0_tmp = document.createElement("a");
+				a0_tmp.innerHTML = "▼";
+				x0_tmp.appendChild(a0_tmp);
+
+				x0_tmp.classList.add("firstTitle");
+				/*
+				event_list.forEach(function(ev, ev_index){
+					x0_tmp.addEventListener(ev, listener, false);
+				});	
+				*/
+				
+				document.getElementById("ulList").prepend(x0_tmp);
+				}
+				
+				if(document.getElementById("2") !== null) {
+				var x1_tmp = document.createElement("li");
+				x1_tmp.setAttribute("id","2");
+				x1_tmp.setAttribute("class","list__item temp_item");
+				x1_tmp.setAttribute("data-level","0");
+				x1_tmp.setAttribute("data-category",'2');
+					
+				var a1_tmp = document.createElement("a");
+				a1_tmp.innerHTML = "▼";
+				x1_tmp.appendChild(a1_tmp);
+
+				x1_tmp.classList.add("secondTitle");
+
+				document.getElementById("2").prepend(x1_tmp);
+				}
+				
+				if(document.getElementById("3") !== null) {
+				var x2_tmp = document.createElement("li");
+				x2_tmp.setAttribute("id","3");
+				x2_tmp.setAttribute("class","list__item temp_item");
+				x2_tmp.setAttribute("data-level","0");
+				x2_tmp.setAttribute("data-category",'3');
+					
+				var a2_tmp = document.createElement("a");
+				a2_tmp.innerHTML = "▼";
+				x2_tmp.appendChild(a2_tmp);
+
+				x2_tmp.classList.add("thirdTitle");
+
+				document.getElementById("3").prepend(x2_tmp);
+				}
+				
+				if(document.getElementById("4") !== null) {
+				var x3_tmp = document.createElement("li");
+				x3_tmp.setAttribute("id","4");
+				x3_tmp.setAttribute("class","list__item temp_item");
+				x3_tmp.setAttribute("data-level","0");
+				x3_tmp.setAttribute("data-category",'4');
+					
+				var a3_tmp = document.createElement("a");
+				a3_tmp.innerHTML = "▼";
+				x3_tmp.appendChild(a3_tmp);
+				
+				x3_tmp.classList.add("fourthTitle");
+
+				document.getElementById("4").prepend(x3_tmp);
+				}
+				
+				if(document.getElementById("5") !== null) {
+				
+				var x4_tmp = document.createElement("li");
+				x4_tmp.setAttribute("id","5");
+				x4_tmp.setAttribute("class","list__item temp_item");
+				x4_tmp.setAttribute("data-level","0");
+				x4_tmp.setAttribute("data-category",'5');
+					
+				var a4_tmp = document.createElement("a");
+				a4_tmp.innerHTML = "▼";
+				x4_tmp.appendChild(a4_tmp);
+				
+				x4_tmp.classList.add("fifthTitle");
+
+
+				document.getElementById("5").prepend(x4_tmp);
+				}
+				
+				
 				}
 
 			});
@@ -347,7 +459,9 @@
 		}
 		 
 		function showLevel(level) {
-
+			document.getElementsByClassName("search__input")[0].value = "";
+			Backspace();
+			
 			closeSens.click();
 			changelev(level);
 			if (i==0) {
@@ -423,13 +537,17 @@
 				classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
 				classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
 			}, 1000);
-			  
+
+
 		}
 
 		/**
 		 * Shows all Mall´s levels
 		 */
-		function showAllLevels() {
+		function showAllLevels() {	
+			$( ".search__input" ).click();
+			Backspace();
+			
 			moved_once = 0;
 			$('.clickable_space').off('click');
 			i = 0;
@@ -457,17 +575,21 @@
 			
 			// hide mall nav ctrls
 			hideMallNav();
-
+			
+			
 			// show back the complete list of spaces
+			
 			spacesList.filter();
 
+					
 			// close content area if it is open
 			if( isOpenContentArea ) {
 				closeContentArea();
 			}
 			
 			changelev(0);
-			
+
+					
 		}
 
 		/**
