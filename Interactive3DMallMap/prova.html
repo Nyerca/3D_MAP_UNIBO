@@ -1234,6 +1234,39 @@ var already_emitted = 0;
 				mainDiv.children[4].innerHTML = day2_graphLabel;
 				mainDiv.children[5].innerHTML = day1_graphLabel;
 				mainDiv.children[6].innerHTML = day0_graphLabel;
+				
+				 $('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+    if(""+$(this).attr('class') == "graph_avg_pm15") {
+	$('#myChart_q25_storico').hide();
+	$('#myChart_q25_storico').hide();
+$('#myChart_q15_storico').show();
+	} else if(""+$(this).attr('class') == "graph_avg_pm25") {
+	$('#myChart_q15_storico').hide();
+	$('#myChart_q10_storico').hide();
+$('#myChart_q25_storico').show();
+	} else {
+		$('#myChart_q15_storico').hide();
+		$('#myChart_215_storico').hide();
+$('#myChart_q10_storico').show();
+	}
+});
+
+$('#myChart_q25_storico').hide();
+$('#myChart_q10_storico').hide();
+
+$('graph_avg_pm15').click();
+
 				}
 			});
 
@@ -1806,15 +1839,38 @@ var already_emitted = 0;
 				</div>
 	 
 	 
-				<div id="qual_storico_Div"  style="display:none;" class="content__sensor" > 
+				<div id="qual_storico_Div"  style="display:none;" class="content__sensor" >
 					<button id="back_button" class ="back_qualPres_button">
 						<svg class="icon icon--cross"><use xlink:href="#back"></use></svg>
 					</button>
 					<button id="close_button" class="close_button">
 						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
 					</button>
+					<div class="form_tabs">
+      
+      <ul class="tab-group">
+        <li class="tab active"><a class="graph_avg_pm15" href="#pm_15">PM 1.0</a></li>
+        <li class="tab"><a class="graph_avg_pm25" href="#pm_25">PM 2.5</a></li>
+		<li class="tab"><a class="graph_avg_pm10" href="#pm_10">PM 10</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="pm_15">
+        </div>
+        
+        <div id="pm_25">   
+        </div>
+		
+		<div id="pm_10">
+        </div>
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
 					<section class="dashboard" id="main-column">
-						<div id="myChart_q_storico"></div>
+						<div id="myChart_q15_storico"></div>
+						<div id="myChart_q25_storico"></div>
+						<div id="myChart_q10_storico"></div>
 					</section>
 				</div>
 	 
@@ -2057,6 +2113,7 @@ var already_emitted = 0;
 	<script  src="/js/index_temp.js"></script>
 	<script  src="/js/index_pr.js"></script>
 	<script  src="/js/index_qual_stor.js"></script>
+	<script  src="/js/index_qual_stor_25.js"></script>
 	<script  src="/js/index_hum.js"></script>
 	<script  src="/js/index_qual_pres.js"></script>
 </html>

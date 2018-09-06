@@ -1,12 +1,12 @@
 /* Javascript air quality historical */
 
-	var qin_day0 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day4 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day5 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day6 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day0_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day1_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day2_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day3_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day4_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day5_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day6_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 	$(document).ready(function() {
 
@@ -22,23 +22,7 @@
 			for(var field in valori) {
 				var line = valori[field].split('***');
 				
-				var d = new Date("" + line[1]);
-				var str = $.datepicker.formatDate('yy-mm-dd', d);
-				if(str === day0) {
-					qin_day0[line[2]] = parseFloat(line[0]);
-				} else if(str == day1) {
-					qin_day1[line[2]] = parseFloat(line[0]);
-				} else if(str == day2) {
-					qin_day2[line[2]] = parseFloat(line[0]);
-				} else if(str == day3) {
-					qin_day3[line[2]] = parseFloat(line[0]);
-				} else if(str == day4) {
-					qin_day4[line[2]] = parseFloat(line[0]);
-				} else if(str == day5) {
-					qin_day5[line[2]] = parseFloat(line[0]);
-				} else if(str == day6) {
-					qin_day6[line[2]] = parseFloat(line[0]);
-				}
+				
 			}
 
 		
@@ -249,49 +233,49 @@
 						},
 						"series":[
 							{
-								"values":qin_day0,
+								"values":qin_day0_graph3,
 								"text":"0-1",
 								"legend-marker":{
 									"backgroundColor":"#E34848",
 								}
 							},
 							{
-								"values":qin_day1,
+								"values":qin_day1_graph3,
 								"text":"1-2",
 								"legend-marker":{
 									"backgroundColor":"#D41C1C"
 								}
 							},
 							{
-								"values":qin_day2,
+								"values":qin_day2_graph3,
 								"text":"2-3",
 								"legend-marker":{
 									"backgroundColor":"#910000"
 								}
 							},
 							{
-								"values":qin_day3,
+								"values":qin_day3_graph3,
 								"text":"3-4",
 								"legend-marker":{
 									"backgroundColor":"#6B0000"
 								}
 							},
 							{
-								"values":qin_day4,
+								"values":qin_day4_graph3,
 								"text":"5-6",
 								"legend-marker":{
 									"backgroundColor":"#460303"
 								}
 							},
 							{
-								"values":qin_day5,
+								"values":qin_day5_graph3,
 								"text":">6",
 								"legend-marker":{
 									"backgroundColor":"#2A0000"
 								}
 							},
 							{
-								"values":qin_day6,
+								"values":qin_day6_graph3,
 								"text":"1-2 Ft",
 								"legend-marker":{
 									"backgroundColor":"#fff"
@@ -308,7 +292,7 @@
 	Zingchart library used to create the chart.
 */	
 			zingchart.render({ 
-				id : 'myChart_q15_storico', 
+				id : 'myChart_q10_storico', 
 				data : myConfig, 
 				height: 400, 
 				width: '100%' 
