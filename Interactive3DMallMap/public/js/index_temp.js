@@ -120,6 +120,7 @@
 		$('#sensorData').highcharts({
 			chart: {
 				type: 'spline',
+				backgroundColor: '#e4c7c6',
 				events: {
 					load: function() {
 						voltage = this.series[0];
@@ -146,11 +147,14 @@
 					}
 				}
 			},
+
 			title: {
-				text: 'Dati Canarin'
+				text: 'Dati medi sensori'
 			},
 			xAxis: {
 				type: 'datetime',
+				lineColor: 'white',
+                gridLineColor: 'white',
 				tickPixelInterval: 50
 			},
 			yAxis: [{
@@ -167,8 +171,10 @@
 					value: 0,
 					width: 1,
 					color: '#808080'
-				}]
-			}, {
+				}],
+				gridLineColor: 'white'
+			},
+			{
 				title: {
 					text: 'UMIDITA',
 					style: {
@@ -183,14 +189,16 @@
 					value: 0,
 					width: 1,
 					color: '#808080'
-				}]
+				}],
+				gridLineColor: 'white'
 			}],
 			tooltip: {
 				formatter: function() {
 					var unitOfMeasurement = this.series.name === 'GRADI' ? ' °C' : ' A';
 					return '<b>' + this.series.name + '</b><br/>' +
 						Highcharts.numberFormat(this.y, 1) + unitOfMeasurement;
-				}
+				},
+				
 			},
 			legend: {
 				enabled: true
@@ -201,9 +209,7 @@
 			series: [{
 				name: 'TEMPERATURA',
 				yAxis: 0,
-				style: {
-					color: '#2b908f'
-				},
+				color: '#2b908f',
 				data: (function() {
 					// generate an array of random data
 					var data = [],
@@ -221,6 +227,7 @@
 			}, {
 				name: 'UMIDITA',
 				yAxis: 1,
+				color: '#90ee7e',
 				data: (function() {
 					// generate an array of random data
 					var data = [],

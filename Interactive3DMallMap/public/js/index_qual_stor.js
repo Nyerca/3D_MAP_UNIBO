@@ -311,7 +311,6 @@
 				id : 'myChart_q15_storico', 
 				data : myConfig, 
 				height: 400, 
-				width: '100%' 
 			});
 		});
 	});

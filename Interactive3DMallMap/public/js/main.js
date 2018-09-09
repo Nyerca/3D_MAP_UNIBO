@@ -156,6 +156,7 @@
 			var storicoTemp = $("#temp_storico_button");
 			storicoTemp.on("click", function() {
 				OpenTempStoricoArea();
+				window.dispatchEvent(new Event('resize'));
 			});
 
 
@@ -174,6 +175,7 @@
 			var storicoPres = $("#pres_storico_button");
 			storicoPres.on("click", function() {
 				OpenPresStoricoArea();
+				window.dispatchEvent(new Event('resize'));
 			});
 
 			var backTemp = $(".back_qualPres_button");
@@ -185,7 +187,7 @@
 			var storicoQual = $("#qual_storico_button");
 			storicoQual.on("click", function() {
 				OpenQualStoricoArea();
-				window.dispatchEvent(new Event('resize'));
+				
 			});
 
 
@@ -210,6 +212,7 @@
 			// hovering a pin / clicking a pin
 			pins.forEach(function(pin) {
 				var contentItem = contentEl.querySelector('.content__item[data-space="' + pin.getAttribute('data-space') + '"]');
+				
 
 				pin.addEventListener('mouseenter', function() {
 					if( !isOpenContentArea ) {
@@ -350,7 +353,12 @@
 		}
 		 
 		function showLevel(level) {
-
+			$( ".showInMap" ).each(function( index ) {
+				$(this).hide();		
+			});
+			$( ".hideInMap" ).each(function( index ) {
+				$(this).fadeIn();		
+			});
 			closeSens.click();
 			changelev(level);
 			if (i==0) {
@@ -410,7 +418,8 @@
 			$(".level--1").attr('data-content','');
 			$(".level--2").attr('data-content','');
 			$(".level--3").attr('data-content','');
-			$(".level--" + level).attr('data-content','L'+level);
+			var lev_val = level + 1;
+			$(".level--" + level).attr('data-content','LIVELLO '+lev_val);
 
 
 			classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
@@ -419,9 +428,9 @@
 
 			 
 			setTimeout(function () {
-				$(".level--1").attr('data-content','L1');
-				$(".level--2").attr('data-content','L2');
-				$(".level--3").attr('data-content','L3');
+				$(".level--1").attr('data-content','LIVELLO 2');
+				$(".level--2").attr('data-content','LIVELLO 3');
+				$(".level--3").attr('data-content','LIVELLO 4');
 				classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
 				classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
 				classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
@@ -434,6 +443,13 @@
 		 */
 		function showAllLevels() {
 			moved_once = 0;
+			$( ".hideInMap" ).each(function( index ) {
+				$(this).hide();		
+			});
+			$( ".showInMap" ).each(function( index ) {
+				$(this).fadeIn();		
+			});
+			
 			$('.clickable_space').off('click');
 			i = 0;
 			if( isNavigating || !isExpanded ) {
@@ -763,6 +779,7 @@
 			style.innerHTML = ".levels {transition: 0.5s; margin: -32vmin 0 0 -48vmin; height:74vmin;}";
 			document.getElementsByTagName('head')[0].appendChild(style);
 			
+			
 			document.getElementById('welcomeDiv').style.display = "none";
 			document.getElementById('welcomeDiv2').style.display = "none";
 			document.getElementById('qual_pres_Div').style.display = "none";
@@ -779,6 +796,7 @@
 			isOpenContentArea = true;
 			// shows space
 			showSpace(true);
+			
 			// show close ctrl
 			classie.remove(contentCloseCtrl, 'content__button--hidden');
 			// resize mall area
@@ -787,6 +805,12 @@
 			classie.add(levelDownCtrl, 'boxbutton--disabled');
 			classie.add(levelUpCtrl, 'boxbutton--disabled');
 			
+			
+			classie.add(document.getElementById("lev3"), 'map_moved');	
+			var style = document.createElement('style');
+			style.type = 'text/css';
+			style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:50%;}";
+			document.getElementsByTagName('head')[0].appendChild(style);
 		}
 
 		/**
@@ -795,6 +819,7 @@
 		function showSpace(sliding) {
 			// the content item
 			var contentItem = contentEl.querySelector('.content__item[data-space="' + spaceref + '"]');
+			//alert(contentItem.getAttribute('data-category')+"");
 			// show content
 			classie.add(contentItem, 'content__item--current');
 			if( sliding ) {
@@ -809,10 +834,13 @@
 			catch(err) {
 				
 			}
-			var style = document.createElement('style');
+							var style = document.createElement('style');
 			style.type = 'text/css';
-			//style.innerHTML = ".levels { transition: 0.5s; margin: -15vmin 0 0 -48vmin; }";
+			style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:10%;}";
 			document.getElementsByTagName('head')[0].appendChild(style);
+			
+			
+
 			
 		}
 

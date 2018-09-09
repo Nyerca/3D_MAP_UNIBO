@@ -25,19 +25,13 @@
 		<link rel="stylesheet" href="/css/style_qual.css">
 	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-		<link rel="stylesheet" href="/css/style_pr.css">
-	
+
+
 	
 		<link rel="stylesheet" type="text/css" href="/css/style_sensors.css" />
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
 	 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.1/highcharts.js'></script>
-		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/4579/darkThemeHighCharts.js'></script>
-
-		<link rel="stylesheet" href="css/style_info.css">
-		<link rel="stylesheet" href="/css/style_humidity.css">
-		<link rel="stylesheet" href="/css/style_temp.css">
-		<link rel="stylesheet" type="text/css" href="/css/style_hum.css" />
 
 		<script src='https://cdn.zingchart.com/zingchart.min.js'></script>
 		<script type="text/javascript">
@@ -507,6 +501,8 @@ var already_emitted = 0;
 					
 					var div = document.createElement("div");
 					div.setAttribute("id","rowLegend");
+					if(line[1] == "Bagni" || line[1] == "Scale") div.setAttribute("class","showInMap");
+					else div.setAttribute("class","hideInMap");
 					
 					var style7 = document.createElement('style');
 					style7.type = 'text/css';
@@ -522,6 +518,7 @@ var already_emitted = 0;
 					span.appendChild(svg2_node);
 					div.appendChild(p);
 					div.appendChild(span);
+					if(div.className == "hideInMap") div.style.display = 'none';
 					box.appendChild(div);
 				}
 	
@@ -1191,9 +1188,9 @@ var already_emitted = 0;
 
 						 
 					setTimeout(function () {
-						$(".level--1").attr('data-content','L1');
-						$(".level--2").attr('data-content','L2');
-						$(".level--3").attr('data-content','L3');
+						$(".level--1").attr('data-content','LIVELLO 2');
+						$(".level--2").attr('data-content','LIVELLO 3');
+						$(".level--3").attr('data-content','LIVELLO 4');
 						classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
 						classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
 						classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
@@ -1226,14 +1223,6 @@ var already_emitted = 0;
 					else $('.menu-toggler').prop( "checked", true );
 				});
 				
-				var mainDiv = document.getElementsByClassName('meter2')[0];
-				mainDiv.children[0].innerHTML = day6_graphLabel;
-				mainDiv.children[1].innerHTML = day5_graphLabel;
-				mainDiv.children[2].innerHTML = day4_graphLabel;
-				mainDiv.children[3].innerHTML = day3_graphLabel;
-				mainDiv.children[4].innerHTML = day2_graphLabel;
-				mainDiv.children[5].innerHTML = day1_graphLabel;
-				mainDiv.children[6].innerHTML = day0_graphLabel;
 				
 				 $('.tab a').on('click', function (e) {
   
@@ -1248,17 +1237,20 @@ var already_emitted = 0;
   
   $(target).fadeIn(600);
     if(""+$(this).attr('class') == "graph_avg_pm15") {
-	$('#myChart_q25_storico').hide();
+	$('#myChart_q10_storico').hide();
 	$('#myChart_q25_storico').hide();
 $('#myChart_q15_storico').show();
+window.dispatchEvent(new Event('resize'));
 	} else if(""+$(this).attr('class') == "graph_avg_pm25") {
 	$('#myChart_q15_storico').hide();
 	$('#myChart_q10_storico').hide();
 $('#myChart_q25_storico').show();
+window.dispatchEvent(new Event('resize'));
 	} else {
 		$('#myChart_q15_storico').hide();
-		$('#myChart_215_storico').hide();
+		$('#myChart_q25_storico').hide();
 $('#myChart_q10_storico').show();
+window.dispatchEvent(new Event('resize'));
 	}
 });
 
@@ -1618,33 +1610,16 @@ $('graph_avg_pm15').click();
 						<button id="close_button" class="close_button">
 							<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
 						</button>
+						<span class="avgTH_Title"> Valori medi di temperatura e umidità dei sensori</span>
 						<div id="sensorValues">
-							<div class="con">
-							 <span class='ub-button'>Temperature</span>
-								<div class="de">
-									<div class="den">
-									  <div class="dene">
-										<div class="denem">
-										  <div class="deneme">
-											<div class="volts">23</div><strong>&deg;</strong>
-										  </div>
-										</div>
-									  </div>
-									</div>
-								</div>
+							<div class="sensor-values">
+							  <div class="volts">12.0</div>
+							  <label>Gradi</label>
+							</div>
 
-							<span class='ub-button-2'>Humidity</span>
-								<div class="wrapper">
-									<div class="green">
-										<div class="progress">
-											<div class="inner">
-												<div class="percent"><span><div class="moisture">67</div></span></div>
-												<div class="water"></div>
-												<div class="glare"></div>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="sensor-values">
+							  <div class="moisture">1</div>
+							  <label>Umidità</label>
 							</div>
 						</div>
 						<div id="sensorData" style="width:100%; height:20%; margin: 0 0;"></div>
@@ -1675,31 +1650,7 @@ $('graph_avg_pm15').click();
 					</button>
 
 					<section class="dashboard" id="main-column">
-						<div>
-							<span class="font--robotoslab med-hum">Valori medi di umidità</span>
-							<div class="wrap_h">
-								<div class="barra barra1 bubbles"> <span id="span_barra2">LU</span></div>
-								<div class="barra barra2 bubbles2"><span id="span_barra2">MA</span></div>
-								<div class="barra barra3 bubbles3"><span id="span_barra2">ME</span></div>
-								<div class="barra barra4 bubbles4"><span id="span_barra2">GI</span></div>
-								<div class="barra barra5 bubbles5"><span id="span_barra2">VE</span></div>
-								<div class="barra barra6 bubbles6"><span id="span_barra2">SA<span></div>
-								<div class="barra barra7 bubbles7"><span id="span_barra2">DO</span></div>
-								<div class="pointer_height">Height:
-									<span class="data-height"></span>
-								</div>
-							</div>
-							
-							<div id="boxContainer">
-								<div class='box_cont blue arrow-left-center'>
-								<div class='centererer'><button id="btnCloseHumInfos" class='close'>Close</button></div>
-								<span class ='avg_span'>Umidità Media</span> <span class="avg_span_val">34</span>
-								<span class ='max_span'>Umidità Max</span> <span class="max_span_val">44</span>
-								<span class ='min_span'>Umidità Min</span> <span class="min_span_val">22</span>
-								</div>
-							</div>
-
-						</div>
+						<div id="myHumChart"></div>
 					</section>
 				</div>
 	 
@@ -1740,102 +1691,8 @@ $('graph_avg_pm15').click();
 						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
 					</button>
 					<section class="dashboard" id="main-column">
-
-						<div class="external_p">
-							<div class="chart-container">
-								<div class="base"></div>
-									<!-- Left Side Meter-->
-								<ul class="meter">
-									<li><div>40</div></li>
-									<li><div>30</li>
-									<li><div>20</li>
-									<li><div>10</div></li>
-									<li><div>0</div></li>
-								</ul>
-								<div class="meter2">
-									<span>LU</span>
-									<span>MA</span>
-									<span>ME</span>
-									<span>GI</span>
-									<span>VE</span>
-									<span>SA</span>
-									<span>DO</span>
-								</div>
-								<!-- Background-Grid -->
-								<table>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-								</table>
-								<!-- End Background Grid -->
-
-								<div class="bar_p two"></div>   
-								<div class="bar_p three"></div>
-								<div class="bar_p four"></div>   
-								<div class="bar_p five"></div>   
-								<div class="bar_p six"></div>
-								<div class="bar_p seven"></div>   
-								<div class="bar_p eight"></div>  
-							</div>
-						</div>
+						<div id="myPresChart"></div>
 					</section>
-
-					<div id="boxContainer" class="contPr">
-						<div class='box_cont blue arrow-left-center'>
-							<div class='centererer'><button id="btnClosePrInfos" class='close'>Close</button></div>
-							<span class ='avg_span'>Pressione Media</span> <span class="avg_span_val avgPr">34</span>
-							<span class ='max_span'>Pressione Max</span> <span class="max_span_val maxPr">44</span>
-							<span class ='min_span'>Pressione Min</span> <span class="min_span_val minPr">22</span>
-						</div>
-		
-					</div>
 				</div>
 	 
 	 
@@ -2024,7 +1881,7 @@ $('graph_avg_pm15').click();
 							
 					</div>
 					<div class="levels">
-						<div class="level level--1" data-content="L1" aria-label="Level 1">
+						<div class="level level--1" data-content="LIVELLO 2" aria-label="Level 1">
 							<svg id="lev1" class="map map--1" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 1</title>
 								<polygon points="200,100 1500,100 1500,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
@@ -2036,7 +1893,7 @@ $('graph_avg_pm15').click();
 							</svg>
 							<div id="level__pins_1" class="level__pins"></div>
 						</div>
-						<div class="level level--2" data-content="L2" aria-label="Level 2">
+						<div class="level level--2" data-content="LIVELLO 3" aria-label="Level 2">
 							<svg id="lev2" class="map map--2" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 2</title>
 								<polygon points="200,100 1385,100 1385,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
@@ -2047,7 +1904,7 @@ $('graph_avg_pm15').click();
 							</svg>
 							<div id="level__pins_2" class="level__pins"></div>
 						</div>
-						<div class="level level--3" data-content="L3" aria-label="Level 3">
+						<div class="level level--3" data-content="LIVELLO 4" aria-label="Level 3">
 							<svg id="lev3" class="map map--3" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 3</title>
 								<polygon points="300,145 1070,145 1070,100 1370,100 
@@ -2091,7 +1948,7 @@ $('graph_avg_pm15').click();
 			<!-- /main -->
 			<aside class="spaces-list" id="spaces-list">
 				<div class="search">
-					<input class="search__input" placeholder="Search..." />
+					<input class="search__input" placeholder="Cerca..." />
 					<button class="boxbutton boxbutton--darker close-search" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
 				</div>
 				<span class="label">
