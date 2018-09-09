@@ -277,7 +277,7 @@
 					if(moved_once == 0) {
 						var style = document.createElement('style');
 						style.type = 'text/css';
-						style.innerHTML = ".levels { transition: 0.5s; margin: -10vmin 0 0 -48vmin; }";
+						//style.innerHTML = ".levels { transition: 0.5s; margin: -10vmin 0 0 -48vmin; }";
 						document.getElementsByTagName('head')[0].appendChild(style);
 						moved_once++;
 					}
@@ -359,7 +359,7 @@
 			$( ".hideInMap" ).each(function( index ) {
 				$(this).fadeIn();		
 			});
-			closeSens.click();
+			//closeSens.click();
 			changelev(level);
 			if (i==0) {
 				$('.clickable_space').on("click", pinClick);
@@ -771,9 +771,7 @@
 			
 		}
 		
-		function closeSensorSpace(sliding) {
-			
-			
+		function closeSensorSpace(sliding) {			
 			var style = document.createElement('style');
 			style.type = 'text/css';
 			style.innerHTML = ".levels {transition: 0.5s; margin: -32vmin 0 0 -48vmin; height:74vmin;}";
@@ -804,13 +802,7 @@
 			// disable mall nav ctrls
 			classie.add(levelDownCtrl, 'boxbutton--disabled');
 			classie.add(levelUpCtrl, 'boxbutton--disabled');
-			
-			
-			classie.add(document.getElementById("lev3"), 'map_moved');	
-			var style = document.createElement('style');
-			style.type = 'text/css';
-			style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:50%;}";
-			document.getElementsByTagName('head')[0].appendChild(style);
+
 		}
 
 		/**
@@ -819,7 +811,15 @@
 		function showSpace(sliding) {
 			// the content item
 			var contentItem = contentEl.querySelector('.content__item[data-space="' + spaceref + '"]');
-			//alert(contentItem.getAttribute('data-category')+"");
+			
+			
+			selectedRealtime = contentItem.getAttribute('data-realtime');
+			alert(selectedRealtime+"");
+			
+
+			
+			
+			
 			// show content
 			classie.add(contentItem, 'content__item--current');
 			if( sliding ) {
@@ -834,9 +834,264 @@
 			catch(err) {
 				
 			}
+
+  var head_menu = "<ul class='tab-group'><li class='tab_real active'><a class='temp' href='#temp_real'>PM 1.0</a></li><li class='tab_real'><a class='hum' href='#hum_real'>PM 2.5</a></li><li class='tab_real'><a class='pres' href='#pm_10'>PM 10</a></li></ul>";
+  var cont = "<div class='tab_real-content'> <div id='temp_real'>A</div><div id='hum_real'>A</div><div id='pm_10'> </div> </div>" 
+  			if(selectedRealtime+"" == "SENS1") {
+						$( ".content__item--current" )
+  .html( head_menu + cont );
+  
+  				 $('.tab_real a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  var target = $(this).attr('href');
+
+  $('.tab_real-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+    if(""+$(this).attr('class') == "temp") {
+		$('#temp_real').show();
+		$('#hum_real').hide();
+
+	} else if(""+$(this).attr('class') == "hum") {
+		$('#hum_real').show();
+	} else {
+		$('#myChart_q15_storico').hide();
+		$('#myChart_q25_storico').hide();
+$('#myChart_q10_storico').show();
+window.dispatchEvent(new Event('resize'));
+	}
+});
+
+
+
+
+
+
+
+
+		var valore_server, value_temp = 0, value2 = 0, value3 = 0;
+	  			
+		var just_once = -1;
+		var temperature_realtime, humidity_realtime;
+		var elem = {name:"SENS1", vals:[1,2,3,4,5,6]};
+		alert("" + elem["vals"][0]);
+			
+		var $delay = 60000,
+			vMin = 11.5,
+			vMax = 15.5,
+			cMin = .3,
+			cMax = 2.5,
+			mMin = 0,
+			mMax = 5,
+			totalPoints = 25;
+
+		function getRandomInt(min, max) {
+			let reading = (Math.random() * (max - min + 1) + min);
+			return (Math.round(reading * 2) / 2)
+		}
+		
+		socket.on('realtime_vals',function(data) {
+			valore_server = data.split(';');
+			for(var field in valore_server) {
+				var line = valore_server[field].split('***');
+				if(line[0] == "1") {
+					value_temp = line[1];
+				} else if(line[0] == "3") {
+					value3 = line[1];
+				}
+				
+			}	
+
+		});
+
+var min_graphh = 0;
+		var max_graph = 0;
+
+		$('#temp_real').highcharts({
+			chart: {
+				type: 'spline',
+				marginTop: '70',
+				backgroundColor: '#e4c7c6',
+				events: {
+					load: function() {
+						temperature_realtime = this.series[0];
+						var x, volts;
+						
+					
+						setInterval(function() {
+
+							x = (new Date()).getTime(),
+								volts = (Math.round(value_temp * 2) / 2);
+								
+
+							
+							temperature_realtime.addPoint([x, volts], true, true);
+var char_t = $('#temp_real').highcharts();
+char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
+							//updateSensorDisplayValues([volts]);
+						}, $delay);
+					}
+				}
+			},
+			title: {
+				text: 'Dati medi sensori'
+			},
+			subtitle: {
+				text: 'Ultimo valore letto: ...'
+			},
+			xAxis: {
+				type: 'datetime',
+				lineColor: 'white',
+                gridLineColor: 'white',
+				tickPixelInterval: 50
+			},
+			yAxis: [{
+				title: {
+					text: 'GRADI',
+					style: {
+						color: '#2b908f',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 25,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}],
+				gridLineColor: 'white'
+			}],
+			tooltip: {
+				enabled: false
+			},
+			legend: {
+				enabled: false
+			},
+			exporting: {
+				enabled: false
+			},
+			series: [{
+				name: 'TEMPERATURA',
+				yAxis: 0,
+				color: '#2b908f',
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i < 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(12, 12)
+						});
+					}
+					return data;
+				}())
+			}]
+		});
+		
+		
+		
+		$('#hum_real').highcharts({
+			chart: {
+				type: 'spline',
+				marginTop: '70',
+				backgroundColor: '#e4c7c6',
+				events: {
+					load: function() {
+						humidity_realtime = this.series[0];
+						var x, volts;
+						
+					
+						setInterval(function() {
+
+							x = (new Date()).getTime(),
+								volts = (Math.round(value_temp * 2) / 2);
+								
+
+							
+							humidity_realtime.addPoint([x, volts], true, true);
+							var char_t = $('#hum_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
+
+							//updateSensorDisplayValues([volts]);
+						}, $delay);
+					}
+				}
+			},
+
+			title: {
+				text: 'Dati medi sensori'
+			},
+			subtitle: {
+				text: 'Ultimo valore letto: ...'
+			},
+			xAxis: {
+				type: 'datetime',
+				lineColor: 'white',
+                gridLineColor: 'white',
+				tickPixelInterval: 50
+			},
+			yAxis: [{
+				title: {
+					text: 'GRADI',
+					style: {
+						color: '#2b908f',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 25,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}],
+				gridLineColor: 'white'
+			}],
+			tooltip: {
+				enabled: false
+			},
+			legend: {
+				enabled: false
+			},
+			exporting: {
+				enabled: false
+			},
+			series: [{
+				name: 'TEMPERATURA',
+				yAxis: 0,
+				color: '#2b908f',
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i < 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(12, 12)
+						});
+					}
+					return data;
+				}())
+			}]
+		});
+		
+		
+			}
+  
 							var style = document.createElement('style');
 			style.type = 'text/css';
-			style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;height:10%;}";
+			style.innerHTML = ".levels { transition: 0.5s; margin: -16vmin 0 0 -48vmin;}";
 			document.getElementsByTagName('head')[0].appendChild(style);
 			
 			

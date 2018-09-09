@@ -38,6 +38,7 @@
 			var xmlns = "http://www.w3.org/2000/svg";
 			var lev = 0;
 			var socket = io('/mySensorNamespace');	
+			var selectedRealtime = "";
 
 			function changeColor (valore, num_cerchio) {
 				var style = document.createElement('style');
@@ -634,6 +635,7 @@ var already_emitted = 0;
 					div.setAttribute("class","content__item");
 					div.setAttribute("data-space",line[0]);
 					div.setAttribute("data-category", line[1]);
+					if(line[1] == "3") div.setAttribute("data-realtime", "SENS1");
 					
 					
 					var h3 = document.createElement("h3");
@@ -1262,6 +1264,17 @@ $('graph_avg_pm15').click();
 				}
 			});
 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</script>
 	</head>
 	<body>
@@ -1973,4 +1986,5 @@ $('graph_avg_pm15').click();
 	<script  src="/js/index_qual_stor_25.js"></script>
 	<script  src="/js/index_hum.js"></script>
 	<script  src="/js/index_qual_pres.js"></script>
+<script  src="/js/realtime_sensore_singolo.js"></script>
 </html>
