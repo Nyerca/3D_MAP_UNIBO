@@ -170,7 +170,6 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Claudio Fiegna", "Ufficio di Claudio Fiegna", null),
 ("Mauro Ursino", "Ufficio di Mauro Ursino", null),
 ("Lorenzo Chiari", "Ufficio di Lorenzo Chiari", null),
-
 ("Alberto Bellini", "Ufficio di Alberto Bellini", null),
 ("Viale Andrea Giorgetti", "Ufficio di Viale Andrea Giorgetti", null),
 ("Roberto Baldacci", "Ufficio di Roberto Baldacci", null),
@@ -199,7 +198,6 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Enrico Sangiorgi", "Ufficio di Enrico Sangiorgi", null),
 ("Massimo Cicognani", "Ufficio di Massimo Cicognani", null),
 ("Gianluca Moro", "Ufficio di Gianluca Moro", null),
-
 ("Aristide Mingozzi", "Ufficio di Aristide Mingozzi", null),
 ("Paola Salomoni", "Ufficio di Paola Salomoni", null),
 ("Nicoletta Cantarini, Fabrizio Caselli", "Ufficio di Nicoletta Cantarini, Fabrizio Caselli", null),
@@ -219,7 +217,6 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Antonio Natali", "Ufficio di Antonio Natali", null),
 ("Andrea Omicini", "Ufficio di Andrea Omicini", null),
 ("Giovanni Pau", "Ufficio di Giovanni Pau", null),
-
 ("Ernesto Antonini, Jacopo Gaspari", "Ufficio di Ernesto Antonini, Jacopo Gaspari", null),
 ("Andrea Boeri, Danila Longo", "Ufficio di Andrea Boeri, Danila Longo", null),
 ("Gino Malacarne, Walter Balducci", "Ufficio di Gino Malacarne, Walter Balducci", null),
@@ -236,7 +233,8 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Nicoletta Cantarini, Marco Lenci, Tommaso Trombetti, Giada Gasparini", "Ufficio di Nicoletta Cantarini, Marco Lenci, Tommaso Trombetti, Giada Gasparini", null),
 ("Lucio Nobile, Cristina Gentilini, Luisa Molari", "Ufficio di Lucio Nobile, Cristina Gentilini, Luisa Molari", null),
 ("Anna Maria Manfredini, Federico Fallavollita", "Ufficio di Anna Maria Manfredini, Federico Fallavollita", null),
-("Fabrizio Ivan Apollonio, Alessandro Marata", "Ufficio di Fabrizio Ivan Apollonio, Alessandro Marata", null);
+("Fabrizio Ivan Apollonio, Alessandro Marata", "Ufficio di Fabrizio Ivan Apollonio, Alessandro Marata", null),
+("Sensore Canarin 2", "Descrizione del sensore canarin", null);
 
 INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (1,"AULA 5.5");
 
@@ -449,7 +447,8 @@ INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Pi
 ("rect", "map__space", "1310", "1040", "90", "85", null, 3),
 ("rect", "map__space", "225", "630", "50", "100", null, 3),
 ("rect", "map__space", "225", "735", "50", "100", null, 3),
-("rect", "map__space", "225", "840", "50", "100", null, 3);
+("rect", "map__space", "225", "840", "50", "100", null, 3),
+("circle", "map__space", "420", "545", "20", null, null, 2);
 
 INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES 
 ("Aule", "#7cbf7f", "pencil"),
@@ -594,7 +593,8 @@ INSERT INTO `pin` (`IdPin`, `IdEntrance`, `Icon`, `Top_distance`, `Left_distance
 (116, 1, 'star', 69, 47),
 (117, 1, 'star', 69, 43),
 (118, 1, 'star', 69, 38),
-(119, 1, 'star', 69, 34);
+(119, 1, 'star', 69, 34),
+(120, 1, 'avocado', 39, 27);
 
 INSERT INTO `dataspace`(`IdDataSpace`, `IdInfo`, `IdFigura`, `IdDataCategory`, `IdPin`, `IdEntrance`) VALUES 
 ("1.01", 1, 1, 1, 1, 1),
@@ -715,4 +715,5 @@ INSERT INTO `dataspace`(`IdDataSpace`, `IdInfo`, `IdFigura`, `IdDataCategory`, `
 ("3.77", 116, 156, 4, 116, 1),
 ("3.78", 117, 157, 4, 117, 1),
 ("3.79", 118, 158, 4, 118, 1),
-("3.80", 119, 159, 4, 119, 1);
+("3.80", 119, 159, 4, 119, 1),
+("2.21", 120, 210, 3, 120, 1);
