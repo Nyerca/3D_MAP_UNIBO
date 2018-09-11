@@ -1331,3 +1331,7 @@ p_move {
 .tab_real-content, .tab_real-content_2 {
 	bottom: 2%;
 }
+.lezioni_table, .lezioni_table th, .lezioni_table td {
+	border: 1px solid black;
+
+}

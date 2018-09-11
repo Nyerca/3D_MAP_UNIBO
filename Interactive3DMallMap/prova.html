@@ -381,7 +381,7 @@
 			$.ajaxSetup({ cache: true });
 			$.ajax({
 				//url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT inizio, fine, ins.materia_descrizione from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id WHERE aula_codici LIKE '61_WP01_003'",
-				url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id JOIN aule_2017 aule ON aula_codici = aula_codice WHERE aula_nome LIKE 'AULA 5.5' AND inizio >= '2018-03-08' AND inizio < '2018-03-09'",
+				url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id JOIN aule_2017 aule ON aula_codici = aula_codice WHERE inizio >= '2018-03-08' AND inizio < '2018-03-09' AND ( aula_nome = 'AULA 5.5' OR aula_nome = 'AULA 5.2' ) ORDER BY aula_nome",
 				type: "get",
 				dataType: "jsonp",
 				success: function(data){
@@ -389,9 +389,9 @@
 					socket.emit('dimValue', dim);
 					for (i in data.result.records) {
 						var current = data.result.records[i];
-						var vect = ["" +current.aula_nome, "" + current.inizio, "" +current.materia_descrizione];
+						var vect = ["" +current.fine, "" + current.inizio, "" +current.materia_descrizione, "" +current.aula_nome];
 						console.log(" A " + vect[1]);
-						socket.emit('deleteValue', vect);
+						socket.emit('opendata_emit', vect);
 					}
 					console.log(" A " + data.result.records[0].inizio);
 				}
@@ -626,7 +626,8 @@ var already_emitted = 0;
 					span_node.appendChild(svg1_node);
 					span_node.appendChild(svg2_node);
 					a_node.appendChild(span_node);
-					
+					/* Workaround, se si elimina questa riga all'interno della variabile pin viene inserito un valore 1.01 che non ci deve essere */
+					if(line[6].length > 1) line[6] = line[6].substring(0,1);
 					document.getElementById("level__pins_"+line[6]).appendChild(a_node);
 				}
 					
@@ -1075,12 +1076,12 @@ var already_emitted = 0;
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	
-	
+				var open_data_content =[];
+				var number_op = 0;
 				var valori = data.opendata.split(';');
 				for(var field in valori) {
-
+					
 					var line = valori[field].split('***');
-
 					if(typeof line[2] !== "undefined") {
 						console.log("LUU" + line[2]);
 						var li = document.createElement("li");
@@ -1089,6 +1090,9 @@ var already_emitted = 0;
 						li.setAttribute("data-level",""+line[1]);
 						li.setAttribute("data-category", "5");
 						li.setAttribute("data-space",""+line[0]);
+						
+						open_data_content[number_op++] = {dataspace: line[0], materia:line[2], inizio: line[3], fine: line[4]};
+						//$('.content__item[data-space="' + line[0] + '"] div').html("CIAO");
 								
 						var a = document.createElement("a");
 						a.setAttribute("href","#");
@@ -1113,7 +1117,7 @@ var already_emitted = 0;
 							document.getElementById("ulList").appendChild(x0_tmp);
 						}
 						/************************************************************/
-						if(line[5] == 1 && L1_5 == 0) {
+						if(line[1] == 1 && L1_5 == 0) {
 							var x_tmp = document.createElement("li");
 							x_tmp.setAttribute("id",5);
 							x_tmp.setAttribute("class","list__item");
@@ -1132,7 +1136,7 @@ var already_emitted = 0;
 							L1_5++;
 						}
 						/************************************************************/
-						if(line[5] == 2 && L2_5 == 0) {
+						if(line[1] == 2 && L2_5 == 0) {
 							var x2_tmp = document.createElement("li");
 							x2_tmp.setAttribute("id",5);
 							x2_tmp.setAttribute("class","list__item");
@@ -1151,7 +1155,7 @@ var already_emitted = 0;
 							L2_5++;
 						}
 						/************************************************************/
-						if(line[5] == 3 && L3_5 == 0) {
+						if(line[1] == 3 && L3_5 == 0) {
 							var x3_tmp = document.createElement("li");
 							x3_tmp.setAttribute("id",5);
 							x3_tmp.setAttribute("class","list__item");
@@ -1178,6 +1182,30 @@ var already_emitted = 0;
 					}
 		
 				}
+				var table_created = 0;
+				var last_read = "";
+				var table;
+				open_data_content.forEach(function(element) {
+					if(table_created == 0) {
+						table = '<table class="lezioni_table"><tr><th>Insegnamento</th><th>Inizio</th><th>Fine</th></tr>';
+						table_created ++;
+					}
+					if(last_read == "" || last_read == element.dataspace ) {
+						table += '<tr><td>' + element.materia + '</td><td>' + element.inizio + '</td><td>' + element.fine + '</td></tr>';
+						last_read = element.dataspace;
+					} else {
+						table += '</table>';
+						$('.content__item[data-space="' + last_read + '"] div').html(table);
+						table = '<table class="lezioni_table"><tr><th>Insegnamento</th><th>Inizio</th><th>Fine</th></tr>';
+						last_read = element.dataspace;
+						table += '<tr><td>' + element.materia + '</td><td>' + element.inizio + '</td><td>' + element.fine + '</td></tr>';
+					}
+					console.log(element.dataspace);
+				});
+				
+				table += '</table>';
+				$('.content__item[data-space="' + last_read + '"] div').html(table);
+				
 				hideAllMarksBut(0);
 				for(var j = 1; j < 6; j++) {
 					Show('' + j);

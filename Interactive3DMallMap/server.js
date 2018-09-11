@@ -56,15 +56,16 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		
     }, 6000);
 	
-    socket.on('deleteValue', function(data) {
-		console.log(data[2]);
+    socket.on('opendata_emit', function(data) {
+		console.log(data[3]);
 		
-		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo = 1)", function (err, result, fields) {
+		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo IN ( SELECT IdInfo FROM toopendata WHERE NomeTabellaOpenData = '" + data[3] + "'))", function (err, result, fields) {
 		for(val in result) {
 				singleData = singleData + result[val].IdDataSpace;
 				singleData = singleData + "***" + result[val].Piano;
 				singleData = singleData + "***" + data[2];
-				singleData = singleData + "*** " + data[1].substring(11);;
+				singleData = singleData + "*** " + data[1].substring(11);
+				singleData = singleData + "*** " + data[0].substring(11);
 				singleData = singleData + ";";
 		}
 		ind = ind + 1;
@@ -73,6 +74,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		});
 	});
 	socket.on('dimValue', function(data) {
+		console.log("DIM");
 		dim = data;
 	});
 	
@@ -96,7 +98,8 @@ http.listen(3000, function() {
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length > 0) {
+		
 		var vals = { 
 			info: info, 
 			figura: figura, 
