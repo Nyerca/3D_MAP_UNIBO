@@ -399,6 +399,7 @@
 
 var already_emitted = 0;
 			socket.on('hi',function(data) {	
+
 				if(already_emitted == 0) {
 					already_emitted ++;
 				console.log("EMITTED = " + already_emitted);

@@ -237,6 +237,7 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Sensore Canarin 2", "Descrizione del sensore canarin", null);
 
 INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (1,"AULA 5.5");
+INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (2,"AULA 5.2");
 
 INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Piano`) VALUES 
 ("rect", "map__space", "1400", "100", "100", "200", null, 1),
