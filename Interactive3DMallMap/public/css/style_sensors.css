@@ -118,8 +118,14 @@ div#sensorValues div.sensor-values div.amps {
 div#sensorValues div.sensor-values div.moisture {
 	color: #90ee7e;
 }
-div#sensorValues div.sensor-values div.moisture span {
-	margin-left: 10px;
-	font-size: .4em;
+
+div#sensorValues div.sensor-values div.volts2 {
+	color: #2b908f;
+}
+div#sensorValues div.sensor-values div.amps2 {
+	color: #90ee7e;
+}
+div#sensorValues div.sensor-values div.moisture2 {
+	color: #90ee7e;
 }
 

@@ -50,7 +50,7 @@
 		$('#myChart_q15_storico').highcharts({
 chart: {
         type: 'heatmap',
-        marginTop: 40,
+        marginTop: 60,
         marginBottom: 80,
         plotBorderWidth: 1,
 		plotBackgroundColor: '#e4c7c6',
@@ -62,6 +62,7 @@ chart: {
         text: "Qualità dell'aria media",
 		style: {
          color: '#515158',
+		 "fontSize": "30px",
       }
     },
 
@@ -69,6 +70,7 @@ chart: {
         categories: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
 		style: {
          color: '#515158',
+		 "fontSize": "15px",
       }
     },
 

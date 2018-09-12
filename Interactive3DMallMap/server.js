@@ -98,7 +98,7 @@ http.listen(3000, function() {
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
 		
 		var vals = { 
 			info: info, 

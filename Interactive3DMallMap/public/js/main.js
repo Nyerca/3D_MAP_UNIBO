@@ -88,8 +88,7 @@
 			spaces = [].slice.call(spacesEl.querySelectorAll('.list__item > a.list__link')),
 			// reference to the current shows space (name set in the data-name attr of both the listed spaces and the pins on the map)
 			spaceref,
-			// sort by ctrls
-			sortByNameCtrl = document.querySelector('#sort-by-name'),
+
 			// listjs initiliazation (all mall´s spaces)
 			spacesList = new List('spaces-list', { valueNames: ['list__link', { data: ['level'] }, { data: ['category'] } ]} ),
 
@@ -195,19 +194,6 @@
 			levelUpCtrl.addEventListener('click', function() { navigate('Down'); });
 			levelDownCtrl.addEventListener('click', function() { navigate('Up'); });
 
-			// sort by name ctrl - add/remove category name (css pseudo element) from list and sorts the spaces by name 
-			sortByNameCtrl.addEventListener('click', function() {
-				if( this.checked ) {
-
-					classie.remove(spacesEl, 'grouped-by-category');
-					
-					spacesList.sort('list__link');
-				}
-				else {
-					classie.add(spacesEl, 'grouped-by-category'); 
-					spacesList.sort('category');
-				}
-			});
 
 			// hovering a pin / clicking a pin
 			pins.forEach(function(pin) {
@@ -353,6 +339,8 @@
 		}
 		 
 		function showLevel(level) {
+			
+			
 			$( ".showInMap" ).each(function( index ) {
 				$(this).hide();		
 			});
@@ -382,6 +370,7 @@
 			// the level element
 			var levelEl = mallLevels[selectedLevel - 1];
 			classie.add(levelEl, 'level--current');
+			
 
 			onEndTransition(levelEl, function() {
 				classie.add(mallLevelsEl, 'levels--open');
@@ -397,6 +386,8 @@
 				//showPins();
 
 				isExpanded = true;
+				
+				
 			}, 'transform');
 			
 			// hide surroundings element
@@ -816,7 +807,6 @@
 			
 			
 			selectedRealtime = contentItem.getAttribute('data-realtime');
-			alert(selectedRealtime+"");
 			
 
 			

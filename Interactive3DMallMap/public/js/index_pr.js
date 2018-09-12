@@ -61,12 +61,14 @@
     text: 'Pressione media',
 	style: {
          color: '#515158',
+		 "fontSize": "30px",
       }
   },
   subtitle: {
     text: 'Il grafico mostra la pressione media settimanale registrata dai sensori',
 	style: {
          color: '#515158',
+		 "fontSize": "15px",
       }
   },
 chart: {

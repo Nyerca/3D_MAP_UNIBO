@@ -2930,15 +2930,17 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 							<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
 						</button>
 
-						<div id="sensorValues2">
-							<div class ="p_move">
-								<div id="prog_q" data-perc="0">
-									<div class="bar_q"><span></span></div>
-									<div class="label_q"><span></span></div>
-								</div>
+						<span class="avgTH_Title"> Valori medi di temperatura e umidità dei sensori</span>
+						<div id="sensorValues">
+							<div class="sensor-values">
+							  <div class="volts2">12.0</div>
+							  <label>Gradi</label>
 							</div>
-							<div id='pChart'></div>
 
+							<div class="sensor-values">
+							  <div class="moisture2">1</div>
+							  <label>Umidità</label>
+							</div>
 						</div>
 						<div id="sensorData2" style="width:100%; height:20%; margin: 0 0;"></div>
 					</section>
@@ -2966,7 +2968,7 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 					<button id="close_button" class="close_button">
 						<svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg>
 					</button>
-					<div class="form_tabs">
+					<div id="air_form" class="form_tabs">
       
       <ul class="tab-group">
         <li class="tab active"><a class="graph_avg_pm15" href="#pm_15">PM 1.0</a></li>
@@ -3144,8 +3146,10 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 							
 					</div>
 					<div class="levels">
+
+						
 						<div class="level level--1" data-content="LIVELLO 2" aria-label="Level 1">
-							<svg id="lev1" class="map map--1" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+							<svg id="lev1" class="map map--1" viewBox="90 70 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 1</title>
 								<polygon points="200,100 1500,100 1500,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
 									1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
@@ -3157,7 +3161,7 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 							<div id="level__pins_1" class="level__pins"></div>
 						</div>
 						<div class="level level--2" data-content="LIVELLO 3" aria-label="Level 2">
-							<svg id="lev2" class="map map--2" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+							<svg id="lev2" class="map map--2" viewBox="90 70 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 								<title>Map Level 2</title>
 								<polygon points="200,100 1385,100 1385,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
 									1400,1375 250,1375 250,1350 100,1350 100,225 200,225"  class="map__ground" />
@@ -3168,7 +3172,7 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 							<div id="level__pins_2" class="level__pins"></div>
 						</div>
 						<div class="level level--3" data-content="LIVELLO 4" aria-label="Level 3">
-							<svg id="lev3" class="map map--3" viewBox="0 0 1520 1420" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+							<svg id="lev3" class="map map--3" viewBox="90 70 1520 1420" width="100%" height="100%">
 								<title>Map Level 3</title>
 								<polygon points="300,145 1070,145 1070,100 1370,100 
 								1370,525 960,525 960,425 400,425 
@@ -3214,10 +3218,6 @@ char_t.setTitle(null, {text: 'Ultimo valore letto: ' + volts});
 					<input class="search__input" placeholder="Cerca..." />
 					<button class="boxbutton boxbutton--darker close-search" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
 				</div>
-				<span class="label">
-					<input id="sort-by-name" class="label__checkbox" type="checkbox" aria-label="Show alphabetically"/>
-					<label class="label__text">A - Z</label>
-				</span>
 				<ul id="ulList" class="list grouped-by-category"></ul>
 			</aside>
 			<!-- /spaces-list -->
