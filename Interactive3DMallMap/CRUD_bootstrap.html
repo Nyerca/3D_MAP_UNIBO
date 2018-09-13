@@ -19,6 +19,19 @@
 		#ttt {
 
 		}
+		#c0 {
+			display:none;
+		}
+	
+		#clog {
+			text-align:center;
+		}
+		#usern {
+			width:100%;
+		}
+		#pwd {
+			width:100%;
+		}
 
 		#toBlack {
 			color : black; 
@@ -251,6 +264,7 @@
 		var delOne = 0;
 		const MAX_VISIBLE = 5;
 		var checkbox = $('table tbody input[type="checkbox"]');
+		var log_user = 0;
 
 		var selectedTab; //Current tab selected from c1 to c5
 		var info;
@@ -1944,7 +1958,6 @@
 			alert("" + data);
 		});
 		socket.on('hi',function(data) {
-
 			document.getElementById("table_val").innerHTML = '';
 			info = data.info.split('___');
 			figura = data.figura.split('___');
@@ -1960,6 +1973,7 @@
 			
 			if(data.correcttab > 0){
 				document.getElementById("a" + data.correcttab).click();
+				document.getElementById("clog").style.display = "none";
 			} else {
 				$("#c0").show()
 				$("#c1").hide()
@@ -2001,7 +2015,7 @@
 			if(data.correcttab == 4){
 				pressed();
 			}
-			
+			document.getElementById("c0").style.display = "none";
 		});
 
 			
@@ -2029,10 +2043,52 @@
 				});
 			}
 		}
-			
+		
+		function login() {
+		var user = document.getElementById("usern").value, pwd = document.getElementById("pwd").value;
+			var loginInfo = { 
+					user: user, 
+					pwd: pwd, 
+			}
+			socket.emit('login', loginInfo);
+		}
+		
+		socket.on('logged',function(data) {
+			if(data == 1) { 
+			alert("log_user: " + log_user);
+			document.getElementById("clog").style.display = "none";
+			document.getElementById("c0").style.display = "block";
+			} else if(data == 0) {
+			document.getElementById("c0").style.display = "none";
+			document.getElementById("clog").style.display = "block";
+			}
+		});
+		
+		function logout() {
+			socket.emit('logout', 'logout');
+		}
+		
 	</script>
 </head>
 <body>
+	<div id="clog" class="container">
+		
+		<div class="table-wrapper">
+			<div class="row">
+				<div class="col-sm-4">
+					<input id="usern" type="text" name="username" placeholder="Username" required>
+				</div>
+				<div class="col-sm-4">
+					<input id="pwd" type="password" name="password" placeholder="Password" required>
+				</div>
+				<div class="col-sm-4">
+					<input type="submit" value="Login" onclick="login();">
+				</div>
+			</div>
+			
+        </div>
+	</div>
+	
 	<div id="c0" class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -2040,7 +2096,9 @@
                     <div class="col-sm-6">
 						<h2>CRUD <b>Operations</b></h2>
 					</div>
-					
+					<div class="col-sm-6">
+						<a class="btn btn-info" onclick="logout()"><span>Logout</span></a>
+					</div>
                 </div>
             </div>
             

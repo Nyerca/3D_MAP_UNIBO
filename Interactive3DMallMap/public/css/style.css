@@ -25,8 +25,9 @@ body {
 }
 
 .logoUnibo {
-	width: 30%;
-	margin: -3% 0 0 0;
+	width: 70%;
+	margin: 3% 0 0 6%;
+
 }
 
 a {
@@ -82,7 +83,7 @@ button:focus {
 	display: flex;
 	-webkit-align-items: center;
 	align-items: center;
-	padding: 1.5em 1em;
+	padding: 0;
 	text-align: center;
 	
 }
@@ -215,7 +216,7 @@ p {
 /*************************************************/
 
 .levels {
-	width: 96vmin;
+	width: 84vmin;
 	height: 74vmin;
 	margin: -32vmin 0 0 -48vmin;
 	-webkit-transition: -webkit-transform 0.3s;
@@ -854,7 +855,7 @@ p {
 .title:before {
 	pointer-events: auto !important;
 }
-ul.list li:after { 
+ul.list li:after {
     content:'' !important;
 }
 
@@ -951,9 +952,20 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 		z-index:200;
 	}
 }
+@keyframes changeWidth {
+	0% {
+		width:84vmin;
+	}
+	100% {
+		width:96vmin;
+	}
+}
 
 .level--current {
 	animation: changeHeight 1s forwards;
+}
+.level--current >svg {
+	animation: changeWidth 1s forwards;
 }
 .iconSum {
 	width: 30%;
@@ -1120,9 +1132,6 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 }
 p_move {
 	width:30%;
-}
-#sensorData2 {
-	margin: -9% 0 0 0 !important;
 }
 
 #myChart_q_storico {
@@ -1295,9 +1304,9 @@ p_move {
 }
 .avgTH_Title {
 	color: #515158;
-	font-size: 40px;
+	font-size: 30px;
 	font-family: 'Roboto';
-	font-weight: 400;
+	font-weight: 300;
 }
 .dashboard {
 	text-align: center;
@@ -1323,6 +1332,7 @@ p_move {
 	background: #e4c7c6;
 	width:99%;
 	height:99%;
+	margin-top:3%;
 }
 .map_moved {
 	margin-bottom: 80% !important;
@@ -1341,4 +1351,7 @@ p_move {
 
 .title:before {
 	content: attr(data-content) !important;
+}
+#air_form {
+	margin-left:35%;
 }

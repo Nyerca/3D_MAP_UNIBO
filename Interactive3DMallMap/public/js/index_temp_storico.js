@@ -61,12 +61,14 @@
     text: 'Temperatura media',
 	style: {
          color: '#515158',
+		 "fontSize": "30px",
       }
   },
   subtitle: {
     text: 'Il grafico mostra le temperature medie settimanali registrate dai sensori',
 	style: {
          color: '#515158',
+		 "fontSize": "15px",
       }
   },
 chart: {

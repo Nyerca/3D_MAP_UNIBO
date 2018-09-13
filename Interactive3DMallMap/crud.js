@@ -219,7 +219,6 @@ function update_toopendata(oldIdInfo, IdInfo, NomeTabellaOpenData) {
 }
 
 
-
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "admin",
@@ -252,6 +251,7 @@ var count_pin = 0
 var count_entrance = 0 
 var count_entrancecss = 0 
 var count_toopendata = 0 
+var logged = 0;
 
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
@@ -284,7 +284,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 				break;
 		}
 		con.query(sql, function (err, result) {
-			if (err) namespace.emit('err', "Errore, non si eliminare un elemento collegato ad altre righe in altre tabelle");
+			if (err) namespace.emit('err', "Errore, non si può eliminare un elemento collegato ad altre righe in altre tabelle");
 			checkForNewData();
 		});
 	});
@@ -294,6 +294,15 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 			if (err) throw err;
 			checkForNewData();
 		});
+	});
+	socket.on('login', function(data) {
+		if(data.user == "a" && data.pwd == "a")
+		logged = 1;
+		namespace.emit('logged', logged);
+	});
+	socket.on('logout', function(data) {
+		logged = 0;
+		namespace.emit('logged', logged);
 	});
 
 	emitData();
@@ -396,6 +405,7 @@ var interval;
 var info = "", figura = "", datacategory = "", pin = "", dataspace = "", svg = "", entrance = "", entrancecss = "", toopendata = "";
 function check() {
 	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && dataspace.length > 0 && svg.length > 0) {
+		
 		var vals = { 
 			info: info, 
 			figura: figura, 
@@ -407,6 +417,7 @@ function check() {
 			entrance: entrance,
 			entrancecss: entrancecss,
 			toopendata: toopendata,
+	
 		}
 		info = "", figura = "", datacategory = "", pin = "", dataspace = "", svg = "", entrance = "", entrancecss = "", toopendata = "";
 		namespace.emit('hi', vals);
