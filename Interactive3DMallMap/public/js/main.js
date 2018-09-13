@@ -321,19 +321,14 @@
                     var category = $(this).attr('data-category');
                     if (category !== prevCategory) {
                         var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
-
-                        console.log(content);
                         $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
-                            "data-level='0' data-category='"+category+"' style='content: attr(data-content)'></li>");
+                            "data-level='0' data-category='"+category+"'></li>");
                     }
                     prevCategory = $(this).attr('data-category');
                     $(this).children().fadeIn();
                 });
-
             }
             prevCategory = 0;
-
-
 
         });
 
