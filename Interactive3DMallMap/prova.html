@@ -136,7 +136,7 @@
 
                         firstOpen = 1;
 
-                        changeListArrow(1, "firstTitle", "▲");
+                        changeListArrow(1, "firstTitle", "▴");
 
 
                         if(secondOpen == 1) Show('2');
@@ -149,13 +149,13 @@
                         $( "ul.list li" ).each(function( index ) {
                             if($(this).attr("data-category") == num) {
                                 $(this).children().each(function( index ) {
-                                    if(( this ).text != "▼") $(this).hide();
+                                    if(( this ).text != "▾") $(this).hide();
                                 });
                             }
                         });
                         firstOpen = 0;
 
-                        changeListArrow(1, "firstTitle", "▼");
+                        changeListArrow(1, "firstTitle", "▾");
 
                     }
 
@@ -170,7 +170,7 @@
                         });
                         secondOpen = 1;
 
-                        changeListArrow(2, "secondTitle", "▲");
+                        changeListArrow(2, "secondTitle", "▴");
 
                         if(firstOpen == 1) Show('1');
                         if(thirdOpen == 1) Show('3');
@@ -183,12 +183,12 @@
                         $( "ul.list li" ).each(function( index ) {
                             if($(this).attr("data-category") == num) {
                                 $(this).children().each(function( index ) {
-                                    if(( this ).text != "▼") $(this).hide();
+                                    if(( this ).text != "▾") $(this).hide();
                                 });
                             }
                         });
                         secondOpen = 0;
-                        changeListArrow(2, "secondTitle", "▼");
+                        changeListArrow(2, "secondTitle", "▾");
                     }
                     break;
                 case '3':
@@ -199,7 +199,7 @@
                             }
                         });
                         thirdOpen = 1;
-                        changeListArrow(3, "thirdTitle", "▲");
+                        changeListArrow(3, "thirdTitle", "▴");
                         if(secondOpen == 1) Show('2');
                         if(firstOpen == 1) Show('1');
                         if(fourthOpen == 1) Show('4');
@@ -209,12 +209,12 @@
                         $( "ul.list li" ).each(function( index ) {
                             if($(this).attr("data-category") == num) {
                                 $(this).children().each(function( index ) {
-                                    if(( this ).text != "▼") $(this).hide();
+                                    if(( this ).text != "▾") $(this).hide();
                                 });
                             }
                         });
                         thirdOpen = 0;
-                        changeListArrow(3, "thirdTitle", "▼");
+                        changeListArrow(3, "thirdTitle", "▾");
                     }
                     break;
                 case '4':
@@ -227,7 +227,7 @@
                         });
 
                         fourthOpen = 1;
-                        changeListArrow(4, "fourthTitle", "▲");
+                        changeListArrow(4, "fourthTitle", "▴");
                         if(secondOpen == 1) Show('2');
                         if(firstOpen == 1) Show('1');
                         if(thirdOpen == 1) Show('3');
@@ -238,12 +238,12 @@
                         $( "ul.list li" ).each(function( index ) {
                             if($(this).attr("data-category") == num) {
                                 $(this).children().each(function( index ) {
-                                    if(( this ).text != "▼") $(this).hide();
+                                    if(( this ).text != "▾") $(this).hide();
                                 });
                             }
                         });
                         fourthOpen = 0;
-                        changeListArrow(4, "fourthTitle", "▼");
+                        changeListArrow(4, "fourthTitle", "▾");
 
 
                     }
@@ -258,7 +258,7 @@
                         });
 
                         fifthOpen = 1;
-                        changeListArrow(5, "fifthTitle", "▲");
+                        changeListArrow(5, "fifthTitle", "▴");
                         if(secondOpen == 1) Show('2');
                         if(firstOpen == 1) Show('1');
                         if(thirdOpen == 1) Show('3');
@@ -269,12 +269,12 @@
                         $( "ul.list li" ).each(function( index ) {
                             if($(this).attr("data-category") == num) {
                                 $(this).children().each(function( index ) {
-                                    if(( this ).text != "▼") $(this).hide();
+                                    if(( this ).text != "▾") $(this).hide();
                                 });
                             }
                         });
                         fifthOpen = 0;
-                        changeListArrow(5, "fifthTitle", "▼");
+                        changeListArrow(5, "fifthTitle", "▾");
                     }
                     break;
             }
@@ -459,7 +459,7 @@
                     var style6 = document.createElement('style');
                     style6.type = 'text/css';
 
-                    style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▼'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
+                    style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▾'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
                     style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
                     style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
                     style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
@@ -751,8 +751,7 @@
                                 x0_tmp.setAttribute("data-category", line[1]);
 
                                 var a0_tmp = document.createElement("a");
-                                a0_tmp.innerHTML = "▼";
-                                a0_tmp.style.fontSize = '0.5em';
+                                a0_tmp.innerHTML = "▾";
                                 x0_tmp.appendChild(a0_tmp);
 
                                 x0_tmp.classList.add("firstTitle");
@@ -771,7 +770,7 @@
                                 x_tmp.setAttribute("data-category", line[1]);
 
                                 var a_tmp = document.createElement("a");
-                                a_tmp.innerHTML = "▼";
+                                a_tmp.innerHTML = "▾";
                                 x_tmp.appendChild(a_tmp);
 
                                 x_tmp.classList.add("firstTitle");
@@ -790,7 +789,7 @@
                                 x2_tmp.setAttribute("data-category", line[1]);
 
                                 var a2_tmp = document.createElement("a");
-                                a2_tmp.innerHTML = "▼";
+                                a2_tmp.innerHTML = "▾";
                                 x2_tmp.appendChild(a2_tmp);
 
                                 x2_tmp.classList.add("firstTitle");
@@ -810,7 +809,7 @@
 
 
                                 var a3_tmp = document.createElement("a");
-                                a3_tmp.innerHTML = "▼";
+                                a3_tmp.innerHTML = "▾";
                                 x3_tmp.appendChild(a3_tmp);
 
                                 x3_tmp.classList.add("firstTitle");
@@ -831,7 +830,7 @@
                                 x0_tmp.setAttribute("data-category", line[1]);
 
                                 var a0_tmp = document.createElement("a");
-                                a0_tmp.innerHTML = "▼";
+                                a0_tmp.innerHTML = "▾";
                                 x0_tmp.appendChild(a0_tmp);
 
                                 x0_tmp.classList.add("secondTitle");
@@ -849,7 +848,7 @@
                                 x_tmp.setAttribute("data-category", line[1]);
 
                                 var a_tmp = document.createElement("a");
-                                a_tmp.innerHTML = "▼";
+                                a_tmp.innerHTML = "▾";
                                 x_tmp.appendChild(a_tmp);
 
                                 x_tmp.classList.add("secondTitle");
@@ -868,7 +867,7 @@
                                 x2_tmp.setAttribute("data-category", line[1]);
 
                                 var a2_tmp = document.createElement("a");
-                                a2_tmp.innerHTML = "▼";
+                                a2_tmp.innerHTML = "▾";
                                 x2_tmp.appendChild(a2_tmp);
 
                                 x2_tmp.classList.add("secondTitle");
@@ -888,7 +887,7 @@
 
 
                                 var a3_tmp = document.createElement("a");
-                                a3_tmp.innerHTML = "▼";
+                                a3_tmp.innerHTML = "▾";
                                 x3_tmp.appendChild(a3_tmp);
 
                                 x3_tmp.classList.add("secondTitle");
@@ -911,7 +910,7 @@
                                 x0_tmp.setAttribute("data-category", line[1]);
 
                                 var a0_tmp = document.createElement("a");
-                                a0_tmp.innerHTML = "▼";
+                                a0_tmp.innerHTML = "▾";
                                 x0_tmp.appendChild(a0_tmp);
 
                                 x0_tmp.classList.add("thirdTitle");
@@ -929,7 +928,7 @@
                                 x_tmp.setAttribute("data-category", line[1]);
 
                                 var a_tmp = document.createElement("a");
-                                a_tmp.innerHTML = "▼";
+                                a_tmp.innerHTML = "▾";
                                 x_tmp.appendChild(a_tmp);
 
                                 x_tmp.classList.add("thirdTitle");
@@ -948,7 +947,7 @@
                                 x2_tmp.setAttribute("data-category", line[1]);
 
                                 var a2_tmp = document.createElement("a");
-                                a2_tmp.innerHTML = "▼";
+                                a2_tmp.innerHTML = "▾";
                                 x2_tmp.appendChild(a2_tmp);
 
                                 x2_tmp.classList.add("thirdTitle");
@@ -968,7 +967,7 @@
 
 
                                 var a3_tmp = document.createElement("a");
-                                a3_tmp.innerHTML = "▼";
+                                a3_tmp.innerHTML = "▾";
                                 x3_tmp.appendChild(a3_tmp);
 
                                 x3_tmp.classList.add("thirdTitle");
@@ -992,7 +991,7 @@
                                 x0_tmp.setAttribute("data-category", line[1]);
 
                                 var a0_tmp = document.createElement("a");
-                                a0_tmp.innerHTML = "▼";
+                                a0_tmp.innerHTML = "▾";
                                 x0_tmp.appendChild(a0_tmp);
 
                                 x0_tmp.classList.add("fourthTitle");
@@ -1010,7 +1009,7 @@
                                 x_tmp.setAttribute("data-category", line[1]);
 
                                 var a_tmp = document.createElement("a");
-                                a_tmp.innerHTML = "▼";
+                                a_tmp.innerHTML = "▾";
                                 x_tmp.appendChild(a_tmp);
 
                                 x_tmp.classList.add("fourthTitle");
@@ -1029,7 +1028,7 @@
                                 x2_tmp.setAttribute("data-category", line[1]);
 
                                 var a2_tmp = document.createElement("a");
-                                a2_tmp.innerHTML = "▼";
+                                a2_tmp.innerHTML = "▾";
                                 x2_tmp.appendChild(a2_tmp);
 
                                 x2_tmp.classList.add("fourthTitle");
@@ -1049,7 +1048,7 @@
 
 
                                 var a3_tmp = document.createElement("a");
-                                a3_tmp.innerHTML = "▼";
+                                a3_tmp.innerHTML = "▾";
                                 x3_tmp.appendChild(a3_tmp);
 
                                 x3_tmp.classList.add("fourthTitle");
@@ -1108,7 +1107,7 @@
                             x0_tmp.setAttribute("data-category", "5");
 
                             var a0_tmp = document.createElement("a");
-                            a0_tmp.innerHTML = "▼";
+                            a0_tmp.innerHTML = "▾";
                             x0_tmp.appendChild(a0_tmp);
 
                             x0_tmp.classList.add("fifthTitle");
@@ -1126,7 +1125,7 @@
                             x_tmp.setAttribute("data-category", "5");
 
                             var a_tmp = document.createElement("a");
-                            a_tmp.innerHTML = "▼";
+                            a_tmp.innerHTML = "▾";
                             x_tmp.appendChild(a_tmp);
 
                             x_tmp.classList.add("fifthTitle");
@@ -1145,7 +1144,7 @@
                             x2_tmp.setAttribute("data-category", "5");
 
                             var a2_tmp = document.createElement("a");
-                            a2_tmp.innerHTML = "▼";
+                            a2_tmp.innerHTML = "▾";
                             x2_tmp.appendChild(a2_tmp);
 
                             x2_tmp.classList.add("fifthTitle");
@@ -1165,7 +1164,7 @@
 
 
                             var a3_tmp = document.createElement("a");
-                            a3_tmp.innerHTML = "▼";
+                            a3_tmp.innerHTML = "▾";
                             x3_tmp.appendChild(a3_tmp);
 
                             x3_tmp.classList.add("fifthTitle");

@@ -320,8 +320,11 @@
                 $( "ul.list li" ).each(function( index ) {
                     var category = $(this).attr('data-category');
                     if (category !== prevCategory) {
-                        $(this).before("<li id='"+category+"' class='list__item firstTitle'" +
-                            "data-level='0' data-category='"+category+"'></li>");
+                        var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
+
+                        console.log(content);
+                        $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
+                            "data-level='0' data-category='"+category+"' style='content: attr(data-content)'></li>");
                     }
                     prevCategory = $(this).attr('data-category');
                     $(this).children().fadeIn();
