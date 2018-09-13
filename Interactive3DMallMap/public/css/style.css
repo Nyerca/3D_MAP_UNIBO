@@ -225,10 +225,6 @@ p {
 	transform-style: preserve-3d;
 }
 
-.level--current > svg{
-	
-}
-
 .level {
 	position: relative;
 	width: 100%;
@@ -856,7 +852,10 @@ p {
 .firstTitle:before { 
     pointer-events: auto !important;
 }
-ul.list li:after { 
+.title:before {
+	pointer-events: auto !important;
+}
+ul.list li:after {
     content:'' !important;
 }
 
@@ -975,7 +974,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 }
 
 
-.firstTitle, .secondTitle, .thirdTitle, .fourthTitle, .fifthTitle {
+.firstTitle, .secondTitle, .thirdTitle, .fourthTitle, .fifthTitle, .title {
 	text-indent: -6500px;
 }
 
@@ -1348,6 +1347,10 @@ p_move {
 .lezioni_table, .lezioni_table th, .lezioni_table td {
 	border: 1px solid black;
 
+}
+
+.title:before {
+	content: attr(data-content) !important;
 }
 #air_form {
 	margin-left:35%;
