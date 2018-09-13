@@ -291,7 +291,7 @@
         $(".search").bind('keyup', function (e) {
             spacesList.filter();
             if(""+ document.getElementsByClassName('search__input')[0].value == "") {
-                if(selectedLevel !== undefined) showLevelSpaces();
+                //if(selectedLevel !== undefined) showLevelSpaces();
                 Show('1');
                 Show('2');
                 Show('3');
@@ -303,6 +303,7 @@
                 else if(fourthOpen == 1) { Show('4');}
                 else if(fifthOpen == 1) { Show('5');}
 
+               showLevelSpaces();
             } else {
                 $( "ul.list li" ).each(function( index ) {
                     var category = $(this).attr('data-category');
@@ -486,16 +487,15 @@
      * Shows all spaces for current level
      */
     function showLevelSpaces() {
-        var cat1 = 0;
+        if (selectedLevel !== undefined){
+            spacesList.filter(function(item) {
+                return item.values().level === selectedLevel.toString();
+            });
 
-        /*spacesList.filter(function(item) {
-
-            if(item.values().level === selectedLevel.toString()) {
-                if(item.values().category == "1");
-                cat1++;
-            }
-            return item.values().level === selectedLevel.toString();
-        });*/
+            $(".list__item[data-level='"+selectedLevel.toString()+"']").each(function () {
+                $(this).show();
+            });
+        }
     }
 
     function howManySpaces() {
@@ -614,7 +614,7 @@
         });
 
         // filter the spaces for this level
-        showLevelSpaces();
+        //showLevelSpaces();
 
         // hide the previous level´s pins
         removePins(currentLevel);
