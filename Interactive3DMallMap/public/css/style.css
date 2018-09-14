@@ -875,7 +875,7 @@ section.box {
 	bottom:0;
 	margin: 0 0 20px 74%;
 	z-index: 100;
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Cabin', Arial, sans-serif;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -1305,7 +1305,7 @@ p_move {
 .avgTH_Title {
 	color: #515158;
 	font-size: 30px;
-	font-family: 'Roboto';
+    font-family: 'Cabin', Arial, sans-serif;
 	font-weight: 300;
 }
 .dashboard {
