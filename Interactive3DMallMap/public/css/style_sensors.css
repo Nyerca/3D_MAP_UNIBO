@@ -109,7 +109,7 @@ div#sensorValues div.sensor-values > label {
 	font-size: 1.5em;
 	color: #515158;
 }
-div#sensorValues div.sensor-values div.volts {
+div#sensorValues div.sensor-values div.volts_val {
 	color: #2b908f;
 }
 div#sensorValues div.sensor-values div.amps {

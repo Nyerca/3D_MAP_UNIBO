@@ -10,7 +10,7 @@
 			mMin = 0,
 			mMax = 5,
 			totalPoints = 25,
-			$voltageDisplay = $('div.volts'),
+			$voltageDisplay = $('div.volts_val'),
 			$currentDisplay = $('div.amps'),
 			$moistureDisplay = $('div.moisture');
 
@@ -25,36 +25,11 @@
 		
 /* Function which update the number visualization inside the three circles */	
 		function updateVoltage(value) {
-			
-			var spn = document.createElement('span');
-			var str = "" + value;
-			$voltageDisplay.html(str.split(".")[0]);
-			
-			var n = str.includes(".");
-
-			if(n != false) {
-				spn.innerHTML = "." +  str.split(".")[1];
-				document.getElementsByClassName('volts')[0].appendChild(spn);
-			}
-	
-			changeColor(value,1);
+			$voltageDisplay.html(value + '<span> °</span>');
 		}
 		
 		function updateMoisture(value) {
-			$moistureDisplay.html(value + '<span>%</span>');
-
-			var valOrig = value;
-			val = 100 - value;
-      
-			if(valOrig == 0) {
-				$("#percent-box").val(0);
-				$(".progress .percent").text(0 + "%");
-			} else $(".progress .percent").text(valOrig + "%");
-      
-			$(".progress").parent().removeClass();
-			$(".progress .water").css("top", val + "%");
-      
-			$(".progress").parent().addClass("green");
+			$moistureDisplay.html(value + '<span> %</span>');
 		}
 		
 		function updateSensorDisplayValues(d) {
@@ -73,15 +48,28 @@
 */	
 		socket.on('realtime_vals',function(data) {
 			valore_server = data.split(';');
+			var numb_values = 0;
+			var sum_values = 0;
+			
+			var numb_values2 = 0;
+			var sum_values2 = 0;
 			for(var field in valore_server) {
 				var line = valore_server[field].split('***');
-				if(line[0] == "1") {
-					value1 = line[1];
-				} else if(line[0] == "3") {
-					value3 = line[1];
+				if(line[2] == 4) {
+					sum_values += parseFloat(line[1]);
+					numb_values++;
+					console.log("SUM: " + sum_values);
+				} else if(line[2] == 5) {
+					sum_values2 += parseFloat(line[1]);
+					numb_values2++;
 				}
 			}	
+			value1 = sum_values / numb_values;
+			value3 = sum_values2 / numb_values2;
+	updateSensorDisplayValues([value1,value3]);
 
+	
+	
 			if(just_once == -1) {
 				just_once = 0;
 				updateSensorDisplayValues([value1,value3]);
@@ -92,6 +80,7 @@
 								
 					voltage.addPoint([x, volts], false, true);
 					moisture.addPoint([x, mPercent], true, true);
+					updateSensorDisplayValues([value1,value3]);
 			}
 		});
 		

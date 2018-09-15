@@ -19,24 +19,37 @@
 			var valori = data.qual_avg_val.split(';');
 			for(var field in valori) {
 				var line = valori[field].split('***');
-				
-				var d = new Date("" + line[1]);
-				var str = $.datepicker.formatDate('yy-mm-dd', d);
-				if(str === day0) {
-					qin_day0[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day1) {
-					qin_day1[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day2) {
-					qin_day2[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day3) {
-					qin_day3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day4) {
-					qin_day4[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day5) {
-					qin_day5[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day6) {
-					qin_day6[line[2]] = parseFloat(line[0]).toFixed(2);
+				if(line[3] == 9) {
+					var d = new Date("" + line[1]);
+					var str = $.datepicker.formatDate('yy-mm-dd', d);
+					console.log(str + " COMP " + day0);
+					console.log(str + " COMP " + day1);
+					if(str === day0) {
+						qin_day0[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day1) {
+						qin_day1[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day2) {
+						qin_day2[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day3) {
+						qin_day3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day4) {
+						qin_day4[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day5) {
+						qin_day5[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day6) {
+						qin_day6[line[2]] = parseFloat(line[0]).toFixed(2);
+					}
 				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 		
 		/* 

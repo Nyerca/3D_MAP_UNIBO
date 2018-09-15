@@ -72,9 +72,9 @@
             var day = new Date();
             day.setDate(day.getDate() - i);
 
-            var month_n = day.getUTCMonth() + 1; //months from 1-12
-            var day_n = day.getUTCDate();
-            var year_n = day.getUTCFullYear();
+            var month_n = day.getMonth() + 1; //months from 1-12
+            var day_n = day.getDate();
+            var year_n = day.getFullYear();
             var day = year_n
             if(("" + month_n).length == 1) {
                 day += "-0" + month_n
@@ -1304,7 +1304,7 @@
                 var s0_drawn = 0, s1_drawn = 0;
                 if(s0_drawn == 0) {
                     s0_drawn++;
-                    var head_menu = "<ul class='tab-group'><li class='tab_real active'><a class='temp' href='#temp_real'>Temperatura</a></li><li class='tab_real'><a class='hum' href='#hum_real'>Umidità</a></li><li class='tab_real'><a class='pres' href='#pres_real'>Pressione</a></li><li class='tab_real'><a class='pm1_0' href='#pm1_0_real'>PM 1.0</a></li><li class='tab_real'><a class='pm2_5' href='#pm1_0_real'>PM 2.5</a></li><li class='tab_real'><a class='pm10' href='#pm10_real'>PM 10</a></li></ul>";
+                    var head_menu = "<ul class='tab-group'><li class='tab_real active'><a class='temp' href='#temp_real'>Temperatura</a></li><li class='tab_real'><a class='hum' href='#hum_real'>Umidità</a></li><li class='tab_real'><a class='pres' href='#pres_real'>Pressione</a></li><li class='tab_real'><a class='pm1_0' href='#pm1_0_real'>PM 1.0</a></li><li class='tab_real'><a class='pm2_5' href='#pm2_5_real'>PM 2.5</a></li><li class='tab_real'><a class='pm10' href='#pm10_real'>PM 10</a></li></ul>";
                     var cont = "<div class='tab_real-content'> <div id='temp_real'>A</div><div id='hum_real'>A</div><div id='pres_real'> </div> <div id='pm1_0_real'> </div> <div id='pm2_5_real'> </div> <div id='pm10_real'> </div></div>"
 
                     $( ".content__item[data-realtime='Sensore Canarin']" )
@@ -1338,8 +1338,8 @@
 
 
 
-                    var value_real = 0;
-
+                    var value_real_temp = 0, value_real_hum = 0, value_real_pres = 0, value_real_pm2_5 = 0, value_real_pm10 = 0, value_real_pm1 = 0;
+					var first_time_realtime_single = -1;
                     var temperature_realtime, humidity_realtime, pressure_realtime, pm1_0_realtime, pm2_5_realtime, pm10_realtime;
                     //var elem = {name:"SENS1", vals:[1,2,3,4,5,6]};
                     //alert("" + elem["vals"][0]);
@@ -1354,14 +1354,57 @@
                     }
 
                     socket.on('realtime_vals',function(data) {
+
                         var valore_server = data.split(';');
                         for(var field in valore_server) {
                             var line = valore_server[field].split('***');
-                            if(line[0] == "1") {
-                                value_real = line[1];
-                            }
-
+                            
+							if(line[0] == 43152552221341348) {
+								if(line[2] == "4") value_real_temp = line[1];
+								if(line[2] == "5") value_real_hum = line[1];
+								if(line[2] == "6") value_real_pres = line[1];
+								if(line[2] == "7") value_real_pm2_5 = line[1];
+								if(line[2] == "8") value_real_pm10 = line[1];
+								if(line[2] == "9") value_real_pm1 = line[1];
+								
+							}
                         }
+						if( first_time_realtime_single == -1) {
+							first_time_realtime_single = 0;
+							var x, te, hu, pr, pm1, pm10, pm25;
+							x = (new Date()).getTime();
+							
+							te = (Math.round(value_real_temp * 2) / 2);
+							temperature_realtime.addPoint([x, te], true, true);
+                            var char_t = $('#temp_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + te});
+							
+							hu = (Math.round(value_real_hum * 2) / 2);
+							humidity_realtime.addPoint([x, hu], true, true);
+                            var char_t = $('#hum_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + hu});
+							
+							pr = (Math.round(value_real_pres * 2) / 2);
+							pressure_realtime.addPoint([x, pr], true, true);
+                            var char_t = $('#pres_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pr});
+							
+							pm1 = (Math.round(value_real_pm1 * 2) / 2);
+							pm1_0_realtime.addPoint([x, pm1], true, true);
+                            var char_t = $('#pm1_0_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm1});
+							
+							pm10 = (Math.round(value_real_pm10 * 2) / 2);
+							pm10_realtime.addPoint([x, pm10], true, true);
+                            var char_t = $('#pm10_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm10});
+							
+							pm25 = (Math.round(value_real_pm2_5 * 2) / 2);
+							pm2_5_realtime.addPoint([x, pm25], true, true);
+                            var char_t = $('#pm2_5_real').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm25});
+						}
+                    
 
                     });
 
@@ -1382,7 +1425,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_temp * 2) / 2);
 
 
 
@@ -1414,8 +1457,8 @@
                                     font: '13px sans-serif'
                                 }
                             },
-                            min: 0,
-                            max: 25,
+                            min: -10,
+                            max: 50,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1475,7 +1518,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_hum * 2) / 2);
 
 
 
@@ -1503,14 +1546,14 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'GRADI',
+                                text: 'PERCENTUALE',
                                 style: {
                                     color: '#2b908f',
                                     font: '13px sans-serif'
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1563,7 +1606,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_pres * 2) / 2);
 
 
 
@@ -1591,14 +1634,14 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'GRADI',
+                                text: 'hPa',
                                 style: {
                                     color: '#2b908f',
                                     font: '13px sans-serif'
                                 }
                             },
-                            min: 0,
-                            max: 25,
+                            min: 870,
+                            max: 1085,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1651,7 +1694,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_pm1 * 2) / 2);
 
 
 
@@ -1679,14 +1722,14 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'GRADI',
+                                text: 'PM 1.0',
                                 style: {
                                     color: '#2b908f',
                                     font: '13px sans-serif'
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1739,7 +1782,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_pm2_5 * 2) / 2);
 
 
 
@@ -1767,14 +1810,14 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'GRADI',
+                                text: 'PM 2.5',
                                 style: {
                                     color: '#2b908f',
                                     font: '13px sans-serif'
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1827,7 +1870,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real * 2) / 2);
+                                            volts = (Math.round(value_real_pm10 * 2) / 2);
 
 
 
@@ -1855,14 +1898,14 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'GRADI',
+                                text: 'PM 10',
                                 style: {
                                     color: '#2b908f',
                                     font: '13px sans-serif'
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1907,7 +1950,7 @@
 
 
                 if(s1_drawn == 0) {
-                    var head_menu = "<ul class='tab-group'><li class='tab_real_2 active'><a class='temp_2' href='#temp_real_2'>Temperatura</a></li><li class='tab_real_2'><a class='hum_2' href='#hum_real_2'>Umidità</a></li><li class='tab_real_2'><a class='pres_2' href='#pres_real_2'>Pressione</a></li><li class='tab_real_2'><a class='pm1_0_2' href='#pm1_0_real_2'>PM 1.0</a></li><li class='tab_real_2'><a class='pm2_5_2' href='#pm1_0_real_2'>PM 2.5</a></li><li class='tab_real_2'><a class='pm10_2' href='#pm10_real_2'>PM 10</a></li></ul>";
+                    var head_menu = "<ul class='tab-group'><li class='tab_real_2 active'><a class='temp_2' href='#temp_real_2'>Temperatura</a></li><li class='tab_real_2'><a class='hum_2' href='#hum_real_2'>Umidità</a></li><li class='tab_real_2'><a class='pres_2' href='#pres_real_2'>Pressione</a></li><li class='tab_real_2'><a class='pm1_0_2' href='#pm1_0_real_2'>PM 1.0</a></li><li class='tab_real_2'><a class='pm2_5_2' href='#pm2_5_real_2'>PM 2.5</a></li><li class='tab_real_2'><a class='pm10_2' href='#pm10_real_2'>PM 10</a></li></ul>";
                     var cont = "<div class='tab_real-content_2'> <div id='temp_real_2'>A</div><div id='hum_real_2'>A</div><div id='pres_real_2'> </div> <div id='pm1_0_real_2'> </div> <div id='pm2_5_real_2'> </div> <div id='pm10_real_2'> </div></div>"
 
 
@@ -1944,7 +1987,9 @@
 
 
                     var value_real_2 = 0;
-
+					var value_real_temp_2 = 0, value_real_hum_2 = 0, value_real_pres_2 = 0, value_real_pm2_5_2 = 0, value_real_pm10_2 = 0, value_real_pm1_2 = 0;
+					var first_time_realtime_single_2 = -1;
+					
                     var temperature_realtime_2, humidity_realtime_2, pressure_realtime_2, pm1_0_realtime_2, pm2_5_realtime_2, pm10_realtime_2;
 
                     var $delay = 60000,
@@ -1959,12 +2004,52 @@
                         var valore_server = data.split(';');
                         for(var field in valore_server) {
                             var line = valore_server[field].split('***');
-                            if(line[0] == "3") {
-                                value_real_2 = line[1];
-                            }
-
+                            
+							if(line[0] == 4315255231839348) {
+								if(line[2] == "4") value_real_temp_2 = line[1];
+								if(line[2] == "5") value_real_hum_2 = line[1];
+								if(line[2] == "6") value_real_pres_2 = line[1];
+								if(line[2] == "7") value_real_pm2_5_2 = line[1];
+								if(line[2] == "8") value_real_pm10_2 = line[1];
+								if(line[2] == "9") value_real_pm1_2 = line[1];
+								
+							}
                         }
-
+						if( first_time_realtime_single_2 == -1) {
+							first_time_realtime_single_2 = 0;
+							var x, te, hu, pr, pm1, pm10, pm25;
+							x = (new Date()).getTime();
+							
+							te = (Math.round(value_real_temp_2 * 2) / 2);
+							temperature_realtime_2.addPoint([x, te], true, true);
+                            var char_t = $('#temp_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + te});
+							
+							hu = (Math.round(value_real_hum_2 * 2) / 2);
+							humidity_realtime_2.addPoint([x, hu], true, true);
+                            var char_t = $('#hum_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + hu});
+							
+							pr = (Math.round(value_real_pres_2 * 2) / 2);
+							pressure_realtime_2.addPoint([x, pr], true, true);
+                            var char_t = $('#pres_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pr});
+							
+							pm1 = (Math.round(value_real_pm1_2 * 2) / 2);
+							pm1_0_realtime_2.addPoint([x, pm1], true, true);
+                            var char_t = $('#pm1_0_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm1});
+							
+							pm10 = (Math.round(value_real_pm10_2 * 2) / 2);
+							pm10_realtime_2.addPoint([x, pm10], true, true);
+                            var char_t = $('#pm10_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm10});
+							
+							pm25 = (Math.round(value_real_pm2_5_2 * 2) / 2);
+							pm2_5_realtime_2.addPoint([x, pm25], true, true);
+                            var char_t = $('#pm2_5_real_2').highcharts();
+							char_t.setTitle(null, {text: 'Ultimo valore letto: ' + pm25});
+						}
                     });
 
                     var min_graphh = 0;
@@ -1980,11 +2065,11 @@
                                     temperature_realtime_2 = this.series[0];
                                     var x, volts;
 
-
+					
                                     setInterval(function() {
-
+										$delay = 2000;
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_temp_2 * 2) / 2);
 
 
 
@@ -2016,8 +2101,8 @@
                                     font: '13px sans-serif'
                                 }
                             },
-                            min: 0,
-                            max: 25,
+                            min: -10,
+                            max: 50,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2077,7 +2162,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_hum_2 * 2) / 2);
 
 
 
@@ -2112,7 +2197,7 @@
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2165,7 +2250,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_pres_2 * 2) / 2);
 
 
 
@@ -2199,8 +2284,8 @@
                                     font: '13px sans-serif'
                                 }
                             },
-                            min: 0,
-                            max: 25,
+                            min: 870,
+                            max: 1085,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2253,7 +2338,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_pm1_2 * 2) / 2);
 
 
 
@@ -2288,7 +2373,7 @@
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2341,7 +2426,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_pm2_5_2 * 2) / 2);
 
 
 
@@ -2376,7 +2461,7 @@
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2429,7 +2514,7 @@
                                     setInterval(function() {
 
                                         x = (new Date()).getTime(),
-                                            volts = (Math.round(value_real_2 * 2) / 2);
+                                            volts = (Math.round(value_real_pm10_2 * 2) / 2);
 
 
 
@@ -2464,7 +2549,7 @@
                                 }
                             },
                             min: 0,
-                            max: 25,
+                            max: 100,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2875,7 +2960,7 @@
 				<span class="avgTH_Title"> Valori medi di temperatura e umidità dei sensori</span>
 				<div id="sensorValues">
 					<div class="sensor-values">
-						<div class="volts">12.0</div>
+						<div class="volts_val">12.0</div>
 						<label>Gradi</label>
 					</div>
 

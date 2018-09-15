@@ -19,17 +19,31 @@ var con = mysql.createConnection({
 	database: "db_unibo"
 });
 var con2 = mysql.createConnection({
-	host: "localhost",
-	user: "sens",
-	password: "123abc",
-	database: "sensori"
+	host: "canarin3-cluster-1.cluster-ro-ces11ksjxlw4.eu-central-1.rds.amazonaws.com",
+	port     : "3306",
+	user: "cesena",
+	password: "cesensor",
+	database: "canarinProj"
 });
+
 
 con.connect(function(err) {
 	if (err) throw err;
 });
+
+var num_canarin = 0;
+var array_canarin = [];
+
 con2.connect(function(err) {
 	if (err) throw err;
+	
+	con2.query("SELECT id FROM `cesena_nodes`", function (err, result, fields) {
+		
+		for(val in result) {
+			array_canarin[num_canarin++] = "" + result[val].id;
+		}
+		if (err) throw err;
+	});
 	//console.log("Connected!");
 });
 
@@ -41,10 +55,11 @@ var opendata = [];
 var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
-	emitSensData();
+	//emitSensData();
 
 	setInterval(function() {
 		var current;
+		emitSensData();
 		checkForNewData(function(current) {
 			if(current > count) {
 				if(count > 0) {
@@ -55,6 +70,11 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		});
 		
     }, 6000);
+	emitStoricoData();
+	setInterval(function() {
+		emitStoricoData();
+		
+    }, 60000);
 	
     socket.on('opendata_emit', function(data) {
 		console.log(data[3]);
@@ -84,7 +104,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 
 //Function that checks for new deta into the table
 function checkForNewData (callback) {
-	con2.query("SELECT COUNT(*) AS num FROM `valori`", function (err, result, fields) {
+	con2.query("SELECT COUNT(*) AS num FROM `cesena_data`", function (err, result, fields) {
 		if (err) throw err;
 		callback(result[0].num); //callback function
 	});
@@ -116,26 +136,26 @@ function check() {
 }
 
 var interval2;
-var temp_avg_val="";
+var day_avg_val="";
 var hum_avg_val="";
-var qual_avg_val="";
+var hour_avg_val="";
 var temp_max_val="";
 var temp_min_val="";
 
 function checkSens() {
-	if(temp_avg_val.length > 0 && temp_max_val.length > 0 && temp_min_val.length > 0 && hum_avg_val.length > 0&& qual_avg_val.length > 0) {
+	if(day_avg_val.length > 0) {
 			var vals_storico_temp = { 
-			temp_avg_val: temp_avg_val, 
+			temp_avg_val: day_avg_val, 
 			temp_min_val: temp_min_val, 
 			temp_max_val: temp_max_val, 
 			hum_avg_val: hum_avg_val,
-			qual_avg_val: qual_avg_val,
+			qual_avg_val: hour_avg_val,
 		}
 		
 		
-		temp_avg_val = "", temp_max_val = "",temp_min_val = "";
+		day_avg_val = "", temp_max_val = "",temp_min_val = "";
 		hum_avg_val = "";
-		qual_avg_val = "";
+		hour_avg_val = "";
 		namespace.emit('temp_storico', vals_storico_temp);
 		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
@@ -212,77 +232,153 @@ function emitData() {
 
 	interval = setInterval(check, 250);
 }
-
-
+/*
+var num_canarin = 0;
+var array_canarin = [];
+*/
+var comp = 0;
 function emitSensData() {
-	con2.query("SELECT * FROM `valori` ORDER  BY IdValue DESC LIMIT 3", function (err, result, fields) {
-		var sensor_val="";
-		for(val in result) {
-		sensor_val = sensor_val + result[val].IdCanarin;
-		sensor_val = sensor_val + "***" + result[val].Value;
+	var query_realtime = "";
+	
+		for(var k = 0; k < num_canarin; k++) {
+			query_realtime += "(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '" + array_canarin[k] + "' ORDER BY server_timestamp DESC LIMIT 6)";
+			if(k<num_canarin -1) query_realtime += " UNION ";
+
+		}
+	con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231541348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231839348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552143841348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
+		var sensor_val = "";
+		for(val in resultx) {
+		sensor_val = sensor_val + resultx[val].node_id;
+		sensor_val = sensor_val + "***" + resultx[val].value_num;
+		sensor_val = sensor_val + "***" + resultx[val].type_id;
 		sensor_val = sensor_val + ";";
-	}
-	sensor_val = sensor_val.slice(0, -1);
+		console.log("RRR: " + sensor_val);
+		}
+	
+		if (err) throw err;
+		sensor_val = sensor_val.slice(0, -1);
+		
+	
 	namespace.emit('realtime_vals', sensor_val);
+	});
+	
+}
+
+function emitStoricoData () {
+var query_stor1 = "", query_stor2 = "";
+var i;
+	var t = 0;
+for(i= 0; i < 7; i++) {
+	var now = new Date();
+		now.setDate(now.getDate() - i);
+		var after = new Date();
+		after.setDate(now.getDate() + 1);
+
+		
+		var startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		var endOfDay = new Date(after.getFullYear(), after.getMonth(), after.getDate());
+		var timestamp = startOfDay / 1000;
+		var timestamp2 = endOfDay / 1000;
+		
+	query_stor1 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM `cesena_data` WHERE type_id BETWEEN 4 AND 6 AND server_timestamp BETWEEN " + timestamp + " AND " + timestamp2 + " GROUP BY type_id)";
+			if(i < 6) query_stor1 += " UNION ";
+	
+
+
+
+
+for(var j= 0; j < 24; j++) {
+	var nowh = new Date();
+	nowh.setDate(nowh.getDate() - i);
+var startOfDay2 = new Date(nowh.getFullYear(), nowh.getMonth(), nowh.getDate());
+startOfDay2.setHours(j);
+var timestamp3 = startOfDay2 / 1000;
+var timestamp4 = (startOfDay2 / 1000) + 3600;
+
+query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM `cesena_data` WHERE type_id BETWEEN 7 AND 9 AND server_timestamp BETWEEN " + timestamp3 + " AND " + timestamp4 + " GROUP BY type_id)";
+			if(!(j == 23 && i == 6)) query_stor2 += " UNION ";
+
+		/*	
+	con2.query("SELECT AVG(value_num) As media, type_id FROM `cesena_data` WHERE type_id BETWEEN 7 AND 9 AND server_timestamp BETWEEN " + timestamp3 + " AND " + timestamp4 + " GROUP BY type_id", function (err, result, fields) {
+		for(val in result) {
+			hour_avg_val = hour_avg_val + result[val].media;
+			hour_avg_val = hour_avg_val + "***" + now.getDate + "/" + now.getMonth;
+			hour_avg_val = hour_avg_val + "***" + result[val].type_id;
+			hour_avg_val = hour_avg_val + ";";
+		}
+		if (err) throw err;
+	});
+	*/
+}	
+	
+	
+    }
+	console.log("query_stor2" + query_stor2);
+	con2.query("" + query_stor1, function (err, result, fields) {
+		
+		for(val in result) {
+			day_avg_val = day_avg_val + result[val].media;
+			
+			var now2 = new Date(result[val].server_timestamp*1000);
+			
+			var month_n = now2.getMonth() + 1; //months from 1-12
+            var day_n = now2.getDate();
+            var year_n = now2.getFullYear();
+            var day = year_n
+            if(("" + month_n).length == 1) {
+                day += "-0" + month_n
+            } else {
+                day += "-" + month_n
+            }
+            if(("" +day_n).length == 1) {
+                day += "-0" + day_n
+            } else {
+                day += "-" + day_n
+            }
+			console.log("dayYYYYYYYYYYYYYYYY: " + day);
+			day_avg_val = day_avg_val + "***" + day;
+			day_avg_val = day_avg_val + "***" + result[val].type_id;
+			day_avg_val = day_avg_val + ";";
+		}
+		
+		if (err) throw err;
+	});
+	
+	con2.query("" + query_stor2, function (err, result, fields) {
+		for(val in result) {
+			hour_avg_val = hour_avg_val + result[val].media;
+						
+			
+           
+            var now2 = new Date(result[val].server_timestamp*1000);
+			var hour_n = now2.getHours();
+			var month_n = now2.getMonth() + 1; //months from 1-12
+            var day_n = now2.getDate();
+            var year_n = now2.getFullYear();
+            var day = year_n
+            if(("" + month_n).length == 1) {
+                day += "-0" + month_n
+            } else {
+                day += "-" + month_n
+            }
+            if(("" +day_n).length == 1) {
+                day += "-0" + day_n
+            } else {
+                day += "-" + day_n
+            }
+			
+			hour_avg_val = hour_avg_val + "***" + day;
+			hour_avg_val = hour_avg_val + "***" + hour_n;
+			hour_avg_val = hour_avg_val + "***" + result[val].type_id;
+			hour_avg_val = hour_avg_val + ";";
+		}
 		if (err) throw err;
 	});
 
-	con2.query("SELECT * FROM `temp_avg`", function (err, result, fields) {
-		
-		for(val in result) {
-			temp_avg_val = temp_avg_val + result[val].media;
-			temp_avg_val = temp_avg_val + "***" + result[val].Giorno;
-			temp_avg_val = temp_avg_val + "***" + result[val].IdCanarin;
-			temp_avg_val = temp_avg_val + ";";
-		}
-		temp_avg_val = temp_avg_val.slice(0, -1);
-		if (err) throw err;
-	});
 	
-	con2.query("SELECT MAX(Value) AS Max FROM `valori`", function (err, result, fields) {
-		for(val in result) {
-			temp_max_val = temp_max_val + result[val].Max;
-			temp_max_val = temp_max_val + ";";
-		}
-		temp_max_val = temp_max_val.slice(0, -1);
-		if (err) throw err;
-	});
+	day_avg_val = day_avg_val.slice(0, -1);
+hour_avg_val = hour_avg_val.slice(0, -1);
 
-	con2.query("SELECT MIN(Value) AS Min FROM `valori`", function (err, result, fields) {
-		
-		for(val in result) {
-			temp_min_val = temp_min_val + result[val].Min;
-			temp_min_val = temp_min_val + ";";
-		}
-		temp_min_val = temp_min_val.slice(0, -1);
-		if (err) throw err;
-	});
-	
-	con2.query("SELECT * FROM `hum_avg`", function (err, result, fields) {
-		
-		for(val in result) {
-			hum_avg_val = hum_avg_val + result[val].media;
-			hum_avg_val = hum_avg_val + "***" + result[val].max;
-			hum_avg_val = hum_avg_val + "***" + result[val].min;
-			hum_avg_val = hum_avg_val + "***" + result[val].Giorno;
-			hum_avg_val = hum_avg_val + ";";
-		}
-		hum_avg_val = hum_avg_val.slice(0, -1);
-		if (err) throw err;
-	});
-	
-	
-	con2.query("SELECT * FROM `qual_avg`", function (err, result, fields) {
-		for(val in result) {
-			qual_avg_val = qual_avg_val + result[val].media;
-			qual_avg_val = qual_avg_val + "***" + result[val].Giorno;
-			qual_avg_val = qual_avg_val + "***" + result[val].Ora;
-			qual_avg_val = qual_avg_val + ";";
-		}
-		qual_avg_val = qual_avg_val.slice(0, -1);
-		if (err) throw err;
-	});
 	
 	interval2 = setInterval(checkSens, 250);
 }
-

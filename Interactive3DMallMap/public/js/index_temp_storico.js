@@ -12,7 +12,7 @@
 			var valori = data.temp_avg_val.split(';');
 			for(var field in valori) {
 			var line = valori[field].split('***');
-			if(line[2] == '1') {
+			if(line[2] == 4) {
 				var d = new Date("" + line[1]);
 				var str = $.datepicker.formatDate('yy-mm-dd', d);
 				if(str === day0) {

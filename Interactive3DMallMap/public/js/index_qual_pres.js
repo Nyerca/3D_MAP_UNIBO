@@ -73,18 +73,28 @@
 */	
 		socket.on('realtime_vals',function(data) {
 			valore_server = data.split(';');
+			var numb_values = 0;
+			var sum_values = 0;
+			
+			var numb_values2 = 0;
+			var sum_values2 = 0;
 			for(var field in valore_server) {
 				var line = valore_server[field].split('***');
-				if(line[0] == "1") {
-					value1 = line[1];
-				} else if(line[0] == "3") {
-					value3 = line[1];
+				if(line[2] == 6) {
+					sum_values += parseFloat(line[1]);
+					numb_values++;
+					console.log("SUM: " + sum_values);
+				} else if(line[2] == 7) {
+					sum_values2 += parseFloat(line[1]);
+					numb_values2++;
 				}
 			}	
-
+			value1 = sum_values / numb_values;
+			value3 = sum_values2 / numb_values2;
+	updateSensorDisplayValues([value1,value3]);
+	
 			if(just_once == -1) {
 				just_once = 0;
-				updateSensorDisplayValues([value1,value3]);
 				var x, volts, mPercent;
 				x = (new Date()).getTime(),
 					volts = (Math.round(value1 * 2) / 2),
@@ -92,6 +102,7 @@
 								
 					voltage.addPoint([x, volts], false, true);
 					moisture.addPoint([x, mPercent], true, true);
+					
 			}
 		});
 		
