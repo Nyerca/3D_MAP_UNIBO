@@ -25,11 +25,11 @@
 		
 /* Function which update the number visualization inside the three circles */	
 		function updateVoltage(value) {
-			$voltageDisplay.html(value + '<span> °</span>');
+			$voltageDisplay.html(parseFloat(value).toFixed(2) + '<span> °</span>');
 		}
 		
 		function updateMoisture(value) {
-			$moistureDisplay.html(value + '<span> %</span>');
+			$moistureDisplay.html(parseFloat(value).toFixed(2) + '<span> %</span>');
 		}
 		
 		function updateSensorDisplayValues(d) {
@@ -154,7 +154,7 @@
 						font: '13px sans-serif'
 					}
 				},
-				min: 0,
+				min: -10,
 				max: 45,
 				plotLines: [{
 					value: 0,
@@ -172,7 +172,7 @@
 					}
 				},
 				min: 0,
-				max: 4,
+				max: 100,
 				opposite: true,
 				plotLines: [{
 					value: 0,

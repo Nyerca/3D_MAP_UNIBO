@@ -145,10 +145,7 @@ var temp_min_val="";
 function checkSens() {
 	if(day_avg_val.length > 0) {
 			var vals_storico_temp = { 
-			temp_avg_val: day_avg_val, 
-			temp_min_val: temp_min_val, 
-			temp_max_val: temp_max_val, 
-			hum_avg_val: hum_avg_val,
+			day_avg_val: day_avg_val, 
 			qual_avg_val: hour_avg_val,
 		}
 		
@@ -156,7 +153,7 @@ function checkSens() {
 		day_avg_val = "", temp_max_val = "",temp_min_val = "";
 		hum_avg_val = "";
 		hour_avg_val = "";
-		namespace.emit('temp_storico', vals_storico_temp);
+		namespace.emit('storico', vals_storico_temp);
 		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
 	}

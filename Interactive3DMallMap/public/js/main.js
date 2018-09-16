@@ -352,7 +352,7 @@
         $( ".hideInMap" ).each(function( index ) {
             $(this).fadeIn();
         });
-        //closeSens.click();
+        closeSens.click();
         changelev(level);
         if (i==0) {
             $('.clickable_space').on("click", pinClick);

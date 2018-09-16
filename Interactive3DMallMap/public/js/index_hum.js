@@ -8,11 +8,11 @@
 		the current value is inserted in the variables
 		the charts realtime values are then updated
 */	
-		socket.on('temp_storico',function(data) {
-			var valori = data.temp_avg_val.split(';');
+		socket.on('storico',function(data) {
+			var valori = data.day_avg_val.split(';');
 			for(var field in valori) {
 			var line = valori[field].split('***');
-			if(line[2] == '1') {
+			if(line[2] == 5) {
 				var d = new Date("" + line[1]);
 				var str = $.datepicker.formatDate('yy-mm-dd', d);
 				if(str === day0) {

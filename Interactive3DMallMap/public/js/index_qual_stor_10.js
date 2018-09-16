@@ -6,7 +6,7 @@
 	var qin_day3_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var qin_day4_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var qin_day5_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var qin_day6_graph3 = [20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var qin_day6_graph3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
    	$(document).ready(function() {
 
@@ -15,30 +15,33 @@
 		the current value is inserted in the variables
 		the charts realtime values are then updated
 */	
-		socket.on('temp_storico',function(data) {
+		socket.on('storico',function(data) {
 			var valori = data.qual_avg_val.split(';');
 			for(var field in valori) {
 				var line = valori[field].split('***');
-				
-				var d = new Date("" + line[1]);
-				var str = $.datepicker.formatDate('yy-mm-dd', d);
-				if(str === day0) {
-					qin_day0_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day1) {
-					qin_day1_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day2) {
-					qin_day2_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day3) {
-					qin_day3_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day4) {
-					qin_day4_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day5) {
-					qin_day5_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
-				} else if(str == day6) {
-					qin_day6_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+				if(line[3] == 8) {
+					var d = new Date("" + line[1]);
+					var str = $.datepicker.formatDate('yy-mm-dd', d);
+					console.log(str + " COMP " + day0);
+					console.log(str + " COMP " + day1);
+					if(str === day0) {
+						qin_day0_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day1) {
+						qin_day1_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day2) {
+						qin_day2_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day3) {
+						qin_day3_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day4) {
+						qin_day4_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day5) {
+						qin_day5_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					} else if(str == day6) {
+						qin_day6_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
+					}
 				}
+				
 			}
-		
 		/* 
 	highcharts library used to create the chart.
 */	

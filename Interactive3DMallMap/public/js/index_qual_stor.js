@@ -15,7 +15,7 @@
 		the current value is inserted in the variables
 		the charts realtime values are then updated
 */	
-		socket.on('temp_storico',function(data) {
+		socket.on('storico',function(data) {
 			var valori = data.qual_avg_val.split(';');
 			for(var field in valori) {
 				var line = valori[field].split('***');
@@ -40,15 +40,6 @@
 						qin_day6[line[2]] = parseFloat(line[0]).toFixed(2);
 					}
 				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 			}
 		

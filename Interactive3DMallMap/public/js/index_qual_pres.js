@@ -1,6 +1,6 @@
 /* Air quality and pressure realtime graphs */
    	$(document).ready(function() {
-		var valore_server, value1 = 0, value2 = 0, value3 = 0;
+		var valore_server, value1 = 0, value2 = 0, value3 = 0, value4 = 0;
 	  
 		var $delay = 60000,
 			vMin = 11.5,
@@ -12,6 +12,7 @@
 			totalPoints = 25,
 			$voltageDisplay = $('div.volts2'),
 			$currentDisplay = $('div.amps2'),
+			$currentDisplay2 = $('div.pm_25_r'),
 			$moistureDisplay = $('div.moisture2');
 
 		function getRandomInt(min, max) {
@@ -25,48 +26,26 @@
 		
 /* Function which update the number visualization inside the three circles */	
 		function updateVoltage(value) {
-			
-			var spn = document.createElement('span');
-			var str = "" + value;
-			$voltageDisplay.html(str.split(".")[0]);
-			
-			var n = str.includes(".");
-
-			if(n != false) {
-				spn.innerHTML = "." +  str.split(".")[1];
-				document.getElementsByClassName('volts2')[0].appendChild(spn);
-			}
-	
-			changeColor(value,1);
+			$voltageDisplay.html(value);
 		}
 		
 		function updateMoisture(value) {
-			$moistureDisplay.html(value + '<span>%</span>');
-
-			var valOrig = value;
-			val = 100 - value;
-      
-			if(valOrig == 0) {
-				$("#percent-box").val(0);
-				$(".progress .percent").text(0 + "%");
-			} else $(".progress .percent").text(valOrig + "%");
-      
-			$(".progress").parent().removeClass();
-			$(".progress .water").css("top", val + "%");
-      
-			$(".progress").parent().addClass("green");
+			$moistureDisplay.html(value);
 		}
 		
 		function updateSensorDisplayValues(d) {
-			updateVoltage(d[0]);
-			updateMoisture(d[1]);
+			updateVoltage(parseFloat(d[0]).toFixed(2));
+			$currentDisplay.html(parseFloat(d[3]).toFixed(2));
+			$currentDisplay2.html(parseFloat(d[1]).toFixed(2));
+			updateMoisture(parseFloat(d[2]).toFixed(2));
 		}
 		
 		var just_once = -1;
-		var voltage;
-		var current;
-		var moisture;
-/* 
+		var pres_v;
+		var pm25_v;
+		var pm10_v;
+		var pm1_v;
+/* 	
 	On receiving new values from the node file 
 		the current value is inserted in the variables
 		the charts realtime values are then updated
@@ -75,9 +54,13 @@
 			valore_server = data.split(';');
 			var numb_values = 0;
 			var sum_values = 0;
-			
 			var numb_values2 = 0;
 			var sum_values2 = 0;
+			var numb_values3 = 0;
+			var sum_values3 = 0;
+			var numb_values4 = 0;
+			var sum_values4 = 0;
+			
 			for(var field in valore_server) {
 				var line = valore_server[field].split('***');
 				if(line[2] == 6) {
@@ -87,22 +70,33 @@
 				} else if(line[2] == 7) {
 					sum_values2 += parseFloat(line[1]);
 					numb_values2++;
+				} else if(line[2] == 8) {
+					sum_values3 += parseFloat(line[1]);
+					numb_values3++;
+				} else if(line[2] == 9) {
+					sum_values4 += parseFloat(line[1]);
+					numb_values4++;
 				}
 			}	
 			value1 = sum_values / numb_values;
-			value3 = sum_values2 / numb_values2;
-	updateSensorDisplayValues([value1,value3]);
+			value2 = sum_values2 / numb_values2;
+			value3 = sum_values3 / numb_values3;
+			value4 = sum_values4 / numb_values4;
+	updateSensorDisplayValues([value1, value2,value3,value4]);
 	
 			if(just_once == -1) {
 				just_once = 0;
-				var x, volts, mPercent;
+				var x, pres_r, pm25_r, pm10_r, pm1_r;
 				x = (new Date()).getTime(),
-					volts = (Math.round(value1 * 2) / 2),
-					mPercent = (Math.round(value3 * 2) / 2);
+					pres_r = (Math.round(value1 * 2) / 2),
+					pm25_r = (Math.round(value2 * 2) / 2),
+					pm10_r = (Math.round(value3 * 2) / 2),
+					pm1_r = (Math.round(value4 * 2) / 2);
 								
-					voltage.addPoint([x, volts], false, true);
-					moisture.addPoint([x, mPercent], true, true);
-					
+					pres_v.addPoint([x, pres_r], false, true);
+					pm25_v.addPoint([x, pm25_r], false, true);
+					pm10_v.addPoint([x, pm10_r], false, true);
+					pm1_v.addPoint([x, pm1_r], true, true);
 			}
 		});
 		
@@ -134,26 +128,34 @@
 				backgroundColor: '#e4c7c6',
 				events: {
 					load: function() {
-						voltage = this.series[0];
-						moisture = this.series[1];
+						pres_v = this.series[0];
+						pm25_v = this.series[1];
+						pm10_v = this.series[2];
+						pm1_v = this.series[3];
 						var x, volts, mPercent;
 						
 					
 						setInterval(function() {
 							x = (new Date()).getTime(),
-								volts = (Math.round(value1 * 2) / 2),
-								mPercent = (Math.round(value3 * 2) / 2);
+								pres_r = (Math.round(value1 * 2) / 2),
+								pm25_r = (Math.round(value2 * 2) / 2),
+								pm10_r = (Math.round(value3 * 2) / 2),
+								pm1_r = (Math.round(value4 * 2) / 2);
 								
+								/*
 							if(volts > max_graph) max_graph = volts;
 							if(volts < min_graphh) min_graphh = volts;
 							var chart_t = $('#sensorData2').highcharts();
 							chart_t .yAxis[0].setExtremes(min_graphh,max_graph);
+							*/
 							
-							voltage.addPoint([x, volts], false, true);
-							moisture.addPoint([x, mPercent], true, true);
+							pres_v.addPoint([x, pres_r], false, true);
+							pm25_v.addPoint([x, pm25_r], false, true);
+							pm10_v.addPoint([x, pm10_r], false, true);
+							pm1_v.addPoint([x, pm1_r], true, true);
 							
 							
-							updateSensorDisplayValues([volts, mPercent]);
+							updateSensorDisplayValues([value1, value2,value3,value4]);
 						}, $delay);
 					}
 				}
@@ -170,14 +172,14 @@
 			},
 			yAxis: [{
 				title: {
-					text: 'GRADI',
+					text: 'PRESSIONE',
 					style: {
 						color: '#2b908f',
 						font: '13px sans-serif'
 					}
 				},
-				min: 0,
-				max: 45,
+				min: 870,
+				max: 1085,
 				plotLines: [{
 					value: 0,
 					width: 1,
@@ -187,14 +189,50 @@
 			},
 			{
 				title: {
-					text: 'UMIDITA',
+					text: 'PM 2.5',
 					style: {
 						color: '#90ee7e',
 						font: '13px sans-serif'
 					}
 				},
 				min: 0,
-				max: 4,
+				max: 100,
+				opposite: true,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}],
+				gridLineColor: 'white'
+			},
+			{
+				title: {
+					text: 'PM 10',
+					style: {
+						color: '#90ee7e',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 100,
+				opposite: true,
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}],
+				gridLineColor: 'white'
+			},
+			{
+				title: {
+					text: 'PM 1.0',
+					style: {
+						color: '#90ee7e',
+						font: '13px sans-serif'
+					}
+				},
+				min: 0,
+				max: 100,
 				opposite: true,
 				plotLines: [{
 					value: 0,
@@ -218,7 +256,7 @@
 				enabled: false
 			},
 			series: [{
-				name: 'TEMPERATURA',
+				name: 'PRESSIONE',
 				yAxis: 0,
 				color: '#2b908f',
 				data: (function() {
@@ -236,7 +274,43 @@
 					return data;
 				}())
 			}, {
-				name: 'UMIDITA',
+				name: 'PM 2.5',
+				yAxis: 1,
+				color: '#90ee7e',
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i < 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(.7, .7)
+						});
+					}
+					return data;
+				}())
+			}, {
+				name: 'PM 10',
+				yAxis: 1,
+				color: '#90ee7e',
+				data: (function() {
+					// generate an array of random data
+					var data = [],
+						time = (new Date()).getTime(),
+						i;
+
+					for (i = -totalPoints; i < 0; i += 1) {
+						data.push({
+							x: time + i * $delay,
+							y: getRandomInt(.7, .7)
+						});
+					}
+					return data;
+				}())
+			}, {
+				name: 'PM 1.0',
 				yAxis: 1,
 				color: '#90ee7e',
 				data: (function() {
