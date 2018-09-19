@@ -247,6 +247,8 @@
                 showLevel(level);
                 // open content for this space
 
+
+
                 //set the current level pins as active
                 var levelEl = mallLevels[selectedLevel - 1];
                 classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
@@ -268,8 +270,29 @@
                     moved_once++;
                 }
 
+                spacesList.filter();
+                if($('.search__input')[0].value !== "") {
+                    var prevCategory = 0;
+                    $( "ul.list li" ).each(function( index ) {
+                        var category = $(this).attr('data-category');
+                        if (category !== prevCategory) {
+                            var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
+                            $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
+                                "data-level='0' data-category='"+category+"'></li>");
+                            Show('1');
+                            Show('2');
+                            Show('3');
+                            Show('4');
+                            Show('5');
+                        }
+                        prevCategory = $(this).attr('data-category');
+                        $(this).children().fadeIn();
+
+                    });
+                }
+
                 // open level
-                showLevel(level);
+                //showLevel(level);
             });
 
 
@@ -436,6 +459,26 @@
      * Shows all Mall´s levels
      */
     function showAllLevels() {
+        if($('.search__input')[0].value !== "") {
+            var prevCategory = 0;
+            $( "ul.list li" ).each(function( index ) {
+                var category = $(this).attr('data-category');
+                if (category !== prevCategory) {
+                    var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
+                    $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
+                        "data-level='0' data-category='"+category+"'></li>");
+                    Show('1');
+                    Show('2');
+                    Show('3');
+                    Show('4');
+                    Show('5');
+                }
+                prevCategory = $(this).attr('data-category');
+                $(this).children().fadeIn();
+            });
+        } else {
+            spacesList.filter();
+        }
         moved_once = 0;
         $( ".hideInMap" ).each(function( index ) {
             $(this).hide();
@@ -472,7 +515,7 @@
         hideMallNav();
 
         // show back the complete list of spaces
-        spacesList.filter();
+        //spacesList.filter();
 
         // close content area if it is open
         if( isOpenContentArea ) {
@@ -480,14 +523,14 @@
         }
 
         changelev(0);
-
+        selectedLevel = 0;
     }
 
     /**
      * Shows all spaces for current level
      */
     function showLevelSpaces() {
-        if (selectedLevel !== undefined){
+        if (selectedLevel !== undefined && selectedLevel !== 0){
             spacesList.filter(function(item) {
                 return item.values().level === selectedLevel.toString();
             });
