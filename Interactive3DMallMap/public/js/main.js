@@ -272,23 +272,8 @@
 
                 spacesList.filter();
                 if($('.search__input')[0].value !== "") {
-                    var prevCategory = 0;
-                    $( "ul.list li" ).each(function( index ) {
-                        var category = $(this).attr('data-category');
-                        if (category !== prevCategory) {
-                            var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
-                            $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
-                                "data-level='0' data-category='"+category+"'></li>");
-                            Show('1');
-                            Show('2');
-                            Show('3');
-                            Show('4');
-                            Show('5');
-                        }
-                        prevCategory = $(this).attr('data-category');
-                        $(this).children().fadeIn();
 
-                    });
+                    getListElement();
                 }
 
                 // open level
@@ -460,22 +445,7 @@
      */
     function showAllLevels() {
         if($('.search__input')[0].value !== "") {
-            var prevCategory = 0;
-            $( "ul.list li" ).each(function( index ) {
-                var category = $(this).attr('data-category');
-                if (category !== prevCategory) {
-                    var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
-                    $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
-                        "data-level='0' data-category='"+category+"'></li>");
-                    Show('1');
-                    Show('2');
-                    Show('3');
-                    Show('4');
-                    Show('5');
-                }
-                prevCategory = $(this).attr('data-category');
-                $(this).children().fadeIn();
-            });
+            getListElement();
         } else {
             spacesList.filter();
         }
@@ -959,5 +929,24 @@
     }
 
     init();
+
+    function getListElement() {
+        var prevCategory = 0;
+        $( "ul.list li" ).each(function( index ) {
+            var category = $(this).attr('data-category');
+            if (category !== prevCategory) {
+                var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
+                $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
+                    "data-level='0' data-category='"+category+"'></li>");
+                Show('1');
+                Show('2');
+                Show('3');
+                Show('4');
+                Show('5');
+            }
+            prevCategory = $(this).attr('data-category');
+            $(this).children().fadeIn();
+        });
+    }
 
 })(window);
