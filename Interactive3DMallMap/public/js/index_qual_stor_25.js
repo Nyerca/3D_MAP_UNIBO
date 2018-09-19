@@ -7,7 +7,7 @@
 	var qin_day4_graph2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var qin_day5_graph2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var qin_day6_graph2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
+var seriesq2_5;
    	$(document).ready(function() {
 
 /* 
@@ -16,14 +16,14 @@
 		the charts realtime values are then updated
 */	
 		socket.on('storico',function(data) {
+			
 			var valori = data.qual_avg_val.split(';');
 			for(var field in valori) {
 				var line = valori[field].split('***');
 				if(line[3] == 7) {
 					var d = new Date("" + line[1]);
 					var str = $.datepicker.formatDate('yy-mm-dd', d);
-					console.log(str + " COMP " + day0);
-					console.log(str + " COMP " + day1);
+					console.log(str + " B " + day0);
 					if(str === day0) {
 						qin_day0_graph2[line[2]] = parseFloat(line[0]).toFixed(2);
 					} else if(str == day1) {
@@ -42,7 +42,34 @@
 				}
 				
 			}
+			seriesq2_5.setData([
+		[0, 0, qin_day6_graph2[0]], [0, 1, qin_day5_graph2[0]], [0, 2, qin_day4_graph2[0]], [0, 3, qin_day3_graph2[0]], [0, 4, qin_day2_graph2[0]], [0, 5, qin_day1_graph2[0]], [0, 6, qin_day0_graph2[0]], 
+		[1, 0, qin_day6_graph2[1]], [1, 1, qin_day5_graph2[1]], [1, 2, qin_day4_graph2[1]], [1, 3, qin_day3_graph2[1]], [1, 4, qin_day2_graph2[1]], [1, 5, qin_day1_graph2[1]], [1, 6, qin_day0_graph2[1]], 
+		[2, 0, qin_day6_graph2[2]], [2, 1, qin_day5_graph2[2]], [2, 2, qin_day4_graph2[2]], [2, 3, qin_day3_graph2[2]], [2, 4, qin_day2_graph2[2]], [2, 5, qin_day1_graph2[2]], [2, 6, qin_day0_graph2[2]], 
+		[3, 0, qin_day6_graph2[3]], [3, 1, qin_day5_graph2[3]], [3, 2, qin_day4_graph2[3]], [3, 3, qin_day3_graph2[3]], [3, 4, qin_day2_graph2[3]], [3, 5, qin_day1_graph2[3]], [3, 6, qin_day0_graph2[3]], 
+		[4, 0, qin_day6_graph2[4]], [4, 1, qin_day5_graph2[4]], [4, 2, qin_day4_graph2[4]], [4, 3, qin_day3_graph2[4]], [4, 4, qin_day2_graph2[4]], [4, 5, qin_day1_graph2[4]], [4, 6, qin_day0_graph2[4]], 
+		[5, 0, qin_day6_graph2[5]], [5, 1, qin_day5_graph2[5]], [5, 2, qin_day4_graph2[1]], [5, 3, qin_day3_graph2[5]], [5, 4, qin_day2_graph2[5]], [5, 5, qin_day1_graph2[5]], [5, 6, qin_day0_graph2[5]], 
 		
+		[6, 0, qin_day6_graph2[6]], [6, 1, qin_day5_graph2[6]], [6, 2, qin_day4_graph2[1]], [6, 3, qin_day3_graph2[6]], [6, 4, qin_day2_graph2[6]], [6, 5, qin_day1_graph2[6]], [6, 6, qin_day0_graph2[6]], 
+		[7, 0, qin_day6_graph2[7]], [7, 1, qin_day5_graph2[7]], [7, 2, qin_day4_graph2[1]], [7, 3, qin_day3_graph2[7]], [7, 4, qin_day2_graph2[7]], [7, 5, qin_day1_graph2[7]], [7, 6, qin_day0_graph2[7]], 
+		[8, 0, qin_day6_graph2[8]], [8, 1, qin_day5_graph2[8]], [8, 2, qin_day4_graph2[1]], [8, 3, qin_day3_graph2[8]], [8, 4, qin_day2_graph2[8]], [8, 5, qin_day1_graph2[8]], [8, 6, qin_day0_graph2[8]], 
+		[9, 0, qin_day6_graph2[9]], [9, 1, qin_day5_graph2[9]], [9, 2, qin_day4_graph2[1]], [9, 3, qin_day3_graph2[9]], [9, 4, qin_day2_graph2[9]], [9, 5, qin_day1_graph2[9]], [9, 6, qin_day0_graph2[9]], 
+		[10, 0, qin_day6_graph2[10]], [10, 1, qin_day5_graph2[10]], [10, 2, qin_day4_graph2[10]], [10, 3, qin_day3_graph2[10]], [10, 4, qin_day2_graph2[10]], [10, 5, qin_day1_graph2[10]], [10, 6, qin_day0_graph2[10]], 
+		[11, 0, qin_day6_graph2[11]], [11, 1, qin_day5_graph2[11]], [11, 2, qin_day4_graph2[11]], [11, 3, qin_day3_graph2[11]], [11, 4, qin_day2_graph2[11]], [11, 5, qin_day1_graph2[11]], [11, 6, qin_day0_graph2[11]], 
+		[12, 0, qin_day6_graph2[12]], [12, 1, qin_day5_graph2[12]], [12, 2, qin_day4_graph2[12]], [12, 3, qin_day3_graph2[12]], [12, 4, qin_day2_graph2[12]], [12, 5, qin_day1_graph2[12]], [12, 6, qin_day0_graph2[12]], 
+		[13, 0, qin_day6_graph2[13]], [13, 1, qin_day5_graph2[13]], [13, 2, qin_day4_graph2[13]], [13, 3, qin_day3_graph2[13]], [13, 4, qin_day2_graph2[13]], [13, 5, qin_day1_graph2[13]], [13, 6, qin_day0_graph2[13]], 
+		[14, 0, qin_day6_graph2[14]], [14, 1, qin_day5_graph2[14]], [14, 2, qin_day4_graph2[14]], [14, 3, qin_day3_graph2[14]], [14, 4, qin_day2_graph2[14]], [14, 5, qin_day1_graph2[14]], [14, 6, qin_day0_graph2[14]], 
+		[15, 0, qin_day6_graph2[15]], [15, 1, qin_day5_graph2[15]], [15, 2, qin_day4_graph2[15]], [15, 3, qin_day3_graph2[15]], [15, 4, qin_day2_graph2[15]], [15, 5, qin_day1_graph2[15]], [15, 6, qin_day0_graph2[15]], 
+		[16, 0, qin_day6_graph2[16]], [16, 1, qin_day5_graph2[16]], [16, 2, qin_day4_graph2[16]], [16, 3, qin_day3_graph2[16]], [16, 4, qin_day2_graph2[16]], [16, 5, qin_day1_graph2[16]], [16, 6, qin_day0_graph2[16]], 
+		[17, 0, qin_day6_graph2[17]], [17, 1, qin_day5_graph2[17]], [17, 2, qin_day4_graph2[17]], [17, 3, qin_day3_graph2[17]], [17, 4, qin_day2_graph2[17]], [17, 5, qin_day1_graph2[17]], [17, 6, qin_day0_graph2[17]], 
+		[18, 0, qin_day6_graph2[18]], [18, 1, qin_day5_graph2[18]], [18, 2, qin_day4_graph2[18]], [18, 3, qin_day3_graph2[18]], [18, 4, qin_day2_graph2[18]], [18, 5, qin_day1_graph2[18]], [18, 6, qin_day0_graph2[18]], 
+		[19, 0, qin_day6_graph2[19]], [19, 1, qin_day5_graph2[19]], [19, 2, qin_day4_graph2[19]], [19, 3, qin_day3_graph2[19]], [19, 4, qin_day2_graph2[19]], [19, 5, qin_day1_graph2[19]], [19, 6, qin_day0_graph2[19]], 
+		[20, 0, qin_day6_graph2[20]], [20, 1, qin_day5_graph2[20]], [20, 2, qin_day4_graph2[20]], [20, 3, qin_day3_graph2[20]], [20, 4, qin_day2_graph2[20]], [20, 5, qin_day1_graph2[20]], [20, 6, qin_day0_graph2[20]], 
+		[21, 0, qin_day6_graph2[21]], [21, 1, qin_day5_graph2[21]], [21, 2, qin_day4_graph2[21]], [21, 3, qin_day3_graph2[21]], [21, 4, qin_day2_graph2[21]], [21, 5, qin_day1_graph2[21]], [21, 6, qin_day0_graph2[21]], 
+		[22, 0, qin_day6_graph2[22]], [22, 1, qin_day5_graph2[22]], [22, 2, qin_day4_graph2[22]], [22, 3, qin_day3_graph2[22]], [22, 4, qin_day2_graph2[22]], [22, 5, qin_day1_graph2[22]], [22, 6, qin_day0_graph2[22]], 
+		[23, 0, qin_day6_graph2[23]], [23, 1, qin_day5_graph2[23]], [23, 2, qin_day4_graph2[23]], [23, 3, qin_day3_graph2[23]], [23, 4, qin_day2_graph2[23]], [23, 5, qin_day1_graph2[23]], [23, 6, qin_day0_graph2[23]], 
+		],true,true,false);
+		});
 		/* 
 	highcharts library used to create the chart.
 */	
@@ -59,6 +86,11 @@ chart: {
         plotBorderWidth: 1,
 		plotBackgroundColor: '#e4c7c6',
 		backgroundColor: '#e4c7c6',
+		events: {
+      load: function () {
+        seriesq2_5 = this.series[0];
+      }
+    }
     },
 
 
@@ -159,7 +191,7 @@ chart: {
 
 	});
 	
-		});
+		
 		
 
 	});

@@ -143,7 +143,7 @@ var temp_max_val="";
 var temp_min_val="";
 
 function checkSens() {
-	if(day_avg_val.length > 0) {
+	if(day_avg_val.length > 0 && hour_avg_val.length > 0) {
 			var vals_storico_temp = { 
 			day_avg_val: day_avg_val, 
 			qual_avg_val: hour_avg_val,
