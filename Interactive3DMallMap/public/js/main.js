@@ -354,9 +354,9 @@
     }
 
     function showLevel(level) {
-        $( ".showInMap" ).each(function( index ) {
+       /* $( ".showInMap" ).each(function( index ) {
             $(this).hide();
-        });
+        });*/
         $( ".hideInMap" ).each(function( index ) {
             $(this).fadeIn();
         });
