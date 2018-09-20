@@ -106,7 +106,7 @@
 					text: 'UMIDITA',
 					style: {
 						color: '#90ee7e',
-						font: '13px sans-serif'
+						font: '13px Cabin, Arial, sans-serif;'
 					}
 				},
 				min: 0,

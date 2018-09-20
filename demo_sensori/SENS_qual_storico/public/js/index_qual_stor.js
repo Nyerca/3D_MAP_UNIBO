@@ -72,7 +72,7 @@ switch(i) {
 // Chart Configuration
 var myConfig = {
   "globals":{
-    "font-family":"Roboto",
+    "font-family":"Cabin, Arial, sans-serif"
   },
   "graphset":[
         {
