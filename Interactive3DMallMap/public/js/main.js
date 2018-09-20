@@ -367,7 +367,7 @@
             i++;
         }
 
-        if( level === selectedLevel) {
+        if( level == selectedLevel) {
             return false;
         }
         var oldLevel = selectedLevel;
