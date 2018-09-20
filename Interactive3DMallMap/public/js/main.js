@@ -367,16 +367,20 @@
             i++;
         }
 
-        if( isExpanded ) {
+        if( level === selectedLevel) {
             return false;
         }
-
+        var oldLevel = selectedLevel;
         // update selected level val
         selectedLevel = level;
 
         // control navigation controls state
         setNavigationState();
 
+        if (oldLevel !== undefined && oldLevel !== 0){
+            classie.remove(mallLevelsEl, 'levels--selected-' + oldLevel);
+            classie.remove(mallLevels[oldLevel-1], 'level--current');
+        }
 
         classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 
