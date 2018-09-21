@@ -201,6 +201,9 @@ function emitData() {
 		figura = figura.slice(0, -1);
 		if (err) throw err;
 	});
+
+    datacategory = "";
+
 	con.query("SELECT * FROM `datacategory`", function (err, result, fields) {
 		for(val in result) {
 			datacategory = datacategory + result[val].IdDataCategory;
