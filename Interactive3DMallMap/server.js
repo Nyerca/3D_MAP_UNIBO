@@ -78,7 +78,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 	
     socket.on('opendata_emit', function(data) {
 		console.log(data[3]);
-		
+
 		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo IN ( SELECT IdInfo FROM toopendata WHERE NomeTabellaOpenData = '" + data[3] + "'))", function (err, result, fields) {
 		for(val in result) {
 				singleData = singleData + result[val].IdDataSpace;
@@ -118,8 +118,8 @@ http.listen(3000, function() {
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
-		
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length >0) {
+
 		var vals = { 
 			info: info, 
 			figura: figura, 
