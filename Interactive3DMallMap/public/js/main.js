@@ -640,7 +640,7 @@
         });
 
         // filter the spaces for this level
-        //showLevelSpaces();
+        showLevelSpaces();
 
         // hide the previous level´s pins
         removePins(currentLevel);

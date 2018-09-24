@@ -69,7 +69,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 			}
 		});
 		
-    }, 6000);
+    }, 60000);
 	emitStoricoData();
 	setInterval(function() {
 		emitStoricoData();
