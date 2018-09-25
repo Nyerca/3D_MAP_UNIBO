@@ -105,7 +105,7 @@ line: {
       enableMouseTracking: false
     },
   series: [{
-    name: 'Gradi',
+    name: 'hPa',
     data: avg_tin,
 	dataLabels: {
         enabled: true

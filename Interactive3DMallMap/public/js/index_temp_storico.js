@@ -78,7 +78,7 @@ chart: {
     },
   yAxis: {
     title: {
-      text: 'Temperatura',
+      text: 'Gradi',
 	  style: {
          color: '#515158',
       }

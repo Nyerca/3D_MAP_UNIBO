@@ -172,7 +172,7 @@
 			},
 			yAxis: [{
 				title: {
-					text: 'PRESSIONE',
+					text: 'hPa',
 					style: {
 						color: '#2b908f',
 						font: '13px sans-serif'
@@ -189,7 +189,7 @@
 			},
 			{
 				title: {
-					text: 'PM 2.5',
+					text: 'ug/m^3',
 					style: {
 						color: '#90ee7e',
 						font: '13px sans-serif'
@@ -207,7 +207,7 @@
 			},
 			{
 				title: {
-					text: 'PM 10',
+					text: 'ug/m^3',
 					style: {
 						color: '#90ee7e',
 						font: '13px sans-serif'
@@ -225,7 +225,7 @@
 			},
 			{
 				title: {
-					text: 'PM 1.0',
+					text: 'ug/m^3',
 					style: {
 						color: '#90ee7e',
 						font: '13px sans-serif'

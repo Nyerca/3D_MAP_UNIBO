@@ -55,7 +55,7 @@ var opendata = [];
 var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
-	//emitSensData();
+	emitSensData();
 
 	setInterval(function() {
 		var current;
@@ -69,7 +69,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 			}
 		});
 		
-    }, 6000);
+    }, 60000);
 	emitStoricoData();
 	setInterval(function() {
 		emitStoricoData();
@@ -78,7 +78,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 	
     socket.on('opendata_emit', function(data) {
 		console.log(data[3]);
-		
+
 		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo IN ( SELECT IdInfo FROM toopendata WHERE NomeTabellaOpenData = '" + data[3] + "'))", function (err, result, fields) {
 		for(val in result) {
 				singleData = singleData + result[val].IdDataSpace;
@@ -118,8 +118,8 @@ http.listen(3000, function() {
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0) {
-		
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length > 0) {
+
 		var vals = { 
 			info: info, 
 			figura: figura, 
@@ -201,6 +201,9 @@ function emitData() {
 		figura = figura.slice(0, -1);
 		if (err) throw err;
 	});
+
+    datacategory = "";
+
 	con.query("SELECT * FROM `datacategory`", function (err, result, fields) {
 		for(val in result) {
 			datacategory = datacategory + result[val].IdDataCategory;
@@ -242,7 +245,16 @@ function emitSensData() {
 			if(k<num_canarin -1) query_realtime += " UNION ";
 
 		}
-	con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231541348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231839348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552143841348' ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
+		var now_day = new Date();
+		now_day.setDate(now_day.getDate() - 1);
+
+		
+		var startOfDay_day = new Date(now_day.getFullYear(), now_day.getMonth(), now_day.getDate());
+		var timestamp_day = startOfDay_day / 1000;
+		
+		//con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
+	con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231541348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231839348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552143841348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
+	
 		var sensor_val = "";
 		for(val in resultx) {
 		sensor_val = sensor_val + resultx[val].node_id;

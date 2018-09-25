@@ -38,7 +38,8 @@ a {
 
 a:hover,
 button:hover {
-	color: #515158;
+	/*color: #515158;*/
+	color: #BDBDBD;
 	outline: none;
 }
 
@@ -372,8 +373,9 @@ p {
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;	
+	/*opacity: 0.7;
+	background-color: #BB2E29;	*/
+	background-color: #BB2E29;
 }
 
 .boxbutton--dark {
@@ -393,7 +395,8 @@ p {
 .boxbutton--disabled:hover {
 	cursor: default;
 	pointer-events: none;
-	opacity: 0.2;
+	/*opacity: 0.2;*/
+	opacity: 0.5;
 }
 
 /* Level map */
@@ -582,6 +585,7 @@ p {
 }
 
 .search__input {
+	line-height: 1.4em;
 	width: 100%;
 	padding: 1.315em 2em;
 	color: #fff;
@@ -991,8 +995,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 }
     
 .close_button svg {
@@ -1013,8 +1017,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 	
 }
     
@@ -1035,8 +1039,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 	border-left: 1px solid black;
 }
     
@@ -1058,8 +1062,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 	overflow: hidden;
 }
     
@@ -1090,8 +1094,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 }
     
 #pres_storico_button svg {
@@ -1111,8 +1115,8 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	padding: 0;
 	color: #fff;
 	border: 0;
-	opacity: 0.7;
-	background-color: #BB2E29;
+	/*opacity: 0.7;*/
+	background-color: #6B0808;
 	border-left: 1px solid black;
 }
     
@@ -1354,4 +1358,8 @@ p_move {
 }
 #air_form {
 	margin-left:35%;
+}
+
+svg.highcharts-root {
+	font-family: Cabin, Arial, sans-serif !important;
 }

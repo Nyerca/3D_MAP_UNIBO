@@ -270,9 +270,9 @@
                     moved_once++;
                 }
 
-                spacesList.filter();
-                if($('.search__input')[0].value !== "") {
 
+                if($('.search__input')[0].value !== "") {
+                    spacesList.filter();
                     getListElement();
                 }
 
@@ -354,9 +354,10 @@
     }
 
     function showLevel(level) {
-        $( ".showInMap" ).each(function( index ) {
+
+       /* $( ".showInMap" ).each(function( index ) {
             $(this).hide();
-        });
+        });*/
         $( ".hideInMap" ).each(function( index ) {
             $(this).fadeIn();
         });
@@ -367,16 +368,20 @@
             i++;
         }
 
-        if( isExpanded ) {
+        if( level == selectedLevel) {
             return false;
         }
-
+        var oldLevel = selectedLevel;
         // update selected level val
         selectedLevel = level;
 
         // control navigation controls state
         setNavigationState();
 
+        if (oldLevel !== undefined && oldLevel !== 0){
+            classie.remove(mallLevelsEl, 'levels--selected-' + oldLevel);
+            classie.remove(mallLevels[oldLevel-1], 'level--current');
+        }
 
         classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 
@@ -406,9 +411,12 @@
         // show mall nav ctrls
         showMallNav();
 
+		
+			
         // filter the spaces for this level
+		if($('.search__input')[0].val === '') {
         showLevelSpaces();
-
+		}
 
         var list= document.getElementsByClassName("changeCol");
         setTimeout(function () {
@@ -446,6 +454,15 @@
     function showAllLevels() {
         if($('.search__input')[0].value !== "") {
             getListElement();
+
+            $( "ul.list li" ).each(function( index ) {
+                Show('1');
+                Show('2');
+                Show('3');
+                Show('4');
+                Show('5');
+            });
+
         } else {
             spacesList.filter();
         }
@@ -627,7 +644,7 @@
         });
 
         // filter the spaces for this level
-        //showLevelSpaces();
+        showLevelSpaces();
 
         // hide the previous level´s pins
         removePins(currentLevel);
@@ -938,11 +955,6 @@
                 var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
                 $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
                     "data-level='0' data-category='"+category+"'></li>");
-                Show('1');
-                Show('2');
-                Show('3');
-                Show('4');
-                Show('5');
             }
             prevCategory = $(this).attr('data-category');
             $(this).children().fadeIn();

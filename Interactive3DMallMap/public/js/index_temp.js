@@ -58,13 +58,15 @@
 				if(line[2] == 4) {
 					sum_values += parseFloat(line[1]);
 					numb_values++;
-					console.log("SUM: " + sum_values);
+					console.log("SETTEMBRE: " + line[1]);
+					console.log("SETTEMBRE2: " + sum_values);
 				} else if(line[2] == 5) {
 					sum_values2 += parseFloat(line[1]);
 					numb_values2++;
 				}
 			}	
 			value1 = sum_values / numb_values;
+			
 			value3 = sum_values2 / numb_values2;
 	updateSensorDisplayValues([value1,value3]);
 
@@ -165,7 +167,7 @@
 			},
 			{
 				title: {
-					text: 'UMIDITA',
+					text: 'PERCENTUALE',
 					style: {
 						color: '#90ee7e',
 						font: '13px sans-serif'
