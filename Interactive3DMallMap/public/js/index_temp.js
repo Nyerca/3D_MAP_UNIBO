@@ -152,7 +152,7 @@
 				title: {
 					text: 'GRADI',
 					style: {
-						color: '#2b908f',
+						color: '#337537',
 						font: '13px sans-serif'
 					}
 				},
@@ -169,7 +169,7 @@
 				title: {
 					text: 'PERCENTUALE',
 					style: {
-						color: '#90ee7e',
+						color: '#2b908f',
 						font: '13px sans-serif'
 					}
 				},
@@ -200,7 +200,7 @@
 			series: [{
 				name: 'TEMPERATURA',
 				yAxis: 0,
-				color: '#2b908f',
+				color: '#337537',
 				data: (function() {
 					// generate an array of random data
 					var data = [],
@@ -216,9 +216,9 @@
 					return data;
 				}())
 			}, {
-				name: 'UMIDITA',
+				name: 'UMIDITA\'',
 				yAxis: 1,
-				color: '#90ee7e',
+				color: '#2b908f',
 				data: (function() {
 					// generate an array of random data
 					var data = [],

@@ -375,11 +375,11 @@ p {
 	border: 0;
 	/*opacity: 0.7;
 	background-color: #BB2E29;	*/
-	background-color: #BB2E29;
+	background-color: #b53737;
 }
 
 .boxbutton--dark {
-	background-color: #6B0808;
+	background-color: #b53737;
 }
 
 .boxbutton--darker {
@@ -996,7 +996,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 }
     
 .close_button svg {
@@ -1018,7 +1018,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 	
 }
     
@@ -1040,7 +1040,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 	border-left: 1px solid black;
 }
     
@@ -1063,7 +1063,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 	overflow: hidden;
 }
     
@@ -1095,7 +1095,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 }
     
 #pres_storico_button svg {
@@ -1116,7 +1116,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	color: #fff;
 	border: 0;
 	/*opacity: 0.7;*/
-	background-color: #6B0808;
+	background-color: #b53737;
 	border-left: 1px solid black;
 }
     
@@ -1300,13 +1300,14 @@ p_move {
   color: #ffffff;
 }
 .tab-group .active a {
-  background: #BB2E29;
+  background: #b53737;
   color: #ffffff;
 }
 ::placeholder {
     color: white !important;
 }
 .avgTH_Title {
+	padding-top: 1%;
 	color: #515158;
 	font-size: 30px;
     font-family: 'Cabin', Arial, sans-serif;
@@ -1362,4 +1363,8 @@ p_move {
 
 svg.highcharts-root {
 	font-family: Cabin, Arial, sans-serif !important;
+}
+
+.mallnav__button--all-levels {
+	background-color: #6B0808;
 }

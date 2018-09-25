@@ -174,7 +174,7 @@
 				title: {
 					text: 'hPa',
 					style: {
-						color: '#2b908f',
+						color: '#4e1132',
 						font: '13px sans-serif'
 					}
 				},
@@ -191,7 +191,7 @@
 				title: {
 					text: 'ug/m^3',
 					style: {
-						color: '#90ee7e',
+						color: '#783459',
 						font: '13px sans-serif'
 					}
 				},
@@ -209,7 +209,7 @@
 				title: {
 					text: 'ug/m^3',
 					style: {
-						color: '#90ee7e',
+						color: '#bc6c97',
 						font: '13px sans-serif'
 					}
 				},
@@ -227,7 +227,7 @@
 				title: {
 					text: 'ug/m^3',
 					style: {
-						color: '#90ee7e',
+						color: '#bc81a1',
 						font: '13px sans-serif'
 					}
 				},
@@ -258,7 +258,7 @@
 			series: [{
 				name: 'PRESSIONE',
 				yAxis: 0,
-				color: '#2b908f',
+				color: '#4e1132',
 				data: (function() {
 					// generate an array of random data
 					var data = [],
@@ -273,10 +273,28 @@
 					}
 					return data;
 				}())
-			}, {
+			},  {
+                name: 'PM 1.0',
+                yAxis: 1,
+                color: '#783459',
+                data: (function() {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -totalPoints; i < 0; i += 1) {
+                        data.push({
+                            x: time + i * $delay,
+                            y: getRandomInt(.7, .7)
+                        });
+                    }
+                    return data;
+                }())
+            },{
 				name: 'PM 2.5',
 				yAxis: 1,
-				color: '#90ee7e',
+				color: '#bc6c97',
 				data: (function() {
 					// generate an array of random data
 					var data = [],
@@ -294,25 +312,7 @@
 			}, {
 				name: 'PM 10',
 				yAxis: 1,
-				color: '#90ee7e',
-				data: (function() {
-					// generate an array of random data
-					var data = [],
-						time = (new Date()).getTime(),
-						i;
-
-					for (i = -totalPoints; i < 0; i += 1) {
-						data.push({
-							x: time + i * $delay,
-							y: getRandomInt(.7, .7)
-						});
-					}
-					return data;
-				}())
-			}, {
-				name: 'PM 1.0',
-				yAxis: 1,
-				color: '#90ee7e',
+				color: '#bc81a1',
 				data: (function() {
 					// generate an array of random data
 					var data = [],

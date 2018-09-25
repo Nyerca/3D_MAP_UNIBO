@@ -110,22 +110,30 @@ div#sensorValues div.sensor-values > label {
 	color: #515158;
 }
 div#sensorValues div.sensor-values div.volts_val {
-	color: #2b908f;
+	color: #337537;
 }
 div#sensorValues div.sensor-values div.amps {
 	color: #90ee7e;
 }
 div#sensorValues div.sensor-values div.moisture {
-	color: #90ee7e;
+	color: #2b908f;
 }
 
 div#sensorValues div.sensor-values div.volts2 {
-	color: #2b908f;
+	color: #4e1132;
 }
 div#sensorValues div.sensor-values div.amps2 {
-	color: #90ee7e;
+	color: #783459;
 }
 div#sensorValues div.sensor-values div.moisture2 {
-	color: #90ee7e;
+	color: #bc81a1;
+}
+.pm_25_r {
+	color: #bc6c97;
 }
 
+.highcharts-legend-item-hidden * {
+	fill: black !important;
+
+	opacity: 0.5 !important;
+}
