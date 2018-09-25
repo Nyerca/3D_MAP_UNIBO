@@ -120,7 +120,7 @@ var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
 	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length > 0) {
 
-		var vals = { 
+		var vals = {
 			info: info, 
 			figura: figura, 
 			datacategory: datacategory, 
@@ -170,6 +170,7 @@ function emitData() {
 		css = css.slice(0, -1);
 		if (err) throw err;
 	});
+	info = "";
 	con.query("SELECT * FROM `view_content` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
 		for(val in result) {
 			info = info + result[val].IdDataSpace;
