@@ -322,7 +322,7 @@ query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM 
 	
 	
     }
-	console.log("query_stor2" + query_stor2);
+	//("query_stor2" + query_stor2);
 	con2.query("" + query_stor1, function (err, result, fields) {
 		
 		for(val in result) {

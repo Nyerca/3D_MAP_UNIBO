@@ -297,7 +297,7 @@
 
         var prevCategory = 0;
         $(".search").bind('keyup', function (e) {
-            //spacesList.filter();
+            spacesList.filter();
             if(""+ document.getElementsByClassName('search__input')[0].value == "") {
                 //if(selectedLevel !== undefined) showLevelSpaces();
                 Show('1');
