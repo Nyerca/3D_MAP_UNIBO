@@ -171,7 +171,7 @@ function emitData() {
 		if (err) throw err;
 	});
 	info = "";
-	con.query("SELECT * FROM `view_content` WHERE IdEntrance = " + IdEntrance, function (err, result, fields) {
+	con.query("SELECT * FROM `view_content` WHERE IdEntrance = " + IdEntrance + " order by IdDataCategory, Nome ", function (err, result, fields) {
 		for(val in result) {
 			info = info + result[val].IdDataSpace;
 			info = info + "***" + result[val].IdDataCategory;
