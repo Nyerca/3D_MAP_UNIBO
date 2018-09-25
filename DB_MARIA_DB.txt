@@ -226,7 +226,7 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("Francesco Saverio Fera, Annalisa Trentin", "Ufficio di Francesco Saverio Fera, Annalisa Trentin", null),
 ("Lamberto Amistadi, Ildebrando Clemente", "Ufficio di Lamberto Amistadi, Ildebrando Clemente", null),
 ("Maura Savini, Andreina Milan", "Ufficio di Maura Savini, Andreina Milan", null),
-("Francesco Gulinello, Elena Mucelli, Stefania Rössl", "Ufficio di Francesco Gulinello, Elena Mucelli, Stefania Rössl", null),
+("Francesco Gulinello, Elena Mucelli, Stefania RÃ¶ssl", "Ufficio di Francesco Gulinello, Elena Mucelli, Stefania RÃ¶ssl", null),
 ("Valentina Orioli", "Ufficio di Valentina Orioli", null),
 ("Giovanni Leoni, Andrea Borsari", "Ufficio di Giovanni Leoni, Andrea Borsari", null),
 ("Marco Pretelli, Andrea Ugolini", "Ufficio di Marco Pretelli, Andrea Ugolini", null),
