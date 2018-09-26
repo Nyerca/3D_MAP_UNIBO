@@ -429,7 +429,8 @@
         $(".level--2").attr('data-content','');
         $(".level--3").attr('data-content','');
         var lev_val = level + 1;
-        $(".level--" + level).attr('data-content','LIVELLO '+lev_val);
+		var piano_val= lev_val - 2;
+        $(".level--" + level).attr('data-content','Livello '+lev_val + ' - Piano '+ piano_val);
 
 
         classie.add(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
@@ -438,9 +439,9 @@
 
 
         setTimeout(function () {
-            $(".level--1").attr('data-content','LIVELLO 2');
-            $(".level--2").attr('data-content','LIVELLO 3');
-            $(".level--3").attr('data-content','LIVELLO 4');
+            $(".level--1").attr('data-content','Livello 2 - Piano 0');
+            $(".level--2").attr('data-content','Livello 3 - Piano 1');
+            $(".level--3").attr('data-content','Livello 4 - Piano 2');
             classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
             classie.remove(document.getElementsByClassName('mallnav__button--up')[0], 'button--hidden');
             classie.remove(document.getElementsByClassName('mallnav__button--down')[0], 'button--hidden');
