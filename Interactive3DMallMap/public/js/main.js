@@ -411,11 +411,11 @@
         // show mall nav ctrls
         showMallNav();
 
-		
-			
+
+
         // filter the spaces for this level
-		if($('.search__input')[0].val === '') {
-        showLevelSpaces();
+		if($('.search__input').val() === '') {
+            showLevelSpaces();
 		}
 
         var list= document.getElementsByClassName("changeCol");
