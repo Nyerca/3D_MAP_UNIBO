@@ -488,6 +488,7 @@ p {
 }
 
 .content__item-title {
+	color: grey !important;
 	font-size: 1.85em;
 	margin: 0;
 	padding: 2em 0 0.75em 0;
@@ -776,7 +777,7 @@ p {
 }
 
 .pin--active .icon--pin {
-	stroke: #515158;
+	stroke: black;
 	stroke-width: 15px;
 	animation:jump 0.8s infinite ease-in;
 }
