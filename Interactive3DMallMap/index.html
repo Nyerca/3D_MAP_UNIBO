@@ -465,7 +465,7 @@
                 for (var field in valori) {
                     var line = valori[field].split('***');
 
-                    if(line[1] != "Lezioni") {
+
                         var style = document.createElement('style');
                         style.type = 'text/css';
                         var style2 = document.createElement('style');
@@ -525,6 +525,7 @@
                         var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
                         use2SVG.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#icon-' + line[3]);
                         svg2_node.appendChild(use2SVG);
+                    if(line[1] != "Lezioni") {
 
                         var div = document.createElement("div");
                         div.setAttribute("id", "rowLegend");
