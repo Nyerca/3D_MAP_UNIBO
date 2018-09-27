@@ -452,13 +452,14 @@ INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Pi
 ("circle", "map__space", "420", "545", "20", null, null, 2);
 
 INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES 
-("Aule", "#7cbf7f", "pencil"),
-("Laboratori", "#6584c7","display"),
-("Sensori", "#f4bc42","avocado"),
-("Professori", "#41d9f4","star"),
+("Aule", "#72A6C5", "pencil"),
+("Laboratori", "#F9975E","display"),
+("Sensori", "#EAC83F","avocado"),
+("Professori", "#3AB795","star"),
 ("Lezioni", "#f48241", null),
 ("Bagni", "#A2BBDD", null),
 ("Scale", "repeating-linear-gradient(to right,black 85%, white 100%)", null);
+("Uscite", "FFFFFF", "emergency");
 
 INSERT INTO `entrance`(`IdEntrance`, `Descrizione`) VALUES 
 (1, "Entrata 1");
