@@ -1282,18 +1282,22 @@
                 var table;
                 open_data_content.forEach(function (element) {
                     if (table_created == 0) {
-                        table = '<table class="lezioni_table"><tr><th>Insegnamento</th><th>Inizio</th><th>Fine</th></tr>';
+                        table = '<table class="lezioni_table"><tr><th>Insegnamento</th>' +
+                            '<th>Inizio</th><th>Fine</th></tr>';
                         table_created++;
                     }
                     if (last_read == "" || last_read == element.dataspace) {
-                        table += '<tr><td>' + element.materia + '</td><td>' + element.inizio + '</td><td>' + element.fine + '</td></tr>';
+                        table += '<tr><td>' + element.materia + '</td><td>' + element.inizio + '</td>' +
+                            '<td>' + element.fine + '</td></tr>';
                         last_read = element.dataspace;
                     } else {
                         table += '</table>';
                         $('.content__item[data-space="' + last_read + '"] div').html(table);
-                        table = '<table class="lezioni_table"><tr><th>Insegnamento</th><th>Inizio</th><th>Fine</th></tr>';
+                        table = '<table class="lezioni_table"><tr>' +
+                            '<th>Insegnamento</th><th>Inizio</th><th>Fine</th></tr>';
                         last_read = element.dataspace;
-                        table += '<tr><td>' + element.materia + '</td><td>' + element.inizio + '</td><td>' + element.fine + '</td></tr>';
+                        table += '<tr><td>' + element.materia + '</td>' +
+                            '<td>' + element.inizio + '</td><td>' + element.fine + '</td></tr>';
                     }
                     console.log(element.dataspace);
                 });

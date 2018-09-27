@@ -519,8 +519,11 @@ p {
 .content__item-details {
 	opacity: 0;
 	margin: 0 auto;
-	max-width: 50vmax;
+    text-align: center;
+
 }
+
+
 
 .content__item--current .content__item-details {
 	opacity: 1;
@@ -1362,9 +1365,24 @@ p_move {
 .tab_real-content, .tab_real-content_2 {
 	bottom: 2%;
 }
-.lezioni_table, .lezioni_table th, .lezioni_table td {
+.lezioni_table {
 	border: 1px solid black;
+    width: 70%;
+    margin-left: 15%;
+}
 
+.lezioni_table td {
+    border: 1px solid black;
+    margin-left: 15%;
+    padding: 1%;
+}
+
+.lezioni_table th {
+    width: 23%;
+    padding: 1%;
+    border: 1px solid black;
+    background-color: grey;
+    color: black;
 }
 
 .title:before {
