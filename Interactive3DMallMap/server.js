@@ -9,7 +9,7 @@ var express = require('express');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function(req, res) {
-	res.sendFile('prova.html', { root: __dirname });
+	res.sendFile('index.html', { root: __dirname });
 });
 
 var con = mysql.createConnection({
