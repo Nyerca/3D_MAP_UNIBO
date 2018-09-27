@@ -486,13 +486,13 @@
                })();
                     */
                     if(indCategories == 0) {
-                        span.setAttribute("class","color-left " + line[1]);
-                        style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
-                    }
+						span.setAttribute("class","color-left " + line[1]);
+						style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
+					}
                     else if(indCategories == valori.length - 1) {
-                        span.setAttribute("class","color-right " + line[1]);
-                        style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
-                    }
+						span.setAttribute("class","color-right " + line[1]);
+						style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
+					}
                     else  {
                         span.setAttribute("class","color-center " + line[1])
                         style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
@@ -508,7 +508,7 @@
 
                     var div = document.createElement("div");
                     div.setAttribute("id","rowLegend");
-                    if(line[1] == "Bagni" || line[1] == "Scale") div.setAttribute("class","showInMap");
+                    if(line[1] == "Bagni" || line[1] == "Scale" || line[1] == "Uscite") div.setAttribute("class","showInMap");
                     else div.setAttribute("class","hideInMap");
 
                     var style7 = document.createElement('style');
@@ -1424,7 +1424,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     temperature_realtime = this.series[0];
@@ -1517,7 +1517,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     humidity_realtime = this.series[0];
@@ -1605,7 +1605,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pressure_realtime = this.series[0];
@@ -1693,7 +1693,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm1_0_realtime = this.series[0];
@@ -1781,7 +1781,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm2_5_realtime = this.series[0];
@@ -1869,7 +1869,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm10_realtime = this.series[0];
@@ -2068,7 +2068,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     temperature_realtime_2 = this.series[0];
@@ -2161,7 +2161,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     humidity_realtime_2 = this.series[0];
@@ -2249,7 +2249,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pressure_realtime_2 = this.series[0];
@@ -2337,7 +2337,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm1_0_realtime_2 = this.series[0];
@@ -2425,7 +2425,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm2_5_realtime_2 = this.series[0];
@@ -2513,7 +2513,7 @@
                         chart: {
                             type: 'spline',
                             marginTop: '70',
-                            backgroundColor: '#e4c7c6',
+                            backgroundColor: '#d7d7dc',
                             events: {
                                 load: function() {
                                     pm10_realtime_2 = this.series[0];
@@ -2794,6 +2794,14 @@
 			<path class="path1" d="M17.347 5.581c-3.514 1.108-7.252 3.231-9.302 5.283-3.885 3.888-4.108 9.987-0.496 13.595s9.71 3.379 13.595-0.509c2.050-2.052 4.17-5.792 5.275-9.306 1.247-3.965 1.088-7.112-0.436-8.634s-4.672-1.679-8.636-0.428zM17.627 21.605c-2.045 1.892-5.236 1.768-7.128-0.278s-1.767-5.236 0.278-7.128c2.045-1.892 5.236-1.767 7.128 0.278s1.767 5.237-0.278 7.128z"></path>
 			<path class="path2" d="M31.258 4.674c-0.376-0.944-0.896-1.752-1.545-2.4-1.489-1.488-3.804-2.274-6.695-2.274-1.857 0-3.924 0.317-6.143 0.943-2.369 0.667-4.825 1.673-7.104 2.909-2.304 1.25-4.252 2.642-5.635 4.025-1.346 1.347-2.389 2.921-3.099 4.676-0.685 1.694-1.032 3.484-1.031 5.32s0.349 3.626 1.036 5.319c0.711 1.755 1.755 3.327 3.103 4.674 1.346 1.345 2.919 2.39 4.673 3.099 1.693 0.685 3.481 1.035 5.316 1.035 0 0 0.001 0 0.001 0 1.837 0 3.628-0.351 5.322-1.037 1.756-0.711 3.329-1.757 4.677-3.105 1.382-1.384 2.772-3.334 4.020-5.639 1.234-2.28 2.237-4.738 2.902-7.107 0.774-2.758 1.071-5.254 0.882-7.419-0.097-1.114-0.326-2.129-0.68-3.018zM28.541 14.405c-0.614 2.186-1.542 4.458-2.685 6.57-1.113 2.057-2.381 3.848-3.57 5.038-2.173 2.175-5.067 3.375-8.151 3.375-0 0-0.001 0-0.001 0-3.080 0-5.972-1.198-8.143-3.367-2.174-2.172-3.371-5.066-3.373-8.148s1.194-5.976 3.365-8.15c1.189-1.191 2.977-2.461 5.032-3.576 2.111-1.145 4.382-2.076 6.567-2.691 1.989-0.561 3.818-0.845 5.435-0.845 2.183 0 3.86 0.522 4.848 1.51 1.742 1.74 1.994 5.585 0.675 10.283z"></path>
 		</symbol>
+
+
+		<symbol id="icon-emergency" style="fill: #269463">
+			<path stroke="null" d="m26.07787,23.09833l-0.65286,-1.73415c-0.28562,-0.71406 -0.93848,-1.2037 -1.75455,-1.2037l-0.28562,0l0,-14.9341l-14.17923,0l0,8.26272l1.85656,0l2.12178,-2.65223c0.42844,-0.48964 1.08129,-0.81607 1.79536,-0.81607l4.52919,0c0.71406,0 1.34652,0.38763 1.67295,1.02009l1.34652,2.55022c0.06121,0.10201 0.10201,0.22442 0.10201,0.38763c0,0.44884 -0.38763,0.85687 -0.85687,0.85687c-0.36723,0 -0.61205,-0.16321 -0.77527,-0.44884l-1.2037,-2.3258l-1.95857,0l1.50973,3.75393l0.44884,4.79442l3.87634,0c0.61205,0 1.1017,0.38763 1.34652,0.91808l0.42844,1.1017l-6.69178,0c-0.48964,0 -0.91808,-0.36723 -0.93848,-0.85687l-0.44884,-4.20277l-3.59071,7.44665c-0.20402,0.42844 -0.65286,0.71406 -1.1833,0.71406l-1.73415,0l4.40678,-9.11959l-1.36692,-3.4275l-1.30571,1.59134c-0.32643,0.42844 -0.87728,0.71406 -1.46893,0.71406l-1.91777,0l0,10.77214l3.06027,3.03986l-9.03799,0l0,-26.09387l26.13467,0l0,26.13467l-2.93786,0l-3.03986,-3.03986l0,-3.20308l2.69303,0" fill="#269463" id="path3495"/>
+			<path stroke="null" d="m13.8572,6.20566l0.10201,0l0.10201,0l0.10201,0.0204l0.08161,0.0204l0.08161,0.0204l0.08161,0.0204l0.08161,0.0408l0.08161,0.0408l0.08161,0.0408l0.08161,0.0408l0.08161,0.0408l0.08161,0.0408l0.06121,0.06121l0.06121,0.06121l0.06121,0.06121l0.06121,0.06121l0.06121,0.06121l0.06121,0.06121l0.06121,0.06121l0.06121,0.08161l0.0408,0.08161l0.0408,0.08161l0.0408,0.08161l0.0408,0.08161l0.0408,0.08161l0.0204,0.08161l0.0204,0.08161l0.0204,0.08161l0.0204,0.08161l0.0204,0.10201l0,0.10201l0,0.10201c0,1.02009 -0.85687,1.83616 -1.85656,1.83616c-1.02009,0 -1.83616,-0.81607 -1.83616,-1.83616s0.85687,-1.87696 1.85656,-1.87696z" fill="#269463" id="path3497"/>
+			<path stroke="null" d="m14.67328,26.97467l2.3462,2.3462l-2.83585,0l-3.06027,-3.03986l1.83616,0c0.63246,0 1.26491,0.26522 1.71375,0.69366z" fill="#269463" id="path3499"/>
+		</symbol>
+
 		<symbol id="icon-star" viewBox="0 0 32 32" style="fill: black">
 			<title>star</title>
 			<path class="path1" d="M16 23.808l-10.038 6.692 4.462-11.154-10.038-6.692h11.154l4.462-11.154 4.462 11.154h11.154l-10.038 6.692 4.462 11.154z"></path>
@@ -3116,7 +3124,7 @@
 			</li>
 
 		</ul>
-		<div class="bg">
+		<!--<div class="bg">
 
 			<svg version="1.1"  id="atomic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 						width="350px" height="350px" viewBox="0 0 512 512" xml:space="preserve">
@@ -3176,7 +3184,7 @@
 					</svg>
 
 
-		</div>
+		</div>-->
 
 
 		<section class="box">
@@ -3295,6 +3303,12 @@
 								<path id="path3499" fill="#269463" d="M416,529.8l11.5,11.5h-13.9l-15-14.9h9C410.7,526.4,413.8,527.7,416,529.8z"></path>
 							</g>
 						</g>
+
+						<g inkscape:label="Capa 1" inkscape:groupmode="layer" id="layer1" transform="translate(150,-450.3622)">
+							<path style="fill:#000000" d="m 3.4029395,1052.1168 c -0.3627573,-0.1311 -0.8468717,-0.3541 -1.0758097,-0.4956 -0.6608242,-0.4084 -1.56534509,-1.4545 -1.92962469,-2.2317 l -0.33500702,-0.7148 0,-21.3125 0,-21.3125 0.33862125,-0.7227 c 0.44448145,-0.9485 1.57438986,-2.1229 2.46186326,-2.5588 l 0.6995155,-0.3435 21.3749999,0 21.375,0 0.6875,0.3246 c 1.54091,0.7277 2.637573,2.2027 2.878894,3.8723 0.165456,1.1447 0.156586,40.442 -0.0094,41.4906 -0.25786,1.6294 -1.345051,3.1023 -2.826207,3.829 l -0.730824,0.3585 -21.125,0.028 c -20.5018938,0.027 -21.1444544,0.021 -21.7845585,-0.2106 z m 41.7837275,-3.5046 c 0.395464,-0.198 0.761879,-0.5111 1,-0.8545 l 0.375831,-0.542 0.03684,-19.583 c 0.02608,-13.8626 -0.0029,-19.7205 -0.09939,-20.0538 -0.160029,-0.5531 -0.752165,-1.2669 -1.29976,-1.5668 -0.359176,-0.1968 -1.799144,-0.2152 -19.575195,-0.2498 -10.553125,-0.021 -19.4784579,0 -19.8340734,0.039 -0.8270531,0.098 -1.6412588,0.6297 -2.046055,1.3366 l -0.3073715,0.5368 0,19.6875 0,19.6875 0.342644,0.5829 c 0.3914079,0.6658 0.9640041,1.0673 1.7428866,1.222 0.2967081,0.059 9.2019693,0.099 19.7894693,0.089 l 19.25,-0.018 0.624169,-0.3125 z m -18.54476,-16.0625 0.0413,-6.0625 6.629336,5.9781 0.06424,-16.9781 4.24653,0 0.06424,16.9797 6.841025,-5.8996 0.07942,5.6074 -9.090975,8.6926 z m -14.204405,-9.8426 -6.5937499,5.9032 -0.09375,-5.8364 8.8855129,-8.3492 8.989487,8.6192 -0.15625,5.5621 -6.78125,-5.8768 -0.06424,16.883 -4.121505,0 z" id="path4226" inkscape:connector-curvature="0"></path>
+
+						</g>
+
 					</svg>
 					<div id="level__pins_2" class="level__pins"></div>
 				</div>
