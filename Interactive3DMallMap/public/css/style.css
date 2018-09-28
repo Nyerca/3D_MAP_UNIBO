@@ -547,7 +547,7 @@ p {
 }
 
 .content__desc {
-	text-align: left;
+	text-align: center;
 	margin: 7vmin 0 0 0;
 	color: grey;
 }
