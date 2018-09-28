@@ -1320,7 +1320,7 @@
 
 
                     setTimeout(function () {
-                        $(".level--1").attr('data-content', 'Livello 2 - Piano 0');
+                        $(".level--1").attr('data-content', 'Livello 2 - Piano Terra');
                         $(".level--2").attr('data-content', 'Livello 3 - Piano 1');
                         $(".level--3").attr('data-content', 'Livello 4 - Piano 2');
                         classie.remove(document.getElementsByClassName('boxbutton--dark mallnav__button--all-levels')[0], 'button--hidden');
@@ -1517,7 +1517,7 @@
                             }
                         },
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Temperatura sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1611,7 +1611,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Umidità sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1698,7 +1698,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Pressione sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1785,7 +1785,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 1.0 sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1798,7 +1798,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#783459',
                                     font: '13px sans-serif'
@@ -1872,7 +1872,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 2.5 sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1885,7 +1885,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#bc6c97',
                                     font: '13px sans-serif'
@@ -1959,7 +1959,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 10 sensore Canarin'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -1972,7 +1972,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#bc81a1',
                                     font: '13px sans-serif'
@@ -2148,7 +2148,7 @@
                             }
                         },
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Temperatura sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2242,7 +2242,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Umidità sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2329,7 +2329,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'Pressione sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2416,7 +2416,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 1.0 sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2429,7 +2429,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#783459',
                                     font: '13px sans-serif'
@@ -2503,7 +2503,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 2.5 sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2516,7 +2516,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#bc6c97',
                                     font: '13px sans-serif'
@@ -2590,7 +2590,7 @@
                         },
 
                         title: {
-                            text: 'Dati medi sensori'
+                            text: 'PM 10 sensore Canarin 2'
                         },
                         subtitle: {
                             text: 'Ultimo valore letto: ...'
@@ -2603,7 +2603,7 @@
                         },
                         yAxis: [{
                             title: {
-                                text: 'ug/m^3',
+                                text: 'ug/m\u00B3',
                                 style: {
                                     color: '#bc81a1',
                                     font: '13px sans-serif'
@@ -2795,12 +2795,33 @@
         </symbol>
         <symbol id="icon-display" viewBox="0 0 32 32" style="fill: black">
             <title>display</title>
-            <path d="M0 2v20h32v-20h-32zM30 20h-28v-16h28v16zM21 24h-10l-1 4-2 2h16l-2-2z"></path>
+            <path d="m0,2l0,20l32,0l0,-20l-32,0zm30,18l-28,0l0,-16l28,0l0,16zm-9,4l-10,0l-1,4l-2,2l16,0l-2,-2l-1,-4z" id="svg_1" fill="black"/>
+            <rect id="svg_2" height="17.25" width="3" y="3.5" x="1.25" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
+            <rect id="svg_3" height="17.25" width="2.25" y="3.75" x="28" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
+            <rect id="svg_4" height="3" width="26" y="3" x="3.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
+            <rect id="svg_5" height="2.75" width="27.5" y="18.25" x="2.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
+            <rect id="svg_6" height="0" width="0.25" y="21.25" x="42.25" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" fill="#000000"/>
         </symbol>
         <symbol id="icon-pin" viewBox="0 0 200 300">
             <title>pin</title>
             <path d="M100,21.78A85,85,0,0,0,15.18,106.6c0,18.85,12.08,49.52,36.76,93.9,17.48,31.36,34.7,57.49,35.47,58.6L100,278.22l12.59-19.11c0.69-1.11,18-27.25,35.47-58.6,24.76-44.38,36.76-75.06,36.76-93.9A85,85,0,0,0,100,21.78Z"/>
         </symbol>
+
+        <symbol id="icon-bathroom" viewBox="0 0 200 300">
+            <title>bathroom</title>
+            <g stroke="null" id="svg_2">
+                <g stroke="null" id="svg_3">
+                    <path stroke="null" fill="#000000" d="m130.1552,70.73257c-1.5634,0.40625 -2.07973,0.40363 -3.66803,-0.02228c-1.54374,-0.41411 -2.4388,-0.96451 -3.58154,-2.20292c-2.49515,-2.69959 -2.47025,-7.01106 0.05504,-9.81418c3.04293,-3.37842 8.62689,-3.09928 11.2924,0.5622c3.12942,4.30099 1.04576,10.14049 -4.09787,11.47718l0,0z" id="svg_4"/>
+                    <path stroke="null" fill="#000000" d="m145.47995,93.87563c0,11.50208 -0.02752,12.37355 -0.4128,13.09169c-1.11784,2.07973 -4.4897,2.0889 -5.5276,0.01441c-0.36038,-0.71945 -0.39576,-1.76129 -0.39576,-11.57677l-0.00131,-10.78394l-1.3511,0l-0.06028,29.30494l-0.05897,29.30625l-0.61986,1.05231c-1.69314,2.87388 -6.45542,2.52529 -7.62699,-0.55826c-0.1625,-0.42984 -0.24113,-6.2523 -0.24113,-18.01254l0,-17.37696l-1.35766,0l0,16.70206c0,11.19411 -0.08125,17.0821 -0.24637,17.85004c-0.29617,1.37862 -1.10998,2.40735 -2.34707,2.96824c-1.07197,0.48619 -2.67076,0.53205 -3.63134,0.10484c-0.84264,-0.37611 -1.81764,-1.39566 -2.13477,-2.23568c-0.16643,-0.4377 -0.24113,-9.76438 -0.24113,-29.87107l0,-29.23418l-1.58437,0l-0.00131,10.89795c0,10.53232 -0.01573,10.92285 -0.45736,11.64492c-1.17157,1.91854 -4.38486,1.8006 -5.46994,-0.2005c-0.39707,-0.73125 -0.41673,-1.47953 -0.35776,-13.76004c0.06028,-12.68413 0.07339,-13.01437 0.54778,-14.16628c1.06018,-2.57902 3.12156,-4.59454 5.677,-5.5525c1.23971,-0.46522 1.73901,-0.49405 9.75521,-0.56482c9.06066,-0.07994 10.61751,0.03669 12.6055,0.94617c1.53064,0.69849 3.45836,2.48336 4.24989,3.93668c1.26055,2.31038 1.28951,2.67731 1.28951,16.07303l0,0z" id="svg_5"/>
+                </g>
+                <g stroke="null" id="svg_6">
+                    <path stroke="null" fill="#000000" d="m77.39255,63.42193c-0.00131,2.04697 -0.51371,3.37973 -1.86874,4.85926c-1.25675,1.37207 -1.98407,1.82157 -3.67721,2.27237c-1.92772,0.5124 -3.67589,0.23458 -5.59444,-0.8872c-3.08749,-1.80584 -4.3639,-5.95613 -2.84243,-9.24674c1.21743,-2.63275 3.77418,-4.28265 6.65199,-4.29313c2.20554,-0.00786 3.6012,0.57923 5.18163,2.17671c1.60665,1.62486 2.1505,2.92106 2.14919,5.11873l0,0z" id="svg_7"/>
+                    <path stroke="null" fill="#000000" d="m90.74502,101.86078c0,1.49788 -0.91471,2.74152 -2.28941,3.11108c-1.06411,0.28569 -2.49122,-0.22278 -3.12812,-1.11653c-0.2372,-0.33286 -1.71804,-4.92085 -3.2893,-10.19422s-2.90927,-9.767 -2.97479,-9.98454c-0.08256,-0.27651 -0.35121,-0.39445 -0.89506,-0.39445c-0.42722,0 -0.77712,0.05242 -0.77712,0.11663s2.18981,7.62437 4.86712,16.80166c2.676,9.17729 4.86581,16.74793 4.86581,16.82393c0,0.07601 -2.03517,0.1376 -4.52115,0.1376l-4.52247,0l-0.06159,13.42193c-0.06028,13.1559 -0.07076,13.43504 -0.52812,14.04703c-1.21481,1.62368 -2.91713,2.05745 -4.60896,1.17419c-1.91068,-0.99728 -1.82812,-0.29355 -1.82812,-15.37061l0,-13.27254l-2.03648,0l0,13.22012c0,14.46376 0.01835,14.26195 -1.32489,15.21467c-0.87802,0.6251 -2.6262,0.82036 -3.54092,0.39576c-0.92127,-0.42591 -1.663,-1.27116 -1.92903,-2.19767c-0.13236,-0.45998 -0.22147,-5.9653 -0.22147,-13.70106l0,-12.93181l-4.5264,0c-2.48991,0 -4.5264,-0.04849 -4.5264,-0.10615c0,-0.08256 9.13273,-31.69395 9.64251,-33.37922c0.09697,-0.32107 -0.02097,-0.39445 -0.63296,-0.39445l-0.75484,0l-2.35231,7.96116c-3.59465,12.1678 -3.58154,12.12849 -4.43073,12.97506c-0.64083,0.63951 -0.90423,0.74697 -1.84516,0.74566c-1.90675,-0.00131 -3.24868,-1.28296 -3.24868,-3.10584c0,-0.85705 6.61399,-22.57825 7.28102,-23.91101c1.20302,-2.40604 4.1018,-4.51067 6.9534,-5.05059c1.57126,-0.29748 11.35924,-0.3001 12.95147,-0.00393c2.64324,0.49274 5.52891,2.5384 6.91802,4.90512c0.726,1.23578 7.3151,22.91124 7.3151,24.06302l0,-0.00001z" id="svg_8"/>
+                </g>
+                <rect stroke="null" x="96.40367" y="57.30291" fill="#000000" width="8.48667" height="88.95141" id="svg_9"/>
+            </g>
+        </symbol>
+
         <symbol id="icon-search" viewBox="0 0 32 32">
             <title>search</title>
             <path class="path1"
@@ -3200,7 +3221,7 @@
             </div>
             <div class="levels">
 
-                <div class="level level--1" data-content="Livello 2 - Piano 0" aria-label="Level 1">
+                <div class="level level--1" data-content="Livello 2 - Piano Terra" aria-label="Level 1">
                     <svg id="lev1" class="map map--1" viewBox="90 70 1520 1420" width="100%" height="100%"
                          preserveAspectRatio="xMidYMid meet">
                         <title>Map Level 1</title>

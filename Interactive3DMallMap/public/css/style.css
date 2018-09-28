@@ -242,7 +242,7 @@ p {
 }
 
 .level::after {
-	font-size: 2.5vmin;
+	font-size: 2.4vmin;
 	line-height: 0;
 	position: absolute;
 	z-index: 100;
@@ -992,6 +992,11 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	margin-left: 20%;
 	margin-top: 0;
 }
+#color6 .iconSum{
+	width: 100%;
+	margin-left: 3%;
+	margin-top: -85%;
+}
 
 .firstTitle, .secondTitle, .thirdTitle, .fourthTitle, .fifthTitle, .title {
 	text-indent: -6500px;
@@ -1311,11 +1316,14 @@ p_move {
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #6B0808;
+  /*background: #6B0808;*/
+  background: grey;
   color: #ffffff;
 }
 .tab-group .active a {
-  background: #b53737;
+ /* background: #b53737;*/
+  background: grey;
+	opacity: 0.8;
   color: #ffffff;
 }
 ::placeholder {
