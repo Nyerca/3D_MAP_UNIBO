@@ -489,6 +489,7 @@ p {
 .content__item--current {
 	-webkit-transform: translate3d(0,-100%,0);
 	transform: translate3d(0,-100%,0);
+	overflow-y: scroll;
 }
 
 .content__item-title {
@@ -496,9 +497,8 @@ p {
 	font-weight: bold;
 	font-size: 1.85em;
 	margin: 0;
-	padding: 2em 0 0.75em 0;
+	padding: 1em 0 0.75em 0;
 	pointer-events: none;
-	font-weight: normal;
 	opacity: 0;
 	-webkit-transform: translate3d(0,-3em,0) translate3d(0,-100%,0);
 	transform: translate3d(0,-3em,0) translate3d(0,-100%,0);
@@ -520,7 +520,6 @@ p {
 	opacity: 0;
 	margin: 0 auto;
     text-align: center;
-
 }
 
 
