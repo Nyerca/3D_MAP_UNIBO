@@ -300,46 +300,29 @@
             }
         }
 
+        function checkHide(number) {
+            if ($(this).attr("data-level") != number) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        }
+
         function hideAllMarksBut(number) {
             $(".firstTitle").each(function (index) {
-
-                if ($(this).attr("data-level") != number) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
+                checkHide(number);
             });
             $(".secondTitle").each(function (index) {
-
-                if ($(this).attr("data-level") != number) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
+                checkHide(number);
             });
             $(".thirdTitle").each(function (index) {
-
-                if ($(this).attr("data-level") != number) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
+                checkHide(number);
             });
             $(".fourthTitle").each(function (index) {
-
-                if ($(this).attr("data-level") != number) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
+                checkHide(number);
             });
             $(".fifthTitle").each(function (index) {
-
-                if ($(this).attr("data-level") != number) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
+                checkHide(number);
             });
         }
 
@@ -466,65 +449,66 @@
                     var line = valori[field].split('***');
 
 
-                        var style = document.createElement('style');
-                        style.type = 'text/css';
-                        var style2 = document.createElement('style');
-                        style2.type = 'text/css';
-                        var style3 = document.createElement('style');
-                        style3.type = 'text/css';
-                        var style4 = document.createElement('style');
-                        style4.type = 'text/css';
-                        var style5 = document.createElement('style');
-                        style5.type = 'text/css';
-                        var style6 = document.createElement('style');
-                        style6.type = 'text/css';
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    var style2 = document.createElement('style');
+                    style2.type = 'text/css';
+                    var style3 = document.createElement('style');
+                    style3.type = 'text/css';
+                    var style4 = document.createElement('style');
+                    style4.type = 'text/css';
+                    var style5 = document.createElement('style');
+                    style5.type = 'text/css';
+                    var style6 = document.createElement('style');
+                    style6.type = 'text/css';
 
-                        style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▾'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
-                        style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
-                        style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
-                        style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
-                        style5.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { font-size: 1.25em; position: absolute; top: -1.75em; left: 0; }";
+                    style.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before {width: 80px !important; content: '" + line[1] + " ▾'; color: " + line[2] + "; position:fixed; margin-left: 6500px;}";
+                    style2.innerHTML = ".pin[data-category='" + line[0] + "'] .icon--pin { fill: " + line[2] + "}";
+                    style3.innerHTML = ".content__item[data-category='" + line[0] + "'] .content__item-title { color: " + line[2] + "}";
+                    style4.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "'] { margin-top: 4em;}";
+                    style5.innerHTML = ".grouped-by-category [data-category='" + line[0] + "']:first-child::before, .grouped-by-category :not([data-category='" + line[0] + "']) + [data-category='" + line[0] + "']::before { font-size: 1.25em; position: absolute; top: -1.75em; left: 0; }";
 
-                        document.getElementsByTagName('head')[0].appendChild(style);
-                        document.getElementsByTagName('head')[0].appendChild(style2);
-                        document.getElementsByTagName('head')[0].appendChild(style3);
-                        document.getElementsByTagName('head')[0].appendChild(style4);
-                        document.getElementsByTagName('head')[0].appendChild(style5);
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                    document.getElementsByTagName('head')[0].appendChild(style2);
+                    document.getElementsByTagName('head')[0].appendChild(style3);
+                    document.getElementsByTagName('head')[0].appendChild(style4);
+                    document.getElementsByTagName('head')[0].appendChild(style5);
 
-                        var box = document.getElementsByClassName("box")[0];
+                    var box = document.getElementsByClassName("box")[0];
 
-                        var span = document.createElement("span");
-                        span.setAttribute("id", "color" + line[0]);
-                        span.setAttribute("class", "opacityOut");
-                        /*
-                    span.onclick = (function() {
-                    var idC = line[0];
-                  var currentI = line[1];
-                  return function() {
-                      showLegend(currentI + '', idC + '');
-                  }
-               })();
-                    */
-                        if (indCategories == 0) {
-                            span.setAttribute("class", "color-left " + line[1]);
-                            style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
-                        }
-                        else if (indCategories == valori.length - 1) {
-                            span.setAttribute("class", "color-right " + line[1]);
-                            style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
-                        }
-                        else {
-                            span.setAttribute("class", "color-center " + line[1])
-                            style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
-                        }
-                        indCategories++;
-                        document.getElementsByTagName('head')[0].appendChild(style6);
+                    var span = document.createElement("span");
+                    span.setAttribute("id", "color" + line[0]);
+                    span.setAttribute("class", "opacityOut");
+                    /*
+                span.onclick = (function() {
+                var idC = line[0];
+              var currentI = line[1];
+              return function() {
+                  showLegend(currentI + '', idC + '');
+              }
+           })();
+                */
+                    if (indCategories == 0) {
+                        span.setAttribute("class", "color-left " + line[1]);
+                        style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-top-right-radius: 5px; display: block; float: right;opacity: 1;}";
+                    }
+                    else if (indCategories == valori.length - 1) {
+                        span.setAttribute("class", "color-right " + line[1]);
+                        style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px; border-bottom-right-radius: 5px; display: block; float: right;opacity: 1;}";
+                    }
+                    else {
+                        span.setAttribute("class", "color-center " + line[1])
+                        style6.innerHTML = "." + line[1] + "{background: " + line[2] + "; width: 80px; height: 30px;  display: block; float: left;opacity: 1;}";
+                    }
+                    indCategories++;
+                    document.getElementsByTagName('head')[0].appendChild(style6);
 
-                        var svg2_node = document.createElementNS(xmlns, "svg");
-                        svg2_node.setAttribute("class", "iconSum");
-                        var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-                        use2SVG.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#icon-' + line[3]);
-                        svg2_node.appendChild(use2SVG);
+                    var svg2_node = document.createElementNS(xmlns, "svg");
+                    svg2_node.setAttribute("class", "iconSum");
+                    var use2SVG = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+                    use2SVG.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#icon-' + line[3]);
+                    svg2_node.appendChild(use2SVG);
+
                     if(line[1] != "Lezioni") {
 
                         var div = document.createElement("div");
@@ -583,91 +567,84 @@
                         node.setAttribute("points", line[7]);
                     }
                     document.getElementById("lev" + line[8]).appendChild(node);
-
-                    //line[8]=lev
-                    if (line[8] == 1) {
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#exitLev1");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManLev1");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev1");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev1Right");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1Right");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1Front");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-
-                    } else if (line[8] == 2) {
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomMan");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWoman");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAll");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllFront");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllBack");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanRight");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-                    } else if (line[8] == 3) {
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev3");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev3Right");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManWheel");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanWheel");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev3");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-
-                        var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-                        use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManWoman");
-                        document.getElementById("lev" + line[8]).appendChild(use);
-                    }
-
                 }
 
+
+                var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#exitLev1");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManLev1");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev1");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev1Right");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1Right");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev1Front");
+                document.getElementById("lev1").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomMan");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWoman");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAll");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllFront");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllBack");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanRight");
+                document.getElementById("lev2").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev3");
+                document.getElementById("lev3").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomAllLev3Right");
+                document.getElementById("lev3").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManWheel");
+                document.getElementById("lev3").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanWheel");
+                document.getElementById("lev3").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomWomanLev3");
+                document.getElementById("lev3").appendChild(use);
+
+                use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#bathroomManWoman");
+                document.getElementById("lev3").appendChild(use);
 
 //carico il css relativo ai piani
                 for (i = 0; i < piani; i++) {
