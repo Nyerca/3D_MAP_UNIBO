@@ -77,7 +77,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
     }, 60000);
 	
     socket.on('opendata_emit', function(data) {
-		console.log(data[3]);
+		//console.log(data[3]);
 
 		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo IN ( SELECT IdInfo FROM toopendata WHERE NomeTabellaOpenData = '" + data[3] + "'))", function (err, result, fields) {
 		for(val in result) {
@@ -94,7 +94,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		});
 	});
 	socket.on('dimValue', function(data) {
-		console.log("DIM");
+		//console.log("DIM");
 		dim = data;
 	});
 	
@@ -130,7 +130,7 @@ function check() {
 		}
 		info = "", figura = "", datacategory = "", pin = "", dataspace = "", singleData="", css="";
 		namespace.emit('hi', vals);
-		console.log("emit MAPPA");
+		//console.log("emit MAPPA");
 		clearInterval(interval);
 	}
 }
@@ -154,7 +154,7 @@ function checkSens() {
 		hum_avg_val = "";
 		hour_avg_val = "";
 		namespace.emit('storico', vals_storico_temp);
-		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+		//console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
 	}
 }

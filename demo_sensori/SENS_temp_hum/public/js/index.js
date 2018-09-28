@@ -72,7 +72,7 @@
 							current.addPoint([x, amps], false, true);
 							moisture.addPoint([x, mPercent], true, true);
 							
-							console.log("valori: " + valori);
+							//console.log("valori: " + valori);
 							
 							updateSensorDisplayValues([volts, amps, mPercent]);
 						}, $delay);

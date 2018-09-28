@@ -123,7 +123,7 @@ jQuery(document).ready(function($){
  
     // Push the header width values to bArray
     for (var i = 0; i < $('.bubbles').width() - 6; i++) {
-		console.log($('.bubbles').width());
+		//console.log($('.bubbles').width());
         bArray.push(i);
     }
      
@@ -206,7 +206,7 @@ var str = $.datepicker.formatDate('yy-mm-dd', d);
 			var input = document.querySelector('#g_due');
 			input.style.setProperty('height', line[0] * 3 +'px')
 			}
-			console.log(str);
+			//console.log(str);
 
 		}		
       });

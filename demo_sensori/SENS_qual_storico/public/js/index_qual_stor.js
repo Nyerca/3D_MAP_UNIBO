@@ -35,7 +35,7 @@ switch(i) {
 }
 
 	$(document).ready(function() {
-	console.log("" + day0 + "   " + day1+ "   " + day2+ "   " + day3+ "   " + day4+ "   " + day5+ "   " + day6);
+	//console.log("" + day0 + "   " + day1+ "   " + day2+ "   " + day3+ "   " + day4+ "   " + day5+ "   " + day6);
 	var socket = io('/mySensorNamespace');	
 	socket.on('hi',function(data) {	
 
@@ -44,7 +44,7 @@ switch(i) {
 			var line = valori[field].split('***');
 
 			if(line[2] == '1') {
-						console.log(line[0]);
+						//console.log(line[0]);
 				var d = new Date("" + line[1]);
 				var str = $.datepicker.formatDate('yy-mm-dd', d);
 				if(str === day0) {

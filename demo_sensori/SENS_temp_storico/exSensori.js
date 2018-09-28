@@ -53,7 +53,7 @@ function check() {
 		}
 		str = "", max = "", min = "";
 		namespace.emit('hi', vals);
-		console.log("emit");
+		//console.log("emit");
 		clearInterval(interval);
 	}
 	

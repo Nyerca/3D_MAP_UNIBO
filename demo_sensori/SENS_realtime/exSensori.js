@@ -64,7 +64,7 @@ function emitData() {
 		str = str + ";";
 	}
 	str = str.slice(0, -1);
-	console.log(result)
+	//console.log(result)
 	namespace.emit('hi', str);
 		if (err) throw err;
 	});
@@ -77,6 +77,6 @@ function getObjAsString(result) {
 		str = str + ";";
 	}
 	str = str.slice(0, -1);
-	console.log(result)
+	//console.log(result)
 	namespace.emit('hi', str);
 }

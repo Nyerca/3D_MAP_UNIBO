@@ -131,7 +131,7 @@ app.post('/pinMod', (req, res) => {
 	res.end();
 })
 app.post('/entranceMod', (req, res) => {
-	console.log("LOG:" + req.body.id);
+	//console.log("LOG:" + req.body.id);
 	update_entrance(req.body.id, req.body.Descrizione);
 	res.redirect('/');
 	res.end();

@@ -59,7 +59,7 @@ function sendData1() {
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
-	console.log("sent " + val);
+	//console.log("sent " + val);
 }
 
 function sendData2() {
@@ -68,7 +68,7 @@ function sendData2() {
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
-	console.log("sent " + val);
+	//console.log("sent " + val);
 }
 
 function sendData3() {
@@ -77,5 +77,5 @@ function sendData3() {
 	con.query(sql, function (err, result) {
 		if (err) throw err;
 	});
-	console.log("sent " + val + " date: " + day + " " + new Date().getHours());
+	//console.log("sent " + val + " date: " + day + " " + new Date().getHours());
 }

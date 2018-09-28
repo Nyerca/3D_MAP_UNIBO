@@ -41,7 +41,7 @@ $(document).ready(function() {
 			var length = t.find('.bar_q').css('width'),
 				perc = Math.round(parseInt(length)/5.56),
 				labelpos = (parseInt(length)-2);
-				console.log("VALOREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: " +length);
+				//console.log("VALOREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: " +length);
 			t.find('.label_q').css('left', labelpos);
 			t.find('.perc').text(perc+'%');
 		}

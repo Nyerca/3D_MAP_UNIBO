@@ -58,7 +58,7 @@ var str = $.datepicker.formatDate('yy-mm-dd', d);
 			var input = document.querySelector('.two');
 			input.style.setProperty('height', '1%')
 			}
-			console.log(str);
+			//console.log(str);
 
 		}		
       });

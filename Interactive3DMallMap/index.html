@@ -147,7 +147,7 @@
             switch (num) {
                 case '1':
                     if (firstOpen == 0) {
-                        console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+                        //console.log("Il livello: " + num + " era chiuso ora viene APERTO");
                         $("ul.list li").each(function (index) {
                             if ($(this).attr("data-category") == num) {
                                 $(this).children().fadeIn();
@@ -165,7 +165,7 @@
                         if (fifthOpen == 1) Show('5');
                     }
                     else {
-                        console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+                        //console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
                         $("ul.list li").each(function (index) {
                             if ($(this).attr("data-category") == num) {
                                 $(this).children().each(function (index) {
@@ -182,7 +182,7 @@
                     break;
                 case '2':
                     if (secondOpen == 0) {
-                        console.log("Il livello: " + num + " era chiuso ora viene APERTO");
+                        //console.log("Il livello: " + num + " era chiuso ora viene APERTO");
                         $("ul.list li").each(function (index) {
                             if ($(this).attr("data-category") == num) {
                                 $(this).children().fadeIn();
@@ -199,7 +199,7 @@
 
                     }
                     else {
-                        console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
+                        //console.log("Il livello: " + num + " era aperto ora viene CHIUSO");
                         $("ul.list li").each(function (index) {
                             if ($(this).attr("data-category") == num) {
                                 $(this).children().each(function (index) {
@@ -285,7 +285,7 @@
                         if (fourthOpen == 1) Show('4');
                     }
                     else {
-                        console.log("CLOSE");
+                        //console.log("CLOSE");
                         $("ul.list li").each(function (index) {
                             if ($(this).attr("data-category") == num) {
                                 $(this).children().each(function (index) {
@@ -409,10 +409,10 @@
                 for (i in data.result.records) {
                     var current = data.result.records[i];
                     var vect = ["" + current.fine, "" + current.inizio, "" + current.materia_descrizione, "" + current.aula_nome];
-                    console.log(" A " + vect[1]);
+                    //console.log(" A " + vect[1]);
                     socket.emit('opendata_emit', vect);
                 }
-                console.log(" A " + data.result.records[0].inizio);
+                //console.log(" A " + data.result.records[0].inizio);
             }
         });
 
@@ -420,7 +420,7 @@
         socket.on('hi', function (data) {
             if (already_emitted == 0) {
                 already_emitted++;
-                console.log("EMITTED = " + already_emitted);
+                //console.log("EMITTED = " + already_emitted);
                 var box = document.getElementsByClassName("box")[0];
                 while (box.firstChild) {
                     box.removeChild(box.firstChild);
@@ -447,7 +447,7 @@
 //Carico il css descritto nella tabella datacategory
                 var valori = data.datacategory.split(';');
                 var indCategories = 0;
-                console.log("VAL LEN: " + valori.length);
+                //console.log("VAL LEN: " + valori.length);
 
                 document.getElementById("level__pins_1").innerHTML = "";
                 document.getElementById("level__pins_2").innerHTML = "";
@@ -676,7 +676,7 @@
 
                     var val = i + 1;
                     styleP.innerHTML = ".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}";
-                    console.log(".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}");
+                    //console.log(".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}");
                     document.getElementsByTagName('head')[0].appendChild(styleP);
                 }
 
@@ -1187,7 +1187,7 @@
 
                     var line = valori[field].split('***');
                     if (typeof line[2] !== "undefined") {
-                        console.log("LUU" + line[2]);
+                        //console.log("LUU" + line[2]);
                         var li = document.createElement("li");
                         li.setAttribute("id", 5);
                         li.setAttribute("class", "list__item");
@@ -1318,7 +1318,7 @@
                         table += '<tr><td>' + element.materia + '</td>' +
                             '<td>' + inizio + '</td><td>' + fine + '</td></tr>';
                     }
-                    console.log(element.dataspace);
+                    //console.log(element.dataspace);
                 });
 
                 table += '</table>';

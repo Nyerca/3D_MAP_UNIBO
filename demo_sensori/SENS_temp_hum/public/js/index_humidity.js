@@ -16,7 +16,7 @@ $(function()
       && val <= 100
       && val >= 0)
     {
-      console.log(val);
+      //console.log(val);
       
       var valOrig = val;
       val = 100 - val;
