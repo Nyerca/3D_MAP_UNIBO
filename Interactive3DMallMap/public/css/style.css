@@ -1406,3 +1406,11 @@ svg.highcharts-root {
 	/*background-color: #6B0808;*/
 	background-color: grey;
 }
+
+.content__item {
+    display: none;
+}
+
+.content__item.content__item--current{
+    display: block;
+}
