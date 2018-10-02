@@ -461,8 +461,8 @@ INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES
 ("Lezioni", "#EA7BAF", null),
 ("Bagni", "#A2BBDD", bathroom),
 ("Scale", "repeating-linear-gradient(to right,black 85%, white 100%)", null),
-("Uscite", "FFFFFF", "emergency"),;
-("Ascensori", "FFFFFF", "elevator");
+("Uscite", "#FFFFFF", "emergency"),;
+("Ascensori", "#FFFFFF", "elevator");
 
 INSERT INTO `entrance`(`IdEntrance`, `Descrizione`) VALUES 
 (1, "Entrata 1");
