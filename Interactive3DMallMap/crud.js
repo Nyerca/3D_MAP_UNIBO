@@ -311,8 +311,8 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 });
 
 
-http.listen(3000, function() {
-	console.log('listening on localhost:3000');
+http.listen(3001, function() {
+	console.log('listening on localhost:3001');
 });
 
 var correcttab = 0;
