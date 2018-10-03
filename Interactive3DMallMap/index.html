@@ -1389,7 +1389,10 @@
                 if (s0_drawn == 0) {
                     s0_drawn++;
                     var head_menu = "<ul class='tab-group'><li class='tab_real active'><a class='temp' href='#temp_real'>Temperatura</a></li><li class='tab_real'><a class='hum' href='#hum_real'>Umidità</a></li><li class='tab_real'><a class='pres' href='#pres_real'>Pressione</a></li><li class='tab_real'><a class='pm1_0' href='#pm1_0_real'>PM 1.0</a></li><li class='tab_real'><a class='pm2_5' href='#pm2_5_real'>PM 2.5</a></li><li class='tab_real'><a class='pm10' href='#pm10_real'>PM 10</a></li></ul>";
-                    var cont = "<div class='tab_real-content'> <div id='temp_real'>A</div><div id='hum_real'>A</div><div id='pres_real'> </div> <div id='pm1_0_real'> </div> <div id='pm2_5_real'> </div> <div id='pm10_real'> </div></div>"
+                    var cont = "<div class='tab_real-content'> " +
+                        "<div id='temp_real'>A</div><div id='hum_real' style='display: none'>A</div>" +
+                        "<div id='pres_real' style='display: none'> </div> <div id='pm1_0_real' style='display: none'> </div> " +
+                        "<div id='pm2_5_real' style='display: none'> </div> <div id='pm10_real' style='display: none'> </div></div>"
 
                     $(".content__item[data-realtime='Sensore Canarin']")
                         .html(head_menu + cont);
@@ -1403,16 +1406,13 @@
 
                         var target = $(this).attr('href');
 
-                        $('.tab_real-content > div').not(target).hide();
+                        $(".tab_real-content > div").each(function(e){
+                            "#"+this.id === target ? $("#"+this.id).show() : $("#"+this.id).hide();
+                        });
+
 
                         $(target).fadeIn(600);
-                        if ("" + $(this).attr('class') == "temp") {
 
-                        } else if ("" + $(this).attr('class') == "hum") {
-
-                        } else {
-
-                        }
                     });
 
 
@@ -1537,7 +1537,7 @@
                                 }
                             },
                             min: -10,
-                            max: 50,
+                            max: 40,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -1549,7 +1549,7 @@
                             formatter: function () {
                                 return '<b>' + this.series.name + '</b><br/>' +
                                     Highcharts.numberFormat(this.y, 1) + ' °C';
-                            },
+                            }
 
                         },
                         legend: {
@@ -1640,7 +1640,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' %';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -1727,7 +1731,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' hPa';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -1814,7 +1822,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -1901,7 +1913,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -1988,7 +2004,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -2051,7 +2071,7 @@
 
                        $(".tab_real-content_2 > div").each(function(e){
                             "#"+this.id === target ? $("#"+this.id).show() : $("#"+this.id).hide();
-                        });
+                       });
 
                         $(target).fadeIn(600);
                        /* if ("" + $(this).attr('class') == "temp") {
@@ -2181,7 +2201,7 @@
                                 }
                             },
                             min: -10,
-                            max: 50,
+                            max: 40,
                             plotLines: [{
                                 value: 0,
                                 width: 1,
@@ -2284,7 +2304,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' %';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -2371,7 +2395,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' hPa';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -2458,7 +2486,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -2545,7 +2577,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false
@@ -2632,7 +2668,11 @@
                             gridLineColor: 'white'
                         }],
                         tooltip: {
-                            enabled: false
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                    Highcharts.numberFormat(this.y, 1) + ' ug/m\u00B3';
+                            }
+
                         },
                         legend: {
                             enabled: false

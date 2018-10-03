@@ -1365,8 +1365,8 @@ p_move {
 	margin-bottom: 80% !important;
 }
 .tab_real-content, #temp_real, #hum_real, #pres_real, #pm1_0_real, #pm2_5_real, #pm10_real, #temp_real_2, #hum_real_2, #pres_real_2, #pm1_0_real_2, #pm2_5_real_2, #pm10_real_2, .tab_real-content_2 {
-	height: 92%;
-	width: 100%;
+	height: 200px;
+	width: 98%;
 }
 .tab_real-content, .tab_real-content_2 {
 	bottom: 2%;
