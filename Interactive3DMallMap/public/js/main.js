@@ -600,6 +600,9 @@
      * Navigate through the mall´s levels
      */
     function navigate(direction) {
+        if (isOpenContentArea) {
+            closeContentArea();
+        }
         if( isNavigating || !isExpanded || isOpenContentArea ) {
             return false;
         }
@@ -830,9 +833,8 @@
         classie.remove(contentCloseCtrl, 'content__button--hidden');
         // resize mall area
         classie.add(mall, 'mall--content-open');
-        // disable mall nav ctrls
-        classie.add(levelDownCtrl, 'boxbutton--disabled');
-        classie.add(levelUpCtrl, 'boxbutton--disabled');
+
+        setNavigationState();
 
     }
 
