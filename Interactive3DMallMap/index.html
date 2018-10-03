@@ -2022,8 +2022,17 @@
 
 
                 if (s1_drawn == 0) {
-                    var head_menu = "<ul class='tab-group'><li class='tab_real_2 active'><a class='temp_2' href='#temp_real_2'>Temperatura</a></li><li class='tab_real_2'><a class='hum_2' href='#hum_real_2'>Umidità</a></li><li class='tab_real_2'><a class='pres_2' href='#pres_real_2'>Pressione</a></li><li class='tab_real_2'><a class='pm1_0_2' href='#pm1_0_real_2'>PM 1.0</a></li><li class='tab_real_2'><a class='pm2_5_2' href='#pm2_5_real_2'>PM 2.5</a></li><li class='tab_real_2'><a class='pm10_2' href='#pm10_real_2'>PM 10</a></li></ul>";
-                    var cont = "<div class='tab_real-content_2'> <div id='temp_real_2'>A</div><div id='hum_real_2'>A</div><div id='pres_real_2'> </div> <div id='pm1_0_real_2'> </div> <div id='pm2_5_real_2'> </div> <div id='pm10_real_2'> </div></div>"
+                    var head_menu = "<ul class='tab-group'>" +
+                        "<li class='tab_real_2 active'><a class='temp_2' href='#temp_real_2'>Temperatura</a></li>" +
+                        "<li class='tab_real_2'><a class='hum_2' href='#hum_real_2'>Umidità</a></li>" +
+                        "<li class='tab_real_2'><a class='pres_2' href='#pres_real_2'>Pressione</a></li>" +
+                        "<li class='tab_real_2'><a class='pm1_0_2' href='#pm1_0_real_2'>PM 1.0</a></li>" +
+                        "<li class='tab_real_2'><a class='pm2_5_2' href='#pm2_5_real_2'>PM 2.5</a></li>" +
+                        "<li class='tab_real_2'><a class='pm10_2' href='#pm10_real_2'>PM 10</a></li></ul>";
+                    var cont = "<div class='tab_real-content_2'> <div id='temp_real_2'>A</div>" +
+                        "<div id='hum_real_2' style='display: none'>A</div><div id='pres_real_2' style='display: none'> </div> " +
+                        "<div id='pm1_0_real_2' style='display: none'> </div> <div id='pm2_5_real_2' style='display: none'> </div> " +
+                        "<div id='pm10_real_2' style='display: none'> </div></div>"
 
 
                     $(".content__item[data-realtime='Sensore Canarin 2']")
@@ -2038,16 +2047,20 @@
 
                         var target = $(this).attr('href');
 
-                        $('.tab_real-content_2 > div').not(target).hide();
+                        //$('.tab_real-content_2 > div').not(target).hide();
+
+                       $(".tab_real-content_2 > div").each(function(e){
+                            "#"+this.id === target ? $("#"+this.id).show() : $("#"+this.id).hide();
+                        });
 
                         $(target).fadeIn(600);
-                        if ("" + $(this).attr('class') == "temp") {
+                       /* if ("" + $(this).attr('class') == "temp") {
 
                         } else if ("" + $(this).attr('class') == "hum") {
 
                         } else {
 
-                        }
+                        }*/
                     });
 
 
@@ -3679,7 +3692,7 @@
 <script src="/js/list.min.js"></script>
 </body>
 
-<script src="/js/index_temp_storico.js"></script>
+<!--<script src="/js/index_temp_storico.js"></script>
 <script src="/js/index_qual.js"></script>
 <script src="/js/index_pres.js"></script>
 <script src="/js/index_temp.js"></script>
@@ -3689,5 +3702,5 @@
 <script src="/js/index_qual_stor_10.js"></script>
 <script src="/js/index_hum.js"></script>
 <script src="/js/index_qual_pres.js"></script>
-<script src="/js/realtime_sensore_singolo.js"></script>
+<script src="/js/realtime_sensore_singolo.js"></script>-->
 </html>
