@@ -459,8 +459,8 @@ INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES
 ("Sensori", "#EAC83F","avocado"),
 ("Professori", "#3AB795","star"),
 ("Lezioni", "#EA7BAF", null),
-("Bagni", "#A2BBDD", bathroom),
 ("Scale", "repeating-linear-gradient(to right,black 85%, white 100%)", null),
+("Bagni", "#A2BBDD", bathroom),
 ("Uscite", "#FFFFFF", "emergency"),;
 ("Ascensori", "#FFFFFF", "elevator");
 
