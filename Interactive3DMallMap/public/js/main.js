@@ -244,7 +244,10 @@
                 closeSearch();
 
                 // open level
-                showLevel(level);
+                if (level != selectedLevel){
+                    showLevel(level);
+                }
+
                 // open content for this space
 
 
@@ -262,14 +265,13 @@
                 document.getElementById("DS"+spacerefval).style.display = "block";
                 openContent(spacerefval);
 
-                if(moved_once == 0) {
+                /*if(moved_once == 0) {
                     var style = document.createElement('style');
                     style.type = 'text/css';
                     //style.innerHTML = ".levels { transition: 0.5s; margin: -10vmin 0 0 -48vmin; }";
                     document.getElementsByTagName('head')[0].appendChild(style);
                     moved_once++;
-                }
-
+                }*/
 
                 if($('.search__input')[0].value !== "") {
                     spacesList.filter();
@@ -361,7 +363,7 @@
         $( ".hideInMap" ).each(function( index ) {
             $(this).fadeIn();
         });
-        closeSens.click();
+        //closeSens.click();
         changelev(level);
         if (i==0) {
             $('.clickable_space').on("click", pinClick);
