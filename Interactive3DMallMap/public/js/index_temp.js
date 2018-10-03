@@ -58,8 +58,8 @@
 				if(line[2] == 4) {
 					sum_values += parseFloat(line[1]);
 					numb_values++;
-					console.log("SETTEMBRE: " + line[1]);
-					console.log("SETTEMBRE2: " + sum_values);
+					//console.log("SETTEMBRE: " + line[1]);
+					//console.log("SETTEMBRE2: " + sum_values);
 				} else if(line[2] == 5) {
 					sum_values2 += parseFloat(line[1]);
 					numb_values2++;

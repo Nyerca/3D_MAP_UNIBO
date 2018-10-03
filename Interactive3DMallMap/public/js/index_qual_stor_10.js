@@ -23,7 +23,6 @@ var seriesq10;
 				if(line[3] == 8) {
 					var d = new Date("" + line[1]);
 					var str = $.datepicker.formatDate('yy-mm-dd', d);
-					console.log(str + " C " + day0);
 					if(str === day0) {
 						qin_day0_graph3[line[2]] = parseFloat(line[0]).toFixed(2);
 					} else if(str == day1) {

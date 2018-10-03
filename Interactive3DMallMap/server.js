@@ -34,7 +34,7 @@ con.connect(function(err) {
 var num_canarin = 0;
 var array_canarin = [];
 
-/*con2.connect(function(err) {
+con2.connect(function(err) {
 	if (err) throw err;
 	
 	con2.query("SELECT id FROM `cesena_nodes`", function (err, result, fields) {
@@ -45,7 +45,7 @@ var array_canarin = [];
 		if (err) throw err;
 	});
 	//console.log("Connected!");
-});*/
+});
 
 var IdEntrance = 1;
 var dim;
@@ -104,10 +104,10 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 
 //Function that checks for new deta into the table
 function checkForNewData (callback) {
-	/*con2.query("SELECT COUNT(*) AS num FROM `cesena_data`", function (err, result, fields) {
+	con2.query("SELECT COUNT(*) AS num FROM `cesena_data`", function (err, result, fields) {
 		if (err) throw err;
 		callback(result[0].num); //callback function
-	});*/
+	});
 }
 
 http.listen(3000, function() {
@@ -254,7 +254,7 @@ function emitSensData() {
 		var timestamp_day = startOfDay_day / 1000;
 		
 		//con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
-	/*con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231541348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231839348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552143841348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
+	con2.query("(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231541348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '4315255231839348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552143841348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)UNION(SELECT node_id, value_num, type_id FROM `cesena_data` WHERE type_id BETWEEN 4 AND 9 AND node_id = '43152552221341348' AND server_timestamp > " + timestamp_day + " ORDER BY server_timestamp DESC LIMIT 6)", function (err, resultx, fields) {
 	
 		var sensor_val = "";
 		for(val in resultx) {
@@ -270,7 +270,7 @@ function emitSensData() {
 		
 	
 	namespace.emit('realtime_vals', sensor_val);
-	});*/
+	});
 	
 }
 
@@ -308,7 +308,7 @@ var timestamp4 = (startOfDay2 / 1000) + 3600;
 query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM `cesena_data` WHERE type_id BETWEEN 7 AND 9 AND server_timestamp BETWEEN " + timestamp3 + " AND " + timestamp4 + " GROUP BY type_id)";
 			if(!(j == 23 && i == 6)) query_stor2 += " UNION ";
 
-		/*	
+
 	con2.query("SELECT AVG(value_num) As media, type_id FROM `cesena_data` WHERE type_id BETWEEN 7 AND 9 AND server_timestamp BETWEEN " + timestamp3 + " AND " + timestamp4 + " GROUP BY type_id", function (err, result, fields) {
 		for(val in result) {
 			hour_avg_val = hour_avg_val + result[val].media;
@@ -318,13 +318,13 @@ query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM 
 		}
 		if (err) throw err;
 	});
-	*/
+
 }	
 	
 	
     }
 	//("query_stor2" + query_stor2);
-	/*con2.query("" + query_stor1, function (err, result, fields) {
+	con2.query("" + query_stor1, function (err, result, fields) {
 		
 		for(val in result) {
 			day_avg_val = day_avg_val + result[val].media;
@@ -383,7 +383,7 @@ query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM 
 			hour_avg_val = hour_avg_val + ";";
 		}
 		if (err) throw err;
-	});*/
+	});
 
 	
 	day_avg_val = day_avg_val.slice(0, -1);

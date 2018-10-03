@@ -69,6 +69,6 @@ function getObjAsString(result) {
 		str = str + ";";
 	}
 	str = str.slice(0, -1);
-	console.log(result)
+	//console.log(result)
 	namespace.emit('hi', str);
 }
