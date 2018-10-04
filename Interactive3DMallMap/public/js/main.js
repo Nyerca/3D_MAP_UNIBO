@@ -560,8 +560,7 @@
      * Removes the level´s pins
      */
     function removePins(levelEl) {
-        var levelEl = levelEl || mallLevels[selectedLevel - 1];
-        classie.remove(levelEl.querySelector('.level__pins'), 'level__pins--active');
+       $('#level__pins_'+levelEl).removeClass('level__pins--active');
     }
 
     /**
@@ -602,11 +601,14 @@
     function navigate(direction) {
         if (isOpenContentArea) {
             closeContentArea();
+            isOpenContentArea = false;
         }
         if( isNavigating || !isExpanded || isOpenContentArea ) {
             return false;
         }
         isNavigating = true;
+
+        removePins(selectedLevel);
 
         var prevSelectedLevel = selectedLevel;
 
@@ -646,7 +648,7 @@
             classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 
             // show the current level´s pins
-            showPins();
+            //showPins();
 
             isNavigating = false;
 
@@ -654,11 +656,25 @@
         });
 
         // filter the spaces for this level
-        showLevelSpaces();
+        if (document.getElementsByClassName('search__input')[0].value == "") {
+            showLevelSpaces();
+        } else {
+            $( "ul.list li" ).each(function( index ) {
+                var category = $(this).attr('data-category');
+                if (category !== prevCategory) {
+                    var content = getComputedStyle(this, ':before').getPropertyValue('content').replace(' ▾','');
+                    $(this).before("<li id='"+category+"' data-content="+content+" class='list__item title'" +
+                        "data-level='0' data-category='"+category+"'></li>");
+                }
+                prevCategory = $(this).attr('data-category');
+                $(this).children().fadeIn();
+            });
+        }
+        prevCategory = 0;
 
         // hide the previous level´s pins
-        removePins(currentLevel);
 
+        //removePins(currentLevel);
         switch_lev(selectedLevel);
 
     }
