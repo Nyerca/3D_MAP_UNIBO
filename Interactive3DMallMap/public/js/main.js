@@ -464,6 +464,7 @@ console.log(selectedLevel+ ' lev2');
      * Shows all Mall´s levels
      */
     function showAllLevels() {
+        $('#levelName').html('');
         if($('.search__input')[0].value !== "") {
             getListElement();
 
@@ -529,6 +530,22 @@ console.log(selectedLevel+ ' lev2');
      * Shows all spaces for current level
      */
     function showLevelSpaces() {
+        switch (selectedLevel) {
+            case 0:
+                $('#levelName').html('Livello 1 - Piano Interrato');
+                break;
+            case 1:
+                $('#levelName').html('Livello 2 - Piano Terra');
+                break;
+            case 2:
+                $('#levelName').html('Livello 3 - Primo Piano');
+                break;
+            case 3:
+                $('#levelName').html('Livello 4 - Secondo Piano');
+                break;
+            default:
+                $('#levelName').html('');
+        }
         if (selectedLevel !== undefined ){
             selectedLevel === 0 ? lev = -1 : lev = selectedLevel;
 

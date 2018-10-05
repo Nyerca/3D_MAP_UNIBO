@@ -1451,3 +1451,8 @@ svg.highcharts-root {
 .content__item.content__item--current{
     display: block;
 }
+
+#levelName {
+    text-align: center;
+    color: gray;
+}
