@@ -245,7 +245,7 @@
 
                 // open level
                 if (level != selectedLevel){
-                    showLevel(level);
+                    showLevel(parseInt(level) +1);
                 }
 
                 // open content for this space
@@ -253,7 +253,7 @@
 
 
                 //set the current level pins as active
-                var levelEl = mallLevels[selectedLevel - 1];
+                var levelEl = mallLevels[level];
                 classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
 
                 //hides all pins
@@ -340,7 +340,7 @@
     function pinClick (e) {
 
         //set the current level pins as active
-        var levelEl = mallLevels[selectedLevel - 1];
+        var levelEl = mallLevels[selectedLevel ];
         classie.add(levelEl.querySelector('.level__pins'), 'level__pins--active');
         //hides all pins
         pins.forEach(function(pin) {
@@ -384,7 +384,7 @@
             classie.remove(mallLevelsEl, 'levels--selected-' + oldLevel);
             classie.remove(mallLevels[oldLevel], 'level--current');
         }
-
+console.log(selectedLevel+ ' lev2');
         classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 
         // the level element
@@ -395,7 +395,7 @@
             classie.add(mallLevelsEl, 'levels--open');
 
             for(var i = 0; i<mallLevelsTotal;i++) {
-                if(selectedLevel != i+1 ) classie.add(mallLevels[i], 'level--hideMe');
+                if(selectedLevel != i ) classie.add(mallLevels[i], 'level--hideMe');
                 else classie.remove(mallLevels[i], 'level--hideMe');
 
             }
