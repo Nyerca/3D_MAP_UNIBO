@@ -15,6 +15,13 @@
 	src: url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'), url('../fonts/codropsicons/codropsicons.woff') format('woff'), url('../public/fonts/codropsicons/codropsicons.ttf') format('truetype'), url('../public/fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
 }
 
+@font-face {
+	font-family: 'trajan';
+	font-weight: normal;
+	font-style: normal;
+	src: url('../fonts/trajan/TrajanPro-Regular.ttf') format('truetype');
+}
+
 body {
 	font-family: 'Cabin', Arial, sans-serif !important;
 	color: #515158;
@@ -85,7 +92,7 @@ button:focus {
 	align-items: center;
 	padding: 0;
 	text-align: center;
-	
+
 }
 
 .main {
@@ -237,7 +244,7 @@ p {
 	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	
+
 }
 
 .level::after {
@@ -896,10 +903,10 @@ p {
 	}
 }*/
 
-.L3_1:before { 
+.L3_1:before {
     pointer-events: auto !important;
 }
-.firstTitle:before { 
+.firstTitle:before {
     pointer-events: auto !important;
 }
 .title:before {
@@ -951,7 +958,7 @@ section.box {
 
 
 @keyframes fadein {
-    0%   { 
+    0%   {
 		border: 1px solid black}
     100% {
 		border: 1px solid black
@@ -972,7 +979,7 @@ section.box p {
 	margin: 0;
 	border: 0;
 	font: inherit;
-	vertical-align: baseline; 
+	vertical-align: baseline;
 	font-weight: 400;
 	font-size: 14px;
 	color: #494A4A;
@@ -1052,7 +1059,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	/*opacity: 0.7;*/
 	background-color: grey;
 }
-    
+
 .close_button svg {
 	width: 25px;
 	height: 25px;
@@ -1073,9 +1080,9 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	border: 0;
 	/*opacity: 0.7;*/
 	background-color: #b53737;
-	
+
 }
-    
+
 #temp_storico_button svg {
 	width: 25px;
 	height: 25px;
@@ -1097,7 +1104,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	background-color: #b53737;
 	border-left: 1px solid black;
 }
-    
+
 #hum_storico_button svg {
 	width: 25px;
 	height: 25px;
@@ -1120,7 +1127,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	background-color: #b53737;
 	overflow: hidden;
 }
-    
+
 #back_button svg {
 	width: 25px;
 	height: 25px;
@@ -1133,7 +1140,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	50%{bottom: -50%;}
 	100%{bottom:0;}
 }
-	
+
 
 #pres_storico_button {
 		position: absolute;
@@ -1151,7 +1158,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	/*opacity: 0.7;*/
 	background-color: #b53737;
 }
-    
+
 #pres_storico_button svg {
 	width: 25px;
 	height: 25px;
@@ -1173,7 +1180,7 @@ section.color-right.grapefruit-dark {background-color:#DA4453;}
 	background-color: #b53737;
 	border-left: 1px solid black;
 }
-    
+
 #qual_storico_button svg {
 	width: 25px;
 	height: 25px;
