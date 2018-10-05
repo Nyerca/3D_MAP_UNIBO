@@ -241,7 +241,7 @@ p {
 }
 
 .level::after {
-	font-size: 2.4vmin;
+	font-size: 2.3vmin;
 	line-height: 0;
 	position: absolute;
 	z-index: 100;
@@ -262,6 +262,9 @@ p {
 	color: #515158;
 }
 
+.level--0::after {
+	content: attr(data-content);
+}
 
 .level--1::after {
 	content: attr(data-content);
@@ -291,24 +294,57 @@ p {
 	transform: translateZ(90vmin);
 }
 
+.levels--selected-1 .level--0,
+.levels--selected-2 .level--0,
 .levels--selected-2 .level--1,
+.levels--selected-3 .level--0,
 .levels--selected-3 .level--1,
 .levels--selected-3 .level--2{
 	-webkit-transform: translateZ(-60vmin);
 	transform: translateZ(-60vmin);
 }
 
+/*.levels--selected-2 .level--1,
+.levels--selected-3 .level--1,
+.levels--selected-3 .level--2{
+	-webkit-transform: translateZ(-60vmin);
+	transform: translateZ(-60vmin);
+}*/
+
 /* Delays */
 /* 1 */
 
+.levels--selected-0 .level--3,
 .levels--selected-1 .level--3,
 .levels--selected-2 .level--3,
 .levels--selected-3 .level--2{
 	-webkit-transition-delay: 0.1s;
 	transition-delay: 0.1s;
 }
+/*.levels--selected-1 .level--3,
+.levels--selected-2 .level--3,
+.levels--selected-3 .level--2{
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}*/
 
-.levels--selected-1 .level--2,
+.levels--selected-0 .level--1,
+.levels--selected-1 .level--current,
+.levels--selected-1 .level--current::after,
+.levels--selected-2 .level--current,
+.levels--selected-2 .level--current::after,
+.levels--selected-3 .level--current,
+.levels--selected-3 .level--current::after{
+	-webkit-transition-delay: 0.25s;
+	transition-delay: 0.25s;
+}
+
+.levels--selected-0 .level--current,
+.levels--selected-0 .level--current::after {
+	-webkit-transition-delay: 0.45s;
+	transition-delay: 0.45s;
+}
+/*.levels--selected-1 .level--2,
 .levels--selected-2 .level--current,
 .levels--selected-2 .level--current::after,
 .levels--selected-3 .level--current,
@@ -321,7 +357,7 @@ p {
 .levels--selected-1 .level--current::after {
 	-webkit-transition-delay: 0.45s;
 	transition-delay: 0.45s;
-}
+}*/
 
 /* Navigation classes */
 .levels--open .level,

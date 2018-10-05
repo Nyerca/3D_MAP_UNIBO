@@ -469,9 +469,11 @@ INSERT INTO `entrance`(`IdEntrance`, `Descrizione`) VALUES
 
 INSERT INTO `entrancecss`(`Css`, `IdEntrance`) VALUES 
 (".surroundings, .levels {transform: rotateX(50deg) rotateY(-5deg)  rotateZ(-135deg) translateZ(-25vmin);}", 1),
+(".level--1 {-webkit-transform: translateZ(10vmin); transform: translateZ(10vmin);}", 1),
 (".level--2 {-webkit-transform: translateZ(10vmin); transform: translateZ(10vmin);}", 1),
 (".level--3 {-webkit-transform: translateZ(20vmin); transform: translateZ(20vmin);}", 1),
 (".level.level--current {transform: translateZ(15vmin) translateY(5vmin) rotate3d(0,0,1,30deg) rotate3d(0,1,0,12deg) rotate3d(1,0,0,-5deg);}", 1),
+(".level--0::after {transform: translateX(-95vmin) rotate3d(0,0,1,90deg) rotate3d(1,0,0,-90deg) rotate3d(0,1,0,-50deg);}", 1),
 (".level--1::after {transform: translateX(-95vmin) rotate3d(0,0,1,90deg) rotate3d(1,0,0,-90deg) rotate3d(0,1,0,-50deg);}", 1),
 (".level--2::after {transform: translateX(-95vmin) rotate3d(0,0,1,90deg) rotate3d(1,0,0,-90deg) rotate3d(0,1,0,-50deg);}", 1),
 (".level--3::after {transform: translateX(-95vmin) rotate3d(0,0,1,90deg) rotate3d(1,0,0,-90deg) rotate3d(0,1,0,-50deg);}", 1),

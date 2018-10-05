@@ -356,7 +356,6 @@
     }
 
     function showLevel(level) {
-
        /* $( ".showInMap" ).each(function( index ) {
             $(this).hide();
         });*/
@@ -373,29 +372,30 @@
         if( level == selectedLevel) {
             return false;
         }
+
         var oldLevel = selectedLevel;
         // update selected level val
-        selectedLevel = level;
+        selectedLevel = level-1;
 
         // control navigation controls state
         setNavigationState();
 
         if (oldLevel !== undefined && oldLevel !== 0){
             classie.remove(mallLevelsEl, 'levels--selected-' + oldLevel);
-            classie.remove(mallLevels[oldLevel-1], 'level--current');
+            classie.remove(mallLevels[oldLevel], 'level--current');
         }
 
         classie.add(mallLevelsEl, 'levels--selected-' + selectedLevel);
 
         // the level element
-        var levelEl = mallLevels[selectedLevel - 1];
+        var levelEl = mallLevels[selectedLevel ];
         classie.add(levelEl, 'level--current');
 
         onEndTransition(levelEl, function() {
             classie.add(mallLevelsEl, 'levels--open');
 
             for(var i = 0; i<mallLevelsTotal;i++) {
-                if(selectedLevel != i + 1) classie.add(mallLevels[i], 'level--hideMe');
+                if(selectedLevel != i+1 ) classie.add(mallLevels[i], 'level--hideMe');
                 else classie.remove(mallLevels[i], 'level--hideMe');
 
             }
@@ -427,12 +427,16 @@
             }
         }, 500);
 
+        $(".level--0").attr('data-content','');
         $(".level--1").attr('data-content','');
         $(".level--2").attr('data-content','');
         $(".level--3").attr('data-content','');
         var lev_val = level + 1;
 		var piano_val= lev_val - 2;
-		if (lev_val == 2){
+
+		if (lev_val == 1){
+            $(".level--" + level).attr('data-content','Livello '+lev_val + ' - Piano Interrato');
+        }else if (lev_val == 2){
             $(".level--" + level).attr('data-content','Livello '+lev_val + ' - Piano Terra');
         } else {
             $(".level--" + level).attr('data-content', 'Livello ' + lev_val + ' - Piano ' + piano_val);
@@ -445,6 +449,7 @@
 
 
         setTimeout(function () {
+            $(".level--0").attr('data-content','Livello 1 - Piano Interrato');
             $(".level--1").attr('data-content','Livello 2 - Piano Terra');
             $(".level--2").attr('data-content','Livello 3 - Piano 1');
             $(".level--3").attr('data-content','Livello 4 - Piano 2');
@@ -495,7 +500,7 @@
         }
 
 
-        classie.remove(mallLevels[selectedLevel - 1], 'level--current');
+        classie.remove(mallLevels[selectedLevel ], 'level--current');
         classie.remove(mallLevelsEl, 'levels--selected-' + selectedLevel);
         classie.remove(mallLevelsEl, 'levels--open');
 
@@ -524,12 +529,15 @@
      * Shows all spaces for current level
      */
     function showLevelSpaces() {
-        if (selectedLevel !== undefined && selectedLevel !== 0){
+        if (selectedLevel !== undefined ){
+            selectedLevel === 0 ? lev = -1 : lev = selectedLevel;
+
             spacesList.filter(function(item) {
-                return item.values().level === selectedLevel.toString();
+                return item.values().level === lev.toString();
             });
 
-            $(".list__item[data-level='"+selectedLevel.toString()+"']").each(function () {
+
+            $(".list__item[data-level='"+lev.toString()+"']").each(function () {
                 $(this).show();
             });
         }
@@ -613,9 +621,9 @@
         var prevSelectedLevel = selectedLevel;
 
         // current level
-        var currentLevel = mallLevels[prevSelectedLevel-1];
+        var currentLevel = mallLevels[prevSelectedLevel];
 
-        if( direction === 'Up' && prevSelectedLevel > 1 ) {
+        if( direction === 'Up' && prevSelectedLevel > 0 ) {
             --selectedLevel;
         }
         else if( direction === 'Down' && prevSelectedLevel < mallLevelsTotal ) {
@@ -631,9 +639,9 @@
         // transition direction class
         classie.add(currentLevel, 'level--moveOut' + direction);
         // next level element
-        var nextLevel = mallLevels[selectedLevel-1];
+        var nextLevel = mallLevels[selectedLevel];
 
-        classie.remove(nextLevel, 'level--hideMe')
+        classie.remove(nextLevel, 'level--hideMe');
 
         // ..becomes the current one
         classie.add(nextLevel, 'level--current');
@@ -683,14 +691,14 @@
      * Control navigation ctrls state. Add disable class to the respective ctrl when the current level is either the first or the last.
      */
     function setNavigationState() {
-        if( selectedLevel == 1 ) {
+        if( selectedLevel == 0 ) {
             classie.add(levelDownCtrl, 'boxbutton--disabled');
         }
         else {
             classie.remove(levelDownCtrl, 'boxbutton--disabled');
         }
 
-        if( selectedLevel == mallLevelsTotal ) {
+        if( selectedLevel == mallLevelsTotal-1 ) {
             classie.add(levelUpCtrl, 'boxbutton--disabled');
         }
         else {

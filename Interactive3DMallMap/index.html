@@ -548,12 +548,12 @@
 
 
 //Carico la vista view_svg
-                var piani = 0;
+                var piani = 4;
                 var valori = data.figura.split(';');
                 for (var field in valori) {
                     var line = valori[field].split('***');
 
-                    if (line[8] > piani) piani = line[8];
+                    //if (line[8] > piani) piani = line[8];
 
                     var node = document.createElementNS(xmlns, line[1]);
                     node.setAttribute("data-space", line[0]);
@@ -658,11 +658,12 @@
                 document.getElementById("lev3").appendChild(use);
 
 //carico il css relativo ai piani
+
                 for (i = 0; i < piani; i++) {
                     var styleP = document.createElement('style');
                     styleP.type = 'text/css';
 
-                    var val = i + 1;
+                    var val = i ;
                     styleP.innerHTML = ".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}";
                     //console.log(".levels--selected-" + val + " .level:not(.level--" + val + "){opacity: 0;}");
                     document.getElementsByTagName('head')[0].appendChild(styleP);
@@ -1321,6 +1322,7 @@
 
 
                 function hideAndShow() {
+                    $(".level--0").attr('data-content', '');
                     $(".level--1").attr('data-content', '');
                     $(".level--2").attr('data-content', '');
                     $(".level--3").attr('data-content', '');
@@ -1331,6 +1333,7 @@
 
 
                     setTimeout(function () {
+                        $(".level--0").attr('data-content', 'Livello 1 - Piano Interrato');
                         $(".level--1").attr('data-content', 'Livello 2 - Piano Terra');
                         $(".level--2").attr('data-content', 'Livello 3 - Piano 1');
                         $(".level--3").attr('data-content', 'Livello 4 - Piano 2');
@@ -3284,6 +3287,17 @@
 
             </div>
             <div class="levels">
+                <div class="level level--0" data-content="Livello 1 - Piano Interrato" aria-label="Level 0">
+                    <svg id="lev0" class="map map--0" viewBox="90 70 1540 1420"  width="100%" height="100%"
+                         preserveAspectRatio="xMidYMid meet">
+                        <title>Map Level 0</title>
+                        <polygon points="200,100 1615,100 1615,525 400,525 400,950 1200,950 1200,925 1500,925 1500,1350 1400,1350
+									1400,1375 250,1375 250,1350 100,1350 100,225 200,225" class="map__ground"/>
+                        <path d="M200 100 H1615 V525 H400 V950 H1200 V925 H1500 V1350 H 1400 V1375 H250 V1350 H100 V225 H200 Z
+								M190 90 V215 H90 V1360 H240 V1385 H1410 V1360 H1510 V915 H1190 V940 H410 V535 H1625 V90"
+                              class="map__outline"/>
+                    </svg>
+                </div>
                 <div class="level level--1" data-content="Livello 2 - Piano Terra" aria-label="Level 1">
                     <svg id="lev1" class="map map--1" viewBox="90 70 1520 1420" width="100%" height="100%"
                          preserveAspectRatio="xMidYMid meet">
