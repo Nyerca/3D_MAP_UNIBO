@@ -820,7 +820,7 @@ p {
 	display: none;
 }
 
-@media screen and (max-width: 65.625em), screen and (max-height: 40.625em) {
+/*@media screen and (max-width: 65.625em), screen and (max-height: 40.625em) {
 	.main {
 		width: 100vw;
 	}
@@ -858,7 +858,7 @@ p {
 		padding-right: 4em;
 		text-align: left;
 	}
-}
+}*/
 
 .L3_1:before { 
     pointer-events: auto !important;
@@ -886,8 +886,7 @@ section.box {
 	display: block;
 	float: left;
 	position:fixed;
-	bottom:0;
-	margin: 0 0 20px 60%;
+	margin: 4.03em 0 0 70%;
 	z-index: 100;
     font-family: 'Cabin', Arial, sans-serif;
 	transition: all 0.3s ease-in-out;
@@ -1170,7 +1169,7 @@ p_move {
 }
 
 /* Code to hide the legend on smaller screen */
-@media screen and (max-width: 600px) {
+/*@media screen and (max-width: 600px) {
 	.box {
 		display:none !important;
 	}
@@ -1183,7 +1182,7 @@ p_move {
 	#atomic {
 		display:none !important;
 	}
-}
+}*/
 #atomic {
 	width:100px !important;
 	height: 100px !important;
@@ -1375,6 +1374,7 @@ p_move {
 	border: 1px solid black;
     width: 70%;
     margin-left: 15%;
+	margin-bottom: 2%;
 }
 
 .lezioni_table td {
@@ -1388,7 +1388,8 @@ p_move {
     padding: 1%;
     border: 1px solid black;
     background-color: grey;
-    color: black;
+    color: white;
+	font-weight: bold;
 }
 
 .title:before {
