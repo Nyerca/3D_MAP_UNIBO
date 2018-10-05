@@ -538,10 +538,10 @@ console.log(selectedLevel+ ' lev2');
                 $('#levelName').html('Livello 2 - Piano Terra');
                 break;
             case 2:
-                $('#levelName').html('Livello 3 - Primo Piano');
+                $('#levelName').html('Livello 3 - Piano 1');
                 break;
             case 3:
-                $('#levelName').html('Livello 4 - Secondo Piano');
+                $('#levelName').html('Livello 4 - Piano 2');
                 break;
             default:
                 $('#levelName').html('');
