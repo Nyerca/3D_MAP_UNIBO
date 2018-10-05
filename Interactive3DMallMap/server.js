@@ -400,3 +400,4 @@ hour_avg_val = hour_avg_val.slice(0, -1);
 
 	interval2 = setInterval(checkSens, 250);
 }
+ 
