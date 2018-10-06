@@ -236,11 +236,30 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("4089 - Fabrizio Ivan Apollonio, Alessandro Marata", "Ufficio di Fabrizio Ivan Apollonio, Alessandro Marata", null),
 ("Sensore Canarin 2", "Descrizione del sensore canarin", null),
 ("3006 - Laboratorio LIB (I)","Laboratorio del primo piano", 34),
-("3007 - Laboratorio LIB (M)","Laboratorio del primo piano", 38),
-("3022 - Ufficio Dottorandi","Ufficio del primo piano", null);
+("3007 - Laboratorio LIB (M)","Laboratorio del primo piano", 38);
 
-INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (1,"AULA 5.5");
-INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (2,"AULA 5.2");
+INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES 
+(8,"AULA 2.1"),
+(6,"AULA 2.3"),
+(5,"AULA 2.4"),
+(4,"AULA 2.5"),
+(3,"AULA 2.6"),
+(2,"AULA 2.7"),
+(1,"AULA 2.8"),
+(10,"AULA 2.9"),
+(11,"AULA 2.10"),
+(12,"AULA 2.11"),
+(13,"AULA 2.12"),
+(14,"AULA 2.13"),
+(7,"LABORATORIO 2.2"),
+(35,"AULA 3.7"),
+(26,"AULA 3.10"),
+(27,"AULA 3.11"),
+(21,"LABORATORIO 3.1"),
+(20,"LABORATORIO 3.2"),
+(24,"LABORATORIO 3.3"),
+(38,"AULA 4.1"),
+(39,"LABORATORIO 4.2");
 
 INSERT INTO `figura`(`Tipo`, `Class`, `x`, `y`, `width`, `height`, `Points`, `Piano`) VALUES 
 ("rect", "map__space", "1400", "100", "100", "200", null, 1),

@@ -64,7 +64,17 @@ var singleData = "";
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
 	emitSensData();
-
+	var o_data = "";
+	con.query("SELECT NomeTabellaOpenData FROM `toopendata`", function (err, result, fields) {
+		for(val in result) {
+			o_data = o_data + result[val].NomeTabellaOpenData;
+			o_data = o_data + ";";
+		}
+		o_data = o_data.slice(0, -1);
+		if (err) throw err;
+	});
+	namespace.emit('o_data', o_data);
+	
 	setInterval(function() {
 		var current;
 		emitSensData();

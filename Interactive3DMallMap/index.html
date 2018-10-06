@@ -391,10 +391,11 @@
 
         var currents = [];
         var current;
+		socket.on('o_data', function (data) {
         $.ajaxSetup({cache: true});
         $.ajax({
-            //url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT inizio, fine, ins.materia_descrizione from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id WHERE aula_codici LIKE '61_WP01_003'",
-            url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2017 orari JOIN insegnamenti_2017_it ins ON orari.componente_id = ins.componente_id JOIN aule_2017 aule ON aula_codici = aula_codice WHERE inizio >= '2018-03-08' AND inizio < '2018-03-09' AND ( aula_nome = 'AULA 5.5' OR aula_nome = 'AULA 5.2' ) ORDER BY aula_nome",
+            //url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2018 orari JOIN insegnamenti_2018_it ins ON orari.componente_id = ins.componente_id JOIN aule_2018 aule ON aula_codici = aula_codice WHERE inizio >= '2018-03-08' AND inizio < '2018-03-09' AND ( aula_nome = 'AULA 5.5' OR aula_nome = 'AULA 5.2' ) ORDER BY aula_nome",
+            url: "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2018 orari JOIN insegnamenti_2018_it ins ON orari.componente_id = ins.componente_id JOIN aule_2018 aule ON aula_codici = aula_codice WHERE  ( aula_nome = 'AULA 2.3' OR aula_nome = 'AULA 2.6' ) ORDER BY aula_nome",
             type: "get",
             dataType: "jsonp",
             success: function (data) {
@@ -409,7 +410,8 @@
                 //console.log(" A " + data.result.records[0].inizio);
             }
         });
-
+		}
+		
         var already_emitted = 0;
         socket.on('hi', function (data) {
             if (already_emitted == 0) {
