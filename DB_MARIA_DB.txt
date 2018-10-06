@@ -1,4 +1,4 @@
-//Per entrare in maria db:
+﻿//Per entrare in maria db:
 sudo mysql -p
 
 //Per eseguire
@@ -139,9 +139,9 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("3034 - Aula Magna 3.4", "Aula del primo piano", 312),
 ("3009 - Laboratorio 1 Elettronica e Telecomunicazioni", "Laboratorio del primo piano", 10),
 ("3021 - Laboratorio Informatico 3.3", "Laboratorio del primo piano", 97),
-("Laboratorio di Ricerca", "Laboratorio del primo piano", 17),
+("3065 - Laboratorio LaMoViDa, "Laboratorio del primo piano", 17),
 ("3064 - Aula 3.10", "Aula del primo piano", 99),
-("3069 - Aula 3.11", "Aula del primo piano", 99),
+("3069 - Aula 3.07", "Aula del primo piano", 99),
 ("3056 - Laboratorio di Sintesi 3.12", "Laboratorio del primo piano", 18),
 ("3055 - Laboratorio di Sintesi 3.13", "Laboratorio del primo piano", 18),
 ("3054 - Laboratorio di Sintesi 3.14", "Laboratorio del primo piano", 18),
@@ -149,7 +149,7 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("3052 - Laboratorio di Sintesi 3.16", "Laboratorio del primo piano", 18),
 ("3071 - Laboratorio Disegno 3.9", "Laboratorio del primo piano", 50),
 ("3070 - Laboratorio Disegno 3.8", "Laboratorio del primo piano", 50),
-("3063 - Aula 3.7", "Aula del primo piano", 188),
+("3063 - Aula 3.11", "Aula del primo piano", 188),
 ("3068 - Laboratorio Disegno 3.6", "Laboratorio del primo piano", 50),
 ("3067 - Laboratorio Disegno 3.5", "Laboratorio del primo piano", 50),
 ("4116 - Aula 4.1", "Aula del secondo piano", 90),
@@ -235,8 +235,9 @@ INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES
 ("4090 - Anna Maria Manfredini, Federico Fallavollita", "Ufficio di Anna Maria Manfredini, Federico Fallavollita", null),
 ("4089 - Fabrizio Ivan Apollonio, Alessandro Marata", "Ufficio di Fabrizio Ivan Apollonio, Alessandro Marata", null),
 ("Sensore Canarin 2", "Descrizione del sensore canarin", null),
-("3007 - Laboratorio LIB (M)","Laboratorio del primo piano", 34),
-("3008 - Laboratorio LIB (I)","Laboratorio del primo piano", 38);
+("3006 - Laboratorio LIB (I)","Laboratorio del primo piano", 34),
+("3007 - Laboratorio LIB (M)","Laboratorio del primo piano", 38),
+("3022 - Ufficio Dottorandi","Ufficio del primo piano", null);
 
 INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (1,"AULA 5.5");
 INSERT INTO `toopendata`(`IdInfo`, `NomeTabellaOpenData`) VALUES (2,"AULA 5.2");
@@ -459,9 +460,9 @@ INSERT INTO `datacategory`(`Nome`, `Colore`, `Icon`) VALUES
 ("Sensori", "#EAC83F","avocado"),
 ("Docenti", "#3AB795","star"),
 ("Lezioni", "#EA7BAF", null),
-("Bagni", "#A2BBDD", bathroom),
+("Bagni", "#A2BBDD", "bathroom"),
 ("Scale", "repeating-linear-gradient(to right,black 85%, white 100%)", null),
-("Uscite", "#FFFFFF", "emergency"),;
+("Uscite", "#FFFFFF", "emergency"),
 ("Ascensori", "#FFFFFF", "elevator");
 
 INSERT INTO `entrance`(`IdEntrance`, `Descrizione`) VALUES 
@@ -469,7 +470,7 @@ INSERT INTO `entrance`(`IdEntrance`, `Descrizione`) VALUES
 
 INSERT INTO `entrancecss`(`Css`, `IdEntrance`) VALUES 
 (".surroundings, .levels {transform: rotateX(50deg) rotateY(-5deg)  rotateZ(-135deg) translateZ(-25vmin);}", 1),
-(".level--1 {-webkit-transform: translateZ(10vmin); transform: translateZ(10vmin);}", 1),
+(".level--1 {-webkit-transform: translateZ(00vmin); transform: translateZ(00vmin);}", 1),
 (".level--2 {-webkit-transform: translateZ(10vmin); transform: translateZ(10vmin);}", 1),
 (".level--3 {-webkit-transform: translateZ(20vmin); transform: translateZ(20vmin);}", 1),
 (".level.level--current {transform: translateZ(15vmin) translateY(5vmin) rotate3d(0,0,1,30deg) rotate3d(0,1,0,12deg) rotate3d(1,0,0,-5deg);}", 1),
