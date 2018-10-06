@@ -61,19 +61,24 @@ var count = 0 //Number of values read
 var ind = 0;
 var opendata = [];
 var singleData = "";
+var o_data = "";
+var o_data_emitted = 0;
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
 namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
 	emitSensData();
-	var o_data = "";
-	con.query("SELECT NomeTabellaOpenData FROM `toopendata`", function (err, result, fields) {
+
+	con.query("SELECT * FROM `toopendata`", function (err, result, fields) {
+		o_data = "";
 		for(val in result) {
 			o_data = o_data + result[val].NomeTabellaOpenData;
 			o_data = o_data + ";";
 		}
 		o_data = o_data.slice(0, -1);
 		if (err) throw err;
+		console.log("EMIT_a");
+		namespace.emit('o_data', o_data);
 	});
-	namespace.emit('o_data', o_data);
+
 	
 	setInterval(function() {
 		var current;
@@ -95,7 +100,6 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
     }, 60000);
 
     socket.on('opendata_emit', function(data) {
-		console.log(data[3]);
 
 		con.query("SELECT IdDataSpace, Piano FROM `view_content` WHERE Nome IN (SELECT Nome FROM informazioni WHERE IdInfo IN ( SELECT IdInfo FROM toopendata WHERE NomeTabellaOpenData = '" + data[3] + "'))", function (err, result, fields) {
 		for(val in result) {
@@ -112,7 +116,6 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		});
 	});
 	socket.on('dimValue', function(data) {
-		console.log("DIM");
 		dim = data;
 	});
 
@@ -172,7 +175,6 @@ function checkSens() {
 		hum_avg_val = "";
 		hour_avg_val = "";
 		namespace.emit('storico', vals_storico_temp);
-		console.log("HO NUOVI VALORIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		clearInterval(interval2);
 	}
 }
@@ -280,7 +282,6 @@ function emitSensData() {
 		sensor_val = sensor_val + "***" + resultx[val].value_num;
 		sensor_val = sensor_val + "***" + resultx[val].type_id;
 		sensor_val = sensor_val + ";";
-		console.log("RRR: " + sensor_val);
 		}
 
 		if (err) throw err;
@@ -363,7 +364,6 @@ query_stor2 += "(SELECT AVG(value_num) As media, type_id, server_timestamp FROM 
             } else {
                 day += "-" + day_n
             }
-			console.log("dayYYYYYYYYYYYYYYYY: " + day);
 			day_avg_val = day_avg_val + "***" + day;
 			day_avg_val = day_avg_val + "***" + result[val].type_id;
 			day_avg_val = day_avg_val + ";";
