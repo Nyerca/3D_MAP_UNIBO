@@ -15,7 +15,8 @@ app.get('/kiosk', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, '/../../demo/Interactive3DMallMap/') });
+    //res.sendFile('index.html', { root: path.join(__dirname, '/../../demo/Interactive3DMallMap/') });
+	res.sendFile('index.html', { root: __dirname });
 });
 
 
@@ -113,6 +114,7 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 		ind = ind + 1;
 		if(ind == dim) singleData = singleData.slice(0, -1);
 		if (err) throw err;
+		console.log("sd");
 		});
 	});
 	socket.on('dimValue', function(data) {
@@ -139,7 +141,7 @@ http.listen(3000, function() {
 var interval;
 var info = "", figura = "", datacategory = "", pin = "", css = "";
 function check() {
-	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 && singleData.length > 0) {
+	if(info.length > 0 && figura.length > 0 && datacategory.length > 0 && pin.length > 0 && css.length > 0 {
 
 		var vals = {
 			info: info,

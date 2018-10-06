@@ -77,10 +77,11 @@
             document.getElementsByTagName('head')[0].appendChild(style);
         }
 
+		var day_next;
         var day0, day1, day2, day3, day4, day5, day6;
         var day0_graphLabel, day1_graphLabel, day2_graphLabel, day3_graphLabel, day4_graphLabel, day5_graphLabel,
             day6_graphLabel;
-        for (var i = 0; i < 7; i++) {
+        for (var i = -1; i < 7; i++) {
             var day = new Date();
             day.setDate(day.getDate() - i);
 
@@ -101,9 +102,11 @@
 			
 
             switch (i) {
+				case -1:
+                    day_next = day;
+                    break;
                 case 0:
                     day0 = day;
-					alert(day0);
                     day0_graphLabel = day.substring(day.length - 2, day.length) + "/" + day.substring(day.length - 5, day.length - 3);
                     break;
                 case 1:
@@ -398,11 +401,11 @@
 		var valori = data.split(';');
          for (var field in valori) {
 		 var line = valori[field].split('***');
-                    str_o_data += "aula_nome = '" + line[0] + "' OR ";
+                    str_o_data += "aula_codice = '" + line[0] + "' OR ";
         }
 		str_o_data = str_o_data.substring(0, str_o_data.length -4);
 		console.log(str_o_data);
-		var definitive_url = "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aule.aula_nome from orari_2018 orari JOIN insegnamenti_2018_it ins ON orari.componente_id = ins.componente_id JOIN aule_2018 aule ON aula_codici = aula_codice WHERE inizio >= '2018-10-05' AND inizio < '2018-10-06' AND ( " + str_o_data + " ) ORDER BY aula_nome";
+		var definitive_url = "https://dati.unibo.it/api/action/datastore_search_sql?sql=SELECT DISTINCT inizio, fine, ins.materia_descrizione, aula_codici from orari_2018 orari JOIN insegnamenti_2018_it ins ON orari.componente_id = ins.componente_id JOIN aule_2018 aule ON aula_codici = aula_codice WHERE inizio >= '2018-10-05' AND inizio < '" + day_next + "' AND ( " + str_o_data + " ) ORDER BY aula_codici";
 		
         $.ajaxSetup({cache: true});
         $.ajax({
@@ -416,17 +419,19 @@
                 socket.emit('dimValue', dim);
                 for (i in data.result.records) {
                     var current = data.result.records[i];
-                    var vect = ["" + current.fine, "" + current.inizio, "" + current.materia_descrizione, "" + current.aula_nome];
+                    var vect = ["" + current.fine, "" + current.inizio, "" + current.materia_descrizione, "" + current.aula_codici];
                     //console.log(" A " + vect[1]);
                     socket.emit('opendata_emit', vect);
                 }
                 //console.log(" A " + data.result.records[0].inizio);
+				
             }
         });
 		});
 
         var already_emitted = 0;
         socket.on('hi', function (data) {
+		console.log("done");
             if (already_emitted == 0) {
                 already_emitted++;
                 //console.log("EMITTED = " + already_emitted);
