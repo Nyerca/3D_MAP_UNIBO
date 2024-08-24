@@ -11,6 +11,9 @@ isi-studio8bis.csr.unibo.it
 
 ----------------------------- CREARE IL DATABASE -----------------------------------
 
+create db: db_unibo
+
+----------------------------- CREARE TABELLE -----------------------------------
 Da MariaDB
 
 create table entrance (

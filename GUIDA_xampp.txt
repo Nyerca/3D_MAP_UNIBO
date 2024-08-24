@@ -1,0 +1,19 @@
+Setup XAMPP
+
+1) Download XAMPP
+https://www.apachefriends.org/download.html
+
+2) Install it with phpmyadmin
+
+3) Open it
+
+4) Click on the two ticks "modules serice" for Apache and MySQL
+
+5) Start both:
+	- Apache
+		IF gives error go to config: Apache (httpd.conf) and chang the listening port
+			note if you select for example 8081 then phpmyadming will be at: http://localhost:8081/phpmyadmin/
+	- MySQL
+
+6) from phpmyadmin create the user (from "user account")
+
