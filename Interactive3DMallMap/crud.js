@@ -167,7 +167,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "admin",
   password: "123abc",
-  database: "db_unibo"
+  database: "db_map"
 });
 
 con.connect(function(err) {
@@ -194,7 +194,7 @@ var count_figura = 0
 var count_pin = 0 
 
 var namespace = io.of('/mySensorNamespace'); //To set up a custom namespace, we can call the ‘of’ function on the server side
-namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3000
+namespace.on('connection', function(socket) { //Executed everytime someone connects to localhost:3001
 	socket.on('deleteValue', function(data) {
 		var sql;
 		switch (data.tab) {
@@ -233,8 +233,8 @@ namespace.on('connection', function(socket) { //Executed everytime someone conne
 });
 
 
-http.listen(3000, function() {
-   console.log('listening on localhost:3000');
+http.listen(3001, function() {
+   console.log('listening on localhost:3001');
 });
 
 var correcttab = 0;

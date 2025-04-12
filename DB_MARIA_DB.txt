@@ -99,22 +99,20 @@ alter table pin add constraint FKR_6
 alter table entrancecss add constraint FKR_7
      foreign key (IdEntrance) references entrance (IdEntrance);
 
-##################################
 
-Da phpmyadmin
 
 CREATE VIEW `view_svg` AS 
-SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano, Colore FROM `dataspace` JOIN `datacategory` ON dataspace.IdDataCategory = datacategory.IdDataCategory RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura
+SELECT IdDataSpace, Tipo, Class, x, y, width, height, Points, Piano, Colore FROM `dataspace` JOIN `datacategory` ON dataspace.IdDataCategory = datacategory.IdDataCategory RIGHT JOIN `figura` ON dataspace.IdFigura = figura.IdFigura;
 
 
 CREATE VIEW `level_pins` AS 
-SELECT IdDataSpace, dataspace.IdFigura, IdDataCategory, Icon, Top_distance, Left_distance, figura.Piano, pin.IdEntrance FROM `dataspace`, `pin`, `figura` where dataspace.IdPin = pin.IdPin AND dataspace.IdFigura = figura.IdFigura
+SELECT IdDataSpace, dataspace.IdFigura, IdDataCategory, Icon, Top_distance, Left_distance, figura.Piano, pin.IdEntrance FROM `dataspace`, `pin`, `figura` where dataspace.IdPin = pin.IdPin AND dataspace.IdFigura = figura.IdFigura;
 
 CREATE VIEW `view_content` AS 
-SELECT IdDataSpace, IdDataCategory, Nome, Descrizione, Posti, figura.Piano, dataspace.IdEntrance FROM `dataspace`, `informazioni`, `figura` where dataspace.IdInfo = informazioni.IdInfo AND dataspace.IdFigura = figura.IdFigura ORDER BY IdDataCategory, Piano
+SELECT IdDataSpace, IdDataCategory, Nome, Descrizione, Posti, figura.Piano, dataspace.IdEntrance FROM `dataspace`, `informazioni`, `figura` where dataspace.IdInfo = informazioni.IdInfo AND dataspace.IdFigura = figura.IdFigura ORDER BY IdDataCategory, Piano;
 
 
-##################################
+
 
 
 INSERT INTO `informazioni`(`Nome`, `Descrizione`, `Posti`) VALUES 

@@ -16,7 +16,7 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "admin",
   password: "123abc",
-  database: "db_unibo"
+  database: "db_map"
 });
 
 con.connect(function(err) {
